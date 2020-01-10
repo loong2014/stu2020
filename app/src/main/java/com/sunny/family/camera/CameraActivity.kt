@@ -2,16 +2,15 @@ package com.sunny.family.camera
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.Environment
 import com.cjt2325.cameralibrary.JCameraView
 import com.cjt2325.cameralibrary.listener.ErrorListener
 import com.cjt2325.cameralibrary.listener.JCameraListener
 import com.sunny.family.R
 import com.sunny.lib.base.BaseActivity
+import com.sunny.lib.utils.FileUtils
 import com.sunny.lib.utils.SunLog
 import com.sunny.lib.utils.ToastUtils
 import kotlinx.android.synthetic.main.act_camera.*
-import java.io.File
 
 
 class CameraActivity : BaseActivity() {
@@ -26,15 +25,13 @@ class CameraActivity : BaseActivity() {
 
     private fun initCamera() {
         //设置视频保存路径
-        jCameraView.setSaveVideoPath(
-                Environment.getExternalStorageDirectory().path + File.separator + "JCamera")
+        jCameraView.setSaveVideoPath(FileUtils.STORAGE_PATH_CAMERA)
 
         //设置只能录像或只能拍照或两种都可以（默认两种都可以）
         jCameraView.setFeatures(JCameraView.BUTTON_STATE_BOTH)
 
         //设置视频质量
         jCameraView.setMediaQuality(JCameraView.MEDIA_QUALITY_MIDDLE)
-
 
         //JCameraView监听
         jCameraView.setErrorLisenter(object : ErrorListener {
@@ -58,7 +55,6 @@ class CameraActivity : BaseActivity() {
         })
 
         jCameraView.setLeftClickListener { finish() }
-
 
         jCameraView.setRightClickListener { ToastUtils.show("Right") }
 

@@ -17,6 +17,7 @@ class FamilyApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        AppConfig.init(this)
 
     }
 }

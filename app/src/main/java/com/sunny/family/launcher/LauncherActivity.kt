@@ -20,6 +20,10 @@ import java.util.*
 
 class LauncherActivity : BaseActivity() {
 
+    private val _permissionList = arrayOf(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE, // 读写内存权限
+            Manifest.permission.RECORD_AUDIO, // 录音权限
+            Manifest.permission.CAMERA) // 相机权限
 
     private val _requestCodePermission = 0x00099
     private lateinit var onPermissionResponseListener: OnPermissionResponseListener
@@ -42,10 +46,7 @@ class LauncherActivity : BaseActivity() {
                 showPermissionTipDialog()
             }
 
-        }, arrayOf(Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        )
+        }, _permissionList)
     }
 
     private fun requestPermission(listener: OnPermissionResponseListener, permissions: Array<out String>) {

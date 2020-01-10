@@ -15,6 +15,11 @@
             android:layout_height="wrap_content"
             android:text="拍照" />
 
+        <Button
+            android:id="@+id/btn_enter_photo_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="相册" />
     </LinearLayout>
 
 </RelativeLayout>
