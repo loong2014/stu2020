@@ -17,6 +17,7 @@ import com.sunny.lib.utils.SunLog
 import kotlinx.android.synthetic.main.act_camera.*
 import java.io.File
 
+
 class CameraSysActivity : BaseActivity() {
 
     private val TAG = "CameraSysActivity"
@@ -39,7 +40,6 @@ class CameraSysActivity : BaseActivity() {
 
     private fun addListener() {
 
-
         btn_take_photo.setOnClickListener {
             takePhotoBySysCamera()
         }
@@ -58,6 +58,9 @@ class CameraSysActivity : BaseActivity() {
         }
     }
 
+    /**
+     * 调用系统相机拍照
+     */
     private fun takePhotoBySysCamera() {
         cameraSaveFile = File(FileUtils.buildCameraFilePath())
 
@@ -97,6 +100,13 @@ class CameraSysActivity : BaseActivity() {
 
                 SunLog.i(TAG, "onActivityResult  photoPath :$photoPath")
                 Glide.with(this).load(photoPath).into(iv_camera_last)
+
+                // 将刚拍照的相片在相册中显示，必须使用fromFile
+                sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(cameraSaveFile)))
+
+                // 该方式会在系统相册生产图片对应的缩略图，不建议使用
+//                val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(cameraSaveFileUri))
+//                MediaStore.Images.Media.insertImage(contentResolver, bitmap, "sunny_demo", "from family")
             }
         }
         super.onActivityResult(requestCode, resultCode, intent)
