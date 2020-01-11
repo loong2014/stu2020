@@ -20,7 +20,7 @@ import java.io.File
 
 class CameraSysActivity : BaseActivity() {
 
-    private val TAG = "CameraSysActivity"
+    private val logTag = "CameraSysActivity"
     private val requestCodeCaptureRaw = 6 //startActivityForResult时的请求码
 
     private val fileProviderAuthority by lazy {
@@ -45,16 +45,7 @@ class CameraSysActivity : BaseActivity() {
         }
 
         btn_scan_photo.setOnClickListener {
-
-            val intent = Intent()
-            intent.addCategory(Intent.CATEGORY_OPENABLE)
-            intent.type = "image/*"
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-                intent.action = Intent.ACTION_GET_CONTENT
-            } else {
-                intent.action = Intent.ACTION_OPEN_DOCUMENT
-            }
-            startActivity(intent)
+            CameraHelper.jumpSysAlbum()
         }
     }
 
@@ -90,23 +81,19 @@ class CameraSysActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
 
         if (Activity.RESULT_OK == resultCode) {
+
             if (requestCodeCaptureRaw == requestCode) {
 
-                var photoPath: String? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val photoPath: String? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     cameraSaveFile.absolutePath
                 } else {
                     cameraSaveFileUri.encodedPath
                 }
 
-                SunLog.i(TAG, "onActivityResult  photoPath :$photoPath")
+                SunLog.i(logTag, "onActivityResult  photoPath :$photoPath")
                 Glide.with(this).load(photoPath).into(iv_camera_last)
 
-                // 将刚拍照的相片在相册中显示，必须使用fromFile
-                sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(cameraSaveFile)))
-
-                // 该方式会在系统相册生产图片对应的缩略图，不建议使用
-//                val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(cameraSaveFileUri))
-//                MediaStore.Images.Media.insertImage(contentResolver, bitmap, "sunny_demo", "from family")
+                CameraHelper.notifyPhotoAlbumChange(cameraSaveFile)
             }
         }
         super.onActivityResult(requestCode, resultCode, intent)

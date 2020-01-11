@@ -16,22 +16,17 @@
             android:text="系统拍照" />
 
         <Button
-            android:id="@+id/btn_enter_photo_album_sys"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="系统相册" />
-
-        <Button
             android:id="@+id/btn_enter_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="拍照" />
+            android:text="自定义拍照" />
 
         <Button
             android:id="@+id/btn_enter_photo_album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="相册" />
+
     </LinearLayout>
 
 </RelativeLayout>
