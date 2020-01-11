@@ -23,8 +23,26 @@ object FileUtils {
     }
 
     fun init(context: Context) {
+
         SunLog.i(TAG, "storagePath :$STORAGE_PATH")
+        var file = File(STORAGE_PATH)
+        if (!file.exists()) {
+            file.mkdirs()
+        }
+
         SunLog.i(TAG, "storagePathCamera :$STORAGE_PATH_CAMERA")
+        file = File(STORAGE_PATH_CAMERA)
+        if (!file.exists()) {
+            file.mkdirs()
+        }
+    }
+
+    fun buildCameraFilePath(): String {
+        val dataTake = System.currentTimeMillis()
+        val jpegName = "picture_$dataTake.jpg"
+        val filePath = STORAGE_PATH_CAMERA + File.separator + jpegName
+        SunLog.i(TAG, "buildCameraFilePath :$filePath")
+        return filePath
     }
 
     /**
@@ -42,13 +60,14 @@ object FileUtils {
             fos = FileOutputStream(jpegName)
             bos = BufferedOutputStream(fos)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
-            bos.flush()
             return jpegName
         } catch (e: Exception) {
+            SunLog.e("FileUtils", "saveCameraBitmap error :$e.toString()")
         } finally {
             try {
-                fos?.close()
+                bos?.flush()
                 bos?.close()
+                fos?.close()
             } catch (e: Exception) {
             }
         }

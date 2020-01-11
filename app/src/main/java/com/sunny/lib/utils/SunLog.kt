@@ -21,10 +21,11 @@ object SunLog {
     }
 
     private fun printLog(type: Int, tag: String, msg: String) {
+        val logTag = "sunny-$tag"
         when (type) {
-            I -> Log.i(tag, msg)
-            D -> Log.d(tag, msg)
-            E -> Log.e(tag, msg)
+            I -> Log.i(logTag, msg)
+            D -> Log.d(logTag, msg)
+            E -> Log.e(logTag, msg)
         }
     }
 }
