@@ -20,11 +20,9 @@ import org.devio.takephoto.permission.TakePhotoInvocationHandler
 import java.io.File
 
 
-class CameraActivity : BaseActivity(), TakePhoto.TakeResultListener, InvokeListener {
+class CameraCustomActivity : BaseActivity(), TakePhoto.TakeResultListener, InvokeListener {
 
-    companion object {
-        val TAG = "CameraActivity"
-    }
+    private val logTag = "CameraCustomActivity"
 
     var mInvokeParam: InvokeParam? = null
 
@@ -39,15 +37,25 @@ class CameraActivity : BaseActivity(), TakePhoto.TakeResultListener, InvokeListe
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.act_camera)
+        
+        addListener()
 
-        takePhoto.onEnableCompress(CompressConfig.Builder().setMaxSize(500 * 1024).create(), true)
+        tv_top_tip.text = "自定义拍照和相册"
 
+        initTakePhoto()
+    }
+
+    private fun addListener() {
         btn_take_photo.setOnClickListener {
             doTakePhoto()
         }
-        btn_scan_photo.setOnClickListener{
+        btn_scan_photo.setOnClickListener {
             doScanPhoto()
         }
+    }
+
+    private fun initTakePhoto() {
+        takePhoto.onEnableCompress(CompressConfig.Builder().setMaxSize(500 * 1024).create(), true)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -73,7 +81,8 @@ class CameraActivity : BaseActivity(), TakePhoto.TakeResultListener, InvokeListe
 
         takePhoto.onPickFromCapture(imageUri)
     }
-    private fun doScanPhoto(){
+
+    private fun doScanPhoto() {
 
         takePhoto.onPickFromGallery()
     }
@@ -88,15 +97,15 @@ class CameraActivity : BaseActivity(), TakePhoto.TakeResultListener, InvokeListe
     }
 
     override fun takeSuccess(result: TResult) {
-        SunLog.i(TAG, "takeSuccess：" + result.image.compressPath)
+        SunLog.i(logTag, "takeSuccess：" + result.image.compressPath)
     }
 
     override fun takeCancel() {
-        SunLog.i(TAG, "takeCancel")
+        SunLog.i(logTag, "takeCancel")
     }
 
     override fun takeFail(result: TResult, msg: String?) {
-        SunLog.i(TAG, "takeFail :$msg")
+        SunLog.i(logTag, "takeFail :$msg")
     }
 
 

@@ -3,10 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tv_top_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/iv_camera_last"
         android:layout_width="400dp"
-        android:layout_height="300dp" />
+        android:layout_height="300dp"
+        android:layout_marginTop="40dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

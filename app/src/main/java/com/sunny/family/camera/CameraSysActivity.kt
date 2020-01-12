@@ -7,11 +7,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.sunny.family.R
 import com.sunny.lib.base.BaseActivity
-import com.sunny.lib.utils.AppConfigUtils
 import com.sunny.lib.utils.FileUtils
 import com.sunny.lib.utils.SunLog
 import kotlinx.android.synthetic.main.act_camera.*
@@ -23,10 +21,6 @@ class CameraSysActivity : BaseActivity() {
     private val logTag = "CameraSysActivity"
     private val requestCodeCaptureRaw = 6 //startActivityForResult时的请求码
 
-    private val fileProviderAuthority by lazy {
-        AppConfigUtils.pkgName + ".fileProvider" //FileProvider的签名(后面会介绍)
-    }
-
     private lateinit var cameraSaveFile: File
 
     private lateinit var cameraSaveFileUri: Uri
@@ -36,6 +30,8 @@ class CameraSysActivity : BaseActivity() {
         setContentView(R.layout.act_camera)
 
         addListener()
+
+        tv_top_tip.text = "系统拍照和系统相册"
     }
 
     private fun addListener() {
@@ -45,7 +41,7 @@ class CameraSysActivity : BaseActivity() {
         }
 
         btn_scan_photo.setOnClickListener {
-            CameraHelper.jumpSysAlbum()
+            CameraHelper.jumpSysAlbum(this)
         }
     }
 
@@ -59,7 +55,7 @@ class CameraSysActivity : BaseActivity() {
 
         //如果是7.0以上，使用FileProvider，否则会报错
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            cameraSaveFileUri = FileProvider.getUriForFile(this, fileProviderAuthority, cameraSaveFile)
+            cameraSaveFileUri = CameraHelper.getUriForFile(cameraSaveFile)
 
             intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
 

@@ -33,13 +33,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".home.HomeActivity" />
-        <activity android:name=".camera.CameraActivity" />
+        <activity android:name=".camera.CameraCustomActivity" />
         <activity android:name=".photoalbum.PhotoAlbumActivity" />
         <activity android:name=".camera.CameraSysActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileProvider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

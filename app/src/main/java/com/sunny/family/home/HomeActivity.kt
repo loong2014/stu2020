@@ -3,7 +3,7 @@ package com.sunny.family.home
 import android.content.Intent
 import android.os.Bundle
 import com.sunny.family.R
-import com.sunny.family.camera.CameraActivity
+import com.sunny.family.camera.CameraCustomActivity
 import com.sunny.family.camera.CameraSysActivity
 import com.sunny.family.photoalbum.PhotoAlbumActivity
 import com.sunny.lib.base.BaseActivity
@@ -25,7 +25,7 @@ class HomeActivity : BaseActivity() {
         }
 
         btn_enter_camera.setOnClickListener {
-            startActivity(Intent(this, CameraActivity::class.java))
+            startActivity(Intent(this, CameraCustomActivity::class.java))
         }
 
         btn_enter_photo_album.setOnClickListener {

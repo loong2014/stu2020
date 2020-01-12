@@ -39,8 +39,8 @@
     <!--        path="path" />-->
 
     <!-- 如果使用外部SD卡-->
-    <!--    <root-path-->
-    <!--        name="camera_photos"-->
-    <!--        path="" />-->
+    <root-path
+        name="camera_photos"
+        path="" />
 
 </paths>

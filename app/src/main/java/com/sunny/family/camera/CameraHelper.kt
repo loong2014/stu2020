@@ -1,8 +1,11 @@
 package com.sunny.family.camera
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import androidx.core.content.FileProvider
+import com.sunny.lib.utils.AppConfigUtils
 import com.sunny.lib.utils.ContextProvider
 import java.io.File
 
@@ -10,7 +13,16 @@ class CameraHelper {
 
     companion object {
 
-        fun jumpSysAlbum() {
+        private val CameraFileProvideAuthorities by lazy {
+            AppConfigUtils.pkgName + ".fileprovider" //FileProvider的签名(后面会介绍)
+        }
+
+        fun getUriForFile(imageFile: File): Uri {
+            return FileProvider.getUriForFile(ContextProvider.appContext,
+                    CameraFileProvideAuthorities, imageFile)
+        }
+
+        fun jumpSysAlbum(context: Context?) {
 
             val intent = Intent()
             intent.addCategory(Intent.CATEGORY_OPENABLE)
@@ -20,7 +32,13 @@ class CameraHelper {
             } else {
                 intent.action = Intent.ACTION_OPEN_DOCUMENT
             }
-            ContextProvider.appContext.startActivity(intent)
+
+            if (context == null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                ContextProvider.appContext.startActivity(intent)
+            } else {
+                context.startActivity(intent)
+            }
         }
 
         fun notifyPhotoAlbumChange(imageFile: File) {
