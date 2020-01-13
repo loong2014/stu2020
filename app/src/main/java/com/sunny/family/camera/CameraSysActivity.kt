@@ -8,13 +8,14 @@ import android.os.Bundle
 import android.provider.MediaStore
 import com.bumptech.glide.Glide
 import com.sunny.family.R
-import com.sunny.lib.base.BaseActivity
+import com.sunny.family.player.BasePlayerActivity
+import com.sunny.family.player.BasePlayerHelper
 import com.sunny.lib.utils.SunLog
 import kotlinx.android.synthetic.main.act_camera.*
 import java.io.File
 
 
-class CameraSysActivity : BaseActivity() {
+class CameraSysActivity : BasePlayerActivity() {
 
     private val logTag = "CameraSysActivity"
     private val requestCodeTakePicture = 101
@@ -25,6 +26,10 @@ class CameraSysActivity : BaseActivity() {
 
     private lateinit var cameraSaveFileUri: Uri
 
+    override fun buildPlayerHelper(): BasePlayerHelper {
+        return CameraPlayerHelper()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_camera)
@@ -32,6 +37,9 @@ class CameraSysActivity : BaseActivity() {
         addListener()
 
         tv_top_tip.text = "系统拍照和系统相册"
+
+//        File.getUsableSpace();//获取文件目录对象剩余空间
+
     }
 
     private fun addListener() {
@@ -58,27 +66,18 @@ class CameraSysActivity : BaseActivity() {
      */
     private fun takePicture() {
         cameraSaveFile = CameraHelper.buildPictureFile()
+        cameraSaveFileUri = CameraHelper.getUriForFile(cameraSaveFile)
 
-        val intent = Intent()
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.addCategory(Intent.CATEGORY_DEFAULT)
 
-        //如果是7.0以上，使用FileProvider，否则会报错
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            cameraSaveFileUri = CameraHelper.getUriForFile(cameraSaveFile)
-
-            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-
-        } else {
-            cameraSaveFileUri = Uri.fromFile(cameraSaveFile)
-        }
+        // 临时访问权限
+        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
 
         //设置拍照后图片保存的位置
         intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraSaveFileUri)
 
-        //设置图片保存的格式
-        intent.action = MediaStore.ACTION_IMAGE_CAPTURE
-        intent.addCategory(Intent.CATEGORY_DEFAULT)
-//        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString())
-
+        SunLog.i(logTag, "takePicture")
         startActivityForResult(intent, requestCodeTakePicture)
     }
 
@@ -89,12 +88,8 @@ class CameraSysActivity : BaseActivity() {
         cameraSaveFile = CameraHelper.buildVideoFile()
         cameraSaveFileUri = CameraHelper.getUriForFile(cameraSaveFile)
 
-        val intent = Intent()
-
+        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         intent.addCategory(Intent.CATEGORY_DEFAULT)
-
-        //设置图片保存的格式
-        intent.action = MediaStore.ACTION_VIDEO_CAPTURE
 
         // 临时访问权限
         intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
@@ -111,6 +106,7 @@ class CameraSysActivity : BaseActivity() {
         //设置拍照后图片保存的位置
         intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraSaveFileUri)
 
+        SunLog.i(logTag, "takeVideo")
         startActivityForResult(intent, requestCodeTakeVideo)
     }
 
@@ -118,7 +114,6 @@ class CameraSysActivity : BaseActivity() {
      * 调用系统录音
      */
     private fun takeVoice() {
-
         cameraSaveFile = CameraHelper.buildVoiceFile()
 
         val intent = Intent()
@@ -126,38 +121,35 @@ class CameraSysActivity : BaseActivity() {
 
         intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
 
+        SunLog.i(logTag, "takeVoice")
         startActivityForResult(intent, requestCodeTakeVoice)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        SunLog.i(logTag, "onActivityResult requestCode :$requestCode , resultCode :$resultCode")
 
         if (Activity.RESULT_OK == resultCode) {
 
             when (requestCode) {
-                requestCodeTakeVideo -> {
-
-                }
 
                 requestCodeTakePicture -> {
-
                     val photoPath: String? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         cameraSaveFile.absolutePath
                     } else {
                         cameraSaveFileUri.encodedPath
                     }
 
-
                     SunLog.i(logTag, "onActivityResult  photoPath :$photoPath")
                     Glide.with(this).load(photoPath).into(iv_camera_last)
+                }
 
-                    CameraHelper.notifyPhotoAlbumChange(cameraSaveFile)
+                requestCodeTakeVideo -> {
+
                 }
 
                 requestCodeTakeVoice -> {
 
                 }
-
             }
 
             CameraHelper.notifyPhotoAlbumChange(cameraSaveFile)

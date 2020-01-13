@@ -30,6 +30,9 @@ class CameraHelper {
             SunLog.i(logTag, "buildPictureFile :$filePath")
 
             val file = File(filePath)
+            if (!file.parentFile.exists()){
+                file.parentFile.mkdirs()
+            }
             file.setWritable(true) // 不加这句会报Read-only警告
             return file
         }

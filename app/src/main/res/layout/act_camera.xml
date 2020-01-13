@@ -12,6 +12,11 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <com.sunny.player.view.SunVideoView
+        android:id="@+id/video_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/iv_camera_last"
         android:layout_width="400dp"
