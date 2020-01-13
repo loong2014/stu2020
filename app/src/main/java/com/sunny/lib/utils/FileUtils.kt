@@ -37,14 +37,6 @@ object FileUtils {
         }
     }
 
-    fun buildCameraFilePath(): String {
-        val dataTake = System.currentTimeMillis()
-        val jpegName = "picture_$dataTake.jpg"
-        val filePath = STORAGE_PATH_CAMERA + File.separator + jpegName
-        SunLog.i(TAG, "buildCameraFilePath :$filePath")
-        return filePath
-    }
-
     /**
      * 保存图片
      */

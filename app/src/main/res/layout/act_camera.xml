@@ -33,12 +33,29 @@
             android:textSize="25sp" />
 
         <Button
+            android:id="@+id/btn_take_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="拍视频"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btn_take_voice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="录音"
+            android:textSize="25sp" />
+
+        <Button
             android:id="@+id/btn_scan_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="浏览"
             android:textSize="25sp" />
+
     </LinearLayout>
 
 </RelativeLayout>
