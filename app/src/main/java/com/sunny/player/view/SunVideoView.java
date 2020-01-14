@@ -8,6 +8,7 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.widget.VideoView;
 
 import com.sunny.lib.utils.SunLog;
 import com.sunny.player.control.IVideoControl;
@@ -44,6 +45,7 @@ public class SunVideoView extends GLSurfaceView implements IVideoControl {
     private int mVideoHeight;
     private int mSurfaceWidth;
     private int mSurfaceHeight;
+    private VideoView videoView;
 
     private float mLeftVolume = 1f;
     private float mRightVolume = 1f;
@@ -98,7 +100,6 @@ public class SunVideoView extends GLSurfaceView implements IVideoControl {
 
         openVideo();
     }
-
 
     private void openVideo() {
         if (mUri == null) {

@@ -6,11 +6,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import com.bumptech.glide.Glide
 import com.sunny.family.R
-import com.sunny.family.player.BasePlayerActivity
-import com.sunny.family.player.BasePlayerHelper
 import com.sunny.lib.utils.SunLog
+import com.sunny.player.BasePlayerActivity
 import kotlinx.android.synthetic.main.act_camera.*
 import java.io.File
 
@@ -26,10 +26,6 @@ class CameraSysActivity : BasePlayerActivity() {
 
     private lateinit var cameraSaveFileUri: Uri
 
-    override fun buildPlayerHelper(): BasePlayerHelper {
-        return CameraPlayerHelper()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_camera)
@@ -38,8 +34,8 @@ class CameraSysActivity : BasePlayerActivity() {
 
         tv_top_tip.text = "系统拍照和系统相册"
 
-//        File.getUsableSpace();//获取文件目录对象剩余空间
-
+        addVideoListener()
+        setVideoView(video_view)
     }
 
     private fun addListener() {
@@ -60,6 +56,17 @@ class CameraSysActivity : BasePlayerActivity() {
             CameraHelper.jumpSysAlbum(this)
         }
     }
+
+    private fun addVideoListener() {
+        btn_video_start.setOnClickListener {
+            playStart()
+        }
+
+        btn_video_stop.setOnClickListener {
+            playStop()
+        }
+    }
+
 
     /**
      * 调用系统相机拍照
@@ -125,26 +132,35 @@ class CameraSysActivity : BasePlayerActivity() {
         startActivityForResult(intent, requestCodeTakeVoice)
     }
 
+    private fun getFilePath(): String? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            cameraSaveFile.absolutePath
+        } else {
+            cameraSaveFileUri.encodedPath
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         SunLog.i(logTag, "onActivityResult requestCode :$requestCode , resultCode :$resultCode")
+
+        video_control_layout.visibility = View.INVISIBLE
 
         if (Activity.RESULT_OK == resultCode) {
 
             when (requestCode) {
 
                 requestCodeTakePicture -> {
-                    val photoPath: String? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        cameraSaveFile.absolutePath
-                    } else {
-                        cameraSaveFileUri.encodedPath
-                    }
-
-                    SunLog.i(logTag, "onActivityResult  photoPath :$photoPath")
-                    Glide.with(this).load(photoPath).into(iv_camera_last)
+                    val picturePath = getFilePath()
+                    SunLog.i(logTag, "onActivityResult  picturePath :$picturePath")
+                    Glide.with(this).load(picturePath).into(iv_camera_last)
                 }
 
                 requestCodeTakeVideo -> {
-
+                    val videoPath = getFilePath()
+                    if (videoPath != null) {
+                        setVideoUri(videoPath)
+                        video_control_layout.visibility = View.VISIBLE
+                    }
                 }
 
                 requestCodeTakeVoice -> {
