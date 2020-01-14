@@ -1,18 +1,17 @@
 package com.sunny.lib.base
 
-import android.app.Activity
 import android.os.Bundle
-import com.sunny.lib.manager.ActivityLifeManager.onCreate
-import com.sunny.lib.manager.ActivityLifeManager.onDestroy
+import androidx.appcompat.app.AppCompatActivity
+import com.sunny.lib.manager.ActivityLifeManager
 
-open class BaseActivity : Activity() {
+open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        onCreate(this)
+        ActivityLifeManager.onCreate(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        onDestroy(this)
+        ActivityLifeManager.onDestroy(this)
     }
 }

@@ -5,8 +5,8 @@ import android.os.Bundle
 import com.sunny.family.R
 import com.sunny.family.camera.CameraCustomActivity
 import com.sunny.family.camera.CameraSysActivity
-import com.sunny.family.photoalbum.PhotoAlbumActivity
 import com.sunny.lib.base.BaseActivity
+import com.sunny.lib.jump.PageJumpUtils
 import kotlinx.android.synthetic.main.act_home.*
 
 class HomeActivity : BaseActivity() {
@@ -29,7 +29,7 @@ class HomeActivity : BaseActivity() {
         }
 
         btn_enter_photo_album.setOnClickListener {
-            startActivity(Intent(this, PhotoAlbumActivity::class.java))
+            PageJumpUtils.jumpPhotoAlbumPage(null, this)
         }
     }
 

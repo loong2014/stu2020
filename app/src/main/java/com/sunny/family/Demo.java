@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Demo {
 
+    private String name;
 
     /**
      * 关闭某一类型的Activity
