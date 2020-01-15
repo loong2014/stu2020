@@ -20,8 +20,16 @@ class DemoKotlin {
 
             val demo = DemoKotlin()
 
-            demo.testClass()
+            demo.testFile()
         }
+    }
+
+
+    fun testFile(){
+val name = "xxx.png"
+        val list = name.split('.')
+
+        println("list :$list")
     }
 
     class BirdA(val color: String = "color", val age: Int = 1, val des: String = "des")

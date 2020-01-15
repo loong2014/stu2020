@@ -19,22 +19,52 @@ object FileUtils {
     }
 
     val STORAGE_PATH_CAMERA: String by lazy {
-        STORAGE_PATH + File.separator + "SunCamera"
+        buildFolder(STORAGE_PATH + File.separator + "SunCamera")
+    }
+
+    val PICTURE_FOLDER_PATG: String by lazy {
+        buildFolder(STORAGE_PATH_CAMERA + File.separator + "picture")
+    }
+
+    val VIDEO_FOLDER_PATG: String by lazy {
+        buildFolder(STORAGE_PATH_CAMERA + File.separator + "/DCIM/Camera")
+    }
+
+    val VOICE_FOLDER_PATG: String by lazy {
+        buildFolder(STORAGE_PATH_CAMERA + File.separator + "voice")
     }
 
     fun init(context: Context) {
-
         SunLog.i(TAG, "storagePath :$STORAGE_PATH")
-        var file = File(STORAGE_PATH)
-        if (!file.exists()) {
-            file.mkdirs()
-        }
-
         SunLog.i(TAG, "storagePathCamera :$STORAGE_PATH_CAMERA")
-        file = File(STORAGE_PATH_CAMERA)
-        if (!file.exists()) {
-            file.mkdirs()
+    }
+
+    fun isPictureFile(file: File?): Boolean {
+        file?.let {
+            return if (it.isFile) {
+                return when (getSuffix(it.name)) {
+                    "png", "jpg" -> true
+                    else -> false
+                }
+            } else {
+                false
+            }
         }
+        return false
+    }
+
+    fun isVideoFile(file: File?): Boolean {
+        file?.let {
+            return if (it.isFile) {
+                return when (getSuffix(it.name)) {
+                    "mp4" -> true
+                    else -> false
+                }
+            } else {
+                false
+            }
+        }
+        return false
     }
 
     /**
@@ -67,12 +97,19 @@ object FileUtils {
         return ""
     }
 
-    private fun buildFolder(absPath: String) {
+    private fun buildFolder(absPath: String): String {
         val file = File(absPath)
         if (!file.exists()) {
             file.mkdirs()
         }
+        return absPath
     }
+
+    private fun getSuffix(str: String): String {
+        val list = str.split('.')
+        return list.last()
+    }
+
 
     fun deleteFile(absPath: String): Boolean {
         val file = File(absPath)

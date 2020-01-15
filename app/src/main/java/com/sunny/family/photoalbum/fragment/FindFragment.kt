@@ -51,14 +51,34 @@ class FindFragment(private val tip: String) : BaseFragment() {
         override fun onGetPicturePathList(list: List<MediaModel>) {
             SunLog.i(logTag, "onGetPicturePathList  ${list.size}")
             pictureList = list
+            setAdapter()
         }
     }
 
     private fun setListener() {
 
         find_grid.setOnItemClickListener { parent, view, position, id ->
-            tryJumpPlayerPage(pictureList?.get(position))
+            //            tryJumpPlayerPage(pictureList?.get(position))
         }
+    }
+
+    //设置适配器
+    private fun setAdapter() {
+        if (pictureList.isNullOrEmpty()) {
+            return
+        }
+
+        find_grid.adapter = Common
+
+//
+//
+//    private fun setAdapter(dataEntities: List<FindMoreEntity>) {
+        find_grid.setAdapter(object : CommonAdapter<MediaModel?>(context, dataEntities, R.layout.grid_item) {
+            fun convert(viewHolder: ViewHolder, dataEntity: FindMoreEntity) {
+                viewHolder.setText(R.id.grid_tv, dataEntity.getName())
+                viewHolder.setImageResourcewithFresco(R.id.grid_iv, Uri.parse(dataEntity.getBgPicture()))
+            }
+        })
     }
 
     private fun tryJumpPlayerPage(data: MediaModel?) {

@@ -25,12 +25,11 @@ class CameraHelper {
             val dataTake = System.currentTimeMillis()
             val jpegName = "picture_$dataTake.jpg"
 
-            val filePath = FileUtils.STORAGE_PATH_CAMERA + File.separator +
-                    "picture" + File.separator + jpegName
+            val filePath = FileUtils.PICTURE_FOLDER_PATG + File.separator + jpegName
             SunLog.i(logTag, "buildPictureFile :$filePath")
 
             val file = File(filePath)
-            if (!file.parentFile.exists()){
+            if (!file.parentFile.exists()) {
                 file.parentFile.mkdirs()
             }
             file.setWritable(true) // 不加这句会报Read-only警告
@@ -42,8 +41,7 @@ class CameraHelper {
             val videoName = "video_$dataTake.mp4"
 
             // 不添加"/DCIM/Camera"目录，相册中无法查看视频文件
-            val filePath = FileUtils.STORAGE_PATH_CAMERA + File.separator +
-                    "/DCIM/Camera" + File.separator + videoName
+            val filePath = FileUtils.VIDEO_FOLDER_PATG + File.separator + videoName
             SunLog.i(logTag, "buildVideoFile :$filePath")
 
             val file = File(filePath)
@@ -55,8 +53,7 @@ class CameraHelper {
             val dataTake = System.currentTimeMillis()
             val voiceName = "voice_$dataTake.amr"
 
-            val filePath = FileUtils.STORAGE_PATH_CAMERA + File.separator +
-                    "voice" + File.separator + voiceName
+            val filePath = FileUtils.VOICE_FOLDER_PATG + File.separator + voiceName
             SunLog.i(logTag, "buildVoiceFile :$filePath")
 
             val file = File(filePath)
