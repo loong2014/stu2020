@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import com.sunny.family.home.HomeActivity
 import com.sunny.family.photoalbum.PhotoAlbumActivity
+import com.sunny.family.player.PlayerActivity
 import com.sunny.lib.utils.ContextProvider
 
 object PageJumpUtils {
@@ -16,6 +17,10 @@ object PageJumpUtils {
 
     fun jumpPhotoAlbumPage(intent: Intent?, context: Context?) {
         doPageJump(intent, context, PhotoAlbumActivity::class.java)
+    }
+
+    fun jumpPlayerPage(intent: Intent?, context: Context?) {
+        doPageJump(intent, context, PlayerActivity::class.java)
     }
 
     private fun doPageJump(intent: Intent?, context: Context?, clazz: Class<*>) {

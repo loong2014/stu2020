@@ -13,11 +13,6 @@ import kotlinx.android.synthetic.main.act_photo_album.*
  */
 class PhotoAlbumActivity : BaseActivity() {
 
-
-//    private FindFragment findFragment;
-//    private HotFragment hotFragment;
-//    private DailyFragment dailyFragment;
-
     private var hotFragment: FindFragment? = null
     private var findFragment: FindFragment? = null
     private var dailyFragment: FindFragment? = null
