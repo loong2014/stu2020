@@ -1,9 +1,6 @@
 package com.sunny.family;
 
-import android.app.Activity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.gson.Gson;
 
 public class DemoJava {
 
@@ -18,7 +15,7 @@ public class DemoJava {
         }
     };
 
-    interface PhotoCallback{
+    interface PhotoCallback {
         void getList();
     }
 
@@ -33,6 +30,7 @@ public class DemoJava {
         DemoJava demoJava = new DemoJava();
 
         int len = demoJava.strLen.apply("hello");
-        System.out.println("len of hello :"+len);
+        System.out.println("len of hello :" + len);
+
     }
 }

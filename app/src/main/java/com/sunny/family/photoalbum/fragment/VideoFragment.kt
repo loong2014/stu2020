@@ -10,6 +10,8 @@ import com.sunny.family.adapter.ViewHolder
 import com.sunny.family.model.VideoModel
 import com.sunny.family.photoalbum.PhotoAlbumHelper
 import com.sunny.lib.base.BaseFragment
+import com.sunny.lib.jump.PageJumpUtils
+import com.sunny.lib.jump.params.JumpPlayerParams
 import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.utils.SunLog
 import kotlinx.android.synthetic.main.fragment_find.*
@@ -75,8 +77,22 @@ class VideoFragment(private val tip: String) : BaseFragment() {
 
     private fun setListener() {
         find_grid.setOnItemClickListener { parent, view, position, id ->
-            //            tryJumpPlayerPage(pictureList?.get(position))
+            tryJumpPlayerPage(dataList?.get(position))
         }
+    }
+
+    private fun tryJumpPlayerPage(data: VideoModel?) {
+        if (data == null) {
+            SunLog.i(logTag, "tryJumpPlayerPage  data is null")
+            return
+        }
+
+        val jumpParams = JumpPlayerParams()
+        jumpParams.videoPath = data.path
+        jumpParams.videoName = data.name
+
+        PageJumpUtils.jumpPlayerPage(context = activity, jumpParams = jumpParams)
+
     }
 
 }

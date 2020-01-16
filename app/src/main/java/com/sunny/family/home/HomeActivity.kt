@@ -29,7 +29,7 @@ class HomeActivity : BaseActivity() {
         }
 
         btn_enter_photo_album.setOnClickListener {
-            PageJumpUtils.jumpPhotoAlbumPage(null, this)
+            PageJumpUtils.jumpPhotoAlbumPage(context = this)
         }
     }
 
