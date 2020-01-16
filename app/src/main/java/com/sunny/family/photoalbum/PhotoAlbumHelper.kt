@@ -31,7 +31,6 @@ class PhotoAlbumHelper {
 
     }
 
-
     interface PhotoAlbumCallback {
         fun onGetPicturePathList(list: List<MediaModel>) {
 

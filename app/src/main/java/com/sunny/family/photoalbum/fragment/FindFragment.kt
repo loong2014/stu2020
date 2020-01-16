@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.sunny.family.R
 import com.sunny.family.model.MediaModel
+import com.sunny.family.photoalbum.CommonAdapter
 import com.sunny.family.photoalbum.PhotoAlbumHelper
 import com.sunny.lib.base.BaseFragment
 import com.sunny.lib.jump.JumpConfig
@@ -68,17 +69,7 @@ class FindFragment(private val tip: String) : BaseFragment() {
             return
         }
 
-        find_grid.adapter = Common
-
-//
-//
-//    private fun setAdapter(dataEntities: List<FindMoreEntity>) {
-        find_grid.setAdapter(object : CommonAdapter<MediaModel?>(context, dataEntities, R.layout.grid_item) {
-            fun convert(viewHolder: ViewHolder, dataEntity: FindMoreEntity) {
-                viewHolder.setText(R.id.grid_tv, dataEntity.getName())
-                viewHolder.setImageResourcewithFresco(R.id.grid_iv, Uri.parse(dataEntity.getBgPicture()))
-            }
-        })
+        find_grid.adapter = object : CommonAdapter<MediaModel>(activity, pictureList, R.layout.item_view_media) {}
     }
 
     private fun tryJumpPlayerPage(data: MediaModel?) {
