@@ -53,13 +53,13 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/tv_daily"
+            android:id="@+id/tv_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
-            android:text="每日精选"
+            android:text="label-1"
             android:textColor="@drawable/main_menu_selector" />
 
         <View
@@ -69,13 +69,13 @@
             android:background="@color/colorGray" />
 
         <TextView
-            android:id="@+id/tv_find"
+            android:id="@+id/tv_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
-            android:text="发现更多"
+            android:text="label-2"
             android:textColor="@drawable/main_menu_selector" />
 
         <View
@@ -85,13 +85,13 @@
             android:background="@color/colorGray" />
 
         <TextView
-            android:id="@+id/tv_hot"
+            android:id="@+id/tv_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
-            android:text="热门排行"
+            android:text="label-3"
             android:textColor="@drawable/main_menu_selector" />
     </LinearLayout>
 </LinearLayout>

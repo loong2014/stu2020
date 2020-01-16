@@ -149,26 +149,39 @@ class CameraSysActivity : BasePlayerActivity() {
 
             when (requestCode) {
 
+                // 图片
                 requestCodeTakePicture -> {
                     val picturePath = getFilePath()
-                    SunLog.i(logTag, "onActivityResult  picturePath :$picturePath")
+
                     Glide.with(this).load(picturePath).into(iv_camera_last)
+
+                    CameraHelper.notifyPictureChanged(cameraSaveFile)
                 }
 
+                // 视频
                 requestCodeTakeVideo -> {
                     val videoPath = getFilePath()
+
                     if (videoPath != null) {
-                        setVideoUri(videoPath)
+//                        setVideoUri(videoPath)
                         video_control_layout.visibility = View.VISIBLE
                     }
+
+                    CameraHelper.notifyVideoFileChanged(cameraSaveFile)
                 }
 
+                // 音频
                 requestCodeTakeVoice -> {
 
+                    intent?.data?.let {
+                        val filePath = CameraHelper.getAudioFilePathFromUri(it)
+                        SunLog.i(logTag, "getAudioFilePathFromUri  $filePath")
+                        CameraHelper.saveVoiceData(filePath, cameraSaveFile)
+                    }
+
+//                    CameraHelper.notifyVoiceFileChanged(cameraSaveFile)
                 }
             }
-
-            CameraHelper.notifyPhotoAlbumChange(cameraSaveFile)
         }
         super.onActivityResult(requestCode, resultCode, intent)
     }

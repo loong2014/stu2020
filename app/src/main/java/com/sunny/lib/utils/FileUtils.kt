@@ -3,9 +3,7 @@ package com.sunny.lib.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Environment
-import java.io.BufferedOutputStream
-import java.io.File
-import java.io.FileOutputStream
+import java.io.*
 
 /**
  * Created by zhangxin17 on 2020-01-10
@@ -22,15 +20,15 @@ object FileUtils {
         buildFolder(STORAGE_PATH + File.separator + "SunCamera")
     }
 
-    val PICTURE_FOLDER_PATG: String by lazy {
+    val PICTURE_FOLDER_PATH: String by lazy {
         buildFolder(STORAGE_PATH_CAMERA + File.separator + "picture")
     }
 
-    val VIDEO_FOLDER_PATG: String by lazy {
-        buildFolder(STORAGE_PATH_CAMERA + File.separator + "/DCIM/Camera")
+    val VIDEO_FOLDER_PATH: String by lazy {
+        buildFolder(STORAGE_PATH_CAMERA + File.separator + "DCIM/Camera")
     }
 
-    val VOICE_FOLDER_PATG: String by lazy {
+    val VOICE_FOLDER_PATH: String by lazy {
         buildFolder(STORAGE_PATH_CAMERA + File.separator + "voice")
     }
 
@@ -58,6 +56,21 @@ object FileUtils {
             return if (it.isFile) {
                 return when (getSuffix(it.name)) {
                     "mp4" -> true
+                    else -> false
+                }
+            } else {
+                false
+            }
+        }
+        return false
+    }
+
+
+    fun isVoiceFile(file: File?): Boolean {
+        file?.let {
+            return if (it.isFile) {
+                return when (getSuffix(it.name)) {
+                    "amr" -> true
                     else -> false
                 }
             } else {
@@ -95,6 +108,35 @@ object FileUtils {
         }
 
         return ""
+    }
+
+    /**
+     * 保存数据
+     */
+    fun saveFileToFile(fromPath: String, toPath: String): Boolean {
+
+        var fromIs: InputStream? = null
+        var toOs: OutputStream? = null
+
+        try {
+            fromIs = FileInputStream(fromPath)
+            toOs = FileOutputStream(toPath)
+            val buffer = ByteArray(1024)
+            var len: Int
+            while (((fromIs.read(buffer)).also { len = it }) != -1) {
+                toOs.write(buffer, 0, len)
+            }
+            return true
+        } catch (e: Exception) {
+            SunLog.e("FileUtils", "saveFileToFile error :$e.toString()")
+        } finally {
+            try {
+                toOs?.close()
+                fromIs?.close()
+            } catch (e: Exception) {
+            }
+        }
+        return false
     }
 
     private fun buildFolder(absPath: String): String {
