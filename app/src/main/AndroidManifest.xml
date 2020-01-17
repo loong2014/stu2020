@@ -37,6 +37,7 @@
         <activity android:name=".photoalbum.PhotoAlbumActivity" />
         <activity android:name=".camera.CameraSysActivity" />
         <activity android:name=".player.PlayerActivity" />
+        <activity android:name=".player.VideoViewActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
