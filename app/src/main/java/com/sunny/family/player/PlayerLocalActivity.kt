@@ -36,12 +36,12 @@ class PlayerLocalActivity : Activity() {
         playerViewHelper = PlayerViewHelper(this)
         playerViewHelper.initPlayerView(sun_player_view)
 
-        val playerInfo = PlayerInfo(videoUrl = jumpParams.videoPath,
+        playerViewHelper.setPlayerInfo(PlayerInfo(
+                videoUrl = jumpParams.videoPath,
                 videoName = jumpParams.videoName,
                 videoImg = jumpParams.videoImg,
                 videoType = VideoType.LOCAL.type
-        )
-        playerViewHelper.setPlayerInfo(playerInfo)
+        ))
     }
 
     override fun onResume() {
