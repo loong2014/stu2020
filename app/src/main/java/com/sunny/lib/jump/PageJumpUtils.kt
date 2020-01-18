@@ -7,9 +7,9 @@ import android.content.Intent
 import com.google.gson.Gson
 import com.sunny.family.home.HomeActivity
 import com.sunny.family.photoalbum.PhotoAlbumActivity
-import com.sunny.family.player.VideoViewActivity
-import com.sunny.lib.jump.params.BaseParams
-import com.sunny.lib.jump.params.JumpPlayerParams
+import com.sunny.family.player.PlayerActivity
+import com.sunny.lib.jump.params.BaseParam
+import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.ContextProvider
 
 object PageJumpUtils {
@@ -22,12 +22,12 @@ object PageJumpUtils {
         doPageJump(intent, context, PhotoAlbumActivity::class.java)
     }
 
-    fun jumpPlayerPage(intent: Intent? = null, context: Context? = ContextProvider.appContext, jumpParams: JumpPlayerParams) {
-//        doPageJump(intent, context, PlayerActivity::class.java, jumpParams)
-        doPageJump(intent, context, VideoViewActivity::class.java, jumpParams)
+    fun jumpPlayerPage(intent: Intent? = null, context: Context? = ContextProvider.appContext, jumpParams: JumpPlayerParam) {
+        doPageJump(intent, context, PlayerActivity::class.java, jumpParams)
+//        doPageJump(intent, context, VideoViewActivity::class.java, jumpParams)
     }
 
-    private fun doPageJump(intent: Intent? = null, context: Context? = ContextProvider.appContext, clazz: Class<*>, params: BaseParams? = null) {
+    private fun doPageJump(intent: Intent? = null, context: Context? = ContextProvider.appContext, clazz: Class<*>, params: BaseParam? = null) {
         val jumpContext = context ?: ContextProvider.appContext
 
         val jumpIntent = intent ?: Intent()

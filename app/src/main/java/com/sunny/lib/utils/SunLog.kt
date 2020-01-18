@@ -4,6 +4,12 @@ import android.util.Log
 
 object SunLog {
 
+    private val playerTag = "PlayerTag-"
+
+    fun buildTag(subTag: String): String {
+        return playerTag + subTag
+    }
+
     private val I: Int = 1
     private val D: Int = 2
     private val E: Int = 3

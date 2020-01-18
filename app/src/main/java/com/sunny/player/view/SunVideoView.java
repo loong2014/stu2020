@@ -4,9 +4,9 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.VideoView;
 
@@ -16,9 +16,9 @@ import com.sunny.player.control.IVideoViewListener;
 
 import java.util.Map;
 
-public class SunVideoView extends GLSurfaceView implements IVideoControl {
+public class SunVideoView extends SurfaceView implements IVideoControl {
 
-    private static final String TAG = "SunVideoView";
+    private static final String TAG = SunLog.INSTANCE.buildTag("SunVideoView");
 
     public static final int STATE_ERROR = -1;
     public static final int STATE_IDLE = 0;
@@ -69,13 +69,13 @@ public class SunVideoView extends GLSurfaceView implements IVideoControl {
 
     private void initView(Context context) {
         mContext = context;
+        showLog("initView");
 
         onStateChanged(STATE_IDLE);
 
         setVisibility(GONE);
 
         getHolder().addCallback(mSHCallback);
-
     }
 
     @Override
@@ -97,7 +97,8 @@ public class SunVideoView extends GLSurfaceView implements IVideoControl {
     public void setVideoPath(Uri uri, Map<String, String> headers) {
         mUri = uri;
         mHeaders = headers;
-
+        showLog("uri :" + uri);
+        showLog("openVideo by setVideoPath");
         openVideo();
     }
 
@@ -114,7 +115,6 @@ public class SunVideoView extends GLSurfaceView implements IVideoControl {
         }
 
         doVideoRelease(false);
-
 
         try {
             mMediaPlayer = new SunMediaPlayer();
@@ -142,7 +142,6 @@ public class SunVideoView extends GLSurfaceView implements IVideoControl {
             onStateChanged(STATE_ERROR);
         }
     }
-
 
     private MediaPlayer.OnPreparedListener mPreparedListener = new MediaPlayer.OnPreparedListener() {
         @Override

@@ -11,7 +11,7 @@ import com.sunny.family.model.VideoModel
 import com.sunny.family.photoalbum.PhotoAlbumHelper
 import com.sunny.lib.base.BaseFragment
 import com.sunny.lib.jump.PageJumpUtils
-import com.sunny.lib.jump.params.JumpPlayerParams
+import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.utils.SunLog
 import kotlinx.android.synthetic.main.fragment_find.*
@@ -87,7 +87,7 @@ class VideoFragment(private val tip: String) : BaseFragment() {
             return
         }
 
-        val jumpParams = JumpPlayerParams()
+        val jumpParams = JumpPlayerParam()
         jumpParams.videoPath = data.path
         jumpParams.videoName = data.name
 

@@ -9,4 +9,6 @@ interface IPlayerViewCallback {
 
     fun onVideoItemClick(itemModel: VideoItemModel)
 
+    fun onError(type: String, msg: String)
+
 }

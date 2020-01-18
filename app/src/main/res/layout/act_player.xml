@@ -4,5 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.sunny.player.view.SunVideoView
+        android:id="@+id/sun_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

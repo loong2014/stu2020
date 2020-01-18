@@ -7,19 +7,19 @@ import com.google.gson.Gson
 import com.sunny.family.R
 import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.jump.JumpConfig
-import com.sunny.lib.jump.params.JumpPlayerParams
+import com.sunny.lib.jump.params.JumpPlayerParam
 import kotlinx.android.synthetic.main.act_player_video_view.*
 
 class VideoViewActivity : BaseActivity() {
 
-    var jumpParams: JumpPlayerParams? = null
+    var jumpParams: JumpPlayerParam? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_player_video_view)
 
         intent.getStringExtra(JumpConfig.keyJumpParams)?.let {
-            jumpParams = Gson().fromJson(it, JumpPlayerParams::class.java)
+            jumpParams = Gson().fromJson(it, JumpPlayerParam::class.java)
         }
 
         initVideoView()
@@ -36,6 +36,5 @@ class VideoViewActivity : BaseActivity() {
             sys_video_view.start()
         }
     }
-
 
 }

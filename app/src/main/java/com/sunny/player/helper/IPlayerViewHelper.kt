@@ -7,7 +7,4 @@ import com.sunny.player.view.SunVideoView
  */
 interface IPlayerViewHelper {
 
-    fun setPlayerViewCallback(callback: IPlayerViewCallback)
-
-    fun setPlayerView(videoView: SunVideoView)
 }
