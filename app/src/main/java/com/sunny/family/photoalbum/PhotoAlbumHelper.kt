@@ -15,7 +15,7 @@ class PhotoAlbumHelper {
     private val logTag = "PhotoAlbumHelper"
 
     fun getPictureList(callback: PhotoAlbumCallback) {
-        HandlerUtils.getUiHandler().postDelayed({
+        HandlerUtils.uiHandler.postDelayed({
             val dataList = mutableListOf<PictureModel>()
 
             val dirFile = File(FileUtils.PICTURE_FOLDER_PATH)
@@ -33,7 +33,7 @@ class PhotoAlbumHelper {
     }
 
     fun getVideoList(callback: PhotoAlbumCallback) {
-        HandlerUtils.getUiHandler().postDelayed({
+        HandlerUtils.uiHandler.postDelayed({
             val dataList = mutableListOf<VideoModel>()
 
             val dirFile = File(FileUtils.VIDEO_FOLDER_PATH)
@@ -52,7 +52,7 @@ class PhotoAlbumHelper {
 
 
     fun getVoiceList(callback: PhotoAlbumCallback) {
-        HandlerUtils.getUiHandler().postDelayed({
+        HandlerUtils.uiHandler.postDelayed({
             val dataList = mutableListOf<VoiceModel>()
 
             val dirFile = File(FileUtils.VOICE_FOLDER_PATH)

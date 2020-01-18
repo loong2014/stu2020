@@ -7,10 +7,13 @@ import android.content.Intent
 import com.google.gson.Gson
 import com.sunny.family.home.HomeActivity
 import com.sunny.family.photoalbum.PhotoAlbumActivity
-import com.sunny.family.player.PlayerActivity
+import com.sunny.family.player.PlayerLocalActivity
+import com.sunny.family.player.PlayerNetActivity
 import com.sunny.lib.jump.params.BaseParam
 import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.utils.ToastUtils
+import com.sunny.player.config.VideoType
 
 object PageJumpUtils {
 
@@ -23,8 +26,20 @@ object PageJumpUtils {
     }
 
     fun jumpPlayerPage(intent: Intent? = null, context: Context? = ContextProvider.appContext, jumpParams: JumpPlayerParam) {
-        doPageJump(intent, context, PlayerActivity::class.java, jumpParams)
-//        doPageJump(intent, context, VideoViewActivity::class.java, jumpParams)
+
+        when (jumpParams.videoType) {
+            VideoType.LOCAL -> {
+                doPageJump(intent, context, PlayerLocalActivity::class.java, jumpParams)
+            }
+
+            VideoType.NETWORK -> {
+                doPageJump(intent, context, PlayerNetActivity::class.java, jumpParams)
+            }
+
+            else -> {
+                ToastUtils.show("错误的跳转类型")
+            }
+        }
     }
 
     private fun doPageJump(intent: Intent? = null, context: Context? = ContextProvider.appContext, clazz: Class<*>, params: BaseParam? = null) {

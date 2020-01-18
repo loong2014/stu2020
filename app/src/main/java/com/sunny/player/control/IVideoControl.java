@@ -21,6 +21,8 @@ public interface IVideoControl {
 
     void pausePlay();
 
+    void stopPlay();
+
     void seekTo(int position);
 
     int getVideoWidth();

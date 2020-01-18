@@ -8,9 +8,10 @@ import com.sunny.family.player.http.model.PlayerInfo
 import com.sunny.lib.jump.JumpConfig
 import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.SunLog
+import com.sunny.player.config.VideoType
 import kotlinx.android.synthetic.main.act_player.*
 
-class PlayerActivity : Activity() {
+class PlayerLocalActivity : Activity() {
 
     private val logTag = SunLog.buildPlayerTag("PlayerActivity")
 
@@ -34,9 +35,11 @@ class PlayerActivity : Activity() {
         SunLog.i(logTag, "initPlayer")
         playerViewHelper = PlayerViewHelper(this)
         playerViewHelper.initPlayerView(sun_player_view)
+
         val playerInfo = PlayerInfo(videoUrl = jumpParams.videoPath,
                 videoName = jumpParams.videoName,
-                videoImg = jumpParams.videoImg
+                videoImg = jumpParams.videoImg,
+                videoType = VideoType.LOCAL.type
         )
         playerViewHelper.setPlayerInfo(playerInfo)
     }

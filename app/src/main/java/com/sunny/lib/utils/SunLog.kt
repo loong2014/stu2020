@@ -6,7 +6,7 @@ object SunLog {
 
     private val playerTag = "PlayerTag-"
 
-    fun buildTag(subTag: String): String {
+    fun buildPlayerTag(subTag: String): String {
         return playerTag + subTag
     }
 

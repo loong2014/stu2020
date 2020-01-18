@@ -4,17 +4,20 @@ import android.app.Activity
 import android.os.Bundle
 import com.google.gson.Gson
 import com.sunny.family.R
+import com.sunny.family.player.http.PlayerNetHelper
 import com.sunny.family.player.http.model.PlayerInfo
 import com.sunny.lib.jump.JumpConfig
 import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.SunLog
 import kotlinx.android.synthetic.main.act_player.*
 
-class PlayerActivity : Activity() {
+class PlayerNetActivity : Activity() {
 
-    private val logTag = SunLog.buildPlayerTag("PlayerActivity")
+    private val logTag = SunLog.buildPlayerTag("PlayerNetActivity")
 
     private lateinit var playerViewHelper: PlayerViewHelper
+
+    private lateinit var playerNetHelper: PlayerNetHelper
 
     lateinit var jumpParams: JumpPlayerParam
 
@@ -28,17 +31,32 @@ class PlayerActivity : Activity() {
         setContentView(R.layout.act_player)
 
         initPlayer()
+        initData()
     }
+
 
     private fun initPlayer() {
         SunLog.i(logTag, "initPlayer")
         playerViewHelper = PlayerViewHelper(this)
         playerViewHelper.initPlayerView(sun_player_view)
-        val playerInfo = PlayerInfo(videoUrl = jumpParams.videoPath,
-                videoName = jumpParams.videoName,
-                videoImg = jumpParams.videoImg
-        )
-        playerViewHelper.setPlayerInfo(playerInfo)
+    }
+
+    private fun initData() {
+        playerNetHelper = PlayerNetHelper(this)
+
+        playerNetHelper.getPlayInfo(jumpParams.videoId, object : PlayerNetHelper.PlayerInfoCallback {
+            override fun onGetPlayerInfo(playerInfo: PlayerInfo) {
+                SunLog.i(logTag, "onGetPlayerInfo  $playerInfo")
+
+                runOnUiThread {
+                    playerViewHelper.setPlayerInfo(playerInfo)
+                }
+            }
+
+            override fun onGetPlayerInfoError(code: String, msg: String) {
+                SunLog.i(logTag, "onGetPlayerInfoError  $code , $msg")
+            }
+        })
     }
 
     override fun onResume() {

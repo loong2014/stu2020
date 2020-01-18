@@ -11,7 +11,7 @@ class FamilyApplication : BaseApplication() {
 
             ActivityLifeManager.finishAll()
 
-            HandlerUtils.getUiHandler().postDelayed({
+            HandlerUtils.uiHandler.postDelayed({
                 val curPid = android.os.Process.myPid()
                 android.os.Process.killProcess(curPid)
             }, 200)

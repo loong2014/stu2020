@@ -2,7 +2,6 @@ package com.sunny.player.helper
 
 import android.content.Context
 import android.net.Uri
-import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.SunLog
 import com.sunny.player.control.IVideoControl
 import com.sunny.player.control.IVideoViewListener
@@ -11,7 +10,7 @@ import com.sunny.player.view.SunVideoView
 
 open class BasePlayerViewHelper(val context: Context) {
 
-    private val logTag = SunLog.buildTag("BasePlayerViewHelper")
+    private val logTag = SunLog.buildPlayerTag("BasePlayerViewHelper")
 
     private lateinit var mPlayerView: SunPlayerView
     private lateinit var mVideoControl: IVideoControl
@@ -33,10 +32,10 @@ open class BasePlayerViewHelper(val context: Context) {
         mPlayerViewCallback = callback
     }
 
-    fun setPlayerJump(jumpParam: JumpPlayerParam) {
-        SunLog.i(logTag, "setPlayerJump")
+    fun setVideoPath(url: String) {
+        SunLog.i(logTag, "setVideoPath $url")
 
-        mVideoControl.setVideoPath(Uri.parse(jumpParam.videoPath), null)
+        mVideoControl.setVideoPath(Uri.parse(url), null)
     }
 
     private val mVideoViewListener = object : IVideoViewListener {
@@ -86,6 +85,9 @@ open class BasePlayerViewHelper(val context: Context) {
     }
 
     fun onActDestroy() {
+        if (mVideoControl.inPlaybackState()) {
+            mVideoControl.stopPlay()
+        }
     }
 
 }

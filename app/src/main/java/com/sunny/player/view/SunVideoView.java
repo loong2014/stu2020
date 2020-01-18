@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class SunVideoView extends SurfaceView implements IVideoControl {
 
-    private static final String TAG = SunLog.INSTANCE.buildTag("SunVideoView");
+    private static final String TAG = SunLog.INSTANCE.buildPlayerTag("SunVideoView");
 
     public static final int STATE_ERROR = -1;
     public static final int STATE_IDLE = 0;
@@ -292,6 +292,11 @@ public class SunVideoView extends SurfaceView implements IVideoControl {
             mMediaPlayer.pause();
             onStateChanged(STATE_PAUSED);
         }
+    }
+
+    @Override
+    public void stopPlay() {
+        doVideoRelease(false);
     }
 
     @Override

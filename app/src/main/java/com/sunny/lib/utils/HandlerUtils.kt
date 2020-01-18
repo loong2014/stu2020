@@ -1,16 +1,19 @@
 package com.sunny.lib.utils
 
 import android.os.Handler
+import android.os.HandlerThread
 import android.os.Looper
 
 object HandlerUtils {
 
-    private var uiHandler: Handler = Handler(Looper.getMainLooper())
-
-    fun getUiHandler(): Handler {
-        return uiHandler
+    val uiHandler: Handler by lazy {
+        Handler(Looper.getMainLooper())
     }
-    fun jjjj(){
 
+    val workHandler: Handler by lazy {
+        val handlerThread = HandlerThread("com.sunny.family.work")
+        handlerThread.start()
+        Handler(handlerThread.looper)
     }
+
 }

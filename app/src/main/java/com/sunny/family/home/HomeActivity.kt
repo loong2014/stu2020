@@ -7,6 +7,9 @@ import com.sunny.family.camera.CameraCustomActivity
 import com.sunny.family.camera.CameraSysActivity
 import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.jump.PageJumpUtils
+import com.sunny.lib.jump.params.JumpPlayerParam
+import com.sunny.player.config.PlayerConfig
+import com.sunny.player.config.VideoType
 import kotlinx.android.synthetic.main.act_home.*
 
 class HomeActivity : BaseActivity() {
@@ -30,6 +33,14 @@ class HomeActivity : BaseActivity() {
 
         btn_enter_photo_album.setOnClickListener {
             PageJumpUtils.jumpPhotoAlbumPage(context = this)
+        }
+
+        btn_enter_net_player.setOnClickListener {
+            val jumpParams = JumpPlayerParam()
+            jumpParams.videoId = PlayerConfig.video1_id
+            jumpParams.videoType = VideoType.NETWORK
+
+            PageJumpUtils.jumpPlayerPage(context = this, jumpParams = jumpParams)
         }
     }
 

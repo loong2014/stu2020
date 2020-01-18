@@ -14,6 +14,7 @@ import com.sunny.lib.jump.PageJumpUtils
 import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.utils.SunLog
+import com.sunny.player.config.VideoType
 import kotlinx.android.synthetic.main.fragment_find.*
 
 class VideoFragment(private val tip: String) : BaseFragment() {
@@ -87,12 +88,12 @@ class VideoFragment(private val tip: String) : BaseFragment() {
             return
         }
 
-        val jumpParams = JumpPlayerParam()
-        jumpParams.videoPath = data.path
-        jumpParams.videoName = data.name
+        val jumpParams = JumpPlayerParam(
+                videoPath = data.path,
+                videoName = data.name,
+                videoType = VideoType.LOCAL)
 
         PageJumpUtils.jumpPlayerPage(context = activity, jumpParams = jumpParams)
-
     }
 
 }

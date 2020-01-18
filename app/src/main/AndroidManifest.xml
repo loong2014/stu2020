@@ -3,6 +3,8 @@
     package="com.sunny.family">
 
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <!-- CameraView -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
@@ -38,6 +40,8 @@
         <activity android:name=".camera.CameraSysActivity" />
         <activity android:name=".player.PlayerActivity" />
         <activity android:name=".player.VideoViewActivity" />
+        <activity android:name=".player.PlayerLocalActivity" />
+        <activity android:name=".player.PlayerNetActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
