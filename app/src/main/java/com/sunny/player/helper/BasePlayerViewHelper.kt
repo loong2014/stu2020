@@ -6,20 +6,26 @@ import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.SunLog
 import com.sunny.player.control.IVideoControl
 import com.sunny.player.control.IVideoViewListener
+import com.sunny.player.view.SunPlayerView
 import com.sunny.player.view.SunVideoView
 
-open class BasePlayerViewHelper(context: Context) {
+open class BasePlayerViewHelper(val context: Context) {
 
     private val logTag = SunLog.buildTag("BasePlayerViewHelper")
 
+    private lateinit var mPlayerView: SunPlayerView
     private lateinit var mVideoControl: IVideoControl
 
     private var mPlayerViewCallback: IPlayerViewCallback? = null
 
-    fun initPlayerView(videoView: SunVideoView) {
+    fun initPlayerView(playerView: SunPlayerView) {
         SunLog.i(logTag, "initPlayerView")
 
-        mVideoControl = videoView
+        mPlayerView = playerView
+
+        mVideoControl = SunVideoView(context)
+        mPlayerView.addVideoView(mVideoControl.videoView)
+
         mVideoControl.setVideoViewListener(mVideoViewListener)
     }
 

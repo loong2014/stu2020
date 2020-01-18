@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.sunny.player.view.SunVideoView
-        android:id="@+id/sun_video_view"
+    <com.sunny.player.view.SunPlayerView
+        android:id="@+id/sun_player_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

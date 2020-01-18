@@ -32,7 +32,7 @@ class PlayerActivity : Activity() {
     private fun initPlayer() {
         SunLog.i(logTag, "initPlayer")
         playerViewHelper = PlayerViewHelper(this)
-        playerViewHelper.initPlayerView(sun_video_view)
+        playerViewHelper.initPlayerView(sun_player_view)
         playerViewHelper.setPlayerJump(jumpParams)
     }
 
