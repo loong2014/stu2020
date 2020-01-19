@@ -2,6 +2,8 @@ package com.sunny.family.camera
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +11,7 @@ import android.provider.MediaStore
 import android.view.View
 import com.bumptech.glide.Glide
 import com.sunny.family.R
+import com.sunny.lib.utils.BackgroundUtils
 import com.sunny.lib.utils.SunLog
 import com.sunny.player.BasePlayerActivity
 import kotlinx.android.synthetic.main.act_camera.*
@@ -156,6 +159,10 @@ class CameraSysActivity : BasePlayerActivity() {
                     Glide.with(this).load(picturePath).into(iv_camera_last)
 
                     CameraHelper.notifyPictureChanged(cameraSaveFile)
+
+                    val bitmap = BitmapFactory.decodeFile(cameraSaveFile.absolutePath)
+
+                    updateBg(bitmap)
                 }
 
                 // 视频
@@ -184,5 +191,35 @@ class CameraSysActivity : BasePlayerActivity() {
             }
         }
         super.onActivityResult(requestCode, resultCode, intent)
+    }
+
+    private fun updateBg(bitmap: Bitmap) {
+
+        BackgroundUtils.getBackgroundColor(bitmap, object : BackgroundUtils.IBackgroundColorCallback {
+            override fun onGetBackgroundColor(colors: IntArray) {
+                runOnUiThread {
+                    BackgroundUtils.updateBackground(act_camera, colors)
+                }
+            }
+
+            override fun onGetBackgroundColorError() {
+                SunLog.i(logTag, "updateBg  onGetBackgroundColorError")
+            }
+        })
+    }
+
+    private fun updateBg(imgUrl: String) {
+
+        BackgroundUtils.getBackgroundColor(imgUrl, object : BackgroundUtils.IBackgroundColorCallback {
+            override fun onGetBackgroundColor(colors: IntArray) {
+                runOnUiThread {
+                    BackgroundUtils.updateBackground(act_camera, colors)
+                }
+            }
+
+            override fun onGetBackgroundColorError() {
+                SunLog.i(logTag, "updateBg  onGetBackgroundColorError")
+            }
+        })
     }
 }

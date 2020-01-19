@@ -19,5 +19,9 @@ object ResUtils {
     }
 
 
+    fun getDimensionPixelSize(resId: Int): Int {
+        return getResources().getDimensionPixelSize(resId)
+    }
+
 
 }

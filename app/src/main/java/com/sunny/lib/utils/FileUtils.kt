@@ -38,17 +38,14 @@ object FileUtils {
     }
 
     fun isPictureFile(file: File?): Boolean {
-        file?.let {
-            return if (it.isFile) {
-                return when (getSuffix(it.name)) {
-                    "png", "jpg" -> true
-                    else -> false
-                }
-            } else {
-                false
-            }
+        val fileName = file?.name
+
+        return when {
+            fileName.isNullOrEmpty() -> false
+            fileName.endsWith(".png") -> true
+            fileName.endsWith(".jpg") -> true
+            else -> false
         }
-        return false
     }
 
     fun isVideoFile(file: File?): Boolean {
@@ -65,19 +62,17 @@ object FileUtils {
         return false
     }
 
-
     fun isVoiceFile(file: File?): Boolean {
-        file?.let {
-            return if (it.isFile) {
-                return when (getSuffix(it.name)) {
-                    "amr" -> true
-                    else -> false
-                }
-            } else {
-                false
+        val fileName = file?.name
+
+        return if (fileName == null) {
+            false
+        } else {
+            when {
+                fileName.endsWith(".amr") -> true
+                else -> false
             }
         }
-        return false
     }
 
     /**
