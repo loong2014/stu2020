@@ -12,7 +12,7 @@ import com.sunny.family.player.PlayerNetActivity
 import com.sunny.lib.jump.params.BaseParam
 import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.ContextProvider
-import com.sunny.lib.utils.ToastUtils
+import com.sunny.lib.utils.SunToast
 import com.sunny.player.config.VideoType
 
 object PageJumpUtils {
@@ -37,7 +37,7 @@ object PageJumpUtils {
             }
 
             else -> {
-                ToastUtils.show("错误的跳转类型")
+                SunToast.show("错误的跳转类型")
             }
         }
     }

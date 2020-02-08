@@ -12,7 +12,7 @@ import com.sunny.family.photoalbum.PhotoAlbumHelper
 import com.sunny.lib.base.BaseFragment
 import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.utils.SunLog
-import kotlinx.android.synthetic.main.fragment_find.*
+import kotlinx.android.synthetic.main.fragment_voice.*
 
 class VoiceFragment(private val tip: String) : BaseFragment() {
 
@@ -24,7 +24,7 @@ class VoiceFragment(private val tip: String) : BaseFragment() {
     private var dataList: List<VoiceModel>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.fragment_find, container, false)
+        rootView = inflater.inflate(R.layout.fragment_voice, container, false)
         return rootView
     }
 

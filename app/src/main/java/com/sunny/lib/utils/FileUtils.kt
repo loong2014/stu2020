@@ -2,6 +2,7 @@ package com.sunny.lib.utils
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.media.MediaMetadataRetriever
 import android.os.Environment
 import java.io.*
 
@@ -74,6 +75,25 @@ object FileUtils {
             }
         }
     }
+
+    fun getVideoThumb(path: String): Bitmap {
+        val media = MediaMetadataRetriever()
+        media.setDataSource(path)
+        return media.getFrameAtTime(0)
+    }
+
+//
+//
+//    public  static Bitmap getVideoThumb(String path) {
+//
+//        MediaMetadataRetriever media = new MediaMetadataRetriever();
+//
+//        media.setDataSource(path);
+//
+//        return  media.getFrameAtTime();
+//
+//    }
+
 
     /**
      * 保存图片

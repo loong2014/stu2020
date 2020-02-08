@@ -8,51 +8,53 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import com.bumptech.glide.Glide
 import com.sunny.family.R
+import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.utils.BackgroundUtils
+import com.sunny.lib.utils.FileUtils
 import com.sunny.lib.utils.SunLog
-import com.sunny.player.BasePlayerActivity
-import kotlinx.android.synthetic.main.act_camera.*
+import com.sunny.lib.utils.SunToast
+import kotlinx.android.synthetic.main.act_camera_sys.*
 import java.io.File
 
 
-class CameraSysActivity : BasePlayerActivity() {
+class CameraSysActivity : BaseActivity() {
 
     private val logTag = "CameraSysActivity"
+
     private val requestCodeTakePicture = 101
     private val requestCodeTakeVideo = 102
     private val requestCodeTakeVoice = 103
 
-    private lateinit var cameraSaveFile: File
+    private lateinit var pictureSaveFile: File
+    private lateinit var videoSaveFile: File
+    private lateinit var voiceSaveFile: File
 
-    private lateinit var cameraSaveFileUri: Uri
+    private lateinit var pictureSaveFileUri: Uri
+    private lateinit var videoSaveFileUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.act_camera)
+        setContentView(R.layout.act_camera_sys)
 
         addListener()
 
         tv_top_tip.text = "系统拍照和系统相册"
-
-        addVideoListener()
-        setVideoView(video_view)
     }
 
     private fun addListener() {
 
         btn_take_photo.setOnClickListener {
-            takePicture()
+            doTakePicture()
         }
 
         btn_take_video.setOnClickListener {
-            takeVideo()
+            doTakeVideo()
         }
 
         btn_take_voice.setOnClickListener {
-            takeVoice()
+            doTakeVoice()
         }
 
         btn_scan_photo.setOnClickListener {
@@ -60,23 +62,12 @@ class CameraSysActivity : BasePlayerActivity() {
         }
     }
 
-    private fun addVideoListener() {
-        btn_video_start.setOnClickListener {
-            playStart()
-        }
-
-        btn_video_stop.setOnClickListener {
-            playStop()
-        }
-    }
-
-
     /**
-     * 调用系统相机拍照
+     * 进行拍照
      */
-    private fun takePicture() {
-        cameraSaveFile = CameraHelper.buildPictureFile()
-        cameraSaveFileUri = CameraHelper.getUriForFile(cameraSaveFile)
+    private fun doTakePicture() {
+        pictureSaveFile = CameraHelper.buildPictureFile()
+        pictureSaveFileUri = CameraHelper.getUriForFile(pictureSaveFile)
 
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.addCategory(Intent.CATEGORY_DEFAULT)
@@ -85,18 +76,40 @@ class CameraSysActivity : BasePlayerActivity() {
         intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
 
         //设置拍照后图片保存的位置
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraSaveFileUri)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, pictureSaveFileUri)
 
-        SunLog.i(logTag, "takePicture")
+        SunLog.i(logTag, "doTakePicture")
         startActivityForResult(intent, requestCodeTakePicture)
     }
 
     /**
-     * 调用系统相机拍视频
+     * 处理拍照
      */
-    private fun takeVideo() {
-        cameraSaveFile = CameraHelper.buildVideoFile()
-        cameraSaveFileUri = CameraHelper.getUriForFile(cameraSaveFile)
+    private fun dealTakePicture() {
+        SunLog.i(logTag, "dealTakePicture")
+
+        val picturePath: String? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            pictureSaveFile.absolutePath
+        } else {
+            pictureSaveFileUri.encodedPath
+        }
+
+        CameraHelper.notifyPictureFileChanged(pictureSaveFile)
+
+        //
+        Glide.with(this).load(picturePath).into(iv_camera_picture)
+
+        //
+        val bitmap = BitmapFactory.decodeFile(pictureSaveFile.absolutePath)
+        updateBg(bitmap)
+    }
+
+    /**
+     * 进行拍视频
+     */
+    private fun doTakeVideo() {
+        videoSaveFile = CameraHelper.buildVideoFile()
+        videoSaveFileUri = CameraHelper.getUriForFile(videoSaveFile)
 
         val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         intent.addCategory(Intent.CATEGORY_DEFAULT)
@@ -114,17 +127,45 @@ class CameraSysActivity : BasePlayerActivity() {
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1)
 
         //设置拍照后图片保存的位置
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraSaveFileUri)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, videoSaveFileUri)
 
-        SunLog.i(logTag, "takeVideo")
+        SunLog.i(logTag, "doTakeVideo")
         startActivityForResult(intent, requestCodeTakeVideo)
     }
 
     /**
-     * 调用系统录音
+     * 处理拍视频
      */
-    private fun takeVoice() {
-        cameraSaveFile = CameraHelper.buildVoiceFile()
+    private fun dealTakeVideo() {
+        SunLog.i(logTag, "dealTakeVideo")
+
+        val videoPath: String? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            videoSaveFile.absolutePath
+        } else {
+            videoSaveFileUri.encodedPath
+        }
+
+        CameraHelper.notifyVideoFileChanged(videoSaveFile)
+
+        if (videoPath.isNullOrEmpty()) {
+            SunToast.show("video path is empty")
+
+        } else {
+            val bitmap: Bitmap = FileUtils.getVideoThumb(videoPath)
+
+            //
+            iv_camera_picture.setImageBitmap(bitmap)
+
+            //
+            updateBg(bitmap)
+        }
+    }
+
+    /**
+     * 进行录音
+     */
+    private fun doTakeVoice() {
+        voiceSaveFile = CameraHelper.buildVoiceFile()
 
         val intent = Intent()
         intent.action = MediaStore.Audio.Media.RECORD_SOUND_ACTION
@@ -135,18 +176,21 @@ class CameraSysActivity : BasePlayerActivity() {
         startActivityForResult(intent, requestCodeTakeVoice)
     }
 
-    private fun getFilePath(): String? {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            cameraSaveFile.absolutePath
-        } else {
-            cameraSaveFileUri.encodedPath
-        }
+    /**
+     * 处理录音
+     */
+    private fun dealTakeVoice(uri: Uri) {
+        val filePath = CameraHelper.getAudioFilePathFromUri(uri)
+
+        SunLog.i(logTag, "getAudioFilePathFromUri  $filePath")
+
+        CameraHelper.saveVoiceData(filePath, voiceSaveFile)
+
+        CameraHelper.notifyVoiceFileChanged(voiceSaveFile)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         SunLog.i(logTag, "onActivityResult requestCode :$requestCode , resultCode :$resultCode")
-
-        video_control_layout.visibility = View.INVISIBLE
 
         if (Activity.RESULT_OK == resultCode) {
 
@@ -154,39 +198,19 @@ class CameraSysActivity : BasePlayerActivity() {
 
                 // 图片
                 requestCodeTakePicture -> {
-                    val picturePath = getFilePath()
-
-                    Glide.with(this).load(picturePath).into(iv_camera_last)
-
-                    CameraHelper.notifyPictureChanged(cameraSaveFile)
-
-                    val bitmap = BitmapFactory.decodeFile(cameraSaveFile.absolutePath)
-
-                    updateBg(bitmap)
+                    dealTakePicture()
                 }
 
                 // 视频
                 requestCodeTakeVideo -> {
-                    val videoPath = getFilePath()
-
-                    if (videoPath != null) {
-//                        setVideoUri(videoPath)
-                        video_control_layout.visibility = View.VISIBLE
-                    }
-
-                    CameraHelper.notifyVideoFileChanged(cameraSaveFile)
+                    dealTakeVideo()
                 }
 
                 // 音频
                 requestCodeTakeVoice -> {
-
                     intent?.data?.let {
-                        val filePath = CameraHelper.getAudioFilePathFromUri(it)
-                        SunLog.i(logTag, "getAudioFilePathFromUri  $filePath")
-                        CameraHelper.saveVoiceData(filePath, cameraSaveFile)
+                        dealTakeVoice(it)
                     }
-
-//                    CameraHelper.notifyVoiceFileChanged(cameraSaveFile)
                 }
             }
         }

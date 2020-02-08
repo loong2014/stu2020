@@ -7,7 +7,7 @@ import com.sunny.family.photoalbum.fragment.PictureFragment
 import com.sunny.family.photoalbum.fragment.VideoFragment
 import com.sunny.family.photoalbum.fragment.VoiceFragment
 import com.sunny.lib.base.BaseActivity
-import com.sunny.lib.utils.ToastUtils
+import com.sunny.lib.utils.SunToast
 import kotlinx.android.synthetic.main.act_photo_album.*
 
 /**
@@ -43,7 +43,7 @@ class PhotoAlbumActivity : BaseActivity() {
 
     private fun setListener() {
         main_toolbar.setNavigationOnClickListener {
-            ToastUtils.show("点击菜单按钮")
+            SunToast.show("点击菜单按钮")
         }
 
         tv_1.setOnClickListener {

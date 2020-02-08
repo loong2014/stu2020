@@ -5,7 +5,7 @@ import android.widget.Toast
 /**
  * Created by zhangxin17 on 2020-01-10
  */
-object ToastUtils {
+object SunToast {
 
     fun show(msg: String) {
         show(msg, Toast.LENGTH_SHORT)

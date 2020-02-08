@@ -15,7 +15,7 @@ import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.utils.SunLog
 import com.sunny.player.config.VideoType
-import kotlinx.android.synthetic.main.fragment_find.*
+import kotlinx.android.synthetic.main.fragment_video.*
 
 class VideoFragment(private val tip: String) : BaseFragment() {
 
@@ -27,7 +27,7 @@ class VideoFragment(private val tip: String) : BaseFragment() {
     private var dataList: List<VideoModel>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.fragment_find, container, false)
+        rootView = inflater.inflate(R.layout.fragment_video, container, false)
         return rootView
     }
 

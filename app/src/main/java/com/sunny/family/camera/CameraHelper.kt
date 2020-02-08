@@ -117,10 +117,10 @@ object CameraHelper {
         return FileUtils.saveFileToFile(dataPath, file.absolutePath)
     }
 
-    fun notifyPictureChanged(imageFile: File) {
+    fun notifyPictureFileChanged(file: File) {
 
         // 将刚拍照的相片在相册中显示，必须使用fromFile
-        ContextProvider.appContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(imageFile)))
+        ContextProvider.appContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)))
 
         // 该方式会在系统相册生产图片对应的缩略图，不建议使用
 //                val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(cameraSaveFileUri))
@@ -128,8 +128,8 @@ object CameraHelper {
 
     }
 
-    fun notifyVideoFileChanged(imageFile: File) {
-        ContextProvider.appContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(imageFile)))
+    fun notifyVideoFileChanged(file: File) {
+        ContextProvider.appContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)))
     }
 
     fun notifyVoiceFileChanged(imageFile: File) {
