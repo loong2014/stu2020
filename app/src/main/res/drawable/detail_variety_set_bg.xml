@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/detail_variety_set_focus" android:state_focused="true" />
+    <item android:drawable="@drawable/detail_variety_set_no_focus" />
+
+</selector>
+
+    <!--   这个是大背景  -->
+    <!--白色   -选中-->
+    <!--透明 -未选中   -->

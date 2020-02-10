@@ -8,12 +8,12 @@
 
 ## uninstall
 #adb uninstall com.sunny.family
-adb shell pm clear com.sunny.family
+#adb shell pm clear com.sunny.family
 
 ## install
-adb install -r ./app/build/outputs/apk/debug/*.apk
+#adb install -r ./app/build/outputs/apk/debug/*.apk
 
-adb shell am start -n com.sunny.family/com.sunny.family.launcher.LauncherActivity
+#adb shell am start -n com.sunny.family/com.sunny.family.launcher.LauncherActivity
 
 
 

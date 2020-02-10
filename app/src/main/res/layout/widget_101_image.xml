@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.drawee.view.SimpleDraweeView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_img"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="top"
+    android:layout_marginBottom="52dp"
+    app:actualImageScaleType="fitXY"
+    app:placeholderImage="@drawable/default_img"
+    app:placeholderImageScaleType="fitXY"
+    app:roundedCornerRadius="6dp" />

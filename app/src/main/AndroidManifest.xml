@@ -41,6 +41,7 @@
         <activity android:name=".player.VideoViewActivity" />
         <activity android:name=".player.PlayerLocalActivity" />
         <activity android:name=".player.PlayerNetActivity" />
+        <activity android:name=".detail.DetailActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

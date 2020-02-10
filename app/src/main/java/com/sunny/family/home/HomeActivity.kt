@@ -42,6 +42,10 @@ class HomeActivity : BaseActivity() {
 
             PageJumpUtils.jumpPlayerPage(context = this, jumpParams = jumpParams)
         }
+
+        btn_enter_detail.setOnClickListener {
+            PageJumpUtils.jumpDetailPage(context = this)
+        }
     }
 
 }

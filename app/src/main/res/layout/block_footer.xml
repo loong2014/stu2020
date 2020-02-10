@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="28dp"
+    android:layout_marginBottom="20dp">
+
+    <TextView
+        android:id="@+id/tab_back"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/block_footer_back_bg"
+        android:drawableStart="@drawable/block_footer_back_selector"
+        android:drawableLeft="@drawable/block_footer_back_selector"
+        android:drawablePadding="6dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:singleLine="true"
+        android:text="回到顶部"
+        android:textColor="@drawable/block_footer_back_text"
+        android:textSize="26sp" />
+</RelativeLayout>

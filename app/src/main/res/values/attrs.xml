@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- attrs for FocusProcessLayout -->
+    <declare-styleable name="FocusProcessLayout">
+        <attr name="enlarge_y" format="dimension" />
+        <attr name="enlarge_x" format="dimension" />
+        <attr name="focus_scale_rate" format="float" />
+        <attr name="focus_stroke_width" format="dimension" />
+        <attr name="show_stroke" format="boolean" />
+        <attr name="stroke_color" format="color" />
+
+    </declare-styleable>
+
+    <declare-styleable name="RoundLayout">
+        <attr name="round_layout_stroke_color" format="color" />
+        <attr name="round_corner" format="dimension" />
+        <attr name="stroke_width" format="dimension" />
+        <attr name="round_corner_top_left" format="dimension" />
+        <attr name="round_corner_top_right" format="dimension" />
+        <attr name="round_corner_bottom_right" format="dimension" />
+        <attr name="round_corner_bottom_left" format="dimension" />
+        <attr name="clip_background" format="boolean" />
+    </declare-styleable>
+
+
+    <!-- 圆角标签属性 -->
+    <declare-styleable name="RoundAngleLabelView">
+        <attr name="roundBgColor" format="reference" />
+        <attr name="roundAngle" format="reference|integer" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundOrangeButton">
+        <attr name="normal_bg" format="reference|color" />
+        <attr name="focus_bg" format="reference|color" />
+        <attr name="normal_text_color" format="color" />
+        <attr name="focus_text_color" format="color" />
+    </declare-styleable>
+
+</resources>

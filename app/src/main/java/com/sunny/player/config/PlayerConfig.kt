@@ -21,4 +21,9 @@ object PlayerConfig {
     val video4_img = "http://img.kaiyanapp.com/4015bed59cab6ae3d2360dcd45452b1d.png?imageMogr2/quality/60/format/jpg"
     val video4_name = "边缘之上"
     val video4_id = "20201004"
+
+
+
+
+
 }

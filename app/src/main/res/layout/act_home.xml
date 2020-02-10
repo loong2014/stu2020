@@ -33,6 +33,12 @@
             android:layout_height="wrap_content"
             android:text="网络视频" />
 
+        <Button
+            android:id="@+id/btn_enter_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="详情页" />
+
     </LinearLayout>
 
 </RelativeLayout>
