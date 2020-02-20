@@ -1,4 +1,4 @@
-package com.sunny.lib.city.model
+package com.sunny.lib.city
 
 object CityType {
     const val Normal = 0 // 普通省份

@@ -11,7 +11,7 @@ import com.sunny.family.R;
 import com.sunny.family.detail.view.common.BlockHolder;
 import com.sunny.family.detail.view.common.BlockInfo;
 import com.sunny.family.detail.view.common.RebuildDataModel;
-import com.sunny.lib.city.model.CityInfo;
+import com.sunny.lib.city.CityInfo;
 
 public class SunBlockHolderOld extends BlockHolder {
 

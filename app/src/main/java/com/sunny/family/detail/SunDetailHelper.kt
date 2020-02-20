@@ -1,7 +1,7 @@
 package com.sunny.family.detail
 
 import com.sunny.lib.city.CityManager
-import com.sunny.lib.city.model.CityInfo
+import com.sunny.lib.city.CityInfo
 import com.sunny.lib.utils.HandlerUtils
 
 class SunDetailHelper(callBack: DetailCallback) {

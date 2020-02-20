@@ -1,4 +1,4 @@
-package com.sunny.family.weather.block;
+package com.sunny.family.city.block;
 
 import android.view.LayoutInflater;
 import android.view.View;

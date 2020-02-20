@@ -1,9 +1,6 @@
 package com.sunny.lib.city
 
 import com.google.gson.Gson
-import com.sunny.lib.city.model.ChinaCityInfo
-import com.sunny.lib.city.model.CityInfo
-import com.sunny.lib.city.model.CityType
 import com.sunny.lib.utils.SunAssetsUtils
 
 /**

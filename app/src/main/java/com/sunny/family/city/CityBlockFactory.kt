@@ -1,7 +1,7 @@
-package com.sunny.family.weather
+package com.sunny.family.city
 
 import android.view.ViewGroup
-import com.sunny.family.weather.block.*
+import com.sunny.family.city.block.*
 import com.sunny.view.block.ISunBlockFactory
 import com.sunny.view.holder.SunBlockHolder
 

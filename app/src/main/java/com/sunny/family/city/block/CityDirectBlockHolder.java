@@ -1,4 +1,4 @@
-package com.sunny.family.weather.block;
+package com.sunny.family.city.block;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.sunny.family.R;
-import com.sunny.lib.city.model.CityType;
 import com.sunny.view.block.SunBlockType;
 
 public class CityDirectBlockHolder extends CityBlockHolder {

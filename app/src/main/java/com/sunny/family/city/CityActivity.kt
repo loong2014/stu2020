@@ -1,12 +1,12 @@
-package com.sunny.family.weather
+package com.sunny.family.city
 
 import android.os.Bundle
 import com.sunny.family.R
-import com.sunny.family.weather.block.*
+import com.sunny.family.city.block.*
 import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.city.CityManager
-import com.sunny.lib.city.model.CityInfo
-import com.sunny.lib.city.model.CityType
+import com.sunny.lib.city.CityInfo
+import com.sunny.lib.city.CityType
 import com.sunny.lib.utils.HandlerUtils
 import com.sunny.lib.utils.SunToast
 import com.sunny.view.data.SunBlockData

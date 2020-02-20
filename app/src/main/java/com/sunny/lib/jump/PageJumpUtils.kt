@@ -10,7 +10,7 @@ import com.sunny.family.home.HomeActivity
 import com.sunny.family.photoalbum.PhotoAlbumActivity
 import com.sunny.family.player.PlayerLocalActivity
 import com.sunny.family.player.PlayerNetActivity
-import com.sunny.family.weather.CityActivity
+import com.sunny.family.city.CityActivity
 import com.sunny.family.weather.WeatherActivity
 import com.sunny.lib.jump.params.BaseParam
 import com.sunny.lib.jump.params.JumpPlayerParam

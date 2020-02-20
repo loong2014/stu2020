@@ -8,7 +8,7 @@ import com.sunny.family.detail.view.VerticalLinearLayoutManager
 import com.sunny.family.detail.view.block.BlockType
 import com.sunny.family.detail.view.common.RebuildDataModel
 import com.sunny.lib.base.BaseActivity
-import com.sunny.lib.city.model.CityInfo
+import com.sunny.lib.city.CityInfo
 import com.sunny.lib.jump.PageJumpUtils
 import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.utils.SunLog

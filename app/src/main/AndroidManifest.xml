@@ -43,7 +43,7 @@
         <activity android:name=".player.PlayerNetActivity" />
         <activity android:name=".detail.DetailActivity" />
         <activity android:name=".weather.WeatherActivity" />
-        <activity android:name=".weather.CityActivity" />
+        <activity android:name=".city.CityActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sunny.family.weather.CityRecyclerView
+    <com.sunny.family.city.CityRecyclerView
         android:id="@+id/city_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
