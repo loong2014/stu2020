@@ -44,6 +44,7 @@
         <activity android:name=".detail.DetailActivity" />
         <activity android:name=".weather.WeatherActivity" />
         <activity android:name=".city.CityActivity" />
+        <activity android:name=".cityexpan.ExpandableCityActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

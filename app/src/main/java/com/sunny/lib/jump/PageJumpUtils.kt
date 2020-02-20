@@ -1,6 +1,7 @@
 package com.sunny.lib.jump
 
 import android.app.Application
+import android.app.ExpandableListActivity
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -11,6 +12,7 @@ import com.sunny.family.photoalbum.PhotoAlbumActivity
 import com.sunny.family.player.PlayerLocalActivity
 import com.sunny.family.player.PlayerNetActivity
 import com.sunny.family.city.CityActivity
+import com.sunny.family.cityexpan.ExpandableCityActivity
 import com.sunny.family.weather.WeatherActivity
 import com.sunny.lib.jump.params.BaseParam
 import com.sunny.lib.jump.params.JumpPlayerParam
@@ -34,6 +36,10 @@ object PageJumpUtils {
 
     fun jumpCityPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
         doPageJump(intent, context, CityActivity::class.java)
+    }
+
+    fun jumpExpandableCityPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
+        doPageJump(intent, context, ExpandableCityActivity::class.java)
     }
 
     fun jumpWeatherPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {

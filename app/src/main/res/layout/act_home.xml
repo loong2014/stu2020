@@ -45,6 +45,13 @@
             android:layout_height="wrap_content"
             android:text="城市列表" />
 
+
+        <Button
+            android:id="@+id/btn_enter_city_expandable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="城市折叠列表" />
+
     </LinearLayout>
 
 </RelativeLayout>
