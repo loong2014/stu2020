@@ -39,6 +39,12 @@
             android:layout_height="wrap_content"
             android:text="详情页" />
 
+        <Button
+            android:id="@+id/btn_enter_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="城市列表" />
+
     </LinearLayout>
 
 </RelativeLayout>

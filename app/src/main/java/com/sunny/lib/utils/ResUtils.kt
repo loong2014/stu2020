@@ -38,6 +38,10 @@ object ResUtils {
         return getResources().getString(resId)
     }
 
+    fun getString(resId: Int, vararg formatArgs: Any?): String? {
+        return getResources().getString(resId, *formatArgs)
+    }
+
     fun getColor(resId: Int): Int {
         return getResources().getColor(resId)
     }

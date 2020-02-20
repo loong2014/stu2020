@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.sunny.family"
-        minSdkVersion 16
+        minSdkVersion "$sdk_version_min"
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -22,8 +22,12 @@ android {
     lintOptions {
         abortOnError false
     }
+    // 解决编译时出现的Invoke-customs are only supported starting with Android O (--min-api 26)错误
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -45,6 +49,11 @@ dependencies {
     implementation 'androidx.palette:palette:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
     implementation 'com.facebook.fresco:fresco:2.0.0'
+
+    // 网络库
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
 
     // 拍照/拍视频
 //    implementation 'cjt.library.wheel:camera:1.1.9'

@@ -2,4 +2,7 @@
     <string name="app_name">Family</string>
 
     <string name="n_year_n_month">%1$s年%2$s月</string>
+
+    <!-- weather -->
+    <string name="weather_name_tip">城市名称:%s</string>
 </resources>

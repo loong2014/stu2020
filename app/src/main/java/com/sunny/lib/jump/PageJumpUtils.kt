@@ -10,6 +10,8 @@ import com.sunny.family.home.HomeActivity
 import com.sunny.family.photoalbum.PhotoAlbumActivity
 import com.sunny.family.player.PlayerLocalActivity
 import com.sunny.family.player.PlayerNetActivity
+import com.sunny.family.weather.CityActivity
+import com.sunny.family.weather.WeatherActivity
 import com.sunny.lib.jump.params.BaseParam
 import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.ContextProvider
@@ -28,6 +30,14 @@ object PageJumpUtils {
 
     fun jumpDetailPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
         doPageJump(intent, context, DetailActivity::class.java)
+    }
+
+    fun jumpCityPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
+        doPageJump(intent, context, CityActivity::class.java)
+    }
+
+    fun jumpWeatherPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
+        doPageJump(intent, context, WeatherActivity::class.java)
     }
 
     fun jumpPlayerPage(intent: Intent? = null, context: Context? = ContextProvider.appContext, jumpParams: JumpPlayerParam) {

@@ -6,6 +6,7 @@ package com.sunny.family.detail.view.block;
  */
 public class BlockType {
 
+
     /**
      * 头部的BlockHolder
      * {@link HeaderBlockHolder}
@@ -29,6 +30,9 @@ public class BlockType {
     public static final int BLOCK_S1004 = 1004;
     public static final int BLOCK_S1005 = 1005;
     public static final int BLOCK_FOOTER = 1100;
+
+
+    public static final int BLOCK_SUN = 1200;
 
     public static final String BLOCK_DATA_S1000 = "s1000";
     public static final String BLOCK_DATA_S1001 = "s1001";

@@ -46,6 +46,10 @@ class HomeActivity : BaseActivity() {
         btn_enter_detail.setOnClickListener {
             PageJumpUtils.jumpDetailPage(context = this)
         }
+
+        btn_enter_city.setOnClickListener {
+            PageJumpUtils.jumpCityPage(context = this)
+        }
     }
 
 }

@@ -24,9 +24,8 @@ class DemoKotlin {
         }
     }
 
-
-    fun testFile(){
-val name = "xxx.png"
+    fun testFile() {
+        val name = "xxx.png"
         val list = name.split('.')
 
         println("list :$list")
@@ -41,14 +40,14 @@ val name = "xxx.png"
 
 
         // 自定义构造方法
-        constructor(birth:String):this  (des  = birth){
+        constructor(birth: String) : this(des = birth) {
 
         }
 
         // lateinit var 不能是基础类型
 //        lateinit var count:Int
 
-        lateinit var str:String
+        lateinit var str: String
 
         // 构造方法，只能对参数进行赋值
         init {

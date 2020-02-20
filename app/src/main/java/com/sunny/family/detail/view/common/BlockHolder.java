@@ -89,7 +89,7 @@ public abstract class BlockHolder extends RecyclerView.ViewHolder
         }
     }
 
-    final void bindData(@Nullable RebuildDataModel model, int row) {
+    public final void bindData(@Nullable RebuildDataModel model, int row) {
         mBlockInfo.setRow(row);
         mBlockInfo.setBlockModel(model);
 
