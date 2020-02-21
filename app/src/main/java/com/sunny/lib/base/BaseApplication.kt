@@ -2,7 +2,6 @@ package com.sunny.lib.base
 
 import android.app.Application
 import com.sunny.lib.http.SunHttp
-
 import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.utils.ResUtils
 

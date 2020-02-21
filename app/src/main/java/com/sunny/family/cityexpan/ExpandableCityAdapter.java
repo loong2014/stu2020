@@ -17,14 +17,20 @@ public class ExpandableCityAdapter extends BaseExpandableListAdapter {
 
     private Context mContext;
 
+    private List<CityInfo> mCityList;
+
+    private IClickListener mClickListener;
+
     public ExpandableCityAdapter(Context context) {
         mContext = context;
     }
 
-    private List<CityInfo> mCityList;
-
     public void setCityList(List<CityInfo> list) {
         mCityList = list;
+    }
+
+    public void setClickListener(IClickListener listener) {
+        mClickListener = listener;
     }
 
     /**
@@ -162,7 +168,19 @@ public class ExpandableCityAdapter extends BaseExpandableListAdapter {
             itemHolder = (ItemHolder) convertView.getTag();
         }
         itemHolder.nameTv.setTextColor(Color.YELLOW);
-        itemHolder.nameTv.setText(mCityList.get(groupPosition).getChildren().get(childPosition).getName());
+
+        final CityInfo cityInfo = mCityList.get(groupPosition).getChildren().get(childPosition);
+
+        itemHolder.nameTv.setText(cityInfo.getName());
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mClickListener != null) {
+                    mClickListener.onChildViewClick(groupPosition, childPosition, cityInfo);
+                }
+            }
+        });
 
         return convertView;
     }
@@ -174,5 +192,11 @@ public class ExpandableCityAdapter extends BaseExpandableListAdapter {
 
     class ItemHolder {
         public TextView nameTv;
+    }
+
+    interface IClickListener {
+
+        void onChildViewClick(int groupPosition, int childPosition, CityInfo cityInfo);
+
     }
 }

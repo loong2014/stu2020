@@ -4,8 +4,8 @@ import android.os.Bundle
 import com.sunny.family.R
 import com.sunny.family.city.block.*
 import com.sunny.lib.base.BaseActivity
-import com.sunny.lib.city.CityManager
 import com.sunny.lib.city.CityInfo
+import com.sunny.lib.city.CityManager
 import com.sunny.lib.city.CityType
 import com.sunny.lib.utils.HandlerUtils
 import com.sunny.lib.utils.SunToast
@@ -52,6 +52,7 @@ class CityActivity : BaseActivity() {
 
                 val blockDataList = mutableListOf<SunBlockData>()
                 cityList.forEach {
+
                     val blockData = SunBlockData()
                     blockData.name = it.name
                     blockData.data = it
@@ -70,6 +71,30 @@ class CityActivity : BaseActivity() {
                     }
 
                     blockDataList.add(blockData)
+
+
+                    it.children?.let { childrenList ->
+                        childrenList.forEach {
+                            val blockData = SunBlockData()
+                            blockData.name = it.name
+                            blockData.data = it
+                            blockData.uiType = when (it.type) {
+                                CityType.Tip -> CityBlockTipHolder.BlockType
+
+                                CityType.Direct -> CityDirectBlockHolder.BlockType
+
+                                CityType.Special -> CitySpecialBlockHolder.BlockType
+
+                                CityType.Normal -> CityNormalBlockHolder.BlockType
+
+                                CityType.Autonomy -> CityAutonomyBlockHolder.BlockType
+
+                                else -> CityBlockTipHolder.BlockType
+                            }
+
+                            blockDataList.add(blockData)
+                        }
+                    }
                 }
 
                 runOnUiThread {

@@ -15,4 +15,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <!-- 悬浮窗 -->
+    <heweather.com.weathernetsdk.view.SynopticNetworkCustomView
+        android:id="@+id/synopticNetworkCustomView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
 </LinearLayout>

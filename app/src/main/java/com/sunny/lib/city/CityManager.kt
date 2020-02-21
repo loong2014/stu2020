@@ -51,20 +51,20 @@ object CityManager {
             }
         }
 
-        directList.add(0, CityInfo(type = CityType.Tip, name = "${directList.size}个直辖市"))
-
-        normalList.add(0, CityInfo(type = CityType.Tip, name = "${normalList.size}个省"))
-
-        autonomyList.add(0, CityInfo(type = CityType.Tip, name = "${autonomyList.size}个自治区"))
-
-        specialList.add(0, CityInfo(type = CityType.Tip, name = "${specialList.size}个特别行政区"))
+//        directList.add(0, CityInfo(type = CityType.Tip, name = "${directList.size}个直辖市"))
+//
+//        normalList.add(0, CityInfo(type = CityType.Tip, name = "${normalList.size}个省"))
+//
+//        autonomyList.add(0, CityInfo(type = CityType.Tip, name = "${autonomyList.size}个自治区"))
+//
+//        specialList.add(0, CityInfo(type = CityType.Tip, name = "${specialList.size}个特别行政区"))
 
         val outList = mutableListOf<CityInfo>()
-        outList.addAll(directList)
-        outList.addAll(normalList)
-        outList.addAll(autonomyList)
-        outList.addAll(specialList)
 
+        outList.add(CityInfo(type = CityType.Tip, name = "${directList.size}个直辖市", children = directList))
+        outList.add(CityInfo(type = CityType.Tip, name = "${normalList.size}个省", children = normalList))
+        outList.add(CityInfo(type = CityType.Tip, name = "${autonomyList.size}个自治区", children = autonomyList))
+        outList.add(CityInfo(type = CityType.Tip, name = "${specialList.size}个特别行政区", children = specialList))
         return outList
     }
 }

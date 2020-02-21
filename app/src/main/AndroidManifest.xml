@@ -3,7 +3,8 @@
     package="com.sunny.family">
 
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 允许网络连接	-->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- CameraView -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -16,6 +17,24 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+
+    <!-- 访问WiFi状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE	" />
+
+    <!-- 访问设备状态	-->
+    <uses-permission android:name="android.permission.REAN_PHONE_STATE	" />
+
+    <!-- 访问GPS定位 -->
+<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+
+    <!-- 访问网络定位	-->
+<!--    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+
+    <!-- 悬浮窗权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW	" />
+
+    <!--    android.permission.ACCESS_COARSE_LOCATION-->
 
 
     <application
@@ -45,6 +64,9 @@
         <activity android:name=".weather.WeatherActivity" />
         <activity android:name=".city.CityActivity" />
         <activity android:name=".cityexpan.ExpandableCityActivity" />
+
+        <!-- 给天气插件预留 -->
+        <activity android:name="heweather.com.weathernetsdk.view.SdkWebViewActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

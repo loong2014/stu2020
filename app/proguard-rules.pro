@@ -19,3 +19,19 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+### okHttp
+-dontwarn com.squareup.**
+
+-dontwarn okio.**
+
+-keep public class org.codehaus.* { *; }
+
+-keep public class java.nio.* { *; }
+
+### 天气插件——Plugin_SDK_Android_V2.1
+-keep class heweather.com.weathernetsdk.bean.** { *; }
+
+-keep class heweather.com.weathernetsdk.view.** { *; }
+
