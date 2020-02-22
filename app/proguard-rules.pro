@@ -35,3 +35,18 @@
 
 -keep class heweather.com.weathernetsdk.view.** { *; }
 
+### 图片加载——glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+# sdk < 27
+-dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+
+# for DexGuard only
+-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+### 其它

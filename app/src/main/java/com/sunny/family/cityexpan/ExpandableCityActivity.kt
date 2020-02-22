@@ -62,8 +62,8 @@ class ExpandableCityActivity : BaseActivity() {
 
     private fun dealCityClick(cityInfo: CityInfo) {
         val intent = Intent()
-//        intent.putExtra("cityName", cityInfo.name)
-        intent.putExtra("cityName", "郑州")
+        intent.putExtra("cityName", cityInfo.name)
+//        intent.putExtra("cityName", "郑州")
         PageJumpUtils.jumpWeatherPage(intent, this)
     }
 

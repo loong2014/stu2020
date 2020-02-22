@@ -1,2 +1,2 @@
-include ':app', ':takephoto_library', ':sunlibbase'
+include ':app', ':takephoto_library'
 rootProject.name='Family'

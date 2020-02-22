@@ -50,8 +50,13 @@ class HomeActivity : BaseActivity() {
         btn_enter_city.setOnClickListener {
             PageJumpUtils.jumpCityPage(context = this)
         }
+
         btn_enter_city_expandable.setOnClickListener {
             PageJumpUtils.jumpExpandableCityPage(context = this)
+        }
+
+        btn_enter_image.setOnClickListener {
+            PageJumpUtils.jumpImagePage(context = this)
         }
     }
 
