@@ -2,9 +2,11 @@ package com.sunny.lib.utils
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.media.Image
 import android.media.MediaMetadataRetriever
 import android.os.Environment
 import java.io.*
+import java.nio.ByteBuffer
 
 /**
  * Created by zhangxin17 on 2020-01-10
@@ -94,6 +96,33 @@ object FileUtils {
 //
 //    }
 
+    fun createBitmap(image: Image?): Bitmap? {
+        if (image == null) {
+            return null
+        }
+
+        if (image.planes.isEmpty()) {
+            return null
+        }
+
+        val plane: Image.Plane = image.planes[0]
+
+        val width = ScreenUtils.screenWidth
+        val height = ScreenUtils.screenHeight
+
+        val buffer: ByteBuffer = plane.buffer
+        val pixelStride = plane.pixelStride
+        val rowStride = plane.rowStride
+        val rowPadding = rowStride - pixelStride * width
+
+        val bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888)
+        bitmap.copyPixelsFromBuffer(buffer)
+//        //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+        image.close()
+
+        return bitmap
+    }
 
     /**
      * 保存图片

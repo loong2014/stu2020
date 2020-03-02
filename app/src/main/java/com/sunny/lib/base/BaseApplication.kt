@@ -1,6 +1,7 @@
 package com.sunny.lib.base
 
 import android.app.Application
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.sunny.lib.http.SunHttp
 import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.utils.ResUtils
@@ -12,6 +13,6 @@ open class BaseApplication : Application() {
         ContextProvider.appContext = this
         ResUtils.init(this)
         SunHttp.init(this)
-
+        Fresco.initialize(this)
     }
 }

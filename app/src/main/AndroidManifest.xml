@@ -68,7 +68,8 @@
 
         <!-- 给天气插件预留 -->
         <activity android:name="heweather.com.weathernetsdk.view.SdkWebViewActivity" />
-        <activity android:name=".image.ImageActivity" />
+        <activity android:name=".image.GlideImageActivity" />
+        <activity android:name=".image.FrescoImageActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

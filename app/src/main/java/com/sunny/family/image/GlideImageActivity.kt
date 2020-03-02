@@ -15,13 +15,14 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.sunny.family.R
 import com.sunny.lib.base.BaseActivity
+import com.sunny.lib.image.GlideImageConfig
 import com.sunny.lib.image.ImageConfig
 import com.sunny.lib.utils.HandlerUtils
 import com.sunny.lib.utils.SunLog
 import kotlinx.android.synthetic.main.act_image.*
 
 
-class ImageActivity : BaseActivity() {
+class GlideImageActivity : BaseActivity() {
     val logTag = "Image-ImageActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,7 +102,7 @@ class ImageActivity : BaseActivity() {
                     }
                 })
 
-//                .thumbnail(Glide.with(this).load(ImageConfig.NetImgUrl))
+//                .thumbnail(Glide.with(this).load(GlideImageConfig.NetImgUrl))
 
                 .into(view)
 //                .into(DrawableImageViewTarget(view))
@@ -127,7 +128,7 @@ class ImageActivity : BaseActivity() {
                     Glide.with(this)
                             .asBitmap()
                             .load(url)
-                            .apply(ImageConfig.getSunGlideRequestOptions())
+                            .apply(GlideImageConfig.getSunGlideRequestOptions())
                             .submit(view.width, view.height) // 必须指定高宽
 
             val bitmap: Bitmap = futureTarget.get()
