@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="tag_poster_info" type="id"/>
-    <item name="tag_adapter_position" type="id"/>
+    <item name="tag_poster_info" type="id" />
+    <item name="tag_adapter_position" type="id" />
 
-    <item name="tag_imageview_url" type="id"/>
+    <item name="tag_imageview_url" type="id" />
 
+    <item name="tag_block_view_data" type="id" />
+    <item name="tag_block_view_position" type="id" />
 
     <!--CTR-->
-    <item name="CTR_REPORT" type="id"/>
-    <item name="CTR_IGNORE" type="id"/>
-    <item name="CTR_REPORT_IGNORE" type="id"/>
+    <item name="CTR_REPORT" type="id" />
+    <item name="CTR_IGNORE" type="id" />
+    <item name="CTR_REPORT_IGNORE" type="id" />
 
     <item name="focus_ignore" type="id" />
 

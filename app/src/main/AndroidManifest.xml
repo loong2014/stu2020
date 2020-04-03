@@ -70,6 +70,7 @@
         <activity android:name="heweather.com.weathernetsdk.view.SdkWebViewActivity" />
         <activity android:name=".image.GlideImageActivity" />
         <activity android:name=".image.FrescoImageActivity" />
+        <activity android:name=".sensor.SensorActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

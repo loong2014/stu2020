@@ -13,6 +13,7 @@ import com.sunny.family.image.FrescoImageActivity
 import com.sunny.family.photoalbum.PhotoAlbumActivity
 import com.sunny.family.player.PlayerLocalActivity
 import com.sunny.family.player.PlayerNetActivity
+import com.sunny.family.sensor.SensorActivity
 import com.sunny.family.weather.WeatherActivity
 import com.sunny.lib.jump.params.BaseParam
 import com.sunny.lib.jump.params.JumpPlayerParam
@@ -49,6 +50,10 @@ object PageJumpUtils {
     fun jumpImagePage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
 //        doPageJump(intent, context, GlideImageActivity::class.java)
         doPageJump(intent, context, FrescoImageActivity::class.java)
+    }
+
+    fun jumpSensorPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
+        doPageJump(intent, context, SensorActivity::class.java)
     }
 
     fun jumpPlayerPage(intent: Intent? = null, context: Context? = ContextProvider.appContext, jumpParams: JumpPlayerParam) {

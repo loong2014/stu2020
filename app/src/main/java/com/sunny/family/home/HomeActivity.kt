@@ -58,6 +58,10 @@ class HomeActivity : BaseActivity() {
         btn_enter_image.setOnClickListener {
             PageJumpUtils.jumpImagePage(context = this)
         }
+
+        btn_enter_sensor.setOnClickListener {
+            PageJumpUtils.jumpSensorPage(context = this)
+        }
     }
 
 }
