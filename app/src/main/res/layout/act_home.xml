@@ -7,68 +7,95 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_enter_camera_sys"
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="系统拍照" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_enter_camera"
+            <Button
+                android:id="@+id/btn_enter_camera_sys"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="系统拍照" />
+
+            <Button
+                android:id="@+id/btn_enter_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义拍照" />
+
+            <Button
+                android:id="@+id/btn_enter_photo_album"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="相册" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="自定义拍照" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_enter_photo_album"
+
+            <Button
+                android:id="@+id/btn_enter_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="详情页" />
+
+            <Button
+                android:id="@+id/btn_enter_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="城市列表" />
+
+            <Button
+                android:id="@+id/btn_enter_city_expandable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="城市折叠列表" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="相册" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_enter_net_player"
+            <Button
+                android:id="@+id/btn_enter_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="图片加载" />
+
+            <Button
+                android:id="@+id/btn_enter_sensor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="传感器" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="网络视频" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_enter_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="详情页" />
+            <Button
+                android:id="@+id/btn_enter_net_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="网络视频" />
 
-        <Button
-            android:id="@+id/btn_enter_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="城市列表" />
+            <Button
+                android:id="@+id/btn_enter_jzplayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="饺子播放器" />
 
-        <Button
-            android:id="@+id/btn_enter_city_expandable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="城市折叠列表" />
-
-        <Button
-            android:id="@+id/btn_enter_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="图片加载" />
-
-        <Button
-            android:id="@+id/btn_enter_sensor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="传感器" />
-
-        <Button
-            android:id="@+id/btn_enter_jzplayer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="饺子播放器" />
-
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

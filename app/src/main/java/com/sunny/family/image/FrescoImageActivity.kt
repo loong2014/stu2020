@@ -36,6 +36,7 @@ class FrescoImageActivity : BaseActivity() {
         }
 
         btn_show_net_gif.setOnClickListener {
+
         }
     }
 

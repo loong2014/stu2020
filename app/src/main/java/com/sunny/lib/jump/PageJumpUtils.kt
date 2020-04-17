@@ -9,7 +9,7 @@ import com.sunny.family.city.CityActivity
 import com.sunny.family.cityexpan.ExpandableCityActivity
 import com.sunny.family.detail.DetailActivity
 import com.sunny.family.home.HomeActivity
-import com.sunny.family.image.FrescoImageActivity
+import com.sunny.family.image.GlideImageActivity
 import com.sunny.family.photoalbum.PhotoAlbumActivity
 import com.sunny.family.player.PlayerLocalActivity
 import com.sunny.family.player.PlayerNetActivity
@@ -48,8 +48,8 @@ object PageJumpUtils {
     }
 
     fun jumpImagePage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
-//        doPageJump(intent, context, GlideImageActivity::class.java)
-        doPageJump(intent, context, FrescoImageActivity::class.java)
+        doPageJump(intent, context, GlideImageActivity::class.java)
+//        doPageJump(intent, context, FrescoImageActivity::class.java)
     }
 
     fun jumpSensorPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
