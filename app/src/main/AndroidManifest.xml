@@ -71,6 +71,7 @@
         <activity android:name=".image.GlideImageActivity" />
         <activity android:name=".image.FrescoImageActivity" />
         <activity android:name=".sensor.SensorActivity" />
+        <activity android:name=".jiaozi.JzPlayerActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

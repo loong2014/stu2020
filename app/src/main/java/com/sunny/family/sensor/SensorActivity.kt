@@ -43,7 +43,7 @@ class SensorActivity : BaseActivity() {
                 dealItemClick(sensorInfo)
             }
 
-            override fun onItemTouch(itemView: View, sensorInfo: SensorInfo, position: Int) {
+            override fun onItemTouch(itemView: View, action: Int, sensorInfo: SensorInfo, position: Int) {
                 SunLog.i(logTag, "onItemTouch  position:$position , $sensorInfo")
                 dealItemClick(sensorInfo)
             }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.sunny.family.R
 import com.sunny.family.camera.CameraCustomActivity
 import com.sunny.family.camera.CameraSysActivity
+import com.sunny.family.jiaozi.JzPlayerActivity
 import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.jump.PageJumpUtils
 import com.sunny.lib.jump.params.JumpPlayerParam
@@ -61,6 +62,10 @@ class HomeActivity : BaseActivity() {
 
         btn_enter_sensor.setOnClickListener {
             PageJumpUtils.jumpSensorPage(context = this)
+        }
+
+        btn_enter_jzplayer.setOnClickListener{
+            startActivity(Intent(this, JzPlayerActivity::class.java))
         }
     }
 

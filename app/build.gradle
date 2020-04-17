@@ -66,6 +66,13 @@ dependencies {
     implementation files('libs/Plugin_SDK_Android_V2.1.jar')
     implementation 'org.conscrypt:conscrypt-android:2.2.1'
 
+    // 视频播放
+    implementation 'cn.jzvd:jiaozivideoplayer:7.2.4'
+
+
+//    api 'cn.jzvd:jiaozivideoplayer:7.2.4'
+
+
 }
 repositories {
     mavenCentral()
