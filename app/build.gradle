@@ -54,6 +54,8 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
     // 提供在kotlin中使用注解
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    // 高斯模糊
+    implementation 'jp.wasabeef:glide-transformations:2.0.2'
 
     // 网络库
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
@@ -68,9 +70,6 @@ dependencies {
 
     // 视频播放
     implementation 'cn.jzvd:jiaozivideoplayer:7.2.4'
-
-
-//    api 'cn.jzvd:jiaozivideoplayer:7.2.4'
 
 
 }

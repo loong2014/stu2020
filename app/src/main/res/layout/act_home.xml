@@ -76,6 +76,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="传感器" />
+
+            <Button
+                android:id="@+id/btn_enter_trans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="高斯模糊" />
         </LinearLayout>
 
         <LinearLayout

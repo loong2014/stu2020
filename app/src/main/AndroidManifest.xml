@@ -72,6 +72,7 @@
         <activity android:name=".image.FrescoImageActivity" />
         <activity android:name=".sensor.SensorActivity" />
         <activity android:name=".jiaozi.JzPlayerActivity" />
+        <activity android:name=".image.GaoSiActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
