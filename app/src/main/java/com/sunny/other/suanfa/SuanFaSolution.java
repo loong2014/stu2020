@@ -1,85 +1,35 @@
 package com.sunny.other.suanfa;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by zhangxin17 on 2020-04-24
+ * 88. 合并两个有序数组
+ * 给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+ *
+ * 说明:
+ * 初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。
+ * 你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素
+ *
  */
 public class SuanFaSolution {
 
 
     public static void main(String[] args) {
-
-        int[] nums = {2, 7, 11, 15};
-        int target = 9;
-
-        int[] out = twoSum(nums, target);
-
-        System.out.println("[" + out[0] + " , " + out[1] + "]");
-
-
-    }
-
-    /**
-     * 时间：O(n)
-     * 空间：O(n)
-     */
-    private static int[] twoSum(int[] nums, int target) {
-        int[] out = new int[2];
-        boolean has = false;
-
-        int len = nums.length;
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < len; i++) {
-            map.put(nums[i], i);
-        }
-
-        for (int i = 0; i < len; i++) {
-            int m = target - nums[i];
-            if (map.containsKey(m) && map.get(m) != i) {
-                out = new int[]{i, map.get(m)};
-                has = true;
-                break;
-            }
-        }
-        return out;
+        ListNode node = new ListNode(9);
+        System.out.println("out :" + deleteDuplicates(node));
     }
 
 
-    /**
-     * 时间：O(n^2)
-     * 空间：O(1)
-     */
-    private static int[] twoSum2(int[] nums, int target) {
-        int[] out = new int[2];
+    public static ListNode deleteDuplicates(ListNode head) {
 
-        int len = nums.length;
-        int i = -1;
-        int j = -1;
-        boolean has = false;
-        for1:
-        for (i = 0; i < len; i++) {
-
-            for (j = i + 1; j < len; j++) {
-                System.out.println("[ " + i + " , " + j + " ] = [ " + nums[i] + " + " + nums[j] + "]");
-
-                if (nums[i] + nums[j] == target) {
-                    has = true;
-                    System.out.println("doExit");
-                    break for1;
-                }
-            }
-        }
-
-        if (has) {
-            out[0] = i;
-            out[1] = j;
-        } else {
-            out = new int[]{-1, -1};
-        }
-
-        return out;
+        return null;
     }
 
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
 }

@@ -8,19 +8,34 @@ public class SuanFaSolution2 {
 
     public static void main(String[] args) {
 
-        int put = 12345;
+        int put = -12345600;
         int out = reverse(put);
         System.out.println(put + " >>> " + out);
     }
 
     private static int reverse(int x) {
+        int ans = 0;
+        while (x != 0) {
+            if ((ans * 10) / 10 != ans) {
+                ans = 0;
+                break;
+            }
+            ans = ans * 10 + x % 10;
+            x = x / 10;
+        }
+        return ans;
+    }
+
+    private static int reverse2(int x) {
+
+        boolean fu = x < 0;
+        if (fu) {
+            x = -x;
+        }
 
         String put = Integer.toString(x);
 
         char[] chars = put.toCharArray();
-
-        System.out.println(chars + "111 >>> " + chars);
-
 
         char tmp;
         int len = chars.length;
@@ -30,13 +45,21 @@ public class SuanFaSolution2 {
             chars[r] = tmp;
         }
 
-        System.out.println(chars + "222 >>> " + chars);
-
-        String out = chars.toString();
-        System.out.println(put + " >>> " + out);
+        String outStr = new String(chars);
 
 
-        return Integer.parseInt(out);
+        int out = 0;
+        try {
+            out = Integer.parseInt(outStr);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+
+        if (fu) {
+            return -out;
+        }
+        return out;
     }
 
 }
