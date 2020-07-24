@@ -4,7 +4,7 @@ package com.sunny.other.suanfa;
  * Created by zhangxin17 on 2020-04-24
  * 28. 实现 strStr()
  */
-public class SuanFaSolution11 {
+public class SuanFaSolution28 {
 
 
     public static void main(String[] args) {

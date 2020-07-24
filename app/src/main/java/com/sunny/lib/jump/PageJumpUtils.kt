@@ -8,6 +8,7 @@ import com.google.gson.Gson
 import com.sunny.family.city.CityActivity
 import com.sunny.family.cityexpan.ExpandableCityActivity
 import com.sunny.family.detail.DetailActivity
+import com.sunny.family.dialog.StuDialogAct
 import com.sunny.family.home.HomeActivity
 import com.sunny.family.image.GlideImageActivity
 import com.sunny.family.photoalbum.PhotoAlbumActivity
@@ -54,6 +55,10 @@ object PageJumpUtils {
 
     fun jumpSensorPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
         doPageJump(intent, context, SensorActivity::class.java)
+    }
+
+    fun jumpDialogPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
+        doPageJump(intent, context, StuDialogAct::class.java)
     }
 
     fun jumpPlayerPage(intent: Intent? = null, context: Context? = ContextProvider.appContext, jumpParams: JumpPlayerParam) {

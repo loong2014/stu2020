@@ -2,14 +2,17 @@ package com.sunny.family.home
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.sunny.family.R
 import com.sunny.family.camera.CameraCustomActivity
 import com.sunny.family.camera.CameraSysActivity
 import com.sunny.family.image.GaoSiActivity
 import com.sunny.family.jiaozi.JzPlayerActivity
+import com.sunny.family.livedata.MyLiveData
 import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.jump.PageJumpUtils
 import com.sunny.lib.jump.params.JumpPlayerParam
+import com.sunny.lib.utils.SunLog
 import com.sunny.player.config.PlayerConfig
 import com.sunny.player.config.VideoType
 import kotlinx.android.synthetic.main.act_home.*
@@ -21,7 +24,21 @@ class HomeActivity : BaseActivity() {
         setContentView(R.layout.act_home)
 
         addListener()
+        liveDataTest()
     }
+
+    lateinit var nameViewModel: MyLiveData
+
+    private fun liveDataTest() {
+
+        nameViewModel = MyLiveData.getInstance(this)
+
+        nameViewModel.observe(this, Observer { num: Int ->
+            SunLog.i("MyLiveData","new num is :"+num)
+            live_data_name.text = "name is $num"
+        })
+    }
+
 
     private fun addListener() {
 
@@ -65,12 +82,21 @@ class HomeActivity : BaseActivity() {
             PageJumpUtils.jumpSensorPage(context = this)
         }
 
+        btn_enter_dialog.setOnClickListener {
+            PageJumpUtils.jumpDialogPage(context = this)
+        }
+
         btn_enter_jzplayer.setOnClickListener {
             startActivity(Intent(this, JzPlayerActivity::class.java))
         }
         btn_enter_trans.setOnClickListener {
             startActivity(Intent(this, GaoSiActivity::class.java))
         }
+
+        btn_enter_main.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
     }
 
 }

@@ -73,6 +73,8 @@
         <activity android:name=".sensor.SensorActivity" />
         <activity android:name=".jiaozi.JzPlayerActivity" />
         <activity android:name=".image.GaoSiActivity" />
+        <activity android:name=".dialog.StuDialogAct" />
+        <activity android:name=".home.MainActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

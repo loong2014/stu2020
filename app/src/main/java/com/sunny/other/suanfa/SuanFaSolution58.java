@@ -4,7 +4,7 @@ package com.sunny.other.suanfa;
  * Created by zhangxin17 on 2020-04-24
  * 58. 最后一个单词的长度
  */
-public class SuanFaSolution12 {
+public class SuanFaSolution58 {
 
 
     public static void main(String[] args) {

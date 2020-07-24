@@ -6,6 +6,7 @@ object SunLog {
 
     private val playerTag = "PlayerTag-"
 
+    @JvmStatic
     fun buildPlayerTag(subTag: String): String {
         return playerTag + subTag
     }
@@ -14,14 +15,17 @@ object SunLog {
     private val D: Int = 2
     private val E: Int = 3
 
+    @JvmStatic
     fun i(tag: String, msg: String) {
         printLog(I, tag, msg)
     }
 
+    @JvmStatic
     fun d(tag: String, msg: String) {
         printLog(D, tag, msg)
     }
 
+    @JvmStatic
     fun e(tag: String, msg: String) {
         printLog(E, tag, msg)
     }
