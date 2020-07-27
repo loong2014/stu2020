@@ -1,5 +1,7 @@
 package com.sunny.other.suanfa;
 
+import com.sunny.other.suanfa.bean.ListNode;
+
 /**
  * Created by zhangxin17 on 2020-04-24
  * 83. 删除排序链表中的重复元素
@@ -50,12 +52,4 @@ public class SuanFaSolution83 {
         return rstNode;
     }
 
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 }

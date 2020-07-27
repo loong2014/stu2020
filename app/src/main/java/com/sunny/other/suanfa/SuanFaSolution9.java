@@ -1,5 +1,7 @@
 package com.sunny.other.suanfa;
 
+import com.sunny.other.suanfa.bean.ListNode;
+
 /**
  * Created by zhangxin17 on 2020-04-24
  * 合并两个有序链表
@@ -51,20 +53,4 @@ public class SuanFaSolution9 {
 
     }
 
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 }
