@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sunny.lib.view.SunnyRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ff00">
+
+    <!-- 二维码图片 -->
+    <com.sunny.lib.view.SunnyImageView
+        android:id="@+id/iv_qr_img"
+        android:layout_width="291dp"
+        android:layout_height="291dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp" />
+
+    <com.sunny.lib.view.SunnyLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <!-- 默认 -->
+        <com.sunny.lib.view.SunnyButton
+            android:id="@+id/btn_qr_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="无icon"
+            android:textSize="25sp" />
+
+        <!-- 带图标 -->
+        <com.sunny.lib.view.SunnyButton
+            android:id="@+id/btn_qr_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="登陆"
+            android:textSize="25sp" />
+
+        <!-- 带图标 -->
+        <com.sunny.lib.view.SunnyButton
+            android:id="@+id/btn_qr_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="支付"
+            android:textSize="25sp" />
+
+        <!-- 带图标 -->
+        <com.sunny.lib.view.SunnyButton
+            android:id="@+id/btn_qr_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="权益领取"
+            android:textSize="25sp" />
+
+    </com.sunny.lib.view.SunnyLinearLayout>
+
+</com.sunny.lib.view.SunnyRelativeLayout>

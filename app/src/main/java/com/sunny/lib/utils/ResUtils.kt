@@ -2,6 +2,8 @@ package com.sunny.lib.utils
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import kotlin.math.roundToInt
 
@@ -48,6 +50,10 @@ object ResUtils {
 
     fun getDrawable(resId: Int): Drawable? {
         return getResources().getDrawable(resId)
+    }
+
+    fun getBitmap(resId: Int): Bitmap {
+        return BitmapFactory.decodeResource(getResources(), resId)
     }
 
 

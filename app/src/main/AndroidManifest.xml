@@ -75,6 +75,7 @@
         <activity android:name=".image.GaoSiActivity" />
         <activity android:name=".dialog.StuDialogAct" />
         <activity android:name=".home.MainActivity" />
+        <activity android:name=".arcode.QrCodeActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
