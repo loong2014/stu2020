@@ -15,6 +15,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
+
+        // flutter只支持v7a和v8a两个cpu架构
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
     }
     buildTypes {
         release {
@@ -23,15 +28,21 @@ android {
         }
     }
     lintOptions {
+        checkReleaseBuilds false
         abortOnError false
     }
-    // 解决编译时出现的Invoke-customs are only supported starting with Android O (--min-api 26)错误
+
+
+// 解决编译时出现的Invoke-customs are only supported starting with Android O (--min-api 26)错误
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 dependencies {
+    // 导入flutter项目
+    implementation project(':flutter')
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -80,6 +91,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.4.0'
 
     implementation 'com.android.support:multidex:1.0.3'
+
 
 }
 repositories {

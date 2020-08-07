@@ -135,6 +135,12 @@
                 android:layout_height="wrap_content"
                 android:text="Main" />
 
+            <Button
+                android:id="@+id/btn_enter_flutter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flutter" />
+
         </LinearLayout>
     </LinearLayout>
 

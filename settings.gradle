@@ -1,2 +1,11 @@
 include ':app', ':takephoto_library'
-rootProject.name='Family'
+rootProject.name = 'Family'
+
+// 关联flutter 模块
+setBinding(new Binding(gradle: this))
+evaluate(
+        new File(
+                settingsDir.parentFile,
+                "stu_flutter/.android/include_flutter.groovy"
+        )
+)

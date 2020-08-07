@@ -76,6 +76,8 @@
         <activity android:name=".dialog.StuDialogAct" />
         <activity android:name=".home.MainActivity" />
         <activity android:name=".arcode.QrCodeActivity" />
+        <activity android:name=".flutter.StuFlutterActivity" />
+        <activity android:name=".flutter.StuFlutterDemo" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
