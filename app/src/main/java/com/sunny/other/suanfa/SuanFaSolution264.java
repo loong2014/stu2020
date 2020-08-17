@@ -15,69 +15,28 @@ public class SuanFaSolution264 {
         System.out.println("out :" + nthUglyNumber(11));
     }
 
+    public static Ugly u = new Ugly();
+
     public static int nthUglyNumber(int n) {
-
-        int count = 1;
-        int num = 1;
-
-        int index2 = 1;
-        int index3 = 1;
-        int index5 = 1;
-
-        while (count < n) {
-            int next2 = index2 * 2;
-            if (!isUgly(next2) || next2 <= num) {
-                index2++;
-                continue;
-            }
-
-            int next3 = index3 * 3;
-            if (!isUgly(next3) || next3 <= num) {
-                index3++;
-                continue;
-            }
-            int next5 = index5 * 5;
-            if (!isUgly(next5) || next5 <= num) {
-                index5++;
-                continue;
-            }
-
-            if (next2 <= next3 && next2 <= next5) {
-                index2++;
-                num = next2;
-                count++;
-                continue;
-            }
-
-            if (next3 <= next2 && next3 <= next5) {
-                index3++;
-                num = next3;
-                count++;
-                continue;
-            }
-
-            if (next5 <= next2 && next5 <= next3) {
-                index5++;
-                num = next5;
-                count++;
-                continue;
-            }
-        }
-
-        return num;
+        return u.nums[n - 1];
     }
+}
 
-    private static boolean isUgly(int num) {
-        if (num <= 0) {
-            return false;
-        }
-        int[] factor = new int[]{2, 3, 5};
-        for (int i : factor) {
-            while (num % i == 0) {
-                num = num / i;
-            }
-        }
+class Ugly {
+    public int[] nums = new int[1690];
 
-        return num == 1;
+    Ugly() {
+        nums[0] = 1;
+        int ugly, i2 = 0, i3 = 0, i5 = 0;
+
+        for (int i = 1; i < 1690; i++) {
+            ugly = Math.min(Math.min(nums[i2] * 2, nums[i3] * 3), nums[i5] * 5);
+            nums[i] = ugly;
+
+            if (ugly == nums[i2] * 2) i2++;
+            if (ugly == nums[i3] * 3) i3++;
+            if (ugly == nums[i5] * 5) i5++;
+
+        }
     }
 }
