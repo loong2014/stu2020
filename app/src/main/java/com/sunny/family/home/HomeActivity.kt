@@ -7,6 +7,7 @@ import com.sunny.family.R
 import com.sunny.family.arcode.QrCodeActivity
 import com.sunny.family.camera.CameraCustomActivity
 import com.sunny.family.camera.CameraSysActivity
+import com.sunny.family.device.SunDeviceInfoActivity
 import com.sunny.family.flutter.StuFlutterActivity
 import com.sunny.family.image.GaoSiActivity
 import com.sunny.family.jiaozi.JzPlayerActivity
@@ -105,6 +106,10 @@ class HomeActivity : BaseActivity() {
 
         btn_enter_flutter.setOnClickListener {
             startActivity(Intent(this, StuFlutterActivity::class.java))
+        }
+
+        btn_enter_device_info.setOnClickListener {
+            startActivity(Intent(this, SunDeviceInfoActivity::class.java))
         }
     }
 

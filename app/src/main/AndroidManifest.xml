@@ -21,6 +21,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
+    <!-- 获取设备信息 -->
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
 
     <!-- 访问WiFi状态 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE	" />
@@ -78,6 +80,7 @@
         <activity android:name=".arcode.QrCodeActivity" />
         <activity android:name=".flutter.StuFlutterActivity" />
         <activity android:name=".flutter.StuFlutterDemo" />
+        <activity android:name=".device.SunDeviceInfoActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

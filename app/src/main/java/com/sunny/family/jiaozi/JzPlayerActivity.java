@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.sunny.family.R;
 import com.sunny.lib.base.BaseActivity;
+import com.sunny.lib.utils.SunDeviceUtils;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -65,8 +66,7 @@ public class JzPlayerActivity extends BaseActivity {
         findViewById(R.id.btn_play_full).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mJzvdStd.startWindowTiny();
-
+                myJzvdStd.gotoScreenFullscreen();
             }
         });
 

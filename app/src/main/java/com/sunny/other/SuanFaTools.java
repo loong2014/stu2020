@@ -17,13 +17,29 @@ public class SuanFaTools {
     }
 
 
+    public static String toString(int[][] array) {
+        if (array == null) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int[] i : array) {
+            sb.append("\n");
+            for (int j : i) {
+                sb.append(j + " ");
+            }
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
+
     public static String toString(int[] array) {
         if (array == null) {
             return "";
         }
         StringBuilder sb = new StringBuilder();
         for (int i : array) {
-             sb.append(i);
+            sb.append(i);
         }
         return sb.toString();
     }

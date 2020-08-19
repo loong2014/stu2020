@@ -19,6 +19,30 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_enter_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Main" />
+
+            <Button
+                android:id="@+id/btn_enter_flutter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flutter" />
+
+            <Button
+                android:id="@+id/btn_enter_device_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设备信息" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -124,24 +148,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_enter_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Main" />
-
-            <Button
-                android:id="@+id/btn_enter_flutter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Flutter" />
-
-        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
