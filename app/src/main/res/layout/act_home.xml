@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.sunny.lib.view.SunnyTextView
         android:id="@+id/live_data_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,23 +24,29 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Main" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_flutter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Flutter" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_device_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="设备信息" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_aop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AOPTest" />
 
         </LinearLayout>
 
@@ -49,19 +55,19 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_camera_sys"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="系统拍照" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="自定义拍照" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_photo_album"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,19 +80,19 @@
             android:orientation="horizontal">
 
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="详情页" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="城市列表" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_city_expandable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,19 +104,19 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="图片加载" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_sensor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="传感器" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_trans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,25 +128,25 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_net_player"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="网络视频" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_jzplayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="饺子播放器" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dialog" />
 
-            <Button
+            <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_qr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

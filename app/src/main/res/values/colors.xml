@@ -56,4 +56,6 @@
 
     <color name="variety_tab_select">#d0a465</color>
 
+    <color name="btn_bg_normal">#78B5AE</color>
+    <color name="btn_bg_focused">#5013BC</color>
 </resources>

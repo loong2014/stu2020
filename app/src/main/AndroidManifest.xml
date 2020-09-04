@@ -81,6 +81,7 @@
         <activity android:name=".flutter.StuFlutterActivity" />
         <activity android:name=".flutter.StuFlutterDemo" />
         <activity android:name=".device.SunDeviceInfoActivity" />
+        <activity android:name=".aop.AspectTestActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

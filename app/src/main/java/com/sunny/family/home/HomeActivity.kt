@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.sunny.family.R
+import com.sunny.family.aop.AspectTestActivity
 import com.sunny.family.arcode.QrCodeActivity
 import com.sunny.family.camera.CameraCustomActivity
 import com.sunny.family.camera.CameraSysActivity
@@ -110,6 +111,10 @@ class HomeActivity : BaseActivity() {
 
         btn_enter_device_info.setOnClickListener {
             startActivity(Intent(this, SunDeviceInfoActivity::class.java))
+        }
+
+        btn_enter_aop.setOnClickListener {
+            startActivity(Intent(this, AspectTestActivity::class.java))
         }
     }
 
