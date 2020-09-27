@@ -10,9 +10,6 @@ open class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        ContextProvider.appContext = this
-        ResUtils.init(this)
-        SunHttp.init(this)
-        Fresco.initialize(this)
+
     }
 }

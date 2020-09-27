@@ -48,6 +48,12 @@
                 android:layout_height="wrap_content"
                 android:text="AOPTest" />
 
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_event_bus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EventBus" />
+
         </LinearLayout>
 
         <LinearLayout

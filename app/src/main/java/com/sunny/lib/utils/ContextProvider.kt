@@ -6,6 +6,9 @@ import android.content.Context
 object ContextProvider {
 
     lateinit var appContext: Context
+    fun init(context: Context){
+        appContext = context
+    }
 
     val contentResolver: ContentResolver by lazy {
         appContext.contentResolver

@@ -9,6 +9,7 @@ import com.sunny.family.arcode.QrCodeActivity
 import com.sunny.family.camera.CameraCustomActivity
 import com.sunny.family.camera.CameraSysActivity
 import com.sunny.family.device.SunDeviceInfoActivity
+import com.sunny.family.eventbus.EventBusActivity
 import com.sunny.family.flutter.StuFlutterActivity
 import com.sunny.family.image.GaoSiActivity
 import com.sunny.family.jiaozi.JzPlayerActivity
@@ -115,6 +116,10 @@ class HomeActivity : BaseActivity() {
 
         btn_enter_aop.setOnClickListener {
             startActivity(Intent(this, AspectTestActivity::class.java))
+        }
+
+        btn_enter_event_bus.setOnClickListener {
+            startActivity(Intent(this, EventBusActivity::class.java))
         }
     }
 
