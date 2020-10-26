@@ -1,16 +1,16 @@
-package com.sunny.family.aop;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-/**
- * Created by zhangxin17 on 2020/8/25
- */
-@Retention(RetentionPolicy.CLASS)
-@Target({ElementType.CONSTRUCTOR, ElementType.METHOD})
-public @interface AspectDebugTool {
-
-
-}
+//package com.sunny.family.aop;
+//
+//import java.lang.annotation.ElementType;
+//import java.lang.annotation.Retention;
+//import java.lang.annotation.RetentionPolicy;
+//import java.lang.annotation.Target;
+//
+///**
+// * Created by zhangxin17 on 2020/8/25
+// */
+//@Retention(RetentionPolicy.CLASS)
+//@Target({ElementType.CONSTRUCTOR, ElementType.METHOD})
+//public @interface AspectDebugTool {
+//
+//
+//}

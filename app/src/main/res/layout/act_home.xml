@@ -42,6 +42,13 @@
                 android:layout_height="wrap_content"
                 android:text="设备信息" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <com.sunny.lib.view.SunnyButton
                 android:id="@+id/btn_enter_aop"
                 android:layout_width="wrap_content"
@@ -53,6 +60,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="EventBus" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_motion_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MotionLayout" />
 
         </LinearLayout>
 

@@ -14,6 +14,7 @@ import com.sunny.family.flutter.StuFlutterActivity
 import com.sunny.family.image.GaoSiActivity
 import com.sunny.family.jiaozi.JzPlayerActivity
 import com.sunny.family.livedata.MyLiveData
+import com.sunny.family.motionlayout.MotionLayoutActivity
 import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.jump.PageJumpUtils
 import com.sunny.lib.jump.params.JumpPlayerParam
@@ -120,6 +121,10 @@ class HomeActivity : BaseActivity() {
 
         btn_enter_event_bus.setOnClickListener {
             startActivity(Intent(this, EventBusActivity::class.java))
+        }
+
+        btn_enter_motion_layout.setOnClickListener {
+            startActivity(Intent(this, MotionLayoutActivity::class.java))
         }
     }
 

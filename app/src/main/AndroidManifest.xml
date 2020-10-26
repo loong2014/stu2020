@@ -83,6 +83,7 @@
         <activity android:name=".device.SunDeviceInfoActivity" />
         <activity android:name=".aop.AspectTestActivity" />
         <activity android:name=".eventbus.EventBusActivity" />
+        <activity android:name=".motionlayout.MotionLayoutActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

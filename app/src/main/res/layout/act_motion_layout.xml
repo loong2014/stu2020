@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/motion_to_view"
+        android:layout_width="23.3dp"
+        android:layout_height="23.3dp"
+        android:layout_marginStart="520dp"
+        android:src="@drawable/icon_gift"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="578dp"
+        android:layout_height="324dp"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="93.3dp"
+        android:src="@drawable/detail_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/front_data_layout"
+        android:layout_width="504dp"
+        android:layout_height="265dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="20dp"
+        android:background="#71706A"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/default_img"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="终极使命"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:background="#00ff00"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--
+        app:layoutDescription=”reference” 必须指向MotionScene XML文件，如前所述
+        app:applyMotionScene=”boolean” 让你申请或不申请MotionScene [default = true]
+        app:showPaths=”boolean” 是否显示运动路径[default = false]。记得在生产版本中关闭！
+        app:progress=”float” 让您指定从0到1的转换进度
+        app:currentState=”reference” 让你强制一个特定的ConstraintSet
+     -->
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/act_motion_layout_scene"
+        app:showPaths="true">
+
+        <ImageView
+            android:id="@+id/motion_from_view"
+            android:layout_width="504dp"
+            android:layout_height="265dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="20dp" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    <com.sunny.lib.view.SunnyButton
+        android:id="@+id/btn_to_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始移动"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btn_reset" />
+
+    <com.sunny.lib.view.SunnyButton
+        android:id="@+id/btn_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="恢复"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_to_end"
+        app:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
