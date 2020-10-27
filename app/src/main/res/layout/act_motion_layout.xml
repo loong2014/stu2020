@@ -103,5 +103,15 @@
         android:text="恢复"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/btn_to_end"
+        app:layout_constraintRight_toLeftOf="@+id/btn_set_progress" />
+
+    <com.sunny.lib.view.SunnyButton
+        android:id="@+id/btn_set_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="设置进度"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_reset"
         app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

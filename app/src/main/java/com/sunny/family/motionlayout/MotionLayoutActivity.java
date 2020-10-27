@@ -17,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
  * Created by zhangxin17 on 2020/10/22
  * MotionLayout
  * 系列博客 https://blog.csdn.net/xgxmwang/article/details/100696851
- *
  */
 public class MotionLayoutActivity extends BaseActivity {
 
@@ -57,6 +56,20 @@ public class MotionLayoutActivity extends BaseActivity {
                 motionLayout.transitionToStart();
             }
         });
+        findViewById(R.id.btn_set_progress).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float cur = motionLayout.getProgress();
+                float next = cur + 0.1F;
+
+                if (next > 1) {
+                    next = 0f;
+                }
+                motionLayout.setProgress(next);
+            }
+        });
+
+        motionLayout.setTransitionListener(transitionListener);
     }
 
     private void doStartToEnd() {
@@ -80,12 +93,30 @@ public class MotionLayoutActivity extends BaseActivity {
         motionFromView.setImageBitmap(drawingCache);
         frontDataLayout.setVisibility(View.GONE);
 
-        doMotionToEnd();
-    }
-
-    private void doMotionToEnd() {
         motionLayout.transitionToEnd();
     }
+
+    private MotionLayout.TransitionListener transitionListener = new MotionLayout.TransitionListener() {
+        @Override
+        public void onTransitionStarted(MotionLayout motionLayout, int i, int i1) {
+            SunLog.i(TAG, "onTransitionStarted " + i + " , " + i1);
+        }
+
+        @Override
+        public void onTransitionChange(MotionLayout motionLayout, int i, int i1, float v) {
+            SunLog.i(TAG, "onTransitionChange " + i + " , " + i1 + " , " + v);
+        }
+
+        @Override
+        public void onTransitionCompleted(MotionLayout motionLayout, int i) {
+            SunLog.i(TAG, "onTransitionCompleted " + i);
+        }
+
+        @Override
+        public void onTransitionTrigger(MotionLayout motionLayout, int i, boolean b, float v) {
+            SunLog.i(TAG, "onTransitionTrigger " + i + " , " + b + " , " + v);
+        }
+    };
 
 
 }
