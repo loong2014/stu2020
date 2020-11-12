@@ -1,131 +1,116 @@
 package com.sunny.family.home
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import android.view.View
+import androidx.viewpager2.widget.ViewPager2
 import com.sunny.family.R
-import com.sunny.family.aop.AspectTestActivity
-import com.sunny.family.arcode.QrCodeActivity
-import com.sunny.family.camera.CameraCustomActivity
-import com.sunny.family.camera.CameraSysActivity
-import com.sunny.family.device.SunDeviceInfoActivity
-import com.sunny.family.eventbus.EventBusActivity
-import com.sunny.family.flutter.StuFlutterActivity
-import com.sunny.family.image.GaoSiActivity
-import com.sunny.family.jiaozi.JzPlayerActivity
-import com.sunny.family.livedata.MyLiveData
-import com.sunny.family.motionlayout.MotionLayoutActivity
+import com.sunny.family.home.fragment.HomeDebugFragment
+import com.sunny.family.home.fragment.HomeFragmentAdapter
+import com.sunny.family.home.fragment.HomeMainFragment
+import com.sunny.family.home.fragment.HomeUserFragment
+import com.sunny.family.livedata.LiveDataFragment
 import com.sunny.lib.base.BaseActivity
-import com.sunny.lib.jump.PageJumpUtils
-import com.sunny.lib.jump.params.JumpPlayerParam
 import com.sunny.lib.utils.SunLog
-import com.sunny.player.config.PlayerConfig
-import com.sunny.player.config.VideoType
 import kotlinx.android.synthetic.main.act_home.*
 
 class HomeActivity : BaseActivity() {
+
+    companion object {
+        const val TAG = "HomeActivity"
+    }
+
+    lateinit var mHomeAdapter: HomeFragmentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_home)
 
-        addListener()
-        liveDataTest()
+        initView()
     }
 
-    lateinit var nameViewModel: MyLiveData
+    private fun initView() {
+        initTopBar()
 
-    private fun liveDataTest() {
+        initPageView()
 
-        nameViewModel = MyLiveData.getInstance(this)
+        initClick()
+    }
 
-        nameViewModel.observe(this, Observer { num: Int ->
-            SunLog.i("MyLiveData", "new num is :" + num)
-            live_data_name.text = "name is $num"
+    private fun initTopBar() {
+        mTopBar.setMiddleName("主页")
+        mTopBar.setOnBackBtnClickListener(View.OnClickListener {
+            doExitActivity()
         })
     }
 
+    private fun initPageView() {
+        mHomeAdapter = HomeFragmentAdapter(this, buildHomeFragmentList())
+        mViewPager2.adapter = mHomeAdapter
 
-    private fun addListener() {
+        mViewPager2.registerOnPageChangeCallback(mPageChangeCallback)
+        mViewPager2.currentItem = 2
+    }
 
-        btn_enter_camera_sys.setOnClickListener {
-            startActivity(Intent(this, CameraSysActivity::class.java))
+    private val mPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            val itemModel = mHomeAdapter.getItem(position)
+            SunLog.i(TAG, "onPageSelected   position :$position , name :${itemModel.name}")
+
+            mTopBar.setMiddleName(itemModel.name)
         }
 
-        btn_enter_camera.setOnClickListener {
-            startActivity(Intent(this, CameraCustomActivity::class.java))
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+//            SunLog.i(TAG, "onPageScrolled  position: $position , offset: $positionOffset , offsetPixels :$positionOffsetPixels")
         }
 
-        btn_enter_photo_album.setOnClickListener {
-            PageJumpUtils.jumpPhotoAlbumPage(context = this)
-        }
-
-        btn_enter_net_player.setOnClickListener {
-            val jumpParams = JumpPlayerParam()
-            jumpParams.videoId = PlayerConfig.video1_id
-            jumpParams.videoType = VideoType.NETWORK
-
-            PageJumpUtils.jumpPlayerPage(context = this, jumpParams = jumpParams)
-        }
-
-        btn_enter_detail.setOnClickListener {
-            PageJumpUtils.jumpDetailPage(context = this)
-        }
-
-        btn_enter_city.setOnClickListener {
-            PageJumpUtils.jumpCityPage(context = this)
-        }
-
-        btn_enter_city_expandable.setOnClickListener {
-            PageJumpUtils.jumpExpandableCityPage(context = this)
-        }
-
-        btn_enter_image.setOnClickListener {
-            PageJumpUtils.jumpImagePage(context = this)
-        }
-
-        btn_enter_sensor.setOnClickListener {
-            PageJumpUtils.jumpSensorPage(context = this)
-        }
-
-        btn_enter_dialog.setOnClickListener {
-            PageJumpUtils.jumpDialogPage(context = this)
-        }
-
-        btn_enter_jzplayer.setOnClickListener {
-            startActivity(Intent(this, JzPlayerActivity::class.java))
-        }
-        btn_enter_trans.setOnClickListener {
-            startActivity(Intent(this, GaoSiActivity::class.java))
-        }
-
-        btn_enter_main.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
-
-        btn_enter_qr.setOnClickListener {
-            startActivity(Intent(this, QrCodeActivity::class.java))
-        }
-
-        btn_enter_flutter.setOnClickListener {
-            startActivity(Intent(this, StuFlutterActivity::class.java))
-        }
-
-        btn_enter_device_info.setOnClickListener {
-            startActivity(Intent(this, SunDeviceInfoActivity::class.java))
-        }
-
-        btn_enter_aop.setOnClickListener {
-            startActivity(Intent(this, AspectTestActivity::class.java))
-        }
-
-        btn_enter_event_bus.setOnClickListener {
-            startActivity(Intent(this, EventBusActivity::class.java))
-        }
-
-        btn_enter_motion_layout.setOnClickListener {
-            startActivity(Intent(this, MotionLayoutActivity::class.java))
+        override fun onPageScrollStateChanged(state: Int) {
+            super.onPageScrollStateChanged(state)
+            SunLog.i(TAG, "onPageScrollStateChanged  state :$state")
         }
     }
 
+    private fun initClick() {
+        mBottomBtn1.text = "个人"
+        mBottomBtn1.setOnClickListener {
+            mViewPager2.setCurrentItem(0, true)
+        }
+
+        mBottomBtn2.text = "主页"
+        mBottomBtn2.setOnClickListener {
+            mViewPager2.setCurrentItem(1, true)
+        }
+
+        mBottomBtn3.text = "测试"
+        mBottomBtn3.setOnClickListener {
+            mViewPager2.setCurrentItem(2, true)
+        }
+
+        mBottomBtn4.text = "其它"
+        mBottomBtn4.setOnClickListener {
+            mViewPager2.setCurrentItem(3, true)
+        }
+
+        mBottomBtn5.text = "其它"
+        mBottomBtn5.setOnClickListener {
+            mViewPager2.setCurrentItem(4, true)
+        }
+    }
+
+    private fun buildHomeFragmentList(): MutableList<HomeFragmentModel> {
+        val list = mutableListOf<HomeFragmentModel>()
+        list.add(HomeFragmentModel("个人", "1", HomeUserFragment()))
+        list.add(HomeFragmentModel("主页", "2", HomeMainFragment()))
+        list.add(HomeFragmentModel("测试", "3", HomeDebugFragment()))
+        list.add(HomeFragmentModel("其它", "3", LiveDataFragment()))
+        list.add(HomeFragmentModel("其它", "4", LiveDataFragment()))
+        return list
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mViewPager2?.unregisterOnPageChangeCallback(mPageChangeCallback)
+    }
 }

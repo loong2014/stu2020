@@ -23,7 +23,7 @@ class FamilyApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        AppConfig.init(this)
+        AppConfig.applicationInit(this)
     }
 
     override fun attachBaseContext(base: Context?) {

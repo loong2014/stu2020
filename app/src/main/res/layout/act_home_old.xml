@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.sunny.lib.view.SunnyTextView
+        android:id="@+id/live_data_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="name is" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Main" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_flutter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flutter" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_device_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设备信息" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_aop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AOPTest" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_event_bus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EventBus" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_motion_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MotionLayout" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_camera_sys"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="系统拍照" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义拍照" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_photo_album"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="相册" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="详情页" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="城市列表" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_city_expandable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="城市折叠列表" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="图片加载" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_sensor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="传感器" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_trans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="高斯模糊" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_net_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="网络视频" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_jzplayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="饺子播放器" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dialog" />
+
+            <com.sunny.lib.view.SunnyButton
+                android:id="@+id/btn_enter_qr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QrCode" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

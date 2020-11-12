@@ -83,7 +83,10 @@
         <activity android:name=".device.SunDeviceInfoActivity" />
         <activity android:name=".aop.AspectTestActivity" />
         <activity android:name=".eventbus.EventBusActivity" />
-        <activity android:name=".motionlayout.MotionLayoutActivity" />
+        <activity android:name=".layout.MotionLayoutActivity" />
+        <activity android:name=".home.HomeActivityOld" />
+        <activity android:name=".layout.CoordinatorLayoutActivity" />
+        <activity android:name=".layout.DrawerLayoutActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 继承 LinearLayout，只能垂直布局 -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <!--
+        layout_scrollFlags：
+        noScroll: 默认值，不参与联动，一直可见
+        scroll: 参联动
+        exitUntilCollapsed: 与scroll结合使用，滑动到minHeight时，停止滑动，当RV滑动到顶部才会展开
+        enterAlways：与scroll结合使用，折叠后只要产生反方向滑动，则展开滑动大小
+        enterAlwaysCollapsed: 与scroll|enterAlways结合使用，反向滑动是最大展开minHeight大小，滑动到顶部才会完全展开
+        snap: 与scroll结合使用，使view具有吸附功能，当滑动停止时，滑出的部分大于1/2则完全折叠，反正完全展开
+        -->
+        <!--        <View-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="90dp"-->
+        <!--            android:background="@drawable/top_bg"-->
+        <!--            app:layout_scrollFlags="scroll" />-->
+
+        <!--        &lt;!&ndash; 有多个view时，滑动效果会有冲突，具体效果与两周的flag有关 &ndash;&gt;-->
+        <!--        <View-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:background="@color/colorBlue"-->
+        <!--            app:layout_scrollFlags="scroll|enterAlways" />-->
+
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <!--
+            layout_collapseMode:
+            none:默认值，表示没有任何属性
+            pin:当这个View到达 CollapsingToolbarLayout的底部的时候，这个View 将会被放置，即代替整个CollapsingToolbarLayout
+            parallax:滑动时出现视觉差效果，最终完全折叠
+
+            -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/top_bg"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/mToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#5FF"
+                app:layout_collapseMode="pin" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

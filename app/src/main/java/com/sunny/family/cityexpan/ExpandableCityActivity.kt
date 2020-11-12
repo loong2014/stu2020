@@ -3,16 +3,19 @@ package com.sunny.family.cityexpan
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ExpandableListView
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.sunny.family.R
 import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.city.CityInfo
 import com.sunny.lib.city.CityManager
 import com.sunny.lib.jump.PageJumpUtils
+import com.sunny.lib.router.RouterConstant
 import com.sunny.lib.utils.HandlerUtils
 import com.sunny.lib.utils.SunLog
 import com.sunny.lib.utils.SunToast
 import kotlinx.android.synthetic.main.act_city_expandable.*
 
+@Route(path = RouterConstant.PageExpandable)
 class ExpandableCityActivity : BaseActivity() {
     val logTag = "City-ExpandableCityActivity "
 

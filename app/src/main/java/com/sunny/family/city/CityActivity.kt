@@ -1,111 +1,69 @@
 package com.sunny.family.city
 
 import android.os.Bundle
+import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.sunny.family.R
-import com.sunny.family.city.block.*
+import com.sunny.family.city.adapter.CityAdapter
 import com.sunny.lib.base.BaseActivity
-import com.sunny.lib.city.CityInfo
-import com.sunny.lib.city.CityManager
-import com.sunny.lib.city.CityType
-import com.sunny.lib.utils.HandlerUtils
-import com.sunny.lib.utils.SunToast
-import com.sunny.view.data.SunBlockData
-import com.sunny.view.layout.SunBlockLayoutManager
+import com.sunny.lib.router.RouterConstant
+import com.sunny.lib.utils.SunLog
 import kotlinx.android.synthetic.main.act_city.*
 
+@Route(path = RouterConstant.PageCity)
 class CityActivity : BaseActivity() {
-    val logTag = "City-CityActivity"
 
-    lateinit var mRecyclerView: CityRecyclerView
-    lateinit var mAdapter: CityBlockAdapter
+    companion object {
+        const val TAG = "City-Act"
+    }
+
+    lateinit var mAdapter: CityAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_city)
 
         initView()
-
-        initData()
     }
 
     private fun initView() {
-        mRecyclerView = city_recycler_view
-
-        //
-        mAdapter = CityBlockAdapter(CityBlockFactory())
-        mRecyclerView.adapter = mAdapter
-
-        //
-        mRecyclerView.layoutManager = SunBlockLayoutManager(this)
-
+        initTopBar()
+        initRecyclerView()
     }
 
-    private fun initData() {
+    private fun initTopBar() {
+        mTopBar.setMiddleName("城市列表")
+        mTopBar.setOnBackBtnClickListener(View.OnClickListener {
+            finish()
+        })
+    }
 
-        HandlerUtils.workHandler.post {
-            val cityList: List<CityInfo>? = CityManager.chinaCityList
+    private fun initRecyclerView() {
+        mRecyclerview.layoutManager = GridLayoutManager(this, 1)
+        mRecyclerview.setHasFixedSize(true)
 
-            if (cityList.isNullOrEmpty()) {
-                SunToast.show("no city list")
+        mAdapter = CityAdapter(buildCityData())
+        mRecyclerview.adapter = mAdapter
 
-            } else {
+        mAdapter.setOnItemClickListener { adapter, view, position ->
 
-                val blockDataList = mutableListOf<SunBlockData>()
-                cityList.forEach {
-
-                    val blockData = SunBlockData()
-                    blockData.name = it.name
-                    blockData.data = it
-                    blockData.uiType = when (it.type) {
-                        CityType.Tip -> CityBlockTipHolder.BlockType
-
-                        CityType.Direct -> CityDirectBlockHolder.BlockType
-
-                        CityType.Special -> CitySpecialBlockHolder.BlockType
-
-                        CityType.Normal -> CityNormalBlockHolder.BlockType
-
-                        CityType.Autonomy -> CityAutonomyBlockHolder.BlockType
-
-                        else -> CityBlockTipHolder.BlockType
-                    }
-
-                    blockDataList.add(blockData)
-
-
-                    it.children?.let { childrenList ->
-                        childrenList.forEach {
-                            val blockData = SunBlockData()
-                            blockData.name = it.name
-                            blockData.data = it
-                            blockData.uiType = when (it.type) {
-                                CityType.Tip -> CityBlockTipHolder.BlockType
-
-                                CityType.Direct -> CityDirectBlockHolder.BlockType
-
-                                CityType.Special -> CitySpecialBlockHolder.BlockType
-
-                                CityType.Normal -> CityNormalBlockHolder.BlockType
-
-                                CityType.Autonomy -> CityAutonomyBlockHolder.BlockType
-
-                                else -> CityBlockTipHolder.BlockType
-                            }
-
-                            blockDataList.add(blockData)
-                        }
-                    }
-                }
-
-                runOnUiThread {
-                    doSetCityList(blockDataList)
-                }
+            val itemModel: CityItemModel = adapter.getItem(position) as CityItemModel
+            if (itemModel.isCity()) {
+                showToast(itemModel.showName)
             }
         }
-    }
+        mRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-    private fun doSetCityList(list: List<SunBlockData>) {
-        mAdapter.bindData(list)
-        mAdapter.notifyDataSetChanged()
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val stickView = recyclerView.findChildViewUnder(0f, 0f)
+
+                SunLog.i(TAG, "onScrolled $stickView")
+            }
+        })
+
     }
 }

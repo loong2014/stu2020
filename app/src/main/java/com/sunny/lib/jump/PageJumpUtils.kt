@@ -7,7 +7,6 @@ import android.content.Intent
 import com.google.gson.Gson
 import com.sunny.family.city.CityActivity
 import com.sunny.family.cityexpan.ExpandableCityActivity
-import com.sunny.family.detail.DetailActivity
 import com.sunny.family.dialog.StuDialogAct
 import com.sunny.family.home.HomeActivity
 import com.sunny.family.image.GlideImageActivity
@@ -30,10 +29,6 @@ object PageJumpUtils {
 
     fun jumpPhotoAlbumPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
         doPageJump(intent, context, PhotoAlbumActivity::class.java)
-    }
-
-    fun jumpDetailPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {
-        doPageJump(intent, context, DetailActivity::class.java)
     }
 
     fun jumpCityPage(intent: Intent? = null, context: Context? = ContextProvider.appContext) {

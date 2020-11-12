@@ -51,7 +51,17 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGray">#848383</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorBlue">#0000ff</color>
+    <color name="colorRed">#ff0000</color>
+    <color name="colorYellow">#ffff00</color>
     <color name="color_676b71">#676b71</color>
+
+    <color name="def_page_bg">@color/black_10</color>
+
+    <color name="def_item_tip_bg">#d0a465</color>
+
+    <color name="def_item_bg">@color/white_15</color>
+    <color name="def_item_bg2">@color/black_15</color>
 
 
     <color name="variety_tab_select">#d0a465</color>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/def_page_bg">
+
+    <!-- 主界面 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.sunny.family.view.SunnyTopBar
+            android:id="@+id/mTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_h"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mTopBar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 侧滑栏
+     layout_gravity：必须设置该属性
+     start：左侧菜单
+     end：右侧菜单
+     -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
+        android:background="@color/white_30"
+        android:minHeight="400dp">
+
+        <TextView
+            android:id="@+id/drawer_tip"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:text="侧滑菜单"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mDrawerRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/drawer_tip" />
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/drawer_layout"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="500dp"-->
+        <!--            android:layout_gravity="start|center_vertical"-->
+        <!--            android:background="#FFFF00"-->
+        <!--            android:orientation="vertical">-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="40dp"-->
+        <!--                android:text="侧滑菜单" />-->
+        <!--        </LinearLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

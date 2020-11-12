@@ -2,8 +2,10 @@ package com.sunny.family.weather
 
 import android.graphics.Color
 import android.os.Bundle
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.sunny.family.R
 import com.sunny.lib.base.BaseActivity
+import com.sunny.lib.router.RouterConstant
 import com.sunny.lib.utils.ResUtils
 import com.sunny.lib.utils.SunToast
 import com.sunny.lib.weather.SunWeatherConfig

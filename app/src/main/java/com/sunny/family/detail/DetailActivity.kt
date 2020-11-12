@@ -3,6 +3,7 @@ package com.sunny.family.detail
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.sunny.family.R
 import com.sunny.family.detail.view.VerticalLinearLayoutManager
 import com.sunny.family.detail.view.block.BlockType
@@ -10,11 +11,13 @@ import com.sunny.family.detail.view.common.RebuildDataModel
 import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.city.CityInfo
 import com.sunny.lib.jump.PageJumpUtils
+import com.sunny.lib.router.RouterConstant
 import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.utils.SunLog
 import com.sunny.lib.utils.SunToast
 import kotlinx.android.synthetic.main.act_detail.*
 
+@Route(path = RouterConstant.PageDetail)
 class DetailActivity : BaseActivity(), SunDetailHelper.DetailCallback {
     val logTag = "Detail-DetailActivity"
 

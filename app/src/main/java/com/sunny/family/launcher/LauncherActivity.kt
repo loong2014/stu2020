@@ -155,6 +155,7 @@ class LauncherActivity : BaseActivity() {
     private fun jumpHomeAct() {
         HandlerUtils.uiHandler.postDelayed({
             PageJumpUtils.jumpHomePage()
+            doExitActivity()
         }, 500)
     }
 

@@ -26,7 +26,7 @@ class GaoSiActivity : BaseActivity() {
     }
 
     private fun initView() {
-        iv_bg.setBackgroundResource(R.mipmap.chuntian)
+        iv_bg.setBackgroundResource(R.drawable.chuntian)
 
         btn_gaosi.setOnClickListener {
             doGaoSiEffect()

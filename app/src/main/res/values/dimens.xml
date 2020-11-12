@@ -24,4 +24,6 @@
     <dimen name="block_number_w_h">66.67dp</dimen>
 
     <dimen name="variety_tab_width">170dp</dimen>
+
+    <dimen name="top_bar_h">60dp</dimen>
 </resources>
