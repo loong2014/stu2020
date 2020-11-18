@@ -21,6 +21,7 @@ class HomeDebugFragment : BaseFragment() {
         const val TAG = "HomeMainFragment"
     }
 
+    var hasInit: Boolean = false
     lateinit var rootLayout: View
     lateinit var mAdapter: HomeAdapter
 
@@ -42,6 +43,10 @@ class HomeDebugFragment : BaseFragment() {
     }
 
     private fun initView() {
+        if (hasInit) {
+            return
+        }
+        hasInit = true
         mFragmentName.text = "主页"
         initRecyclerView()
     }
@@ -70,5 +75,6 @@ private fun buildHomeData(): MutableList<HomeItemModel> {
     list.add(HomeItemModel(showName = "协调布局", routePath = RouterConstant.PageCoordinator))
     list.add(HomeItemModel(showName = "运动布局", routePath = RouterConstant.PageMotion))
     list.add(HomeItemModel(showName = "侧滑布局", routePath = RouterConstant.PageDrawer))
+    list.add(HomeItemModel(showName = "下拉刷新布局", routePath = RouterConstant.PageSwipeRefresh))
     return list
 }

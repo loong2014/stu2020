@@ -16,7 +16,7 @@
         exitUntilCollapsed: 与scroll结合使用，滑动到minHeight时，停止滑动，当RV滑动到顶部才会展开
         enterAlways：与scroll结合使用，折叠后只要产生反方向滑动，则展开滑动大小
         enterAlwaysCollapsed: 与scroll|enterAlways结合使用，反向滑动是最大展开minHeight大小，滑动到顶部才会完全展开
-        snap: 与scroll结合使用，使view具有吸附功能，当滑动停止时，滑出的部分大于1/2则完全折叠，反正完全展开
+        snap: 与scroll结合使用，使view具有吸附功能，当滑动停止时，滑出的部分大于1/2则完全折叠，反之完全展开
         -->
         <!--        <View-->
         <!--            android:layout_width="match_parent"-->

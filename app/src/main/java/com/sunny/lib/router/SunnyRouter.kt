@@ -12,5 +12,6 @@ class RouterConstant {
         const val PageCoordinator = "/sunny/page/coordinator"
         const val PageMotion = "/sunny/page/motion"
         const val PageDrawer = "/sunny/page/drawer"
+        const val PageSwipeRefresh = "/sunny/page/swipeRefresh"
     }
 }

@@ -1,14 +1,15 @@
 package com.sunny.family.city.adapter
 
+import android.content.Context
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.sunny.family.R
-import com.sunny.family.city.CityItemModel
-import com.sunny.family.city.ItemViewTypeCity
-import com.sunny.family.city.ItemViewTypeTip
+import com.sunny.family.city.*
 import com.sunny.lib.utils.ResUtils
 
 /**
@@ -16,9 +17,16 @@ import com.sunny.lib.utils.ResUtils
  */
 class CityAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
 
+    private lateinit var mContext: Context
+
+    constructor(context: Context, data: MutableList<MultiItemEntity>) : this(data) {
+        mContext = context
+    }
+
     constructor(data: MutableList<MultiItemEntity>) : super(data) {
         addItemType(ItemViewTypeTip, R.layout.layout_item_view_city_tip)
         addItemType(ItemViewTypeCity, R.layout.layout_item_view_city)
+        addItemType(ItemViewTypeSwipe, R.layout.layout_item_view_swipe)
     }
 
     override fun convert(holder: BaseViewHolder, item: MultiItemEntity) {
@@ -40,8 +48,20 @@ class CityAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
                     bgView.setBackgroundColor(ResUtils.getColor(R.color.def_item_bg2))
                 }
             }
+            ItemViewTypeSwipe -> {
+                setSwipeData(holder)
+            }
             else -> {
             }
         }
+    }
+
+
+    private fun setSwipeData(holder: BaseViewHolder) {
+        val mSwipeRecyclerView: RecyclerView = holder.getView(R.id.swipe_recyclerView)
+        mSwipeRecyclerView.setLayoutManager(GridLayoutManager(mContext, 1))
+        mSwipeRecyclerView.setHasFixedSize(true)
+        val mSwipeAdapter = CityAdapter(buildCityTipData())
+        mSwipeRecyclerView.setAdapter(mSwipeAdapter)
     }
 }
