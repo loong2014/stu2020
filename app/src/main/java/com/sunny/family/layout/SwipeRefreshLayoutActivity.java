@@ -82,9 +82,7 @@ public class SwipeRefreshLayoutActivity extends BaseActivity {
         initDataRecyclerView();
 
         //
-        View firstView = findViewById(R.id.first_view);
-        mSwipeToLoadLayout.setFirstView(firstView);
-        mSwipeToLoadLayout.setDataRecyclerView(mDataRecyclerView);
+        mSwipeToLoadLayout.setTopView(findViewById(R.id.first_view));
 
         initFilter();
     }

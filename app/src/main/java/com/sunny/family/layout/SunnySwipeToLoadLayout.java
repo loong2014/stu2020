@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.sunny.lib.utils.SunLog;
 
@@ -17,8 +15,7 @@ import com.sunny.lib.utils.SunLog;
 public class SunnySwipeToLoadLayout extends SwipeToLoadLayout {
     private static final String TAG = "Zhang-Swipe_Layout";
 
-    private View mFirstView;
-    private RecyclerView mDataRecyclerView;
+    private View mTopView;
 
     public SunnySwipeToLoadLayout(Context context) {
         super(context);
@@ -32,32 +29,19 @@ public class SunnySwipeToLoadLayout extends SwipeToLoadLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setFirstView(View view) {
-        mFirstView = view;
-    }
-
-    public void setDataRecyclerView(RecyclerView recyclerView) {
-        mDataRecyclerView = recyclerView;
+    public void setTopView(View view) {
+        mTopView = view;
     }
 
     @Override
     protected boolean canChildScrollUp() {
-        if (mDataRecyclerView != null && mDataRecyclerView.canScrollVertically(-1)) {
-            SunLog.i(TAG, "canChildScrollUp  mDataRecyclerView can scroll up");
-            return true;
-        }
-        boolean isCovered = isViewCovered(mFirstView);
-        SunLog.i(TAG, "canChildScrollUp  mFirstView isCovered :" + isCovered);
-
-        if (isCovered) {
+        if (isViewCovered(mTopView)) {
+            SunLog.i(TAG, "canChildScrollUp  mTopView isCovered");
             return true;
         }
 
-        boolean can = super.canChildScrollUp();
-        SunLog.i(TAG, "canChildScrollUp :" + can);
-        return can;
+        return super.canChildScrollUp();
     }
-
 
     private boolean isViewCovered(final View view) {
         if (view == null) {
