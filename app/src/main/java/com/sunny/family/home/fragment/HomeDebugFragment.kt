@@ -76,5 +76,7 @@ private fun buildHomeData(): MutableList<HomeItemModel> {
     list.add(HomeItemModel(showName = "运动布局", routePath = RouterConstant.PageMotion))
     list.add(HomeItemModel(showName = "侧滑布局", routePath = RouterConstant.PageDrawer))
     list.add(HomeItemModel(showName = "下拉刷新布局", routePath = RouterConstant.PageSwipeRefresh))
+    list.add(HomeItemModel(showName = "xxx布局", routePath = RouterConstant.PageXxxLayout))
+    list.add(HomeItemModel(showName = "loading", routePath = RouterConstant.PageLoading))
     return list
 }

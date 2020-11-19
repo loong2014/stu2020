@@ -5,4 +5,19 @@
 
     <!-- weather -->
     <string name="weather_name_tip">城市名称:%s</string>
+
+
+    <!--导航-->
+    <string name="navigation_homepage">首页</string>
+    <string name="navigation_score">比分</string>
+    <string name="navigation_manito">大神</string>
+    <string name="navigation_viewpoint">观点</string>
+    <string name="navigation_mine">我的</string>
+
+    <string-array name="detail_tab_names_arr">
+        <item>世界</item>
+        <item>亚洲</item>
+        <item>中国</item>
+        <item>北京</item>
+    </string-array>
 </resources>

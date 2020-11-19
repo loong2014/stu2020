@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sunny.family.layout.SunnySwipeToLoadLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_to_load_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 刷新模块 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/swipe_refresh_header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/top_bg">
+
+        <!-- 刷新模块 -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/refresh_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="释放刷新"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 内容模块 -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/swipe_target"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
+                android:orientation="vertical"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <!-- 与刷新关联的RV -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/swipe_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!-- 筛选栏 -->
+                <com.ogaclejapan.smarttablayout.SmartTabLayout
+                    android:id="@+id/data_tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/white"
+                    android:clipToPadding="false"
+                    app:stl_clickable="true"
+                    app:stl_customTabTextLayoutId="@layout/smarttablelayout_custom_tap_detail_fragment"
+                    app:stl_customTabTextViewId="@+id/tab_content"
+                    app:stl_distributeEvenly="true"
+                    app:stl_dividerColor="@color/white_90"
+                    app:stl_dividerThickness="0.5dp"
+                    app:stl_indicatorColor="@color/colorRed"
+                    app:stl_indicatorCornerRadius="0dp"
+                    app:stl_indicatorGravity="bottom"
+                    app:stl_indicatorInterpolation="smart"
+                    app:stl_indicatorThickness="2dp"
+                    app:stl_indicatorWidth="20dp"
+                    app:stl_underlineColor="@color/white"
+                    app:stl_underlineThickness="0dp" />
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/data_list_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</com.sunny.family.layout.SunnySwipeToLoadLayout>

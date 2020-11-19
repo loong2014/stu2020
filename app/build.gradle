@@ -138,6 +138,11 @@ dependencies {
     // https://github.com/Aspsine/SwipeToLoadLayout
     implementation 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
 
+    //viewPage indicator: https://github.com/ogaclejapan/SmartTabLayout
+    implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
+    //Optional: see how to use the utility.
+    implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
+
     //
     implementation 'com.google.android.material:material:1.2.1'
 

@@ -27,11 +27,13 @@ object ResUtils {
         this.context = context
     }
 
+    @JvmStatic
     fun getResources(): Resources {
         return context.resources
     }
 
 
+    @JvmStatic
     fun getDimensionPixelSize(resId: Int): Int {
         return getResources().getDimensionPixelSize(resId)
     }
@@ -40,16 +42,24 @@ object ResUtils {
         return getResources().getString(resId)
     }
 
+    @JvmStatic
     fun getString(resId: Int, vararg formatArgs: Any?): String? {
         return getResources().getString(resId, *formatArgs)
     }
 
+    @JvmStatic
     fun getColor(resId: Int): Int {
         return getResources().getColor(resId)
     }
 
+    @JvmStatic
     fun getDrawable(resId: Int): Drawable? {
         return getResources().getDrawable(resId)
+    }
+
+    @JvmStatic
+    fun getDimension(resId: Int): Float {
+        return getResources().getDimension(resId)
     }
 
     fun getBitmap(resId: Int): Bitmap {

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_drawer"
+        android:icon="@drawable/navi_score_selector"
+        android:title="侧滑" />
+
+    <item
+        android:id="@+id/navigation_coordinator"
+        android:icon="@drawable/navi_manito_selector"
+        android:title="协调" />
+
+    <item
+        android:id="@+id/navigation_detail"
+        android:icon="@drawable/navi_homepage_selector"
+        android:title="详情" />
+
+    <item
+        android:id="@+id/navigation_motion"
+        android:icon="@drawable/navi_viewpoint_selector"
+        android:title="运动" />
+
+    <item
+        android:id="@+id/navigation_expandable"
+        android:icon="@drawable/navi_mine_selector"
+        android:title="折叠" />
+
+</menu>

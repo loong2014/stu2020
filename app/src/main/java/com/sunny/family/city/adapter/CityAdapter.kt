@@ -31,25 +31,25 @@ class CityAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
 
     override fun convert(holder: BaseViewHolder, item: MultiItemEntity) {
         val itemMode = item as CityItemModel
-        val bgView: View = holder.getView(R.id.item_constraint)
-        val nameView: AppCompatTextView = holder.getView(R.id.item_name)
         when (holder.itemViewType) {
             ItemViewTypeTip -> {
+                val nameView: AppCompatTextView = holder.getView(R.id.item_name)
                 nameView.text = itemMode.showName
 
+                val bgView: View = holder.getView(R.id.item_constraint)
                 bgView.setBackgroundColor(ResUtils.getColor(R.color.def_item_tip_bg))
             }
             ItemViewTypeCity -> {
+
+                val nameView: AppCompatTextView = holder.getView(R.id.item_name)
                 nameView.text = itemMode.showName
 
+                val bgView: View = holder.getView(R.id.item_constraint)
                 if (holder.bindingAdapterPosition % 2 == 0) {
                     bgView.setBackgroundColor(ResUtils.getColor(R.color.def_item_bg))
                 } else {
                     bgView.setBackgroundColor(ResUtils.getColor(R.color.def_item_bg2))
                 }
-            }
-            ItemViewTypeSwipe -> {
-                setSwipeData(holder)
             }
             else -> {
             }

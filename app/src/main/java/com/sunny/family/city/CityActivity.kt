@@ -35,9 +35,6 @@ class CityActivity : BaseActivity() {
 
     private fun initTopBar() {
         mTopBar.setMiddleName("城市列表")
-        mTopBar.setOnBackBtnClickListener(View.OnClickListener {
-            finish()
-        })
     }
 
     private fun initRecyclerView() {
