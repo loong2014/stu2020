@@ -90,6 +90,7 @@
         <activity android:name=".layout.SwipeRefreshLayoutActivity" />
         <activity android:name=".layout.XxxLayoutActivity" />
         <activity android:name=".loading.LoadingActivity" />
+        <activity android:name=".list.ListActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

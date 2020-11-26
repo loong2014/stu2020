@@ -1,7 +1,6 @@
 package com.sunny.family.city
 
 import android.os.Bundle
-import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -44,7 +43,7 @@ class CityActivity : BaseActivity() {
         mAdapter = CityAdapter(buildCityData())
         mRecyclerview.adapter = mAdapter
 
-        mAdapter.setOnItemClickListener { adapter, view, position ->
+        mAdapter.setOnItemClickListener { adapter, _, position ->
 
             val itemModel: CityItemModel = adapter.getItem(position) as CityItemModel
             if (itemModel.isCity()) {

@@ -15,5 +15,6 @@ class RouterConstant {
         const val PageSwipeRefresh = "/sunny/page/swipeRefresh"
         const val PageXxxLayout = "/sunny/page/xxxLayout"
         const val PageLoading = "/sunny/page/loading"
+        const val PageList = "/sunny/page/list"
     }
 }

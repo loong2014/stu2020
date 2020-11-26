@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 import com.sunny.family.R;
 import com.sunny.family.city.CityModelKt;
 import com.sunny.family.city.adapter.CityAdapter;
@@ -132,7 +133,7 @@ public class XxxDetailInfoFragment extends BaseFragment {
         }
 
         //
-        DetailTabFragmentAdapter tabAdapter = new DetailTabFragmentAdapter(getChildFragmentManager(), creator.create());
+        FragmentStatePagerItemAdapter tabAdapter = new FragmentStatePagerItemAdapter(getChildFragmentManager(), creator.create());
         mDataViewPager.setAdapter(tabAdapter);
         mDataViewPager.setOffscreenPageLimit(1);
 

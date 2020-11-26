@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 import com.sunny.family.R;
 import com.sunny.family.view.SunnyTopBar;
 import com.sunny.lib.base.BaseFragment;
@@ -77,7 +78,7 @@ public class XxxDetailFragment extends BaseFragment {
         }
 
         //
-        DetailTabFragmentAdapter tabAdapter = new DetailTabFragmentAdapter(getChildFragmentManager(), creator.create());
+        FragmentStatePagerItemAdapter tabAdapter = new FragmentStatePagerItemAdapter(getChildFragmentManager(), creator.create());
         mViewPager.setAdapter(tabAdapter);
         mViewPager.setOffscreenPageLimit(1);
 

@@ -21,6 +21,8 @@ class SunnyTopBar(context: Context, attributeSet: AttributeSet?) : ConstraintLay
         const val TAG = "SunnyTopBar"
     }
 
+    private var middleName: String? = null
+
     init {
         SunLog.i(TAG, "init")
         LayoutInflater.from(context).inflate(R.layout.layout_top_bar, this)
@@ -41,7 +43,12 @@ class SunnyTopBar(context: Context, attributeSet: AttributeSet?) : ConstraintLay
     }
 
     fun setMiddleName(name: String) {
+        middleName = name
         top_bar_mid_name.text = name
+    }
+
+    fun setMiddleNameSuffix(suffixName: String) {
+        top_bar_mid_name.text = "${middleName ?: ""}-$suffixName"
     }
 
     fun getMiddleNameView(): View {
