@@ -39,6 +39,11 @@
     <!-- 悬浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW	" />
 
+    <!-- 拨打电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- 读取通讯录 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".FamilyApplication"
@@ -91,7 +96,13 @@
         <activity android:name=".layout.XxxLayoutActivity" />
         <activity android:name=".loading.LoadingActivity" />
         <activity android:name=".list.ListActivity" />
+        <activity android:name=".permission.PermissionActivity" />
+        <activity android:name=".provider.ProviderActivity" />
+        <activity android:name=".db.DatabaseActivity" />
+        <activity android:name=".通知.NotificationActivity" />
+        <activity android:name=".搜索框.SearchViewActivity" />
 
+        <!-- 拍照使用，访问本地存储 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -101,6 +112,14 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/camera_file_paths" />
         </provider>
+
+        <provider
+            android:name=".provider.SunProvider"
+            android:authorities="com.stu.sunny.provider"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service android:name=".通知.NotificationService" />
     </application>
 
 </manifest>

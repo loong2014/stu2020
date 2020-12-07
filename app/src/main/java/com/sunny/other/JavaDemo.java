@@ -1,5 +1,6 @@
 package com.sunny.other;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -49,5 +50,35 @@ public class JavaDemo {
     public static void main(String[] args) {
         A a = new B("hi");
         a.print();
+
+
+//        double money = 1.21875693438935859E20;
+
+
+        double money = 1234567890.12345;
+        System.out.println("str0 :" + money);
+
+        // 去除小数
+        DecimalFormat df = new java.text.DecimalFormat("#");
+        String monetStr = df.format(money);
+        int len = monetStr.length();
+
+        String str = null;
+        for (int i = 0; i < len; i++) {
+            char c = monetStr.charAt(len - i - 1);
+            if (i % 3 == 0) {
+                if (str == null) {
+                    str = ".00";
+                } else {
+                    str = "," + str;
+                }
+            }
+            str = c + str;
+        }
+
+
+        System.out.println("str :" + str);
+
+
     }
 }

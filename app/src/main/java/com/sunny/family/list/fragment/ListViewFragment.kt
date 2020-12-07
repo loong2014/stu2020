@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListView
 import com.sunny.family.R
+import com.sunny.family.extend.lettersCount
 import com.sunny.family.list.ListDataModel
 import com.sunny.family.list.ListLayoutConstants
 import com.sunny.family.list.ListViewHolder
@@ -51,7 +52,6 @@ class ListViewFragment : BaseFragment() {
                 SunToast.show(it.title)
             }
         }
-
     }
 
     inner class ListViewAdapter(val context: Context, var datas: List<ListDataModel>? = null) : BaseAdapter() {

@@ -3,7 +3,9 @@ package com.sunny.family.layout
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.sunny.family.R
 import com.sunny.family.city.CityActivity
 import com.sunny.family.city.CityItemModel
@@ -11,7 +13,6 @@ import com.sunny.family.city.adapter.CityAdapter
 import com.sunny.family.city.buildCityData
 import com.sunny.lib.base.BaseActivity
 import com.sunny.lib.router.RouterConstant
-import com.sunny.lib.utils.ResUtils
 import com.sunny.lib.utils.SunLog
 import kotlinx.android.synthetic.main.act_coordinator.*
 
@@ -25,11 +26,16 @@ class CoordinatorLayoutActivity : BaseActivity() {
         const val TAG = "City-Act"
     }
 
+    @JvmField
+    @Autowired(name = "titleName")
+    var titleName: String? = null
+
     lateinit var mAdapter: CityAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_coordinator)
+        ARouter.getInstance().inject(this)
 
         initView()
     }

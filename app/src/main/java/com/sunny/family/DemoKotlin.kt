@@ -3,7 +3,40 @@ package com.sunny.family
 /**
  * Created by zhangxin17 on 2020-01-15
  */
+
+fun main() {
+//    val list = listOf<String>("aas", "dadasd", "fwrefwe", "tgsfr", "ihdas", "g5rvs")
+//    println("list :${list.size}")
+//    val newList = list.filter {
+//        "s" in it
+//    }
+//    println("newList :${newList.size}")
+
+    //
+    val demo = DemoKotlin()
+    demo.doTest()
+}
+
+
 class DemoKotlin {
+
+    fun example(func: (String, Int) -> String): String {
+        return func("hello", 9)
+    }
+
+    fun buildStr(str: String, age: Int): String {
+        return "$str - $age"
+    }
+
+    fun doTest() {
+        val result = example(::buildStr)
+        println("result :$result")
+
+        val r2 = example { s, i ->
+            "$s - $i"
+        }
+        println("r2 :$r2")
+    }
 
     internal interface PhotoCallback {
         val list: Unit

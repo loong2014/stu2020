@@ -61,7 +61,16 @@ class HomeDebugFragment : BaseFragment() {
 
         mAdapter.setOnItemClickListener { adapter, _, position ->
             val itemModel: HomeItemModel = adapter.getItem(position) as HomeItemModel
-            ARouter.getInstance().build(itemModel.routePath).navigation()
+
+            if (RouterConstant.PageSearchView == itemModel.routePath) {
+                SunLog.i(TAG, "transfer param by router ")
+                ARouter.getInstance().build(itemModel.routePath)
+                        .withString(RouterConstant.Param.Key, "2020")
+                        .navigation()
+            } else {
+
+                ARouter.getInstance().build(itemModel.routePath).navigation()
+            }
         }
     }
 }
@@ -79,5 +88,10 @@ private fun buildHomeData(): MutableList<HomeItemModel> {
     list.add(HomeItemModel(showName = "xxx布局", routePath = RouterConstant.PageXxxLayout))
     list.add(HomeItemModel(showName = "loading", routePath = RouterConstant.PageLoading))
     list.add(HomeItemModel(showName = "列表", routePath = RouterConstant.PageList))
+    list.add(HomeItemModel(showName = "运行时权限", routePath = RouterConstant.PagePermission))
+    list.add(HomeItemModel(showName = "SQLite", routePath = RouterConstant.PageDatabase))
+    list.add(HomeItemModel(showName = "数据访问", routePath = RouterConstant.PageProvider))
+    list.add(HomeItemModel(showName = "消息通知", routePath = RouterConstant.PageNotification))
+    list.add(HomeItemModel(showName = "搜索框", routePath = RouterConstant.PageSearchView))
     return list
 }

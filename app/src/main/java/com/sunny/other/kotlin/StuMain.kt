@@ -24,4 +24,14 @@ fun main() {
     val maxLen2 = list.maxBy { it.length }
 
     println("maxLen :$maxLen")
+
+
+    val set = SunnySet<String>(HashSet())
+    set.sayHello()
+
+    val clazz = SunnyClass()
+
+    clazz.p = 10
+
+
 }
