@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 //apply plugin: 'android-aspectjx'
 
@@ -24,6 +24,7 @@ android {
         }
 
         // ARouter
+        // 使用 arguments {} 块将参数传给注解处理器：
         kapt {
             arguments {
                 arg("AROUTER_MODULE_NAME", project.getName())
@@ -66,11 +67,20 @@ android {
 }
 
 dependencies {
-    // 库依赖：导入flutter项目
-    implementation project(':flutter')
 
     // 本地依赖：将libs目录下的所有jar文件添加到项目的构建路径中
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // 依赖基础组件
+    api project(path: ':libCommon')
+
+    // 路由
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
+
+
+    // 库依赖：导入flutter项目
+    implementation project(':flutter')
+
 
     // 远程依赖声明格式：aaa:bbb:ccc  其中，aaa是域名部分区分公司，bbb是工程部分区分同公司的不同库，ccc是版本号
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -79,9 +89,6 @@ dependencies {
     // 注解
     implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'com.google.zxing:javase:3.4.0'
-
-    // 下拉刷新
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     // aop
 //    implementation 'org.aspectj:aspectjrt:1.8.9'
@@ -100,8 +107,6 @@ dependencies {
     implementation 'androidx.palette:palette:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha06'
 
-    // 图片加载
-    implementation 'com.facebook.fresco:fresco:2.1.0'
 
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
     // 提供在kotlin中使用注解
@@ -146,10 +151,6 @@ dependencies {
     //
     implementation 'com.google.android.material:material:1.2.1'
 
-    // https://github.com/alibaba/ARouter/blob/master/README_CN.md
-    // 替换成最新版本, 需要注意的是api要与compiler匹配使用，均使用最新版可以保证兼容
-    implementation 'com.alibaba:arouter-api:1.5.1'
-    kapt 'com.alibaba:arouter-compiler:1.5.1'
 }
 repositories {
     mavenCentral()

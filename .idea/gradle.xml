@@ -11,7 +11,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/LibDemo" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/appdemo" />
+            <option value="$PROJECT_DIR$/libCommon" />
             <option value="$PROJECT_DIR$/takephoto_library" />
             <option value="$PROJECT_DIR$/../stu_flutter/.android/Flutter" />
           </set>

@@ -2,6 +2,7 @@ package com.sunny.lib.router
 
 /**
  * Created by zhangxin17 on 2020/11/12
+ * https://www.jianshu.com/p/a33029557b1f
  */
 class RouterConstant {
     companion object {
