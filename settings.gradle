@@ -1,14 +1,7 @@
+include ':moduleWeb'
+include ':libUi'
 include ':appdemo'
-include ':LibDemo'
+include ':moduleLogin'
+include ':moduleHome'
+include ':moduleView'
 include ':libCommon'
-include ':app', ':takephoto_library'
-rootProject.name = 'Family'
-
-// 关联flutter 模块
-setBinding(new Binding(gradle: this))
-evaluate(
-        new File(
-                settingsDir.parentFile,
-                "stu_flutter/.android/include_flutter.groovy"
-        )
-)

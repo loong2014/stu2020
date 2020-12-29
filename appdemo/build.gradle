@@ -1,28 +1,24 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "$build_tools_version"
 
     defaultConfig {
+        minSdkVersion "$sdk_version_min"
+        targetSdkVersion 29 // 项目运行的目标版本，系统将为你解锁目标版本的新特效
+
         applicationId "com.sunny.app.demo"
-        minSdkVersion 29
-        targetSdkVersion 29
+
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        // 使用 arguments {} 块将参数传给注解处理器：
-        kapt {
-            // ARouter
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
     }
 
     buildTypes {
@@ -46,18 +42,25 @@ android {
 
 dependencies {
 
-    // 依赖基础组件
+    // 基础组件，使用api进行依赖，这样可以直接调用common组件里的代码
     api project(path: ':libCommon')
 
-    // 路由
-    kapt 'com.alibaba:arouter-compiler:1.5.1'
+    // 功能组件，使用runtimeOnly进行依赖，实现组件之间的代码隔离，但不能隔离资源的直接使用
+    // 要隔绝资源引用需要在组件的build.gradle中resourcePrefix来固定这个modoule中的资源前缀
+    // but，resourcePrefix只能限定 res 中 xml 文件中定义的资源，并不能对图片，layout中的xml名字进行限制
+    if (!isModuleHomeAlone.toBoolean()) {
+        runtimeOnly project(path: ':moduleHome')
+    }
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    if (!isModuleLoginAlone.toBoolean()) {
+        runtimeOnly project(path: ':moduleLogin')
+    }
+
+    if (!isModuleViewAlone.toBoolean()) {
+        runtimeOnly project(path: ':moduleView')
+    }
+
+    if (!isModuleWebAlone.toBoolean()) {
+        runtimeOnly project(path: ':moduleWeb')
+    }
 }

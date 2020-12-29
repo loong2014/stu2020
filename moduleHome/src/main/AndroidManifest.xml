@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sunny.module.home">
+
+    <application android:theme="@style/Theme.Family">
+        <activity
+            android:name=".HomeDemoActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".HomeActivity"
+            android:launchMode="singleInstance" />
+    </application>
+</manifest>

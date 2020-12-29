@@ -1,0 +1,70 @@
+if (isModuleWebAlone.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "$build_tools_version"
+
+    defaultConfig {
+        minSdkVersion "$sdk_version_min"
+        targetSdkVersion 29
+
+        if (isModuleWebAlone.toBoolean()) {
+            applicationId "com.sunny.module.web"
+        }
+
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // router
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+    sourceSets {
+        main {
+            if (isModuleWebAlone.toBoolean()) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/moduleManifest/AndroidManifest.xml'
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    //
+    resourcePrefix "web_"
+}
+
+dependencies {
+
+    // 依赖基础组件
+    api project(path: ':libCommon')
+
+    // 路由
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
+}

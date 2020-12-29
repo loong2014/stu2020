@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sunny.lib.common.view.SunnyConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
+    <com.sunny.lib.ui.SunnyLinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.sunny.lib.ui.SunnyButton
+            android:id="@+id/btn_jump_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跳转首页" />
+
+        <com.sunny.lib.ui.SunnyButton
+            android:id="@+id/btn_jump_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="跳转登陆页" />
+
+        <com.sunny.lib.ui.SunnyButton
+            android:id="@+id/btn_jump_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="跳转布局页" />
+
+        <com.sunny.lib.ui.SunnyButton
+            android:id="@+id/btn_jump_web"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="跳转WebView页" />
+
+    </com.sunny.lib.ui.SunnyLinearLayout>
+
+</com.sunny.lib.common.view.SunnyConstraintLayout>
