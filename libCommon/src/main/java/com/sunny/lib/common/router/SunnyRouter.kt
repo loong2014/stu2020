@@ -30,6 +30,8 @@ class RouterConstant {
     open class Web {
         companion object {
             const val PageDemo = "/web/demo"
+            const val PageWebView = "/web/webview"
+            const val PageHttp = "/web/http"
         }
     }
 
