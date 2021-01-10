@@ -1,23 +1,23 @@
 package com.sunny.lib.common.utils
 
-import android.view.View
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
-/**
- * Created by zhangxin17 on 2020-01-15
- */
 object JsonUtils {
 
+    @JvmStatic
+    fun getJson(obj: Any?): String? {
+        return Gson().toJson(obj)
+    }
 
-//
-//    fun <T : View> getView(viewId: Int): T {
-//        var view: View? = mViews[viewId]
-//
-//        if (view == null) {
-//            view = mConvertView.findViewById(viewId)
-//            mViews.put(viewId, view)
-//        }
-//
-//        return view as T
-//    }
+    @JvmStatic
+    fun <T> getBean(str: String): T {
+        return Gson().fromJson<T>(str, object : TypeToken<T>() {}.type)
+    }
+
+    @JvmStatic
+    fun <T> getListBean(str: String): List<T> {
+        return Gson().fromJson<List<T>>(str, object : TypeToken<List<T>>() {}.type)
+    }
 
 }

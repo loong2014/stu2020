@@ -43,6 +43,9 @@ dependencies {
 
     api project(path: ':libUi')
 
+    //
+    api 'com.google.code.gson:gson:2.8.6'
+
     // 适配控件
     api 'androidx.appcompat:appcompat:1.2.0'
 

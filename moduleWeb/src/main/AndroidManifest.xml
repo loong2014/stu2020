@@ -11,6 +11,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/web_app_name"
+        android:networkSecurityConfig="@xml/web_network_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -23,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".WebWebViewActivity" />
-        <activity android:name=".WebHttpActivity" />
+        <activity android:name=".HttpActivity" />
     </application>
 
 </manifest>
