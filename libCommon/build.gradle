@@ -49,6 +49,9 @@ dependencies {
     // 适配控件
     api 'androidx.appcompat:appcompat:1.2.0'
 
+    // material风格库
+    api 'com.google.android.material:material:1.1.0'
+
     // 约束布局
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
 
@@ -78,5 +81,5 @@ dependencies {
     // kotlin模块基础引用
     api 'androidx.core:core-ktx:1.2.0'
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'com.google.android.material:material:1.1.0'
+
 }

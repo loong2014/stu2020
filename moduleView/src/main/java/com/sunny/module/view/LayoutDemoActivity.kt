@@ -1,8 +1,12 @@
 package com.sunny.module.view
 
 import android.os.Bundle
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
+import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
+import com.google.android.material.snackbar.Snackbar
 import com.sunny.lib.common.base.BaseActivity
 import com.sunny.lib.common.router.RouterConstant
 import kotlinx.android.synthetic.main.view_activity_demo.*
@@ -17,13 +21,87 @@ class LayoutDemoActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_activity_demo)
 
+        setSupportActionBar(toolBar)
+
         initView()
     }
 
     private fun initView() {
-        top_bar.setMiddleName("模块：布局")
-        top_bar.setOnBackBtnClickListener(View.OnClickListener {
-            doExitActivity()
+        initToolBar()
+
+        initRecyclerView()
+    }
+
+    private fun initToolBar() {
+        //
+        toolBar.title = "模块：控件"
+        toolBar.subtitle = "各种控件的使用实战"
+
+        // 更改ToolBar左侧按钮的两种方式
+        // 1针对toolBar
+//        toolBar.setNavigationIcon(R.drawable.ic_arrow_left_black)
+//        // 默认点击触发finish()，可通过下面方法更改click处理
+//        toolBar.setNavigationOnClickListener {
+//            showToast("重写click事件")
+//        }
+
+        // 2针对actionBar
+        supportActionBar?.let {
+            // 打开toolbar最左侧的默认按钮(Home按钮)，默认图标是一个返回箭头，点击后返回上一个activity
+            it.setDisplayHomeAsUpEnabled(true)
+            // 更改Home按钮的图片
+//            it.setHomeAsUpIndicator(R.drawable.ic_gift)
+        }
+    }
+
+    private fun initRecyclerView() {
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        val adapter = LayoutDemoAdapter(this, buildDataList())
+        recyclerView.adapter = adapter
+
+        adapter.setItemClickListener(object : DemoItemClickListener {
+            override fun onItemClick(model: LayoutDemoModel) {
+                ARouter.getInstance().build(model.jumpPath).navigation()
+            }
         })
     }
+
+    private fun buildDataList(): List<LayoutDemoModel> {
+        val list = mutableListOf<LayoutDemoModel>()
+        list.add(LayoutDemoModel(name = "XXXLayout", jumpPath = RouterConstant.View.PageXxx))
+        list.add(LayoutDemoModel(name = "DrawerLayout", jumpPath = RouterConstant.View.PageDrawer))
+        list.add(LayoutDemoModel(name = "CoordinatorLayout", jumpPath = RouterConstant.View.PageCoordinator))
+        return list
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.view_toolbar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+//                showToast("点击了ToolBar的默认Home按钮")
+
+                showSnackBar("你确定要点！！！")
+            }
+            else -> {
+                showToast(item.title as String)
+            }
+        }
+        return true
+    }
+
+    private fun showSnackBar(tip: String) {
+        /**
+         * 第一个参数只要是当前布局的一个view就行
+         */
+        Snackbar.make(toolBar, tip, Snackbar.LENGTH_SHORT)
+                .setAction("Yes") {
+                    showToast("点击了ToolBar的默认Home按钮")
+                }
+                .show()
+    }
+
 }

@@ -24,6 +24,8 @@ class RouterConstant {
         companion object {
             const val PageDemo = "/view/demo"
             const val PageXxx = "/view/xxx"
+            const val PageDrawer = "/view/drawer"
+            const val PageCoordinator = "/view/coordinator"
         }
     }
 

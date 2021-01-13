@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- group表示一个组，single表示组内选项是单选 -->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/detail"
+            android:icon="@drawable/ic_nav_score_unselected"
+            android:title="Detail"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/add"
+            android:icon="@drawable/ic_nav_score_selected"
+            android:title="Add"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/delete"
+            android:icon="@drawable/ic_nav_score_unselected"
+            android:title="Delete"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/user"
+            android:icon="@drawable/ic_nav_score_selected"
+            android:title="User"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_nav_score_selected"
+            android:title="Settings"
+            app:showAsAction="never" />
+    </group>
+
+</menu>
