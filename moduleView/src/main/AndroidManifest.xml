@@ -3,7 +3,7 @@
     package="com.sunny.module.view">
 
     <application
-        android:name=".ModuleViewApplication"
+        android:name=".base.ModuleViewApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/view_app_name"

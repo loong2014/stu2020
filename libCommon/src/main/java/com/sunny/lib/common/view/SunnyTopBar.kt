@@ -9,7 +9,7 @@ import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.sunny.lib.common.R
 import com.sunny.lib.common.utils.ResUtils
-import com.sunny.lib.common.utils.SunLog
+import com.sunny.lib.base.log.SunLog
 import kotlinx.android.synthetic.main.layout_top_bar.view.*
 
 /**

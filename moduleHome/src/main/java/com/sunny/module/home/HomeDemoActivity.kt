@@ -5,6 +5,7 @@ import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.sunny.lib.common.base.BaseActivity
 import com.sunny.lib.common.router.RouterConstant
+import com.sunny.lib.common.router.RouterJump
 import kotlinx.android.synthetic.main.home_activity_demo.*
 
 /**
@@ -26,5 +27,8 @@ class HomeDemoActivity : BaseActivity() {
             doExitActivity()
         })
 
+        btnJumpHome.setOnClickListener {
+            RouterJump.navigation(RouterConstant.Home.PageHome)
+        }
     }
 }

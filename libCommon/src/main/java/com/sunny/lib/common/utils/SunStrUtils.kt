@@ -4,6 +4,7 @@ import android.text.TextUtils
 
 object SunStrUtils {
 
+    @JvmStatic
     fun strToInt(str: String, def: Int): Int {
         var str = str
         if (TextUtils.isEmpty(str)) {
@@ -14,7 +15,7 @@ object SunStrUtils {
             str.toInt()
         } else def
     }
-
+    @JvmStatic
     fun strToLong(str: String, def: Long): Long {
         var str = str
         if (TextUtils.isEmpty(str)) {
@@ -26,6 +27,7 @@ object SunStrUtils {
         } else def
     }
 
+    @JvmStatic
     fun rebuildString(str: String, maxLen: Int): String? {
         var str = str
         if (TextUtils.isEmpty(str)) {
@@ -41,10 +43,12 @@ object SunStrUtils {
     /**
      * 检查字符串是否为空
      */
+    @JvmStatic
     fun isEmpty(string: String?): Boolean {
         return !(string != null && string.isNotEmpty())
     }
 
+    @JvmStatic
     fun isArrayEmpty(objs: Array<Any?>?): Boolean {
         if (objs == null || objs.isEmpty()) {
             return true
@@ -59,10 +63,12 @@ object SunStrUtils {
         return isEmpty
     }
 
+    @JvmStatic
     fun isBlank(str: String?): Boolean {
         return str.isNullOrBlank()
     }
 
+    @JvmStatic
     fun equalsNull(str: String): Boolean {
         return isBlank(str) || str.equals("null", ignoreCase = true)
     }

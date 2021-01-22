@@ -6,6 +6,7 @@ import com.sunny.lib.utils.ContextProvider
 /**
  * Created by zhangxin17 on 2020-01-10
  */
+
 object SunToast {
 
     @JvmStatic
@@ -18,4 +19,13 @@ object SunToast {
         Toast.makeText(ContextProvider.appContext, msg, duration).show()
     }
 
+
+}
+
+
+/**
+ * 给String类型添加一个showToast的扩展函数
+ */
+fun String.showToast() {
+    SunToast.show(this)
 }

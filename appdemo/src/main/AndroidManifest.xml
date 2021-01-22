@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sunny.app.demo">
+    package="com.sunny.app">
 
     <!-- 网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,15 +9,14 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".DemoApplication"
+        android:name=".base.DemoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        tools:replace="android:theme"
-        android:theme="@style/Theme.Family">
+        android:theme="@style/Theme.Family"
+        tools:replace="android:theme">
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -28,5 +27,6 @@
         </activity>
 
     </application>
+
 
 </manifest>

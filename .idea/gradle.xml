@@ -12,10 +12,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/appdemo" />
+            <option value="$PROJECT_DIR$/libBase" />
             <option value="$PROJECT_DIR$/libCommon" />
             <option value="$PROJECT_DIR$/libUi" />
+            <option value="$PROJECT_DIR$/moduleAccount" />
             <option value="$PROJECT_DIR$/moduleHome" />
-            <option value="$PROJECT_DIR$/moduleLogin" />
             <option value="$PROJECT_DIR$/moduleView" />
             <option value="$PROJECT_DIR$/moduleWeb" />
           </set>

@@ -41,6 +41,8 @@ dependencies {
     // 本地依赖：将libs目录下的所有jar文件添加到项目的构建路径中
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
+    api project(path: ':libBase')
+
     api project(path: ':libUi')
 
     //
@@ -55,8 +57,15 @@ dependencies {
     // 约束布局
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
 
+    // Jetpack
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+
     // 图片加载
     api 'com.facebook.fresco:fresco:2.1.0'
+    api 'com.facebook.fresco:animated-gif:2.1.0'
+    api 'com.facebook.fresco:animated-base:2.1.0'
+
 
     // 下拉刷新
     api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'

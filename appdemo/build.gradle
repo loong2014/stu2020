@@ -13,7 +13,7 @@ android {
         minSdkVersion "$sdk_version_min"
         targetSdkVersion 29 // 项目运行的目标版本，系统将为你解锁目标版本的新特效
 
-        applicationId "com.sunny.app.demo"
+        applicationId "com.sunny.app"
 
         versionCode 1
         versionName "1.0"
@@ -52,8 +52,8 @@ dependencies {
         runtimeOnly project(path: ':moduleHome')
     }
 
-    if (!isModuleLoginAlone.toBoolean()) {
-        runtimeOnly project(path: ':moduleLogin')
+    if (!isModuleAccountAlone.toBoolean()) {
+        runtimeOnly project(path: ':moduleAccount')
     }
 
     if (!isModuleViewAlone.toBoolean()) {

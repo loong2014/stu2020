@@ -21,7 +21,7 @@ import com.sunny.lib.common.base.BaseFragment;
 import com.sunny.lib.common.city.CityAdapter;
 import com.sunny.lib.common.city.CityModelKt;
 import com.sunny.lib.common.utils.ResUtils;
-import com.sunny.lib.common.utils.SunLog;
+import com.sunny.lib.base.log.SunLog;
 import com.sunny.lib.common.view.SunnySwipeToLoadLayout;
 import com.sunny.module.view.R;
 

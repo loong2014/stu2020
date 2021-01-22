@@ -6,7 +6,7 @@ import android.media.Image
 import android.media.MediaMetadataRetriever
 import android.os.Environment
 import com.sunny.lib.common.utils.ScreenUtils
-import com.sunny.lib.common.utils.SunLog
+import com.sunny.lib.base.log.SunLog
 import java.io.*
 import java.nio.ByteBuffer
 

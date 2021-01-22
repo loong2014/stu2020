@@ -7,8 +7,10 @@ object ModuleConfig {
 
 
     var moduleApplications = arrayOf<String>(
-            "com.sunny.module.login.ModuleLoginApplication",
-            "com.sunny.module.web.ModuleWebApplication"
+            "com.sunny.module.home.base.ModuleHomeApplication",
+            "com.sunny.module.account.base.ModuleAccountApplication",
+            "com.sunny.module.web.base.ModuleWebApplication",
+            "com.sunny.module.view.base.ModuleViewApplication"
     )
 
 }

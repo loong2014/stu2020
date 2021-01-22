@@ -6,9 +6,12 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.google.android.material.snackbar.Snackbar
 import com.sunny.lib.common.base.BaseActivity
 import com.sunny.lib.common.router.RouterConstant
+import com.sunny.lib.common.utils.SunNumberUtils
+import com.sunny.lib.common.utils.SunToast
+import com.sunny.lib.common.utils.showSnckbar
+import com.sunny.lib.common.utils.showToast
 import kotlinx.android.synthetic.main.view_activity_demo.*
 
 /**
@@ -97,11 +100,22 @@ class LayoutDemoActivity : BaseActivity() {
         /**
          * 第一个参数只要是当前布局的一个view就行
          */
-        Snackbar.make(toolBar, tip, Snackbar.LENGTH_SHORT)
-                .setAction("Yes") {
-                    showToast("点击了ToolBar的默认Home按钮")
-                }
-                .show()
+//        Snackbar.make(toolBar, tip, Snackbar.LENGTH_SHORT)
+//                .setAction("Yes") {
+//                    showToast("点击了ToolBar的默认Home按钮")
+//                }
+//                .show()
+
+        toolBar.showSnckbar(tip, "Yes") {
+
+            val a = 10
+            val b = 20
+            val c = 30
+
+            val max = SunNumberUtils.max(a, b, c)
+"ddd".showToast()
+            finish()
+        }
     }
 
 }

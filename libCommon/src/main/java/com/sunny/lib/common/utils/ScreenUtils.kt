@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Point
 import android.view.WindowManager
 import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.log.SunLog
 
 
 object ScreenUtils {

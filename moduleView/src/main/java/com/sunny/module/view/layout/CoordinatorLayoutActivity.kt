@@ -12,7 +12,7 @@ import com.sunny.lib.common.city.CityAdapter
 import com.sunny.lib.common.city.CityItemModel
 import com.sunny.lib.common.city.buildCityData
 import com.sunny.lib.common.router.RouterConstant
-import com.sunny.lib.common.utils.SunLog
+import com.sunny.lib.base.log.SunLog
 import com.sunny.module.view.R
 import kotlinx.android.synthetic.main.view_act_layout_coordinator.*
 

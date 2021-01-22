@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
-import com.sunny.lib.common.utils.SunLog;
+import com.sunny.lib.base.log.SunLog;
 
 /**
  * Created by zhangxin17 on 2020/11/18
