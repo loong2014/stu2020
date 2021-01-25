@@ -66,6 +66,9 @@ dependencies {
     api 'com.facebook.fresco:animated-gif:2.1.0'
     api 'com.facebook.fresco:animated-base:2.1.0'
 
+    // 周期性任务
+    api 'androidx.work:work-runtime:2.3.4'
+
 
     // 下拉刷新
     api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
