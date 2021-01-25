@@ -12,7 +12,6 @@ class LoginUtils private constructor() {
             return instance.mUserModel
         }
 
-
     }
 
     var mUserModel: UserModel? = null
