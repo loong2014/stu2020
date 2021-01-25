@@ -46,7 +46,18 @@ object SunSharedPreferencesUtils {
     }
 
     @JvmStatic
+    fun putBoolean(key: String, value: Boolean) {
+        defSp.edit().putBoolean(key, value).apply()
+    }
+
+    @JvmStatic
+    fun getBoolean(key: String, defValue: Boolean): Boolean {
+        return defSp.getBoolean(key, defValue)
+    }
+
+    @JvmStatic
     fun remove(key: String) {
         defSp.edit().remove(key).apply()
     }
+
 }
