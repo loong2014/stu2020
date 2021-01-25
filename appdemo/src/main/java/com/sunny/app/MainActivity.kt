@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.launcher.ARouter
 import com.sunny.lib.common.router.RouterConstant
+import com.sunny.lib.common.router.RouterJump
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +31,10 @@ class MainActivity : AppCompatActivity() {
 
         btn_jump_web.setOnClickListener {
             ARouter.getInstance().build(RouterConstant.Web.PageDemo).navigation()
+        }
+
+        btn_jump_weather.setOnClickListener {
+            RouterJump.navigation(RouterConstant.Weather.PageDemo)
         }
     }
 }

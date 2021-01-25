@@ -41,6 +41,14 @@ class RouterConstant {
         }
     }
 
+    open class Weather {
+        companion object {
+            const val PageDemo = "/weather/demo"
+            const val PageSearch = "/weather/search"
+            const val PageWeather = "/weather/weather"
+        }
+    }
+
     open class Param {
         companion object {
             const val Key = "ley"

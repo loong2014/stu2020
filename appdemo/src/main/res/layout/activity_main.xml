@@ -40,6 +40,13 @@
             android:layout_marginTop="20dp"
             android:text="跳转WebView页" />
 
+        <com.sunny.lib.ui.SunnyButton
+            android:id="@+id/btn_jump_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="跳转Weather页" />
+
     </com.sunny.lib.ui.SunnyLinearLayout>
 
 </com.sunny.lib.common.view.SunnyConstraintLayout>
