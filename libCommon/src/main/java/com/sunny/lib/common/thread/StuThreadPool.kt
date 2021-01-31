@@ -121,6 +121,7 @@ class StuThreadPool(poolType: Int = PoolTypeCustom) {
                  * 使用场景：
                  * 适用于处理CPU密集型的任务，确保CPU在长期被工作线程使用的情况下，尽可能的少的分配线程，即适用执行长期的任务
                  *
+                 * [LinkedBlockingQueue]
                  * [ThreadPoolExecutor.execute]
                  */
                 Executors.newFixedThreadPool(2)
@@ -151,6 +152,7 @@ class StuThreadPool(poolType: Int = PoolTypeCustom) {
                  * 用于并发执行大量短期的小任务。由于空闲 60 秒的线程会被终止，
                  * 长时间保持空闲的 CachedThreadPool 不会占用任何资源。
                  *
+                 * [SynchronousQueue]
                  * [ThreadPoolExecutor.execute]
                  */
                 Executors.newCachedThreadPool()
@@ -179,6 +181,7 @@ class StuThreadPool(poolType: Int = PoolTypeCustom) {
                  * 使用场景：
                  * 适用于串行执行任务的场景，一个任务一个任务地执行。
                  *
+                 * [LinkedBlockingQueue]
                  * [ThreadPoolExecutor.execute]
                  */
                 Executors.newSingleThreadExecutor()
@@ -277,7 +280,7 @@ class StuThreadPool(poolType: Int = PoolTypeCustom) {
             1 -> {
                 /**
                  * https://blog.csdn.net/qq_31865983/article/details/105370688
-                 * 有界队列，是一个用数组实现的有界阻塞队列，按FIFO排序量
+                 * 有界队列，是一个用 数组 实现的有界阻塞队列，按FIFO排序量
                  *
                  * putIndex：待添加task的下标
                  * takeIndex：待获取task的下标
@@ -291,18 +294,47 @@ class StuThreadPool(poolType: Int = PoolTypeCustom) {
             }
             2 -> {
                 /**
-                 * 可设置容量队列,基于链表结构的阻塞队列，按FIFO排序任务.
+                 * 可设置容量队列,基于 链表 结构的阻塞队列，按FIFO排序任务.
                  * 容量可以选择进行设置，不设置的话，将是一个无边界的阻塞队列，最大长度为Integer.MAX_VALUE，
                  * 吞吐量通常要高于ArrayBlockingQuene；newFixedThreadPool线程池使用了这个队列
                  * head：栈头
                  * last：栈尾
+                 *
+                 * [Executors.newSingleThreadExecutor]
+                 * [Executors.newFixedThreadPool]
                  *
                  * 添加：[LinkedBlockingQueue.offer]
                  * 移除：[LinkedBlockingQueue.remove]
                  * 获取：[LinkedBlockingQueue.take]
                  * 获取：[LinkedBlockingQueue.poll]
                  */
-                LinkedBlockingQueue()
+                LinkedBlockingQueue<Runnable>()
+            }
+            3 -> {
+                /**
+                 * 优先级队列，是具有优先级的无界阻塞队列
+                 * 其数据结构是 数组
+                 *
+                 * 添加：[PriorityBlockingQueue.offer]
+                 * 移除：[PriorityBlockingQueue.remove]
+                 * 获取：[PriorityBlockingQueue.take]
+                 * 获取：[PriorityBlockingQueue.poll]
+                 */
+                PriorityBlockingQueue()
+            }
+            4 -> {
+                /**
+                 * 同步队列，一个不存储元素的阻塞队列，每个插入操作必须等到另一个线程调用移除操作，
+                 * 否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQuene
+                 *
+                 * [Executors.newCachedThreadPool]
+                 *
+                 * 添加：[SynchronousQueue.offer]
+                 * 移除：[SynchronousQueue.remove]
+                 * 获取：[SynchronousQueue.take]
+                 * 获取：[SynchronousQueue.poll]
+                 */
+                SynchronousQueue<Runnable>()
             }
             else -> {
                 LinkedBlockingQueue<Runnable>(capacity)
@@ -318,43 +350,147 @@ class StuThreadPool(poolType: Int = PoolTypeCustom) {
     }
 }
 
-fun main() {
+object TestDelayQueue {
 
-    println("Main >> StuThreadPool")
-    val stuThreadPool = StuThreadPool(PoolTypeFixed)
+    /**
+     * https://www.cnblogs.com/myseries/p/10944211.html
+     *
+     * DelayQueue属于排序队列，它的特殊之处在于队列的元素必须实现Delayed接口，该接口需要实现compareTo和getDelay方法。
+     * 其数据结构是一个优先队列:PriorityQueue，其具体实现是 数组，初始大小是11
+     * 在线程池[Executors.newScheduledThreadPool]中，使用的就是自定义的延时队列 [ScheduledThreadPoolExecutor.getQueue]
+     * 是一个任务定时周期的延迟执行的队列。根据指定的执行时间从小到大排序，否则根据插入到队列的先后排序。
+     *
+     * 添加：[DelayQueue.offer]
+     * 删除：[DelayQueue.remove]
+     *
+     * 获取：[DelayQueue.take]
+     * 获取：[DelayQueue.poll]
+     */
+    private fun getDelayQueue(): DelayQueue<SunDelayTask> {
+        return DelayQueue<SunDelayTask>()
+    }
 
-    val pool = stuThreadPool.threadPool
+    private fun buildDelayTask(time: Long): SunDelayTask {
+        return SunDelayTask(time, Runnable {
+            println("testDelayQueue >> ${System.currentTimeMillis()} , time :$time")
+        })
+    }
 
-    if (pool is ScheduledExecutorService) {
-        var count = 0
-        pool.scheduleWithFixedDelay(
-                Runnable {
-                    println("scheduleWithFixedDelay >> count :${count++}")
+    fun doTest() {
+        val delayQueue = getDelayQueue()
+        kotlin.run {
+            delayQueue.offer(buildDelayTask(1000))
+            delayQueue.offer(buildDelayTask(500))
+            delayQueue.offer(buildDelayTask(4000))
+            delayQueue.offer(buildDelayTask(2600))
+        }
+
+        println("TestDelayQueue >> start")
+        while (!delayQueue.isEmpty()) {
+            val task = delayQueue.take()
+            task.doRun()
+        }
+        println("TestDelayQueue >> end")
+    }
+
+    /**
+     * 延时队列的item
+     */
+    class SunDelayTask(private val time: Long, private val task: Runnable) : Delayed {
+
+        private val start = System.currentTimeMillis()
+
+        override fun compareTo(other: Delayed): Int {
+
+            if (other is SunDelayTask) {
+                return (this.getDelay(TimeUnit.MILLISECONDS) - other.getDelay(TimeUnit.MILLISECONDS)).toInt()
+            }
+
+            return 0
+        }
+
+        override fun getDelay(unit: TimeUnit): Long {
+            return unit.convert((start + time) - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+        }
+
+        fun doRun() {
+            task.run()
+        }
+    }
+
+}
+
+object TestThreadPool {
+    fun doTest() {
+        println("Main >> TestThreadPool")
+
+        val stuThreadPool = StuThreadPool(PoolTypeScheduled)
+
+        val pool = stuThreadPool.threadPool
+
+        if (pool is ScheduledExecutorService) {
+            var count = 0
+
+            if (false) {
+                /**
+                 * 按某种速率周期执行，3,6,9执行
+                 * 即任务开始时，延时3s
+                 */
+                pool.scheduleAtFixedRate(Runnable {
+                    println("scheduleAtFixedRate >> ${System.currentTimeMillis()} , count :${count++}")
+
+                    Thread.sleep(1000)
 
                     if (count > 10) {
                         pool.shutdownNow()
                     }
-                },
-                1L, 3L, TimeUnit.SECONDS)
-    } else {
-        for (num in 1..30) {
 
-            stuThreadPool.execute {
-                Thread.sleep(100)
-                println("Main >> ${System.currentTimeMillis()}  num :$num")
+                }, 1L, 3L, TimeUnit.SECONDS)
+
+            } else {
+                /**
+                 * 在某个延迟后执行，4，8，12执行
+                 * 即在任务完成后再延时3s
+                 */
+                pool.scheduleWithFixedDelay(Runnable {
+                    println("scheduleWithFixedDelay >> ${System.currentTimeMillis()} , count :${count++}")
+
+                    Thread.sleep(1000)
+                    if (count > 10) {
+                        pool.shutdownNow()
+                    }
+                }, 1L, 3L, TimeUnit.SECONDS)
+            }
+
+
+        } else {
+            for (num in 1..30) {
+
+                stuThreadPool.execute {
+                    Thread.sleep(100)
+                    println("Main >> ${System.currentTimeMillis()}  num :$num")
 //                if (num == 5) {
 //                    stuThreadPool.shutdown()
 //                }
+                }
+            }
+
+            println("Main >> ${System.currentTimeMillis()}  awaitTermination start")
+            val result = stuThreadPool.awaitTermination(1000)
+            println("Main >> ${System.currentTimeMillis()}  awaitTermination end , result :$result")
+
+            if (!result) {
+                stuThreadPool.shutdownNow()
             }
         }
 
-        println("Main >> ${System.currentTimeMillis()}  awaitTermination start")
-        val result = stuThreadPool.awaitTermination(1000)
-        println("Main >> ${System.currentTimeMillis()}  awaitTermination end , result :$result")
-
-        if (!result) {
-            stuThreadPool.shutdownNow()
-        }
     }
+}
+
+fun main() {
+    println("Main >> StuThreadPool")
+
+    TestThreadPool.doTest()
+//    TestDelayQueue.doTest()
 
 }
