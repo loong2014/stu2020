@@ -8,6 +8,7 @@
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_h"
+        android:background="@drawable/top_bg"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.sunny.lib.ui.SunnyTextView

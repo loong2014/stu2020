@@ -30,6 +30,8 @@ class RouterConstant {
             const val PageXxx = "/view/xxx"
             const val PageDrawer = "/view/drawer"
             const val PageCoordinator = "/view/coordinator"
+            const val PageStatusBar = "/view/status"
+            const val PageBarBlack = "/view/bar/black"
         }
     }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:fitsSystemWindows="true">
+    <!--    android:src="@drawable/top_bg"-->
+
+    <!--    <com.sunny.lib.common.view.SunnyTopBar-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/top_bar_h"-->
+    <!--        android:background="@color/white"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

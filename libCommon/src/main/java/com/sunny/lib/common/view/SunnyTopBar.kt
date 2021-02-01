@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.sunny.lib.common.R
-import com.sunny.lib.common.utils.ResUtils
 import com.sunny.lib.base.log.SunLog
+import com.sunny.lib.common.R
 import kotlinx.android.synthetic.main.layout_top_bar.view.*
 
 /**
@@ -26,7 +25,6 @@ class SunnyTopBar(context: Context, attributeSet: AttributeSet?) : ConstraintLay
     init {
         SunLog.i(TAG, "init")
         LayoutInflater.from(context).inflate(R.layout.layout_top_bar, this)
-        setBackgroundColor(ResUtils.getColor(R.color.white))
 
         // 默认点击返回处理
         top_bar_left_back_btn.setOnClickListener {

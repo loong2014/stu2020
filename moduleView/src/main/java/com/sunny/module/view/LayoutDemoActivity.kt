@@ -9,9 +9,9 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.sunny.lib.common.base.BaseActivity
 import com.sunny.lib.common.router.RouterConstant
 import com.sunny.lib.common.utils.SunNumberUtils
-import com.sunny.lib.common.utils.SunToast
 import com.sunny.lib.common.utils.showSnckbar
 import com.sunny.lib.common.utils.showToast
+import com.sunny.module.view.bar.SystemBarTintManager
 import kotlinx.android.synthetic.main.view_activity_demo.*
 
 /**
@@ -22,7 +22,12 @@ class LayoutDemoActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        SystemBarTintManager.translucentStatus(this)
+
         setContentView(R.layout.view_activity_demo)
+
+        SystemBarTintManager.setViewPaddingTopStatusBar(this, toolBar)
 
         setSupportActionBar(toolBar)
 
@@ -74,6 +79,8 @@ class LayoutDemoActivity : BaseActivity() {
         list.add(LayoutDemoModel(name = "XXXLayout", jumpPath = RouterConstant.View.PageXxx))
         list.add(LayoutDemoModel(name = "DrawerLayout", jumpPath = RouterConstant.View.PageDrawer))
         list.add(LayoutDemoModel(name = "CoordinatorLayout", jumpPath = RouterConstant.View.PageCoordinator))
+        list.add(LayoutDemoModel(name = "状态栏", jumpPath = RouterConstant.View.PageStatusBar))
+        list.add(LayoutDemoModel(name = "BlackBg", jumpPath = RouterConstant.View.PageBarBlack))
         return list
     }
 
@@ -113,7 +120,7 @@ class LayoutDemoActivity : BaseActivity() {
             val c = 30
 
             val max = SunNumberUtils.max(a, b, c)
-"ddd".showToast()
+            "ddd".showToast()
             finish()
         }
     }

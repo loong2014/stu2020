@@ -7,13 +7,14 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.snackbar.Snackbar
+import com.sunny.lib.base.log.SunLog
 import com.sunny.lib.common.base.BaseActivity
 import com.sunny.lib.common.city.CityAdapter
 import com.sunny.lib.common.city.CityItemModel
 import com.sunny.lib.common.city.buildCityData
 import com.sunny.lib.common.router.RouterConstant
-import com.sunny.lib.base.log.SunLog
 import com.sunny.module.view.R
+import com.sunny.module.view.bar.SystemBarTintManager
 import kotlinx.android.synthetic.main.view_act_layout_coordinator.*
 
 /**
@@ -34,7 +35,11 @@ class CoordinatorLayoutActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        SystemBarTintManager.translucentStatus(this)
+
         setContentView(R.layout.view_act_layout_coordinator)
+
+//        SystemBarTintManager.setViewPaddingTopStatusBar(this,appBarLayout)
         ARouter.getInstance().inject(this)
 
         initView()

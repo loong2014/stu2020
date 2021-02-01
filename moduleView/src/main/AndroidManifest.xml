@@ -9,7 +9,7 @@
         android:label="@string/view_app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/ViewAppTheme">
+        android:theme="@style/ViewTheme.NoActionBar">
         <activity
             android:name=".LayoutDemoActivity"
             android:label="模块：布局">
@@ -22,7 +22,11 @@
 
         <activity android:name=".xxx.XxxLayoutActivity" />
         <activity android:name=".layout.DrawerLayoutActivity" />
-        <activity android:name=".layout.CoordinatorLayoutActivity" />
+        <activity
+            android:name=".layout.CoordinatorLayoutActivity"/>
+
+        <activity android:name=".bar.BlackBarActivity" />
+        <activity android:name=".bar.StatusBarActivity" />
 
     </application>
 
