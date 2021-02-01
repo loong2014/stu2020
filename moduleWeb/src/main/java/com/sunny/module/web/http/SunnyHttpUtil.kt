@@ -37,7 +37,7 @@ object SunnyHttpUtil {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
-                listener.onFinish(response.body()?.string() ?: "empty")
+                listener.onFinish(response.body?.string() ?: "empty")
             }
 
             override fun onFailure(call: Call, e: IOException) {

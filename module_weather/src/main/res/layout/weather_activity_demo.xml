@@ -30,15 +30,29 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.sunny.lib.ui.SunnyButton
-        android:id="@+id/btnJumpSearch"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        android:text="城市搜索"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLoadData" />
+        app:layout_constraintRight_toRightOf="parent">
+
+        <com.sunny.lib.ui.SunnyButton
+            android:id="@+id/btnJumpSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:text="城市搜索" />
+
+        <com.sunny.lib.ui.SunnyButton
+            android:id="@+id/btnJumpWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:text="天气信息" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

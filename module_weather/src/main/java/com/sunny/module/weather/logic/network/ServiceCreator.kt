@@ -23,9 +23,12 @@ object ServiceCreator {
     private fun getOkHttpClient(): OkHttpClient {
 
         //
-        val loggingInterceptor = HttpLoggingInterceptor() {
-            SunLog.i("SunHttp", it)
-        }
+        val loggingInterceptor = HttpLoggingInterceptor(logger = object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                SunLog.i("SunHttp", message)
+
+            }
+        })
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         //

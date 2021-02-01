@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.sunny.lib.common.base.BaseActivity
 import com.sunny.lib.common.router.RouterConstant
 import com.sunny.lib.common.router.RouterJump
@@ -49,6 +50,13 @@ class WeatherDemoActivity : BaseActivity() {
 
         btnJumpSearch.setOnClickListener {
             RouterJump.navigation(RouterConstant.Weather.PageSearch)
+        }
+        btnJumpWeather.setOnClickListener {
+            ARouter.getInstance().build(RouterConstant.Weather.PageWeather)
+                    .withString("name", "北京市")
+                    .withString("lng", "116.407526")
+                    .withString("lat", "39.90403")
+                    .navigation()
         }
     }
 }
