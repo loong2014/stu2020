@@ -9,7 +9,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_gravity="top">
+        android:fitsSystemWindows="true">
 
         <!--
         layout_scrollFlags：
@@ -37,7 +37,6 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <!--
@@ -59,7 +58,6 @@
                 android:id="@+id/mToolBar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#5FF"
                 app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -23,7 +23,8 @@
         <activity android:name=".xxx.XxxLayoutActivity" />
         <activity android:name=".layout.DrawerLayoutActivity" />
         <activity
-            android:name=".layout.CoordinatorLayoutActivity"/>
+            android:name=".layout.CoordinatorLayoutActivity"
+            android:theme="@style/ViewTheme.Trans" />
 
         <activity android:name=".bar.BlackBarActivity" />
         <activity android:name=".bar.StatusBarActivity" />
