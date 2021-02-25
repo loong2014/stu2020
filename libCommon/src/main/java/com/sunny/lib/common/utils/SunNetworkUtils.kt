@@ -8,10 +8,14 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.telephony.TelephonyManager
-import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.base.log.SunLog
+import com.sunny.lib.utils.ContextProvider
+import java.net.InetAddress
+import java.net.NetworkInterface
+import java.util.*
 
 const val TAG = "SunnyNetWork"
 
@@ -250,6 +254,63 @@ object SunNetworkUtils {
     @JvmStatic
     fun isWifi(): Boolean {
         return ConnectivityManager.TYPE_WIFI == getNetworkType()
+    }
+
+    /**
+     * 获取ip地址
+     */
+    @JvmStatic
+    fun getIpAddress(): String {
+        return getLocalIpAddress()
+    }
+
+    @JvmStatic
+    fun getIpByWifi(): String {
+
+        val wifiManager = ContextProvider.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        wifiManager.connectionInfo?.ipAddress?.let {
+            return intToIp(it)
+        }
+        return ""
+    }
+
+    private fun intToIp(i: Int): String {
+        val sb = StringBuilder()
+        sb.append(i and 0xFF)
+        sb.append(".")
+        sb.append((i shr 8) and 0xFF)
+        sb.append(".")
+        sb.append((i shr 16) and 0xFF)
+        sb.append(".")
+        sb.append((i shr 24) and 0xFF)
+
+        return sb.toString()
+    }
+
+    private fun getLocalIpAddress(): String {
+        try {
+            val en: Enumeration<NetworkInterface> = NetworkInterface.getNetworkInterfaces()
+            while (en
+                            .hasMoreElements()) {
+                val network: NetworkInterface = en.nextElement()
+                if (network.getName().toLowerCase().equals("eth0")
+                        || network.getName().toLowerCase().equals("wlan0")) { // 仅过滤无线和有线的ip
+                    val enumIp: Enumeration<InetAddress> = network.getInetAddresses()
+                    while (enumIp.hasMoreElements()) {
+                        val inetAddress: InetAddress = enumIp.nextElement()
+                        if (!inetAddress.isLoopbackAddress()) {
+                            val ip: String = inetAddress.getHostAddress()
+                            if (!ip.contains("::")) { // 过滤掉ipv6的地址
+                                return ip
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return ""
     }
 
 }

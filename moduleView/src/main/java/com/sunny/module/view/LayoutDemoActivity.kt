@@ -81,6 +81,7 @@ class LayoutDemoActivity : BaseActivity() {
         list.add(LayoutDemoModel(name = "CoordinatorLayout", jumpPath = RouterConstant.View.PageCoordinator))
         list.add(LayoutDemoModel(name = "状态栏", jumpPath = RouterConstant.View.PageStatusBar))
         list.add(LayoutDemoModel(name = "BlackBg", jumpPath = RouterConstant.View.PageBarBlack))
+        list.add(LayoutDemoModel(name = "CardView", jumpPath = RouterConstant.View.PageCardView))
         return list
     }
 

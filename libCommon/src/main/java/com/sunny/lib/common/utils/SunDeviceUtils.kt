@@ -3,8 +3,8 @@ package com.sunny.lib.common.utils
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
-import com.sunny.lib.utils.ContextProvider
 import com.sunny.lib.base.log.SunLog
+import com.sunny.lib.utils.ContextProvider
 import java.net.NetworkInterface
 
 /**
@@ -27,15 +27,13 @@ object SunDeviceUtils {
      */
     @JvmStatic
     val mac: String by lazy {
-        when {
-            // 6.0之后
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
-                getMacFromNetwork()
-            }
-            // 6.0之前
-            else -> {
-                getMacFromWifiManager()
-            }
+        // 6.0之后
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getMacFromNetwork()
+        }
+        // 6.0之前
+        else {
+            getMacFromWifiManager()
         }
     }
 
@@ -44,7 +42,7 @@ object SunDeviceUtils {
      * 6.0之后获取到的恒为：02:00:00:00:00:00
      *
      */
-    private fun getMacFromWifiManager(): String {
+    fun getMacFromWifiManager(): String {
         val manager = ContextProvider.getSystemService(Context.WIFI_SERVICE) as WifiManager
         val wifiInfo = manager.connectionInfo
         wifiInfo?.let {
@@ -57,7 +55,7 @@ object SunDeviceUtils {
      * 6.0 ～ 7.0，通过网络接口
      * 获取网卡的mac地址
      */
-    private fun getMacFromNetwork(): String {
+    fun getMacFromNetwork(): String {
         try {
             //获取本机器所有的网络接口
             val enumeration = NetworkInterface.getNetworkInterfaces()

@@ -79,4 +79,7 @@ dependencies {
     // 圆形图片 https://github.com/hdodenhof/CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    // https://developer.android.google.cn/jetpack/androidx/releases/cardview
+    implementation 'androidx.cardview:cardview:1.0.0'
+
 }

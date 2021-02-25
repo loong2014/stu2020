@@ -30,5 +30,9 @@ class HomeDemoActivity : BaseActivity() {
         btnJumpHome.setOnClickListener {
             RouterJump.navigation(RouterConstant.Home.PageHome)
         }
+
+        btnJumpDeviceInfo.setOnClickListener {
+            RouterJump.navigation(RouterConstant.Tool.PageDeviceInfo)
+        }
     }
 }

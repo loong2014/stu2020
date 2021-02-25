@@ -17,6 +17,12 @@ class RouterConstant {
         }
     }
 
+    open class Tool {
+        companion object {
+            const val PageDeviceInfo = "/tool/device"
+        }
+    }
+
     open class Account {
         companion object {
             const val PageDemo = "/account/demo2"
@@ -32,6 +38,7 @@ class RouterConstant {
             const val PageCoordinator = "/view/coordinator"
             const val PageStatusBar = "/view/status"
             const val PageBarBlack = "/view/bar/black"
+            const val PageCardView = "/view/cardview"
         }
     }
 

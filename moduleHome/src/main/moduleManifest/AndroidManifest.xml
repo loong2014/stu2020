@@ -9,5 +9,6 @@
         <activity
             android:name=".HomeActivity"
             android:launchMode="singleInstance" />
+        <activity android:name=".developer.device.SunDeviceInfoActivity" />
     </application>
 </manifest>
