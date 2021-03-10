@@ -1,4 +1,4 @@
-package com.sunny.lib.common.utils
+package com.sunny.lib.base.network
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -8,43 +8,20 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import android.net.wifi.WifiManager
 import android.os.Build
 import android.telephony.TelephonyManager
 import com.sunny.lib.base.log.SunLog
 import com.sunny.lib.utils.ContextProvider
-import java.net.InetAddress
-import java.net.NetworkInterface
-import java.util.*
 
-const val TAG = "SunnyNetWork"
-
-/**
- * Created by zhangxin17 on 2020/8/19
- * 广播监听网络状态——7.0及之后只能动态注册
- */
-enum class NetWorkType(val netName: String) {
-    AUTO("无状态"),
-    CONNECT("已连接"),
-
-    NONE("无网络"),
-
-    OTHER("未知"),
-
-    WIFI("wifi网络"),
-
-    MOBILE("移动网络"),
-    MOBILE_2G("2G"),
-    MOBILE_3G("3G"),
-    MOBILE_4G("4G"),
-    MOBILE_OTHER(""),
-
-}
 
 /**
  * 网络模块
  */
 class SunNetworkModel {
+
+    companion object {
+        const val TAG = "SunNetworkModel"
+    }
 
     init {
         doRegister()
@@ -219,98 +196,3 @@ class SunNetworkModel {
     }
 }
 
-
-object SunNetworkUtils {
-
-    /**
-     * 网络是否可用
-     */
-    @JvmStatic
-    fun isNetworkAvailable(): Boolean {
-        val manager: ConnectivityManager = ContextProvider.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = manager.activeNetworkInfo
-        networkInfo?.let {
-            return networkInfo.isConnected
-        }
-        return false
-    }
-
-    /**
-     * 获取网络类型
-     */
-    @JvmStatic
-    fun getNetworkType(): Int {
-        val manager: ConnectivityManager = ContextProvider.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = manager.activeNetworkInfo
-        networkInfo?.let {
-            return networkInfo.type
-        }
-        return -1
-    }
-
-    /**
-     * 是否是wifi网络
-     */
-    @JvmStatic
-    fun isWifi(): Boolean {
-        return ConnectivityManager.TYPE_WIFI == getNetworkType()
-    }
-
-    /**
-     * 获取ip地址
-     */
-    @JvmStatic
-    fun getIpAddress(): String {
-        return getLocalIpAddress()
-    }
-
-    @JvmStatic
-    fun getIpByWifi(): String {
-
-        val wifiManager = ContextProvider.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        wifiManager.connectionInfo?.ipAddress?.let {
-            return intToIp(it)
-        }
-        return ""
-    }
-
-    private fun intToIp(i: Int): String {
-        val sb = StringBuilder()
-        sb.append(i and 0xFF)
-        sb.append(".")
-        sb.append((i shr 8) and 0xFF)
-        sb.append(".")
-        sb.append((i shr 16) and 0xFF)
-        sb.append(".")
-        sb.append((i shr 24) and 0xFF)
-
-        return sb.toString()
-    }
-
-    private fun getLocalIpAddress(): String {
-        try {
-            val en: Enumeration<NetworkInterface> = NetworkInterface.getNetworkInterfaces()
-            while (en
-                            .hasMoreElements()) {
-                val network: NetworkInterface = en.nextElement()
-                if (network.getName().toLowerCase().equals("eth0")
-                        || network.getName().toLowerCase().equals("wlan0")) { // 仅过滤无线和有线的ip
-                    val enumIp: Enumeration<InetAddress> = network.getInetAddresses()
-                    while (enumIp.hasMoreElements()) {
-                        val inetAddress: InetAddress = enumIp.nextElement()
-                        if (!inetAddress.isLoopbackAddress()) {
-                            val ip: String = inetAddress.getHostAddress()
-                            if (!ip.contains("::")) { // 过滤掉ipv6的地址
-                                return ip
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return ""
-    }
-
-}

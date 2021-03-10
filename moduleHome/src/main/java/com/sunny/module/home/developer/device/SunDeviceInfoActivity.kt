@@ -22,6 +22,7 @@ class SunDeviceInfoActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         setContentView(R.layout.home_act_device_info)
 
         deviceInfoViewModel = ViewModelProvider(this).get(DeviceViewModel::class.java)
@@ -36,7 +37,7 @@ class SunDeviceInfoActivity : BaseActivity() {
     }
 
     private fun initData() {
-        deviceInfoViewModel.networkInfo.observe(this, Observer {
+        deviceInfoViewModel.deviceInfo.observe(this, Observer {
             onGetDeviceInfo()
         })
     }

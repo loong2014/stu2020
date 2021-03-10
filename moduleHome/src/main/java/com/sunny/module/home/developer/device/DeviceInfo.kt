@@ -3,7 +3,6 @@ package com.sunny.module.home.developer.device
 import android.os.Build
 import com.sunny.lib.base.log.SunLog
 import com.sunny.lib.common.utils.SunDeviceUtils
-import com.sunny.lib.common.utils.SunNetworkModel
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
@@ -32,9 +31,6 @@ class DeviceInfoModel {
         SunDeviceUtils.sn
     }
 
-    val networkModel by lazy {
-        SunNetworkModel()
-    }
 
     private fun doGetCpuInfo(): String {
 
