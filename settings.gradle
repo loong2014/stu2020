@@ -1,3 +1,4 @@
+include ':module_stu'
 include ':module_weather'
 include ':libBase'
 include ':moduleWeb'

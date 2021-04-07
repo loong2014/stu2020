@@ -17,6 +17,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        btn_jump_stu.setOnClickListener {
+            ARouter.getInstance().build(RouterConstant.Stu.PageDemo).navigation()
+        }
 
         btn_jump_home.setOnClickListener {
             ARouter.getInstance().build(RouterConstant.Home.PageDemo).navigation()

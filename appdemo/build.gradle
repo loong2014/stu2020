@@ -45,6 +45,9 @@ dependencies {
     // 基础组件，使用api进行依赖，这样可以直接调用common组件里的代码
     api project(path: ':libCommon')
 
+    runtimeOnly project(path: ':module_stu')
+
+
     // 功能组件，使用runtimeOnly进行依赖，实现组件之间的代码隔离，但不能隔离资源的直接使用
     // 要隔绝资源引用需要在组件的build.gradle中resourcePrefix来固定这个modoule中的资源前缀
     // but，resourcePrefix只能限定 res 中 xml 文件中定义的资源，并不能对图片，layout中的xml名字进行限制

@@ -58,6 +58,13 @@ class RouterConstant {
         }
     }
 
+
+    open class Stu {
+        companion object {
+            const val PageDemo = "/stu/demo"
+        }
+    }
+
     open class Param {
         companion object {
             const val Key = "ley"
