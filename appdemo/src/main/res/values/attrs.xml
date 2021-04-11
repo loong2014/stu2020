@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StuJumpText">
+        <attr name="jump_path" format="string" />
+        <attr name="jump_type" format="string" />
+    </declare-styleable>
+
+
+    <declare-styleable name="StuFoldText">
+        <attr name="fold_layout_res_id" format="reference" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="stu_top_bar_h">60dp</dimen>
+    <dimen name="stu_top_bar_back_w">50dp</dimen>
+    <dimen name="stu_top_bar_back_h">50dp</dimen>
+    <dimen name="stu_top_bar_title_size">20sp</dimen>
+
+
+    <dimen name="stu_title_marge_left_level_1">15dp</dimen>
+    <dimen name="stu_content_marge_left_level_1">10dp</dimen>
+
+    <dimen name="stu_content_size">15sp</dimen>
+    <dimen name="stu_content_size_small">10sp</dimen>
+    <dimen name="stu_content_size_big">20sp</dimen>
+
+</resources>
