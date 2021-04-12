@@ -11,6 +11,7 @@ import com.sunny.lib.base.log.SunLog;
 import com.sunny.lib.common.router.RouterJump;
 import com.sunny.lib.ui.SunnyTextView;
 import com.sunny.module.stu.R;
+import com.sunny.module.stu.StuConstant;
 
 public class JumpTextView extends SunnyTextView {
 
@@ -45,7 +46,8 @@ public class JumpTextView extends SunnyTextView {
                 }
 
                 if (mJumpPath != null) {
-                    RouterJump.navigation(mJumpPath, mJumpType);
+                    String jumpValue = StuConstant.buildJumpValue(mJumpType);
+                    RouterJump.navigation(mJumpPath, jumpValue);
                 }
             }
         });

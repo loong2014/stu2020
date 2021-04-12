@@ -1,5 +1,6 @@
 package com.sunny.module.stu
 
+import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.sunny.lib.common.base.BaseActivity

@@ -81,6 +81,14 @@
                     android:layout_marginTop="5dp"
                     android:text="IntentService" />
 
+
+                <com.sunny.module.stu.base.view.JumpTextView
+                    style="@style/StuJumpText"
+                    android:layout_marginTop="5dp"
+                    android:text="Handler"
+                    app:jump_path="/stu/introduction"
+                    app:jump_type="stu_handler" />
+
             </LinearLayout>
 
         </LinearLayout>

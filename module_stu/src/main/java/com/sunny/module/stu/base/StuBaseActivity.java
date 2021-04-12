@@ -1,20 +1,19 @@
 package com.sunny.module.stu.base;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.sunny.lib.base.log.SunLog;
 import com.sunny.lib.common.router.RouterConstant;
-import com.sunny.lib.common.utils.JsonUtils;
 import com.sunny.module.stu.R;
 import com.sunny.module.stu.StuConstant;
 import com.sunny.module.stu.jump.StuJumpModel;
 
-public abstract class StuBaseActivity extends Activity {
+public abstract class StuBaseActivity extends AppCompatActivity {
 
     protected String TAG = "";
 
@@ -53,7 +52,7 @@ public abstract class StuBaseActivity extends Activity {
         String jumpValue = getIntent().getStringExtra(RouterConstant.JumpValue);
         showLog("initJumpValue  jumpValue :" + jumpValue);
         if (jumpValue != null) {
-            mJumpModel = JsonUtils.getBean(jumpValue);
+            mJumpModel = StuConstant.buildJumpModel(jumpValue);
         }
 
         if (mJumpModel != null) {

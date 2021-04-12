@@ -63,6 +63,7 @@ class RouterConstant {
         companion object {
             const val PageDemo = "/stu/demo"
             const val PageThread = "/stu/thread"
+            const val PageIntroduction = "/stu/introduction"
         }
     }
 
