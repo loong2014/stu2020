@@ -1,4 +1,4 @@
-package com.sunny.app.stu.base;
+package com.sunny.module.stu.base;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,12 +7,12 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.sunny.app.R;
-import com.sunny.app.stu.StuConstant;
-import com.sunny.app.stu.jump.StuJumpModel;
 import com.sunny.lib.base.log.SunLog;
 import com.sunny.lib.common.router.RouterConstant;
 import com.sunny.lib.common.utils.JsonUtils;
+import com.sunny.module.stu.R;
+import com.sunny.module.stu.StuConstant;
+import com.sunny.module.stu.jump.StuJumpModel;
 
 public abstract class StuBaseActivity extends Activity {
 

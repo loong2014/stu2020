@@ -1,6 +1,7 @@
-package com.sunny.app.stu.introduction;
+package com.sunny.module.stu.introduction;
 
-import com.sunny.app.stu.base.StuBaseActivity;
+
+import com.sunny.module.stu.base.StuBaseActivity;
 
 public class StuIntroductionActivity extends StuBaseActivity {
 

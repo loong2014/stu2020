@@ -1,4 +1,4 @@
-package com.sunny.app.stu.jump;
+package com.sunny.module.stu.jump;
 
 public class StuJumpModel {
     private String jumpType;

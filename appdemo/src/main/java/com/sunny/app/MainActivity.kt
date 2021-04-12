@@ -1,11 +1,10 @@
 package com.sunny.app
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.launcher.ARouter
-import com.sunny.app.stu.thread.StuThreadActivity
 import com.sunny.lib.common.router.RouterConstant
+import com.sunny.lib.common.router.RouterJump
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -38,8 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_jump_weather.setOnClickListener {
-//            RouterJump.navigation(RouterConstant.Weather.PageDemo)
-            startActivity(Intent(this, StuThreadActivity::class.java))
+            RouterJump.navigation(RouterConstant.Weather.PageDemo)
         }
     }
 }

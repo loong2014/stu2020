@@ -1,6 +1,7 @@
-package com.sunny.app.stu;
+package com.sunny.module.stu;
 
-import com.sunny.app.stu.jump.StuJumpModel;
+
+import com.sunny.module.stu.jump.StuJumpModel;
 
 /**
  * 学习常量类

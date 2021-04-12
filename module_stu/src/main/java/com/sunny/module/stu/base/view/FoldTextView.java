@@ -1,4 +1,4 @@
-package com.sunny.app.stu.base.view;
+package com.sunny.module.stu.base.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-import com.sunny.app.R;
 import com.sunny.lib.base.log.SunLog;
 import com.sunny.lib.ui.SunnyTextView;
+import com.sunny.module.stu.R;
 
 public class FoldTextView extends SunnyTextView {
 

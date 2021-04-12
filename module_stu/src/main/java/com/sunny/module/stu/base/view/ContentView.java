@@ -1,11 +1,11 @@
-package com.sunny.app.stu.base.view;
+package com.sunny.module.stu.base.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.sunny.app.R;
 import com.sunny.lib.common.utils.ResUtils;
 import com.sunny.lib.ui.SunnyTextView;
+import com.sunny.module.stu.R;
 
 public class ContentView extends SunnyTextView {
 

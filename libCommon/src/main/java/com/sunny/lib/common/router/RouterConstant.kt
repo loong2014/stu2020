@@ -62,6 +62,7 @@ class RouterConstant {
     open class Stu {
         companion object {
             const val PageDemo = "/stu/demo"
+            const val PageThread = "/stu/thread"
         }
     }
 

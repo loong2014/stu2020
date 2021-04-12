@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <com.sunny.app.stu.base.view.FoldTextView
+            <com.sunny.module.stu.base.view.FoldTextView
                 android:id="@+id/title_1"
                 style="@style/StuFoldText"
                 android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
@@ -38,13 +38,13 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <com.sunny.app.stu.base.view.JumpTextView
+                <com.sunny.module.stu.base.view.JumpTextView
                     style="@style/StuJumpText"
                     android:text="继承Thread"
                     app:jump_path="/stu/introduction"
                     app:jump_type="stu_thread_thread" />
 
-                <com.sunny.app.stu.base.view.JumpTextView
+                <com.sunny.module.stu.base.view.JumpTextView
                     style="@style/StuJumpText"
                     android:layout_marginTop="5dp"
                     android:text="实现Runnable"
@@ -53,7 +53,7 @@
 
             </LinearLayout>
 
-            <com.sunny.app.stu.base.view.FoldTextView
+            <com.sunny.module.stu.base.view.FoldTextView
                 android:id="@+id/title_2"
                 style="@style/StuFoldText"
                 android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
@@ -67,16 +67,16 @@
                 android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
                 android:orientation="vertical">
 
-                <com.sunny.app.stu.base.view.JumpTextView
+                <com.sunny.module.stu.base.view.JumpTextView
                     style="@style/StuJumpText"
                     android:text="AsyncTask" />
 
-                <com.sunny.app.stu.base.view.JumpTextView
+                <com.sunny.module.stu.base.view.JumpTextView
                     style="@style/StuJumpText"
                     android:layout_marginTop="5dp"
                     android:text="HandlerThread" />
 
-                <com.sunny.app.stu.base.view.JumpTextView
+                <com.sunny.module.stu.base.view.JumpTextView
                     style="@style/StuJumpText"
                     android:layout_marginTop="5dp"
                     android:text="IntentService" />
