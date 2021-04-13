@@ -16,10 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".thread.StuThreadActivity" />
+
         <activity
             android:name=".introduction.StuIntroductionActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

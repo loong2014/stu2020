@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            android:id="@+id/title_1"
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="Handler 是什么？"
+            app:fold_layout_res_id="@+id/content_1" />
+
+        <LinearLayout
+            android:id="@+id/content_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="Android系统中线程间传递消息的一种机制" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="主要由 Message，MessageQueue，Handler，Looper几个类组成" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

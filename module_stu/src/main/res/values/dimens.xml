@@ -9,6 +9,8 @@
     <dimen name="stu_title_marge_left_level_1">15dp</dimen>
     <dimen name="stu_content_marge_left_level_1">10dp</dimen>
 
+    <dimen name="stu_title_size">23sp</dimen>
+    <dimen name="stu_sub_title_size">20sp</dimen>
     <dimen name="stu_content_size">15sp</dimen>
     <dimen name="stu_content_size_small">10sp</dimen>
     <dimen name="stu_content_size_big">20sp</dimen>

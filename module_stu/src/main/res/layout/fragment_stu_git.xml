@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="Git 是什么？"
+            app:fold_layout_res_id="@+id/content_1" />
+
+        <LinearLayout
+            android:id="@+id/content_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="分布式版本控制系统" />
+
+        </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="Branch命令"
+            app:fold_layout_res_id="@+id/content_2" />
+
+        <LinearLayout
+            android:id="@+id/content_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="查看分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git branch //查看本地分支
+                \ngit branch -r //查看远程分支
+                \ngit branch -a //查看本地和远程的所有分支" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="创建本地分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git branch [name] // 只创建并不会切换到新分支
+                \ngit checkout -b [name] // 创建并切换到新分支" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="创建远程分支(本地分支push到远程)" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git push origin [name]" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="切换本地分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git checkout [name]
+                \n如果name是远程分支的名称，则在本地创建名称为name的分支，并与远程分支关联，并切换到新分支" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="删除分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git branch -d/D [name]" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="删除远程分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git push origin :heads/[name]
+                \ngit branch :[name]" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="合并分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git merge [name] // 将名称为name的分支合并到当前分支" />
+
+        </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="Tag命令"
+            app:fold_layout_res_id="@+id/content_3" />
+
+        <LinearLayout
+            android:id="@+id/content_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="visible">
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="查看Tag" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git tag" />
+
+        </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="Branch(分支)"
+            app:fold_layout_res_id="@+id/content_4" />
+
+        <LinearLayout
+            android:id="@+id/content_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="origin/master,master,origin的？" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="master：是执行git init时，初始分支的默认名称
+                \norigin：是执行git clone时，默认服务器的名称(可通过git clone -o xxx，指定服务器的名称)" />
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="创建分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git branch &#060;name&#062;" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="origin/master,master,origin的？" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="master：是执行git init时，初始分支的默认名称
+                \norigin：是执行git clone时，默认服务器的名称(可通过git clone -o xxx，指定服务器的名称)" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="origin/master 远程分支名称
+                \nmaster 默认的本地分支，是远程分支origin/master在本地的拷贝" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="追踪分支，上游分支？" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="从远程分支checkout一个本地分支,该本地分支被称为追踪分支(tracking branch),被追踪的分支被称为上游分支(upstream branch)
+                \n追踪分支可以理解为是和远程分支有直接关联的本地分支.如果我们在追踪分支时执行git pull,git会自动知道需要获取和merge的分支的服务器." />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="创建新的追踪分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git checkout -b [branch] [remotename]/[branch]" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="在执行git clone指令后：
+                \n1、自动将远程服务器命名为origin
+                \n2、下载该服务下的所有数据
+                \n3、创建一个指向master分支的指针，并将该分支命名为origin/master
+                \n4、创建名为master的本地分支，并且和远程分支在同一个提交节点" />
+
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel1"
+                android:text="删除分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="git branch -r //查看远程分支" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

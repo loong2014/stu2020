@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/layout_top_bar"
+        layout="@layout/layout_stu_top_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_top_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.sunny.module.stu.base.view.FoldTextView
+                android:id="@+id/title_1"
+                style="@style/StuFoldText"
+                android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+                android:text="焦点分发策略"
+                app:fold_layout_res_id="@+id/content_1" />
+
+            <LinearLayout
+                android:id="@+id/content_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.sunny.module.stu.base.view.JumpTextView
+                    style="@style/StuJumpText"
+                    android:text="继承Thread"
+                    app:jump_path="/stu/introduction"
+                    app:jump_type="stu_thread_thread" />
+
+                <com.sunny.module.stu.base.view.JumpTextView
+                    style="@style/StuJumpText"
+                    android:layout_marginTop="5dp"
+                    android:text="实现Runnable"
+                    app:jump_path="/stu/introduction"
+                    app:jump_type="stu_thread_runnable" />
+
+            </LinearLayout>
+
+            <com.sunny.module.stu.base.view.FoldTextView
+                android:id="@+id/title_2"
+                style="@style/StuFoldText"
+                android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+                android:text="区别及场景"
+                app:fold_layout_res_id="@+id/content_2" />
+
+            <LinearLayout
+                android:id="@+id/content_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+                android:orientation="vertical">
+
+                <com.sunny.module.stu.base.view.JumpTextView
+                    style="@style/StuJumpText"
+                    android:text="AsyncTask" />
+
+                <com.sunny.module.stu.base.view.JumpTextView
+                    style="@style/StuJumpText"
+                    android:layout_marginTop="5dp"
+                    android:text="HandlerThread" />
+
+                <com.sunny.module.stu.base.view.JumpTextView
+                    style="@style/StuJumpText"
+                    android:layout_marginTop="5dp"
+                    android:text="IntentService" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

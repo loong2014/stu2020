@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".StuDemoActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
-        <com.sunny.lib.ui.SunnyButton
-            android:id="@+id/btnJumpThreadStu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="多线程" />
+        <com.sunny.module.stu.base.view.JumpTextView
+            style="@style/StuJumpText"
+            android:text="Stu_Git"
+            app:jump_path="/stu/introduction"
+            app:jump_type="stu_git" />
+
+        <com.sunny.module.stu.base.view.JumpTextView
+            style="@style/StuJumpText"
+            android:text="Stu_Thread"
+            app:jump_path="/stu/introduction"
+            app:jump_type="stu_thread" />
+
+        <com.sunny.module.stu.base.view.JumpTextView
+            style="@style/StuJumpText"
+            android:text="Stu_Handler"
+            app:jump_path="/stu/introduction"
+            app:jump_type="stu_handler" />
 
     </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
