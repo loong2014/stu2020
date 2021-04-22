@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.sunny.lib.ui.SunnyTextView
+        style="@style/StuTitleTextLevel2"
+        android:text="工作区（Working Directory）" />
+
+    <com.sunny.module.stu.base.view.ContentView
+        style="@style/StuContentText"
+        android:text="是我们直接编辑的地方，例如 Android Studio 打开的项目，记事本打开的文本等，肉眼可见，直接操作。" />
+
+    <com.sunny.lib.ui.SunnyTextView
+        style="@style/StuTitleTextLevel2"
+        android:text="暂存区（Stage 或 Index）" />
+
+    <com.sunny.module.stu.base.view.ContentView
+        style="@style/StuContentText"
+        android:text="数据暂时存放的区域，可在工作区和版本库之间进行数据的友好交流。" />
+
+    <com.sunny.lib.ui.SunnyTextView
+        style="@style/StuTitleTextLevel2"
+        android:text="版本库（commit History）" />
+
+    <com.sunny.module.stu.base.view.ContentView
+        style="@style/StuContentText"
+        android:text="存放已经提交的数据，push 的时候，就是把这个区的数据 push 到远程仓库了。" />
+
+    <com.sunny.lib.ui.SunnyTextView
+        style="@style/StuTitleTextLevel2"
+        android:text="不同区域代码对比" />
+
+    <com.sunny.module.stu.base.view.ContentView
+        style="@style/StuContentText"
+        android:text="git diff //工作区 vs 暂存区
+        \ngit diff head //工作区 vs 版本库
+        \ngit diff --cached //暂存区 vs 版本库" />
+
+    <com.sunny.lib.ui.SunnyTextView
+        style="@style/StuTitleTextLevel2"
+        android:text="常用命令的效果" />
+
+    <com.sunny.module.stu.base.view.ContentView
+        style="@style/StuContentText"
+        android:text="" />
+
+</LinearLayout>

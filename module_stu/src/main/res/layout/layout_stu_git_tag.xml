@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
+        android:text="查看标签"
+        app:fold_layout_res_id="@+id/content_tag_1" />
+
+    <LinearLayout
+        android:id="@+id/content_tag_1"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git tag // 查看本地
+                \ngit ls-remote --tags origin // 查看远程
+                \ngit show [name] // 查看本地标签的详细信息" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="检出标签到新分支" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="本质上等同于通过commitId拉取分支
+            \ngit branch [branch] [tagName]" />
+
+    </LinearLayout>
+
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
+        android:text="创建标签"
+        app:fold_layout_res_id="@+id/content_tag_2" />
+
+    <LinearLayout
+        android:id="@+id/content_tag_2"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="创建本地标签" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="基于当前branch最后一个commitId
+            \ngit tag [name]
+            \ngit tag -a [name] -m 'msg' // 带注释" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="基于某个指定commitId
+            \ngit tag -a [name] [commitId]" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="创建远程标签" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="push本地标签到远程
+            \ngit push origin [name] // 推送一个tag到远程
+            \ngit push origin --tags // 推送多个tag到远程" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="获取某个远程标签" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git fetch origin tag [name]" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="合并远程仓库的tag到本地" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git pull origin --tags" />
+
+    </LinearLayout>
+
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
+        android:text="删除标签"
+        app:fold_layout_res_id="@+id/content_tag_3" />
+
+    <LinearLayout
+        android:id="@+id/content_tag_3"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="删除本地标签" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git tag -d [name]" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="删除远程标签" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git push origin :refs/tags/[name]
+                \ngit push origin :[name]" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

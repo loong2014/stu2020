@@ -49,17 +49,31 @@ public class FoldTextView extends SunnyTextView {
         });
     }
 
-    private void dealFoldClick() {
+    public void updateFoldContentVisibility(int visibility) {
+
         initFoldInfo();
 
+        if (mVisibility == visibility) {
+            return;
+        }
+
         if (mFoldLayoutView != null) {
-            if (mVisibility == View.VISIBLE) {
-                mVisibility = View.GONE;
-            } else {
-                mVisibility = View.VISIBLE;
-            }
+            mVisibility = visibility;
             mFoldLayoutView.setVisibility(mVisibility);
         }
+    }
+
+    private void dealFoldClick() {
+
+        initFoldInfo();
+
+        int nextVisibility;
+        if (mVisibility == View.VISIBLE) {
+            nextVisibility = View.GONE;
+        } else {
+            nextVisibility = View.VISIBLE;
+        }
+        updateFoldContentVisibility(nextVisibility);
     }
 
     private void initFoldInfo() {

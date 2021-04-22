@@ -60,59 +60,13 @@
             android:text="分支(branch)"
             app:fold_layout_res_id="@+id/content_branch" />
 
-        <LinearLayout
+        <include
             android:id="@+id/content_branch"
-            android:layout_width="wrap_content"
+            layout="@layout/layout_stu_git_branch"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="查看分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git branch //查看本地分支
-                \ngit branch -r //查看远程分支
-                \ngit branch -a //查看本地和远程的所有分支" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="创建本地分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git branch [name] // 只创建并不会切换到新分支
-                \ngit checkout -b [name] // 创建并切换到新分支" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="创建远程分支(本地分支push到远程)" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git push origin [name]" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="切换本地分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git checkout [name]
-                \n如果name是远程分支的名称，则在本地创建名称为name的分支，并与远程分支关联，并切换到新分支" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="合并分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git merge [name] // 将名称为name的分支合并到当前分支" />
-
-        </LinearLayout>
+            android:visibility="gone" />
 
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
@@ -120,85 +74,27 @@
             android:text="标签(tag)"
             app:fold_layout_res_id="@+id/content_tag" />
 
-        <LinearLayout
+        <include
             android:id="@+id/content_tag"
-            android:layout_width="wrap_content"
+            layout="@layout/layout_stu_git_tag"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone" />
 
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="查看标签" />
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="数据区域"
+            app:fold_layout_res_id="@+id/content_area" />
 
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git tag // 查看本地
-                \ngit ls-remote --tags origin // 查看远程
-                \ngit show [name] // 查看本地标签的详细信息" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="创建标签(基于当前branch最后一个commitId)" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git tag [name]
-                \ngit tag -a [name] -m 'msg' // 带注释" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="创建标签(基于某个指定commitId)" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git tag -a [name] [commitId]" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="创建远程标签(push本地标签到远程)" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git push origin [name] // 推送一个tag到远程
-                \ngit push origin --tags // 推送多个tag到远程" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="获取某个远程标签" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git fetch origin tag [name]" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="合并远程仓库的tag到本地" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git pull origin --tags" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="删除标签" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git tag -d [name] // 删除本地标签
-                \ngit push origin :refs/tags/[name]或者
-                \ngit push origin :[name] // 删除远程标签" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="检出标签到新分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git branch [newBranchName] [tagName]" />
-
-        </LinearLayout>
+        <include
+            android:id="@+id/content_area"
+            layout="@layout/layout_stu_git_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:visibility="gone" />
 
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
@@ -208,7 +104,7 @@
 
         <LinearLayout
             android:id="@+id/content_diff_1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
             android:orientation="vertical"
@@ -228,12 +124,12 @@
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
-            android:text="追踪分支/上游分支？"
+            android:text="merge/rebase？"
             app:fold_layout_res_id="@+id/content_diff_2" />
 
         <LinearLayout
             android:id="@+id/content_diff_2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
             android:orientation="vertical"
@@ -241,84 +137,54 @@
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
-                android:text="从远程分支checkout一个本地分支,该本地分支被称为追踪分支(tracking branch),被追踪的分支被称为上游分支(upstream branch)
-                \n追踪分支可以理解为是和远程分支有直接关联的本地分支.如果我们在追踪分支时执行git pull,git会自动知道需要获取和merge的分支的服务器." />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="执行git clone创建了本地仓库后,会自动创建一个追踪origin/master分支的本地追踪分支master" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="查看上游分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git branch -vv" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="创建新的追踪分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git checkout -b [newBranch] origin/[branch]" />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="本地分支关联远程分支/修改追踪的上游分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git branch -u origin/[newBranch]" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="可以通过@{upstream}或@{u}来引用其上游分支
-                \n通过git merge @{u}指令来代替git merge origin/master" />
+                android:text="版本标记用tag，代码改动用branch" />
 
         </LinearLayout>
 
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
-            android:text="删除分支"
-            app:fold_layout_res_id="@+id/content_diff_3" />
+            android:text="其它命令"
+            app:fold_layout_res_id="@+id/content_diff" />
 
         <LinearLayout
-            android:id="@+id/content_diff_3"
-            android:layout_width="wrap_content"
+            android:id="@+id/content_diff"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
             android:orientation="vertical"
             android:visibility="gone">
 
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="删除本地分支" />
+            <com.sunny.module.stu.base.view.FoldTextView
+                style="@style/StuSubFoldText"
+                android:text="代码回滚"
+                app:fold_layout_res_id="@+id/content_git_reset" />
 
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git branch -d [name] // 删除前检查是否已经merge
-                \ngit branch -D [name] // 不检查merge状态直接删除" />
+            <LinearLayout
+                android:id="@+id/content_git_reset"
+                style="@style/StuSubContentLayout"
+                android:visibility="gone">
 
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="删除远程分支" />
+                <com.sunny.lib.ui.SunnyTextView
+                    style="@style/StuTitleTextLevel2"
+                    android:text="本地分支回滚" />
 
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git push origin -d [name]
-                \ngit push origin :heads/[name]" />
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="git reset --hard [commitId]" />
 
+                <com.sunny.lib.ui.SunnyTextView
+                    style="@style/StuTitleTextLevel2"
+                    android:text="远程分支回滚" />
 
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="删除追踪分支(删除的本地分支和远程分支的关联关系)" />
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="git reset --hard commit id //本地分支回滚
+                \ngit push origin :<name> //删除远程分支
+                \ngit push origin <name> //用回滚后的本地分支重新建立远程分支" />
 
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git branch --delete --remotes origin/[branch]" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -327,6 +193,7 @@
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
             android:text="Branch(分支)"
             app:fold_layout_res_id="@+id/content_5" />
+
 
         <LinearLayout
             android:id="@+id/content_5"
@@ -367,23 +234,6 @@
                 android:text="origin/master 远程分支名称
                 \nmaster 默认的本地分支，是远程分支origin/master在本地的拷贝" />
 
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="追踪分支，上游分支？" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="从远程分支checkout一个本地分支,该本地分支被称为追踪分支(tracking branch),被追踪的分支被称为上游分支(upstream branch)
-                \n追踪分支可以理解为是和远程分支有直接关联的本地分支.如果我们在追踪分支时执行git pull,git会自动知道需要获取和merge的分支的服务器." />
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="创建新的追踪分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git checkout -b [branch] [remotename]/[branch]" />
-
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
                 android:text="在执行git clone指令后：
@@ -392,14 +242,6 @@
                 \n3、创建一个指向master分支的指针，并将该分支命名为origin/master
                 \n4、创建名为master的本地分支，并且和远程分支在同一个提交节点" />
 
-
-            <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="删除分支" />
-
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="git branch -r //查看远程分支" />
         </LinearLayout>
 
     </LinearLayout>

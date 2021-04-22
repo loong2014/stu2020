@@ -19,6 +19,5 @@ public class ContentView extends SunnyTextView {
 
     public ContentView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setTextSize(ResUtils.getDimension(R.dimen.stu_content_size));
     }
 }
