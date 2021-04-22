@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.weather_activity_weather.*
 class WeatherActivity : BaseActivity() {
 
     companion object {
+
         const val TAG = "WeatherActivity"
     }
 
