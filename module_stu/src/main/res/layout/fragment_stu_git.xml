@@ -309,17 +309,17 @@
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
                 android:text="git push origin -d [name]
-                \ngit push origin :heads/[name]
-                \ngit branch :[name]" />
+                \ngit push origin :heads/[name]" />
 
 
             <com.sunny.lib.ui.SunnyTextView
                 style="@style/StuTitleTextLevel1"
-                android:text="删除追踪分支" />
+                android:text="删除追踪分支(删除的本地分支和远程分支的关联关系)" />
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
-                android:text="" />
+                android:text="git branch --delete --remotes origin/[branch]" />
+
         </LinearLayout>
 
         <com.sunny.module.stu.base.view.FoldTextView
