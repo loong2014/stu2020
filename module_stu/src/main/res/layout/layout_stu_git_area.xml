@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
+        android:text="工作区/暂存区/版本库"
+        app:fold_layout_res_id="@+id/content_branch_1" />
+
+    <LinearLayout
+        android:id="@+id/content_branch_1"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="工作区(Working Directory)" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="是我们直接编辑的地方，例如 Android Studio 打开的项目，记事本打开的文本等，肉眼可见，直接操作。" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="暂存区(Stage/Index)" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="数据暂时存放的区域，可在工作区和版本库之间进行数据的友好交流。" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="版本库(Repository)" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="存放已经提交的数据，push 的时候，就是把这个区的数据 push 到远程仓库了。" />
+
+    </LinearLayout>
+
     <com.sunny.lib.ui.SunnyTextView
         style="@style/StuTitleTextLevel2"
-        android:text="工作区（Working Directory）" />
-
-    <com.sunny.module.stu.base.view.ContentView
-        style="@style/StuContentText"
-        android:text="是我们直接编辑的地方，例如 Android Studio 打开的项目，记事本打开的文本等，肉眼可见，直接操作。" />
-
-    <com.sunny.lib.ui.SunnyTextView
-        style="@style/StuTitleTextLevel2"
-        android:text="暂存区（Stage 或 Index）" />
-
-    <com.sunny.module.stu.base.view.ContentView
-        style="@style/StuContentText"
-        android:text="数据暂时存放的区域，可在工作区和版本库之间进行数据的友好交流。" />
-
-    <com.sunny.lib.ui.SunnyTextView
-        style="@style/StuTitleTextLevel2"
-        android:text="版本库（commit History）" />
-
-    <com.sunny.module.stu.base.view.ContentView
-        style="@style/StuContentText"
-        android:text="存放已经提交的数据，push 的时候，就是把这个区的数据 push 到远程仓库了。" />
-
-    <com.sunny.lib.ui.SunnyTextView
-        style="@style/StuTitleTextLevel2"
-        android:text="不同区域代码对比" />
+        android:text="代码对比" />
 
     <com.sunny.module.stu.base.view.ContentView
         style="@style/StuContentText"
@@ -40,10 +53,32 @@
 
     <com.sunny.lib.ui.SunnyTextView
         style="@style/StuTitleTextLevel2"
-        android:text="常用命令的效果" />
+        android:text="代码同步" />
 
     <com.sunny.module.stu.base.view.ContentView
         style="@style/StuContentText"
-        android:text="" />
+        android:text="写代码 //工作区
+        \ngit add //工作区的代码同步到暂存区
+        \ngit commit //暂存区代码同步到版本库
+        \ngit push //版本库的代码push到远程版本库" />
+
+    <com.sunny.lib.ui.SunnyTextView
+        style="@style/StuTitleTextLevel2"
+        android:text="代码回退(保留commit)" />
+
+    <com.sunny.lib.ui.SunnyTextView
+        style="@style/StuTitleTextLevel2"
+        android:text="git reset --soft //保留工作目录，并把重置 HEAD 所带来的新的差异放进暂存区
+        \ngit reset --mixed //版本库=>暂存区
+        \ngit reset --hard //版本库=>暂存区=>工作区(如果工作区里有修改则会被删除)
+        \ngit reset HEAD^ //版本库回退到工作区(删除版本库里的commit)" />
+
+    <com.sunny.lib.ui.SunnyTextView
+        style="@style/StuTitleTextLevel2"
+        android:text="代码回退(删除commit)" />
+
+    <com.sunny.lib.ui.SunnyTextView
+        style="@style/StuTitleTextLevel2"
+        android:text="git reset HEAD^ //保留工作区的修改" />
 
 </LinearLayout>
