@@ -145,10 +145,10 @@
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
             android:text="其它命令"
-            app:fold_layout_res_id="@+id/content_diff" />
+            app:fold_layout_res_id="@+id/content_other" />
 
         <LinearLayout
-            android:id="@+id/content_diff"
+            android:id="@+id/content_other"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
@@ -185,7 +185,86 @@
 
             </LinearLayout>
 
+            <com.sunny.module.stu.base.view.FoldTextView
+                style="@style/StuSubFoldText"
+                android:text="代码找回"
+                app:fold_layout_res_id="@+id/content_git_fix" />
 
+            <LinearLayout
+                android:id="@+id/content_git_fix"
+                style="@style/StuSubContentLayout"
+                android:visibility="gone">
+
+                <com.sunny.lib.ui.SunnyTextView
+                    style="@style/StuTitleTextLevel2"
+                    android:text="有commit" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="git reflog //查看所有发生过commit的记录
+                    \ngit reset --hard HEAD@{*} //回退到你想要的commit" />
+
+                <com.sunny.lib.ui.SunnyTextView
+                    style="@style/StuTitleTextLevel2"
+                    android:text="没有commit，但有add" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="git fsck --lost-found
+                    \n在项目git目录下的 /.git/lost-found/other里有你add过的文件
+                    \n挨个看看，能救回来多少是多少吧" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="find .git/objects -type f | xargs ls -lt | sed 60q
+                    \n找回本地仓库里边最近add的60个文件。找回思路同上" />
+
+                <com.sunny.lib.ui.SunnyTextView
+                    style="@style/StuTitleTextLevel2"
+                    android:text="没有commit，没有add" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="放弃治疗，重写吧" />
+
+            </LinearLayout>
+
+
+            <com.sunny.module.stu.base.view.FoldTextView
+                style="@style/StuSubFoldText"
+                android:text="git stash"
+                app:fold_layout_res_id="@+id/content_git_stash" />
+
+            <LinearLayout
+                android:id="@+id/content_git_stash"
+                style="@style/StuSubContentLayout"
+                android:visibility="gone">
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="没有在git 版本控制中的文件，是不能被git stash 存起来的
+                    \n新增文件要先add一下" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="git stash //存储暂存区的需改
+                    \ngit stash pop //弹出存储恢复到工作区
+                    \ngit stash pop  //弹出存储恢复到工作区
+                    \ngit stash list //查看已有存储列表
+                    \ngit stash save [msg] //存储时添加注释
+                    \ngit stash apply //只恢复存储到工作区，但不删除
+                    \ngit stash clear //清空已有存储列表
+                    \ngit stash drop stash@{$num} //从列表中删除第num存储" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="stash@{$num}对第num个存储进行操作(num从0开始)" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="git stash –keep-index //存储没有被add的文件" />
+
+            </LinearLayout>
         </LinearLayout>
 
         <com.sunny.module.stu.base.view.FoldTextView

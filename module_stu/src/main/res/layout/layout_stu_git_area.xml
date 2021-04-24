@@ -73,12 +73,4 @@
         \ngit reset --hard //版本库=>暂存区=>工作区(如果工作区里有修改则会被删除)
         \ngit reset HEAD^ //版本库回退到工作区(删除版本库里的commit)" />
 
-    <com.sunny.lib.ui.SunnyTextView
-        style="@style/StuTitleTextLevel2"
-        android:text="代码回退(删除commit)" />
-
-    <com.sunny.lib.ui.SunnyTextView
-        style="@style/StuTitleTextLevel2"
-        android:text="git reset HEAD^ //保留工作区的修改" />
-
 </LinearLayout>
