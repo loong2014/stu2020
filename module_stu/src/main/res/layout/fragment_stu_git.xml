@@ -85,25 +85,11 @@
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
-            android:text="数据区域"
-            app:fold_layout_res_id="@+id/content_area" />
-
-        <include
-            android:id="@+id/content_area"
-            layout="@layout/layout_stu_git_area"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
-            android:visibility="gone" />
-
-        <com.sunny.module.stu.base.view.FoldTextView
-            style="@style/StuFoldText"
-            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
-            android:text="branch/tag？"
-            app:fold_layout_res_id="@+id/content_diff_1" />
+            android:text="branch/tag?"
+            app:fold_layout_res_id="@+id/content_diff_branch_tag" />
 
         <LinearLayout
-            android:id="@+id/content_diff_1"
+            android:id="@+id/content_diff_branch_tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
@@ -124,11 +110,25 @@
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
-            android:text="merge/rebase？"
-            app:fold_layout_res_id="@+id/content_diff_2" />
+            android:text="数据区域"
+            app:fold_layout_res_id="@+id/content_area" />
+
+        <include
+            android:id="@+id/content_area"
+            layout="@layout/layout_stu_git_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:visibility="gone" />
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="拉取代码"
+            app:fold_layout_res_id="@+id/content_pull" />
 
         <LinearLayout
-            android:id="@+id/content_diff_2"
+            android:id="@+id/content_pull"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
@@ -137,9 +137,25 @@
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
-                android:text="版本标记用tag，代码改动用branch" />
+                android:text="git pull //git fetch + git merge
+        \ngit pull --rebase //git fetch + git rebase" />
 
         </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="merge/rebase?"
+            app:fold_layout_res_id="@+id/content_merge" />
+
+        <include
+            android:id="@+id/content_merge"
+            layout="@layout/layout_stu_git_merge_rebase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:visibility="gone" />
+
 
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
@@ -147,125 +163,13 @@
             android:text="其它命令"
             app:fold_layout_res_id="@+id/content_other" />
 
-        <LinearLayout
+        <include
             android:id="@+id/content_other"
+            layout="@layout/layout_stu_git_other"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <com.sunny.module.stu.base.view.FoldTextView
-                style="@style/StuSubFoldText"
-                android:text="代码回滚"
-                app:fold_layout_res_id="@+id/content_git_reset" />
-
-            <LinearLayout
-                android:id="@+id/content_git_reset"
-                style="@style/StuSubContentLayout"
-                android:visibility="gone">
-
-                <com.sunny.lib.ui.SunnyTextView
-                    style="@style/StuTitleTextLevel2"
-                    android:text="本地分支回滚" />
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="git reset --hard [commitId]" />
-
-                <com.sunny.lib.ui.SunnyTextView
-                    style="@style/StuTitleTextLevel2"
-                    android:text="远程分支回滚" />
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="git reset --hard commit id //本地分支回滚
-                \ngit push origin :<name> //删除远程分支
-                \ngit push origin <name> //用回滚后的本地分支重新建立远程分支" />
-
-            </LinearLayout>
-
-            <com.sunny.module.stu.base.view.FoldTextView
-                style="@style/StuSubFoldText"
-                android:text="代码找回"
-                app:fold_layout_res_id="@+id/content_git_fix" />
-
-            <LinearLayout
-                android:id="@+id/content_git_fix"
-                style="@style/StuSubContentLayout"
-                android:visibility="gone">
-
-                <com.sunny.lib.ui.SunnyTextView
-                    style="@style/StuTitleTextLevel2"
-                    android:text="有commit" />
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="git reflog //查看所有发生过commit的记录
-                    \ngit reset --hard HEAD@{*} //回退到你想要的commit" />
-
-                <com.sunny.lib.ui.SunnyTextView
-                    style="@style/StuTitleTextLevel2"
-                    android:text="没有commit，但有add" />
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="git fsck --lost-found
-                    \n在项目git目录下的 /.git/lost-found/other里有你add过的文件
-                    \n挨个看看，能救回来多少是多少吧" />
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="find .git/objects -type f | xargs ls -lt | sed 60q
-                    \n找回本地仓库里边最近add的60个文件。找回思路同上" />
-
-                <com.sunny.lib.ui.SunnyTextView
-                    style="@style/StuTitleTextLevel2"
-                    android:text="没有commit，没有add" />
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="放弃治疗，重写吧" />
-
-            </LinearLayout>
-
-
-            <com.sunny.module.stu.base.view.FoldTextView
-                style="@style/StuSubFoldText"
-                android:text="git stash"
-                app:fold_layout_res_id="@+id/content_git_stash" />
-
-            <LinearLayout
-                android:id="@+id/content_git_stash"
-                style="@style/StuSubContentLayout"
-                android:visibility="gone">
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="没有在git 版本控制中的文件，是不能被git stash 存起来的
-                    \n新增文件要先add一下" />
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="git stash //存储暂存区的需改
-                    \ngit stash pop //弹出存储恢复到工作区
-                    \ngit stash pop  //弹出存储恢复到工作区
-                    \ngit stash list //查看已有存储列表
-                    \ngit stash save [msg] //存储时添加注释
-                    \ngit stash apply //只恢复存储到工作区，但不删除
-                    \ngit stash clear //清空已有存储列表
-                    \ngit stash drop stash@{$num} //从列表中删除第num存储" />
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="stash@{$num}对第num个存储进行操作(num从0开始)" />
-
-                <com.sunny.module.stu.base.view.ContentView
-                    style="@style/StuContentText"
-                    android:text="git stash –keep-index //存储没有被add的文件" />
-
-            </LinearLayout>
-        </LinearLayout>
+            android:visibility="gone" />
 
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"

@@ -140,7 +140,7 @@
 
     <com.sunny.module.stu.base.view.FoldTextView
         style="@style/StuSubFoldText"
-        android:text="合并分支(merge)"
+        android:text="合并分支"
         app:fold_layout_res_id="@+id/content_branch_5" />
 
     <LinearLayout
@@ -150,7 +150,9 @@
 
         <com.sunny.module.stu.base.view.ContentView
             style="@style/StuContentText"
-            android:text="git merge [feature] //将feature分支合并到当前的master分支" />
+            android:text="git merge [feature]
+            \ngit rebase [feature]
+            \n将feature分支合并到当前的master分支" />
 
         <com.sunny.lib.ui.SunnyTextView
             style="@style/StuTitleTextLevel2"
@@ -173,40 +175,12 @@
         <com.sunny.module.stu.base.view.ContentView
             style="@style/StuContentText"
             android:text="使用三个符号标明冲突的地方，以及两个分支在该地方的冲突内容
-            \n<<<<<<< HEAD
+            \n&#060;&#060;&#060;&#060;&#060;&#060;&#060;HEAD
             \nmaster分支的内容
             \n=======
             \nfeature分支的内容
-            \n>>>>>>>feature" />
-
-        <com.sunny.module.stu.base.view.ContentView
-            style="@style/StuContentText"
-            android:text="通过git status 查看有冲突的文件
-            \n解决冲突后执行git add+commit提交" />
+            \n&#062;&#062;&#062;&#062;&#062;&#062;&#062;feature" />
 
     </LinearLayout>
 
-    <com.sunny.module.stu.base.view.FoldTextView
-        style="@style/StuSubFoldText"
-        android:text="合并分支(rebase)"
-        app:fold_layout_res_id="@+id/content_branch_6" />
-
-    <LinearLayout
-        android:id="@+id/content_branch_6"
-        style="@style/StuSubContentLayout"
-        android:visibility="gone">
-
-        <com.sunny.module.stu.base.view.ContentView
-            style="@style/StuContentText"
-            android:text="找最近的base节点
-            \n基于base节点的代码进行递归合并
-            \n如果base节点的某段代码在两个分支上有不同修改，则产生冲突，这时需要手动介入处理冲突" />
-
-        <com.sunny.module.stu.base.view.ContentView
-            style="@style/StuContentText"
-            android:text="git status //查看有冲突的文件
-            \ngit add . //解决冲突后执行
-            \ngit rebase --continue //继续进行分支合并" />
-
-    </LinearLayout>
 </LinearLayout>

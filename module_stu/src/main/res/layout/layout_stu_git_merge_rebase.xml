@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
+        android:text="节点树/解决冲突"
+        app:fold_layout_res_id="@+id/content_mr_1" />
+
+    <LinearLayout
+        android:id="@+id/content_mr_1"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="节点树" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="merge操作会生成一个新的节点，之前的提交分开显示
+        \nrebase操作不会生成新的节点，是将两个分支融合成一个线性的节点树" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="解决冲突" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="merge //修改冲突 + add + commit
+        \nrebase //修改冲突 + add + rebase –continue" />
+
+    </LinearLayout>
+
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
+        android:text="merge"
+        app:fold_layout_res_id="@+id/content_mr_merge" />
+
+    <LinearLayout
+        android:id="@+id/content_mr_merge"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git checkout master
+            \ngit merge feature" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="merge 操作是区分上下文的，当前分支始终是目标分支，因此当需要将某个分支合并到目标分支时，需要先切到目标分支上" />
+
+    </LinearLayout>
+
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
+        android:text="rebase"
+        app:fold_layout_res_id="@+id/content_mr_rebase" />
+
+    <LinearLayout
+        android:id="@+id/content_mr_rebase"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="rebase 合并往往又被称为[变基]，这里的[基]就是一个[基点]、[起点]的意思，[变基]就是改变[当前分支]的起点" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git rebase master feature //以 master 分支为基，对 feature 分支进行变基" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="等同于
+            \ngit checkout feature
+            \ngit rebase master" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git rebase [基分支]，就是将[基分支]与[当前分支]的差异提交获取到，
+然后在[基分支]最新提交点后面将差异提交逐个再次提交，最后将[当前分支]的 HEAD 指针指向最新的提交点
+\n[基分支]的 HEAD 位置是不变的。要想完成分支合并，完成变基之后，需要再进行分支间的合并等操作" />
+
+    </LinearLayout>
+</LinearLayout>
