@@ -28,7 +28,7 @@
                 android:text="分布式版本控制系统" />
 
             <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
+                style="@style/StuTitleTextLevel2"
                 android:text="查看远程仓库" />
 
             <com.sunny.module.stu.base.view.ContentView
@@ -36,21 +36,104 @@
                 android:text="git remote -v" />
 
             <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
-                android:text="master,origin？" />
+                style="@style/StuTitleTextLevel2"
+                android:text="HEAD" />
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
-                android:text="master：是执行git init时，初始分支的默认名称
-                \norigin：是执行git clone时，默认服务器的名称(可通过git clone -o xxx，指定服务器的名称)" />
+                android:text="HEAD是包含当前分支的引用(指针)，指向分支头" />
 
             <com.sunny.lib.ui.SunnyTextView
-                style="@style/StuTitleTextLevel1"
+                style="@style/StuTitleTextLevel2"
+                android:text="工作树(节点树)" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="是把当前分支检出到工作空间后形成的目录树，一般的开发工作都会基于工作树进行" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="index(索引)" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="是对工作树进行代码修改后，通过add命令更新索引文件；GIT系统通过索引index文件生成tree对象" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="master" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="master：是执行git init时，初始分支的默认名称" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="origin" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="origin：是执行git clone时，默认服务器的名称(可通过git clone -o xxx，指定服务器的名称)" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
                 android:text="获取服务器数据" />
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
-                android:text="git fetch" />
+                android:text="git fetch [branch] //将名为branch的远程分支拉取到本地" />
+
+        </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="GitFlow"
+            app:fold_layout_res_id="@+id/content_git_flow" />
+
+        <LinearLayout
+            android:id="@+id/content_git_flow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="GitFlow是一套基于git的工作流程，这个工作流程围绕着项目发布定义了一个严格的如何建立分支的模型" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="分支介绍" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="master分支
+                \n功能稳定，可以直接发布线上版本" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="develop分支
+                \n功能最新最全的分支，包含所有要发布到下一个 release 的代码，主要用于合并其它分支" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="feature分支
+                \n开发新功能时从develop分支拉取，一旦开发完成，通过测试(开发自测)后，合并回develop分支。之后该分支可删除不可更改" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="release分支
+                \n准备提测时从develop分支拉取，经过测试(测试团队功能测试，兼容测试)和改bug后，合并回develop分支和master分支
+                \nhotfix分支 //用于修复线上代码的bug。从 master 分支上拉。完成 hotfix 后，打上 tag 我们合并回 master 和 develop 分支" />
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="master分支 //功能稳定，可以直接发布线上版本
+                \ndevelop分支 //功能最新最全的分支，包含所有要发布到下一个 release 的代码，主要用于合并其它分支
+                \nfeature分支 //开发新功能时从develop分支拉取，一旦开发完成，通过测试(开发自测)后，合并回develop分支。然后就可以删除了
+                \nrelease分支 //准备提测时从develop分支拉取，经过测试(测试团队功能测试，兼容测试)和改bug后，合并回develop分支和master分支
+                \nhotfix分支 //用于修复线上代码的bug。从 master 分支上拉。完成 hotfix 后，打上 tag 我们合并回 master 和 develop 分支" />
 
         </LinearLayout>
 

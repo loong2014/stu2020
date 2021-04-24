@@ -169,6 +169,37 @@
 
     <com.sunny.module.stu.base.view.FoldTextView
         style="@style/StuSubFoldText"
+        android:text="修改某次提交的说明"
+        app:fold_layout_res_id="@+id/content_git_amend" />
+
+    <LinearLayout
+        android:id="@+id/content_git_amend"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git commit --amend //修改最近一次提交的说明" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="先通过git log列出最近的提交找出想要修改的commitId
+            \n1、git rebase -i HEAD~n //列出前n次的提交
+            \n2、更改想要修改提交的pick为edit，然后保存退出
+            \n3、git commit --amend 进入修改页面，完成修改后保存退出
+            \n4、git rebase --continue 完成指定commit的修改
+            \n再次执行git log 会发现指定的commit的说明已经修改了" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="执行上面的命令后会进入一个编辑页面，最近一次commit在列表的最下方
+            \n将需要压缩的commit前面的pick更改为squash(必须保留一个pick)
+            \n保存后会让你编辑新的commit说明(编辑区包含被压缩commit的说明)" />
+
+    </LinearLayout>
+
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
         android:text="恢复merge之前代码"
         app:fold_layout_res_id="@+id/content_git_abort" />
 
@@ -185,6 +216,60 @@
             style="@style/StuContentText"
             android:text="git merge --abort
             \ngit rebase --abort" />
+
+    </LinearLayout>
+
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
+        android:text="导出代码"
+        app:fold_layout_res_id="@+id/content_git_archive" />
+
+    <LinearLayout
+        android:id="@+id/content_git_archive"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="将master分支打包为output.tar.gz" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git archive --format tar.gz --output [xxx/output.tar.gz] master" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="打包文件格式" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git archive -l //获得支持的文件格式列表
+            \n–format指明打包格式，若不指明此项，则根据–output中的文件名推断文件格式" />
+
+        <com.sunny.lib.ui.SunnyTextView
+            style="@style/StuTitleTextLevel2"
+            android:text="打包某个目录" />
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git archive --output [path] master mydir mydir2 //打包某个目录
+            \n没有指定目录时，默认打包当前目录" />
+
+    </LinearLayout>
+
+    <com.sunny.module.stu.base.view.FoldTextView
+        style="@style/StuSubFoldText"
+        android:text="清理空间"
+        app:fold_layout_res_id="@+id/content_git_gc" />
+
+    <LinearLayout
+        android:id="@+id/content_git_gc"
+        style="@style/StuSubContentLayout"
+        android:visibility="gone">
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git gc" />
 
     </LinearLayout>
 
