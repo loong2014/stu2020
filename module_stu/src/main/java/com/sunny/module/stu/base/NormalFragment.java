@@ -1,4 +1,4 @@
-package com.sunny.module.stu.fragment;
+package com.sunny.module.stu.base;
 
 import com.sunny.module.stu.R;
 import com.sunny.module.stu.base.StuBaseFragment;

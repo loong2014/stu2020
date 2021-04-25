@@ -1,6 +1,8 @@
-package com.sunny.module.stu.fragment
+package com.sunny.module.stu.selector
 
+import com.sunny.module.stu.base.NormalFragment
 import com.sunny.module.stu.base.StuBaseFragment
+import com.sunny.module.stu.fragment.StuFragmentFragment
 import com.sunny.module.stu.git.StuGitFragment
 import com.sunny.module.stu.handler.StuHandlerFragment
 import java.util.*
@@ -17,8 +19,9 @@ object StuFragmentSelector {
 
         //
         result = when (type) {
-            "stu_handler" -> StuHandlerFragment()
             "stu_git" -> StuGitFragment()
+            "stu_fragment" -> StuFragmentFragment()
+            "stu_handler" -> StuHandlerFragment()
             else -> NormalFragment()
         }
         mFragmentMap[type] = result

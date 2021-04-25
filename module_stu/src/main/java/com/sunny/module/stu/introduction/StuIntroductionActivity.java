@@ -5,7 +5,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.sunny.lib.common.router.RouterConstant;
 import com.sunny.module.stu.R;
 import com.sunny.module.stu.base.StuBaseActivity;
-import com.sunny.module.stu.fragment.StuFragmentSelector;
+import com.sunny.module.stu.selector.StuFragmentSelector;
 
 @Route(path = RouterConstant.Stu.PageIntroduction)
 public class StuIntroductionActivity extends StuBaseActivity {

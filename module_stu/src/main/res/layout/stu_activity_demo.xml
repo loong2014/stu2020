@@ -19,6 +19,12 @@
 
         <com.sunny.module.stu.base.view.JumpTextView
             style="@style/StuJumpText"
+            android:text="Stu_Fragment"
+            app:jump_path="/stu/introduction"
+            app:jump_type="stu_fragment" />
+
+        <com.sunny.module.stu.base.view.JumpTextView
+            style="@style/StuJumpText"
             android:text="Stu_Thread"
             app:jump_path="/stu/introduction"
             app:jump_type="stu_thread" />
