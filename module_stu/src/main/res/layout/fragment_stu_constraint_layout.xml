@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="ConstraintLayout(约束布局)是什么？"
+            app:fold_layout_res_id="@+id/content_what" />
+
+        <LinearLayout
+            android:id="@+id/content_what"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="可以在Api9(2.3)以上的Android系统使用它" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="为了解决什么问题" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="解决布局嵌套过多的问题，以灵活的方式定位和调整小部件" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="与RelativeLayout(相对布局)对比" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="它与之相比更灵活，性能更好，而且它使用百分比来进行定位与布局，可以相对的解决屏幕适配问题。" />
+
+        </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="定位"
+            app:fold_layout_res_id="@+id/content_dir" />
+
+        <LinearLayout
+            android:id="@+id/content_dir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="Dir=Left/Right/Start/End/Top/Bottom" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="分配的是剩余空间" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="相对定位" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="layout_constraintDirA_toDirBOf=[view]
+                \n当前控件的DirA边界与view的DirB边界对齐" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="文本对齐" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="layout_constraintBaseline_toBaselineOf=[view]
+                \n当前控件基线与view的基线一致" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="角度定位" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="用一个角度和一个距离来约束两个控件的中心
+                \nlayout_constraintCircle=[view] //参照控件
+                \nlayout_constraintCircleAngle=[135] //角度
+                \nlayout_constraintCircleRadius=[100dp] //距离
+                \n当前控件的中心相对view的中心，偏移120度(右下角)，距离100dp" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="margin" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="layout_marginDir=[dp]
+                \n当前控件在Dir的方向上移动一定距离
+                \n生效前提是控件被约束，且dp必须大于0" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="可见性/goneMargin" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="A在B的右侧，当B不可见的时候，可以理解为B变成了一个不可见的点，位于原来位置的中心，而A依然根据B变成的点进行定位" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="layout_goneMarginDir=[dp]
+                \n主要用于约束控件的可见性被设置为gone的时候使用的margin值" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="居中" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="layout_constraintBottom_toBottomOf=[parent]
+                \nlayout_constraintLeft_toLeftOf=[parent]
+                \nlayout_constraintRight_toRightOf=[parent]
+                \nlayout_constraintTop_toTopOf=[parent]
+                \n控件相对于父控件居中显示" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="百分比偏移" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="layout_constraintVertical_bias=[0.5] //垂直偏移(垂直居中)
+                \nlayout_constraintHorizontal_bias=[0.9] //水平偏移(水平右侧)" />
+
+        </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="大小"
+            app:fold_layout_res_id="@+id/content_size" />
+
+        <LinearLayout
+            android:id="@+id/content_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="尺寸约束" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="控件的尺寸可以通过四种不同方式指定
+                \n1、使用指定的尺寸
+                \n2、使用wrap_content，让控件自己计算大小
+                \n3、0dp，配合约束代替match_parent
+                \n4、宽高比" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="宽高比" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="layout_constraintDimensionRatio=[ratio]
+                \nratio=x:y //=宽:高
+                \nratio=H,x:y //=高:宽
+                \nratio=W,x:y //=宽:高
+                \n宽或高至少有一个尺寸被设置为0dp时生效" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="最大/最小尺寸" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="当控件的高度或宽度为wrap_content时，可以设置控件的最大/最小高/宽度：
+                \nminWidth //最小的宽度
+                \nmaxWidth //最大的宽度
+                \nminHeight //最小的高度
+                \nmaxHeight //最大的高度
+                \n当ConstraintLayout为1.1版本以下时，使用这些属性需要加上强制约束
+                \nconstrainedWidth=[true]
+                \nconstrainedHeight=[true]" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="样式链/权重链" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="多个控件通过明确的相互约束来互相约束对方的位置，从而形成一个链条
+                \n可以设定链条中剩余空间的分发规则
+                \n当宽/高为warp_content时，分配剩余空间
+                \n当宽/高为0时，控件的宽/高平分剩余空间" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="样式链 //对链头生效
+                \nlayout_constraintHorizontal_chainStyle=[chain] //水平链
+                \nlayout_constraintVertical_chainStyle=[chain] //垂直链
+                \n|  **  **  **  | //CHAIN_SPREAD(默认)
+                \n|**    **    **| //CHAIN_SPREAD_INSIDE(链的两端贴近parent)
+                \n|    ******    | //CHAIN_PACKED(链的元素将被打包在一起)" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="权重链 // 对宽高为0dp的控件生效
+                \nlayout_constraintHorizontal_weight=[chain] //水平权重
+                \nlayout_constraintVertical_weight=[chain] //垂直权重" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="Dimensions" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="指定控件的宽度或高度占父控件空间的百分比，属性值在 0 到 1 之间
+                \nlayout_constrainWidth_percent=[0.1]
+                \nlayout_constrainHeight_percent=[0.2]" />
+
+        </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="辅助控件"
+            app:fold_layout_res_id="@+id/content_help" />
+
+        <LinearLayout
+            android:id="@+id/content_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="优化器(Optimizer)" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="当使用匹配约束(MATCH_CONSTRAINT)时，ConstraintLayout 将不得不对控件进行2次测量
+                \n可以通过给ConstraintLayout设置layout_optimizationLevel属性进行优化
+                \nnone：不应用优化
+                \nstandard：仅优化直接约束和屏障约束(默认的)
+                \ndirect：优化直接约束
+                \nbarrier：优化屏障约束
+                \nchain：优化链约束（实验）
+                \ndimensions：优化尺寸测量（实验）
+                \n可以设置多个值" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="组(Group)控件" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="Group可以把多个控件归为一组，方便隐藏或显示一组控件
+                \nconstraint_referenced_ids=[id1,id2,id3] //控件id" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="占位符(Placeholder)控件" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="在Placeholder中可使用setContent()设置另一个控件的id，使这个控件移动到占位符的位置
+                \ncontent=[id] //默认控件" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="指示线(Guideline)控件" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="orientation=[vertical/horizontal] //方向
+                \nlayout_constraintGuide_begin=[dp] //开始位置
+                \nlayout_constraintGuide_end=[dp] 结束位置
+                \nlayout_constraintGuide_percent=[0.5] //距离顶部/左侧的百分比
+                \n宽度和高度均为0，可见性为GONE，即指示线只是为了帮助其它View进行定位，实际上并不会出现在页面上" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="屏障(Barrier)控件" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="barrierDirection=[dir] //位置
+                \nconstraint_referenced_ids=[id1,id2,id3] //引用的控件id
+                \nbarrierAllowsGoneWidgets=[true] //当引用的控件为gone时，Barrier的创建在已gone控件已解析的位置上创建，fase则不考虑已gone的控件
+                \nBarrier可以在多个控件的一侧建立一个屏障控件，帮助其它view进行定位" />
+
+            <com.sunny.module.stu.base.view.FoldTextView
+                style="@style/StuSubFoldText"
+                android:text="Flow控件"
+                app:fold_layout_res_id="@+id/content_flow" />
+
+            <LinearLayout
+                android:id="@+id/content_flow"
+                style="@style/StuSubContentLayout"
+                android:visibility="gone">
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="Flow 是一种新的虚拟布局，它专门用来构建链式排版效果，当出现空间不足的情况时能够自动换行，甚至是自动延展到屏幕的另一区域。当需要对多个元素进行链式布局，但不确定在运行时布局空间的实际大小是多少时 Flow 对你来说就非常有用。你可以使用 Flow 来实现让布局随着应用屏幕尺寸的变化 (比如设备发生旋转后出现的屏幕宽度变化) 而动态地进行自适应。此外，Flow 是一种虚拟布局，并不会作为视图添加到视图层级结构中，而是仅仅引用其它视图来辅助它们在布局系统中完成各自的布局功能" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="wrapMode //它可以决定在内容溢出 (或出现换行) 时的布局行为
+                \n none – 所有引用的视图以一条链的方式进行布局，如果内容溢出则溢出内容不可见
+                \n chain – 当出现溢出时，溢出的内容会自动换行，以新的一条链的方式进行布局，不足一行居中显示
+                \n align – 同 chain 类似，但是不以行而是以列的方式进行布局" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="none 此模式下控件不会自动换行，且由于屏幕宽度无法完整展示，所以只会展示一部分内容
+                \n flow_horizontalStyle = [chain] //Chains 链的展示形式
+                \n flow_verticalStyle = [chain]
+                \n flow_horizontalBias = [float] //只在 style 为 packed 时才生效，用于控制控件在水平方向上的偏移量
+                \n flow_verticalBias = [float]
+                \n flow_horizontalGap = [dp] //设置每个控件的左右间距
+                \n flow_verticalGap = [dimension]
+                \n flow_horizontalAlign = [start|end]
+                \n flow_verticalAlign = [top|bottom|center|baseline]" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="chain //此模式下控件会自动换行，且不足一行的内容会居中显示
+                \n flow_firstHorizontalStyle = [spread|spread_inside|packed] //第一行 Chains 链的展示形式
+                \n flow_firstVerticalStyle = [spread|spread_inside|packed]
+                \n flow_firstHorizontalBias = [float] //只在 style 为 packed 时才生效，用于控制第一行在水平方向上的偏移量
+                \n flow_firstVerticalBias = [float]
+                \n flow_lastHorizontalStyle = [spread|spread_inside|packed]  //最后一行 Chains 链的展示形式
+                \n flow_lastHorizontalBias = [float]" />
+
+                <com.sunny.module.stu.base.view.ContentView
+                    style="@style/StuContentText"
+                    android:text="aligned //此模式和 chain 类似，区别在于不足一行的内容会靠边对齐显示" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="性能分析"
+            app:fold_layout_res_id="@+id/content_analysis" />
+
+        <LinearLayout
+            android:id="@+id/content_analysis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone"></LinearLayout>
+    </LinearLayout>
+</ScrollView>

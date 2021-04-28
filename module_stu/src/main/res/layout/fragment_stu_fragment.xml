@@ -23,18 +23,89 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <com.sunny.module.stu.base.view.ContentView
-                style="@style/StuContentText"
-                android:text="分布式版本控制系统" />
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="onAttach/onDetach" />
+
+            <com.sunny.lib.ui.SunnyImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <com.sunny.lib.ui.SunnyTextView
                 style="@style/StuTitleTextLevel2"
-                android:text="查看远程仓库" />
+                android:text="activity/fragment" />
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
-                android:text="git remote -v" />
+                android:text="onCreate/onAttach：fragment被添加到activity中，只回调一次" />
 
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onCreate/onCreate：" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onCreate/onCreateView：" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onCreate/onActivityCreated：" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onStart/onStart：" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onResume/onResume：" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onPause/onPause：" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onStop/onStop：" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onDestroy/onDestroyView：" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onDestroy/onDestroy：" />
+
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="onDestroy/onDetach //fragment从activity中删除/替换或者activity的onDestroy之后，只回调一次" />
+
+
+        </LinearLayout>
+
+
+        <!-- 基模块 -->
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="xxxx"
+            app:fold_layout_res_id="@+id/content_" />
+
+        <LinearLayout
+            android:id="@+id/content_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.lib.ui.SunnyTextView
+                style="@style/StuTitleTextLevel2"
+                android:text="title" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="content" />
 
         </LinearLayout>
 
