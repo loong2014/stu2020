@@ -12,7 +12,7 @@
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
-            android:text="mac下对文件加密压缩"
+            android:text="adb 连接指定设备"
             app:fold_layout_res_id="@+id/content_1" />
 
         <LinearLayout
@@ -25,14 +25,14 @@
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
-                android:text="zip -e 压缩后文件名.zip 压缩前文件名.type" />
+                android:text="adb -s [devName] [opt]" />
 
         </LinearLayout>
 
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
-            android:text="grep查找字符串"
+            android:text="unable to connect to xxx"
             app:fold_layout_res_id="@+id/content_2" />
 
         <LinearLayout
@@ -45,10 +45,11 @@
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
-                android:text="grep -r [keyWord] [path]" />
+                android:text=" setprop service.adb.tcp.port 555
+                \n stop adbd
+                \n staart adbd" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 </ScrollView>

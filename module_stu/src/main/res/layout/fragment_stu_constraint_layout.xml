@@ -353,6 +353,11 @@
                     android:text="aligned //此模式和 chain 类似，区别在于不足一行的内容会靠边对齐显示" />
             </LinearLayout>
 
+            <com.sunny.module.stu.base.view.FoldTextView
+                style="@style/StuSubFoldText"
+                android:text="Layer控件"
+                app:fold_layout_res_id="@+id/content_flow" />
+
         </LinearLayout>
 
         <com.sunny.module.stu.base.view.FoldTextView

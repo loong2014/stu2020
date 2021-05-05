@@ -12,7 +12,7 @@
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
-            android:text="mac下对文件加密压缩"
+            android:text="网络协议"
             app:fold_layout_res_id="@+id/content_1" />
 
         <LinearLayout
@@ -22,6 +22,17 @@
             android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
             android:orientation="vertical"
             android:visibility="gone">
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="七层
+                \n应用层(提供文件传输)(HTTP)
+                \n表示层(提供数据解释)
+                \n会话层(提供服务到服务的连接)
+                \n传输层(提供端口到端口的连接)(TCP,UDP)
+                \n网络层(提供网络连接A-B-C)(IP)
+                \n数据链路层(提供数据传送服务A-B)(ARP)
+                \n物理层(提供传输媒介)(ISO,IEEE)" />
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"

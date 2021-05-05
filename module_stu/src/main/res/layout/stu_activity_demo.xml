@@ -35,5 +35,17 @@
             app:jump_path="/stu/introduction"
             app:jump_type="stu_handler" />
 
+        <com.sunny.module.stu.base.view.JumpTextView
+            style="@style/StuJumpText"
+            android:text="Stu_Adb"
+            app:jump_path="/stu/introduction"
+            app:jump_type="stu_adb" />
+
+        <com.sunny.module.stu.base.view.JumpTextView
+            style="@style/StuJumpText"
+            android:text="Stu_Http"
+            app:jump_path="/stu/introduction"
+            app:jump_type="stu_http" />
+
     </LinearLayout>
 </ScrollView>
