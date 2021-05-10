@@ -27,12 +27,13 @@
                 style="@style/StuContentText"
                 android:text="adb -s [devName] [opt]" />
 
+
         </LinearLayout>
 
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
-            android:text="unable to connect to xxx"
+            android:text="adb 查看已安装应用"
             app:fold_layout_res_id="@+id/content_2" />
 
         <LinearLayout
@@ -45,9 +46,8 @@
 
             <com.sunny.module.stu.base.view.ContentView
                 style="@style/StuContentText"
-                android:text=" setprop service.adb.tcp.port 555
-                \n stop adbd
-                \n staart adbd" />
+                android:text="adb shell pm list packages -s [pkgName]
+                \n判断某个应用是否已安装"/>
 
         </LinearLayout>
 
