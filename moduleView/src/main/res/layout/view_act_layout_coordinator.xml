@@ -58,6 +58,7 @@
                 android:id="@+id/mToolBar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="#66ff00ff"
                 app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

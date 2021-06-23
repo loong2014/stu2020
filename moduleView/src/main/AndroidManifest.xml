@@ -29,6 +29,7 @@
         <activity android:name=".bar.BlackBarActivity" />
         <activity android:name=".bar.StatusBarActivity" />
         <activity android:name=".layout.CardViewActivity" />
+        <activity android:name=".layout.TitleUpdateLayoutActivity" />
 
     </application>
 

@@ -5,5 +5,9 @@
     <application android:theme="@style/Theme.Family">
         <activity android:name=".LayoutDemoActivity" />
         <activity android:name=".xxx.XxxLayoutActivity" />
+        <activity android:name=".layout.CoordinatorLayoutActivity" />
+        <activity android:name=".layout.DrawerLayoutActivity" />
+        <activity android:name=".layout.CardViewActivity" />
+        <activity android:name=".layout.TitleUpdateLayoutActivity" />
     </application>
 </manifest>

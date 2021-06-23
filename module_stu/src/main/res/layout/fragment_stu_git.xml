@@ -85,6 +85,34 @@
 
         </LinearLayout>
 
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="一个git的分支挪至另一个git"
+            app:fold_layout_res_id="@+id/content_remote" />
+
+
+    <LinearLayout
+        android:id="@+id/content_remote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.sunny.module.stu.base.view.ContentView
+            style="@style/StuContentText"
+            android:text="git branch //查看分支
+            \ngit remote -v //查看远端分支(此时分支名称为origin)
+            \ngit remote rename origin old-origin //修改当前分支名称
+            \ngit remote -v //再次查看远端分支(此时分支名称为old-origin)
+            \ngit remote add origin [path] //path是另一个git的项目地址
+            \ngit remote -v //再次查看远端分支(此时old-origin 对应 旧git；origin 对应 新git)
+            \ngit push -u origin //提交到新服务器" />
+
+
+    </LinearLayout>
         <com.sunny.module.stu.base.view.FoldTextView
             style="@style/StuFoldText"
             android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
