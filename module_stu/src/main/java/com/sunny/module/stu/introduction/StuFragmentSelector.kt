@@ -1,8 +1,9 @@
-package com.sunny.module.stu.selector
+package com.sunny.module.stu.introduction
 
 import com.sunny.module.stu.adb.StuAdbFragment
 import com.sunny.module.stu.base.NormalFragment
 import com.sunny.module.stu.base.StuBaseFragment
+import com.sunny.module.stu.book.StuXLHFragment
 import com.sunny.module.stu.fragment.StuFragmentFragment
 import com.sunny.module.stu.fresco.StuFrescoFragment
 import com.sunny.module.stu.git.StuGitFragment
@@ -28,6 +29,7 @@ object StuFragmentSelector {
             "stu_adb" -> StuAdbFragment()
             "stu_http" -> StuHttpFragment()
             "stu_fresco" -> StuFrescoFragment()
+            "stu_xlh" -> StuXLHFragment()
             else -> NormalFragment()
         }
         mFragmentMap[type] = result

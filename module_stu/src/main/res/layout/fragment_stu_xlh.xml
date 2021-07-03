@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="区别及使用场景"
+            app:fold_layout_res_id="@+id/content_1" />
+
+        <LinearLayout
+            android:id="@+id/content_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="Serializable是Java的序列化接口、使用简单，开销大(大量I/O操作)
+                \n场景：本地存储/网络传输" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="Parcelable是Android的序列化方式，使用麻烦，效率高(Parcel)
+                \n场景：内存序列化" />
+
+        </LinearLayout>
+
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="Serializable"
+            app:fold_layout_res_id="@+id/content_2" />
+
+        <LinearLayout
+            android:id="@+id/content_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="实现方式
+                \nXxx implements Serializable" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="通过ObjectOutputStream和ObjectInputStream实现序列化和反序列化" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="serialVersionUID //反序列化时校验
+                \nprivate static final long serialVersionUID = 1L" />
+
+        </LinearLayout>
+
+        <com.sunny.module.stu.base.view.FoldTextView
+            style="@style/StuFoldText"
+            android:layout_marginStart="@dimen/stu_title_marge_left_level_1"
+            android:text="Parcelable"
+            app:fold_layout_res_id="@+id/content_3" />
+
+        <LinearLayout
+            android:id="@+id/content_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/stu_content_marge_left_level_1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="实现方式
+                \nXxx implements Parcelable
+                \n通过工具自动实现必要方法" />
+
+            <com.sunny.module.stu.base.view.ContentView
+                style="@style/StuContentText"
+                android:text="" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

@@ -40,6 +40,8 @@ class RouterConstant {
             const val PageBarBlack = "/view/bar/black"
             const val PageCardView = "/view/cardview"
             const val PageTitleUpdate = "/view/titleupdate"
+            const val PageRemoteViewsService = "/view/remoteviews/service"
+            const val PageRemoteViewsClient = "/view/remoteviews/client"
         }
     }
 
@@ -63,6 +65,7 @@ class RouterConstant {
     open class Stu {
         companion object {
             const val PageDemo = "/stu/demo"
+            const val PageBook01 = "/stu/book01"
             const val PageThread = "/stu/thread"
             const val PageIntroduction = "/stu/introduction"
         }

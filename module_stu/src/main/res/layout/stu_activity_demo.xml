@@ -53,5 +53,11 @@
             app:jump_path="/stu/fresco"
             app:jump_type="stu_fresco" />
 
+        <com.sunny.module.stu.base.view.JumpTextView
+            style="@style/StuJumpText"
+            android:text="Android开发艺术探索"
+            app:jump_path="/stu/book01"
+            app:jump_type="stu_book01" />
+
     </LinearLayout>
 </ScrollView>

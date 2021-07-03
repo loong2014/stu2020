@@ -30,6 +30,8 @@
         <activity android:name=".bar.StatusBarActivity" />
         <activity android:name=".layout.CardViewActivity" />
         <activity android:name=".layout.TitleUpdateLayoutActivity" />
+        <activity android:name=".remote.LayoutRemoteViewsServiceActivity" />
+        <activity android:name=".remote.LayoutRemoteViewsClientActivity" />
 
     </application>
 

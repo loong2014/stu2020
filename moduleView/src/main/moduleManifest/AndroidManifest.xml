@@ -9,5 +9,7 @@
         <activity android:name=".layout.DrawerLayoutActivity" />
         <activity android:name=".layout.CardViewActivity" />
         <activity android:name=".layout.TitleUpdateLayoutActivity" />
+        <activity android:name=".remote.LayoutRemoteViewsClientActivity" />
+        <activity android:name=".remote.LayoutRemoteViewsServiceActivity" />
     </application>
 </manifest>

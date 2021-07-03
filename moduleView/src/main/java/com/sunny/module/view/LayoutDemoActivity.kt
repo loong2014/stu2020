@@ -83,6 +83,8 @@ class LayoutDemoActivity : BaseActivity() {
         list.add(LayoutDemoModel(name = "BlackBg", jumpPath = RouterConstant.View.PageBarBlack))
         list.add(LayoutDemoModel(name = "CardView", jumpPath = RouterConstant.View.PageCardView))
         list.add(LayoutDemoModel(name = "TitleUpdate", jumpPath = RouterConstant.View.PageTitleUpdate))
+        list.add(LayoutDemoModel(name = "RemoteViewsService", jumpPath = RouterConstant.View.PageRemoteViewsService))
+        list.add(LayoutDemoModel(name = "RemoteViewsClient", jumpPath = RouterConstant.View.PageRemoteViewsClient))
         return list
     }
 
