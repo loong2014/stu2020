@@ -1,8 +1,8 @@
-package com.sunny.module.stu.BAndroid.ABinder;
+package com.sunny.module.stu.BAndroid.ABinder.概念;
 
 import com.sunny.module.stu.base.StuImpl;
 
-public class Fmmap extends StuImpl {
+public class Stu_mmap extends StuImpl {
 
     /*
     void* mmap(void* start,size_t length,int prot,int flags,int fd,off_t offset);

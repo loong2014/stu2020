@@ -1,8 +1,8 @@
-package com.sunny.module.stu.BAndroid.ABinder;
+package com.sunny.module.stu.BAndroid.ABinder.概念;
 
 import com.sunny.module.stu.base.StuImpl;
 
-public class EIPCThreadState extends StuImpl {
+public class Stu_IPCThreadState extends StuImpl {
 
     @Override
     public void 是什么() {

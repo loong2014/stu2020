@@ -1,4 +1,4 @@
-package com.sunny.module.stu.AJAVA.J集合;
+package com.sunny.module.stu.AJAVA.J集合框架;
 
 import java.util.Collections;
 import java.util.IdentityHashMap;

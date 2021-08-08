@@ -1,11 +1,11 @@
-package com.sunny.module.stu.BAndroid.ABinder;
+package com.sunny.module.stu.BAndroid.ABinder.概念;
 
 import com.sunny.module.stu.base.StuImpl;
 
-public class Fioctl extends StuImpl {
+public class Stu_ioctl extends StuImpl {
 
     /**
-     * linux 提供的命令，不通的cmd对于不同的操作
+     * linux 提供的命令，不同的cmd对于不同的操作
      * 在binder中，ioctl的cmd为BINDER_WRITE_READ，用于完成数据的接发
      */
     @Override
