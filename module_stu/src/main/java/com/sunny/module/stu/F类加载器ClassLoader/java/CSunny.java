@@ -1,4 +1,4 @@
-package com.sunny.module.stu.AJAVA.C类加载;
+package com.sunny.module.stu.F类加载器ClassLoader.java;
 
 public class CSunny {
 

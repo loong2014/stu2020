@@ -23,8 +23,8 @@ public class LineNumberTable_attribute extends StuImpl {
     public void s_数据结构() {
 /*
     LineNumberTable_attribute{
-        u2          attribute_name_index // 指向CONSTANT_Utf8_info类型常量的索引，表示字符串"LineNumberTable"；
-        u4          line_number_table // 每个成员都表明源文件中行号的变化，在code[]数组中都会有对应的标记点
+        u2          attribute_name_index    // 指向CONSTANT_Utf8_info类型常量的索引，表示字符串"LineNumberTable"
+        u4          attribute_length
         u2          line_number_table_length  //
 line_number_table      line_number_table[line_number_table_length] //
     }
@@ -34,7 +34,7 @@ line_number_table      line_number_table[line_number_table_length] //
 
     private void line_number_table() {
         /*
-    exception_table {
+    line_number_table {
         u2      start_pc    // 必须是code[]数组的一个索引，code[]数组在该索引处的字符表示源文件中新的行的起点
         u2      line_number      // 必须与源文件的行号相匹配
     }

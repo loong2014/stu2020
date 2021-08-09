@@ -2,16 +2,24 @@ package com.sunny.module.stu.AJAVA.H垃圾回收GC;
 
 import com.sunny.module.stu.base.StuImpl;
 
-
 /*
 https://blog.csdn.net/laomo_bible/article/details/83112622
  */
 public class Stu常用算法 extends StuImpl {
+
     @Override
     public void a_是什么() {
-
         //GC常用算法有：标记-清除算法，标记-压缩算法，复制算法，分代收集算法。
+        标记_清除算法();
 
+        标记_压缩算法();
+
+        复制算法();
+
+        分代收集算法();
+    }
+
+    private void 标记_清除算法() {
         //标记-清除算法
         /*
         为每个对象存储一个标记位，记录对象的状态（活着或是死亡）。
@@ -27,6 +35,9 @@ public class Stu常用算法 extends StuImpl {
 所有对象都要在清除阶段扫描一遍，因此算法复杂度较高。没有移动对象，导致可能出现很多碎片空间无法利用的情况。
 
          */
+    }
+
+    private void 标记_压缩算法() {
 
         //  标记-压缩算法（标记-整理）
         /*
@@ -40,7 +51,9 @@ public class Stu常用算法 extends StuImpl {
 缺点
 如果存活的对象过多，整理阶段将会执行较多复制操作，导致算法效率降低。
          */
+    }
 
+    private void 复制算法() {
         // 复制算法
         /*
         该算法将内存平均分成两部分，然后每次只使用其中的一部分，当这部分内存满的时候，
@@ -54,7 +67,9 @@ public class Stu常用算法 extends StuImpl {
 每次运行，总有一半内存是空的，导致可使用的内存空间只有原来的一半。
          */
 
+    }
 
+    private void 分代收集算法() {
         // 分代收集算法
         /*
         现在的虚拟机垃圾收集大多采用这种方式，它根据对象的生存周期，将堆分为新生代(Young)和老年代(Tenure)。
@@ -72,7 +87,7 @@ public class Stu常用算法 extends StuImpl {
 
         老年代经过这么几次折腾，也就扛不住了（空间被用完），好，那就来次集体大扫除（Full GC），也就是全量回收。
         如果Full GC使用太频繁的话，无疑会对系统性能产生很大的影响。所以要合理设置年轻代与老年代的大小，尽量减少Full GC的操作。
-
          */
     }
+
 }

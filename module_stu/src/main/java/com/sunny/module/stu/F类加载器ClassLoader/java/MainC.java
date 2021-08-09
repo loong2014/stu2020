@@ -1,4 +1,4 @@
-package com.sunny.module.stu.AJAVA.C类加载;
+package com.sunny.module.stu.F类加载器ClassLoader.java;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -67,7 +67,7 @@ public class MainC {
         }
 
 
-        Class clazz = classLoader.loadClass("com.sunny.module.stu.AJAVA.C类加载.CSunny");
+        Class clazz = classLoader.loadClass("com.sunny.module.stu.F类加载器ClassLoader.java.CSunny");
         Object object = clazz.getConstructor().newInstance();
         System.out.println("object :" + object);
 
