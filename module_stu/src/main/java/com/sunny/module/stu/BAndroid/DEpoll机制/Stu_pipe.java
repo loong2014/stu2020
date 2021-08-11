@@ -2,7 +2,7 @@ package com.sunny.module.stu.BAndroid.DEpoll机制;
 
 import com.sunny.module.stu.base.StuImpl;
 
-public class 管道pipe extends StuImpl {
+public class Stu_pipe extends StuImpl {
 
     @Override
     public void a_是什么() {

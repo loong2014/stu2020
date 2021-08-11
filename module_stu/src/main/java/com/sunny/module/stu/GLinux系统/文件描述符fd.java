@@ -1,4 +1,4 @@
-package com.sunny.module.stu.BAndroid.DEpoll机制;
+package com.sunny.module.stu.GLinux系统;
 
 import com.sunny.module.stu.base.StuImpl;
 
@@ -9,6 +9,7 @@ public class 文件描述符fd extends StuImpl {
     @Override
     public void a_是什么() {
         // 文件描述符，是对文件的描述。在unix里，“一切皆为文件”，设备也会被视为文件。
+        // 包括 网络连接套接字、管道
         /*
         进程：
             file descriptor
@@ -34,11 +35,16 @@ public class 文件描述符fd extends StuImpl {
                 只有该fd是指向某文件的最后一个fd时，文件对应资源才会被释放。
          */
         /*
-        2. 访问文件需要通过系统调用，进程不能直接访问文件
+            2. 访问文件需要通过系统调用，进程不能直接访问文件
 
-        3. 可以通过/proc/PID/fd/查看PID对应的进程打开了哪些文件
+            3. 可以通过/proc/PID/fd/查看PID对应的进程打开了哪些文件
 
-        4. 类Unix系统中，文件描述符还可以指向其他io设备，比如网络连接套接字、管道等
+            4. 类Unix系统中，文件描述符还可以指向其他io设备，比如网络连接套接字、管道等
+         */
+    }
+    private void stu_inode_table(){
+        /*
+
          */
     }
 }

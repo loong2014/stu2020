@@ -1,11 +1,11 @@
-package com.sunny.module.stu.BAndroid.DEpoll机制;
+package com.sunny.module.stu.GLinux系统;
 
 import com.sunny.module.stu.base.StuImpl;
 
 /*
 https://cloud.tencent.com/developer/article/1005481
  */
-public class IO模型 extends StuImpl {
+public class Stu_IO模型 extends StuImpl {
     @Override
     public void a_是什么() {
         /*

@@ -40,8 +40,16 @@ public class Stu_nativePollOnce {
 119}
      */
 
-    // xref: /system/core/libutils/Looper.cpp
+    // xref: /system/core/include/utils/Looper.h
     // pollOnce
+    /*
+263    int pollOnce(int timeoutMillis, int* outFd, int* outEvents, void** outData);
+264    inline int pollOnce(int timeoutMillis) {
+265        return pollOnce(timeoutMillis, NULL, NULL, NULL);
+266    }
+     */
+
+    // xref: /system/core/libutils/Looper.cpp
     /*
 178int Looper::pollOnce(int timeoutMillis, int* outFd, int* outEvents, void** outData) {
 179    int result = 0;
