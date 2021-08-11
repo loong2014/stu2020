@@ -24,7 +24,14 @@ public class Stu_epoll extends StuImpl {
                 EPOLL_CTL_DEL
             通过mmap减少用户态和内核太之间的数据交换
          */
+    }
 
+    @Override
+    public void s_数据结构() {
+        //
+        /*
+
+         */
 
     }
 
