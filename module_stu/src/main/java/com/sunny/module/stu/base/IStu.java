@@ -33,4 +33,7 @@ public interface IStu {
     void s_面试点();
 
     void s_数据结构();
+
+    void p_流程();
+
 }

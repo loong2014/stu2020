@@ -82,4 +82,9 @@ public class StuImpl implements IStu {
     public void s_数据结构() {
 
     }
+
+    @Override
+    public void p_流程() {
+
+    }
 }
