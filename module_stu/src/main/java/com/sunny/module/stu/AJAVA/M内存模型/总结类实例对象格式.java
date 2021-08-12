@@ -2,6 +2,7 @@ package com.sunny.module.stu.AJAVA.M内存模型;
 
 import com.sunny.module.stu.base.StuImpl;
 
+
 public class 总结类实例对象格式 extends StuImpl {
 
     @Override
@@ -23,6 +24,35 @@ public class 总结类实例对象格式 extends StuImpl {
         stuMarkWord();
     }
 
+    /*
+    https://blog.csdn.net/zwjyyy1203/article/details/106217887
+     */
+    private void stu_ObjectMonitor(){
+
+        // 通常所说的对象的内置锁，是对象头Mark Word中的重量级锁指针指向的monitor对象，
+        // 该对象是在HotSpot底层C++语言编写的(openjdk里面看)，简单看一下代码：
+        /*
+//结构体如下
+ObjectMonitor::ObjectMonitor() {
+  _header       = NULL;
+  _count       = 0;
+  _waiters      = 0,
+  _recursions   = 0;       //线程的重入次数
+  _object       = NULL;
+  _owner        = NULL;    //标识拥有该monitor的线程
+  _WaitSet      = NULL;    //等待线程组成的双向循环链表，_WaitSet是第一个节点
+  _WaitSetLock  = 0 ;
+  _Responsible  = NULL ;
+  _succ         = NULL ;
+  _cxq          = NULL ;    //多线程竞争锁进入时的单向链表
+  FreeNext      = NULL ;
+  _EntryList    = NULL ;    //_owner从该双向循环链表中唤���线程结点，_EntryList是第一个节点
+  _SpinFreq     = 0 ;
+  _SpinClock    = 0 ;
+  OwnerIsThread = 0 ;
+}
+         */
+    }
     private void stuMarkWord() {
 
 /*

@@ -90,7 +90,7 @@ public class CrashManager {
         return false;
     }
 
-    public static class CrashHandler implements Thread.UncaughtExceptionHandler {
+    static class CrashHandler implements Thread.UncaughtExceptionHandler {
 
         /**
          * 系统默认的异常处理

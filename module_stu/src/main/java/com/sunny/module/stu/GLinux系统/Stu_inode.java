@@ -96,6 +96,26 @@ public class Stu_inode extends StuImpl {
     @Override
     public void s_数据结构() {
         /*
+        Linux 系统中有一个名为 super block 的“硬盘地图”。Linux 并不是把文件内容直接写入到这个“硬盘地图”里面，
+        而是在里面记录着整个文件系统的信息。Linux 只是把每个文件的权限与属性记录在inode 中，
+        而且每个文件占用一个独立的 inode 表格，该表格的大小默认为 128 字节，里面记录着如下信息：
+            该文件的访问权限（read、write、execute）；
+            该文件的所有者与所属组（owner、group）；
+            该文件的大小（size）；
+            该文件的创建或内容修改时间（ctime）；
+            该文件的最后一次访问时间（atime）；
+            该文件的修改时间（mtime）；
+            文件的特殊权限（SUID、SGID、SBIT）；
+            该文件的真实数据地址（point）。
+
+        而文件的实际内容则保存在 block 块中（大小可以是 1KB、2KB 或 4KB），一个 inode 的默认大小仅为 128B（Ext3），
+            记录一个 block 则消耗 4B。当文件的 inode 被写满后，Linux 系统会自动分配出一个 block 块，
+            专门用于像 inode 那样记录其他 block 块的信息，这样把各个block 块的内容串到一起，就能够让用户读到完整的文件内容了。
+            对于存储文件内容的 block 块，有下面两种常见情况（以 4KB 的 block 大小为例进行说明）:
+                文件很小（1KB），但依然会占用一个 block，因此会潜在地浪费 3KB。
+                文件很大（5KB），那么会占用两个 block（5KB-4KB 后剩下的 1KB 也要占用一个 block）。
+
+        //
         inode包含文件的元信息，具体来说有以下内容：
             * Size：         文件的字节数
             * Uid：          文件拥有者的User ID
