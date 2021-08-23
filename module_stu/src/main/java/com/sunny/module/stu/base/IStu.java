@@ -36,4 +36,6 @@ public interface IStu {
 
     void p_流程();
 
+    void c_创建();
+
 }

@@ -3,7 +3,6 @@ package com.sunny.module.stu.BAndroid.ABinder.demo;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-import com.sunny.module.aidl.ISunny;
 
 public class StuAidl {
 

@@ -129,7 +129,6 @@ public class Stu_注册系统服务 extends StuImpl {
         }
          */
 
-
         // http://androidxref.com/6.0.1_r10/xref/frameworks/native/libs/binder/BpBinder.cpp
         // IPCThreadState::transact(0, ADD_SERVICE_TRANSACTION, data, reply, 0);
         /*
@@ -313,13 +312,15 @@ public class Stu_注册系统服务 extends StuImpl {
          */
 
         // ioctl -> binder_ioctl -> binder_ioctl_write_read
-
         /*
         ioctl(mProcess->mDriverFD, BINDER_WRITE_READ, &bwr)
         ===> binder_ioctl(mProcess->mDriverFD, BINDER_WRITE_READ, &bwr)
             ===> binder_ioctl_write_read(filp, cmd, arg, thread)
          */
+
         // binder_ioctl_write_read
+        // copy_from_user   // 用户空间数据copy到内核空间
+        // copy_to_user     // 内核空间数据copy到用户空间
         /*
         static int binder_ioctl_write_read(
                         struct file *filp,
@@ -360,6 +361,172 @@ public class Stu_注册系统服务 extends StuImpl {
         }
          */
 
+        // binder_thread_write
+        // binder_transaction(proc, thread, &tr, cmd == BC_REPLY)
+        /*
+        struct binder_transaction_data tr
+        copy_from_user(&tr, ptr, sizeof(tr))
+        binder_transaction(proc, thread, &tr, cmd == BC_REPLY)
+
+        static int binder_thread_write(struct binder_proc *proc,
+                        struct binder_thread *thread,       // thread
+                        binder_uintptr_t binder_buffer,     // bwr.write_buffer
+                        size_t size,                        // bwr.write_size
+                        binder_size_t *consumed)            // &bwr.write_consumed
+        {
+            uint32_t cmd;
+            void __user *buffer = (void __user *)(uintptr_t)binder_buffer;
+            void __user *ptr = buffer + *consumed;
+            void __user *end = buffer + size;
+            while (ptr < end && thread->return_error == BR_OK) {
+                //拷贝用户空间的cmd命令，此时为BC_TRANSACTION
+                if (get_user(cmd, (uint32_t __user *)ptr)) -EFAULT;
+                ptr += sizeof(uint32_t);
+                switch (cmd) {
+                case BC_TRANSACTION:
+                case BC_REPLY: {
+                    struct binder_transaction_data tr;
+                    //拷贝用户空间的binder_transaction_data
+                    if (copy_from_user(&tr, ptr, sizeof(tr)))   return -EFAULT;
+                    ptr += sizeof(tr);
+                    // 见小节4.3】
+                    binder_transaction(proc, thread, &tr, cmd == BC_REPLY);
+                    break;
+                }
+                ...
+            }
+            *consumed = ptr - buffer;
+          }
+          return 0;
+        }
+         */
+
+        // binder_transaction(proc, thread, &tr, cmd == BC_REPLY)
+        /*
+        struct binder_transaction *t;
+        struct binder_work *tcomplete;
+
+        static void binder_transaction(struct binder_proc *proc,
+                       struct binder_thread *thread,
+                       struct binder_transaction_data *tr, int reply){
+            struct binder_transaction *t;
+            struct binder_work *tcomplete;
+            ...
+
+            if (reply) {
+                ...
+            }else {
+                if (tr->target.handle) {
+                    ...
+                } else {
+                    // handle=0则找到servicemanager实体
+                    target_node = binder_context_mgr_node;
+                }
+                //target_proc为servicemanager进程
+                target_proc = target_node->proc;
+            }
+
+            if (target_thread) {
+                ...
+            } else {
+                //找到servicemanager进程的todo队列
+                target_list = &target_proc->todo;
+                target_wait = &target_proc->wait;
+            }
+
+            t = kzalloc(sizeof(*t), GFP_KERNEL);
+            tcomplete = kzalloc(sizeof(*tcomplete), GFP_KERNEL);
+
+            //非oneway的通信方式，把当前thread保存到transaction的from字段
+            if (!reply && !(tr->flags & TF_ONE_WAY))
+                t->from = thread;
+            else
+                t->from = NULL;
+
+            t->sender_euid = task_euid(proc->tsk);
+            t->to_proc = target_proc; //此次通信目标进程为servicemanager进程
+            t->to_thread = target_thread;
+            t->code = tr->code;  //此次通信code = ADD_SERVICE_TRANSACTION
+            t->flags = tr->flags;  // 此次通信flags = 0
+            t->priority = task_nice(current);
+
+            //从servicemanager进程中分配buffer
+            t->buffer = binder_alloc_buf(target_proc, tr->data_size,
+                tr->offsets_size, !reply && (t->flags & TF_ONE_WAY));
+
+            t->buffer->allow_user_free = 0;
+            t->buffer->transaction = t;
+            t->buffer->target_node = target_node;
+
+            if (target_node)
+                binder_inc_node(target_node, 1, 0, NULL); //引用计数加1
+            offp = (binder_size_t *)(t->buffer->data + ALIGN(tr->data_size, sizeof(void *)));
+
+            //分别拷贝用户空间的binder_transaction_data中ptr.buffer和ptr.offsets到内核
+            copy_from_user(t->buffer->data,
+                (const void __user *)(uintptr_t)tr->data.ptr.buffer, tr->data_size);
+            copy_from_user(offp,
+                (const void __user *)(uintptr_t)tr->data.ptr.offsets, tr->offsets_size);
+
+            off_end = (void *)offp + tr->offsets_size;
+
+            for (; offp < off_end; offp++) {
+                struct flat_binder_object *fp;
+                fp = (struct flat_binder_object *)(t->buffer->data + *offp);
+                off_min = *offp + sizeof(struct flat_binder_object);
+                switch (fp->type) {
+                    case BINDER_TYPE_BINDER:
+                    case BINDER_TYPE_WEAK_BINDER: {
+                      struct binder_ref *ref;
+                      //【见4.3.1】
+                      struct binder_node *node = binder_get_node(proc, fp->binder);
+                      if (node == NULL) {
+                        //服务所在进程 创建binder_node实体【见4.3.2】
+                        node = binder_new_node(proc, fp->binder, fp->cookie);
+                        ...
+                      }
+                      //servicemanager进程binder_ref【见4.3.3】
+                      ref = binder_get_ref_for_node(target_proc, node);
+                      ...
+                      //调整type为HANDLE类型
+                      if (fp->type == BINDER_TYPE_BINDER)
+                        fp->type = BINDER_TYPE_HANDLE;
+                      else
+                        fp->type = BINDER_TYPE_WEAK_HANDLE;
+                      fp->binder = 0;
+                      fp->handle = ref->desc; //设置handle值
+                      fp->cookie = 0;
+                      binder_inc_ref(ref, fp->type == BINDER_TYPE_HANDLE,
+                               &thread->todo);
+                    } break;
+                    case :...
+            }
+
+            if (reply) {
+                ..
+            } else if (!(t->flags & TF_ONE_WAY)) {
+                //BC_TRANSACTION 且 非oneway,则设置事务栈信息
+                t->need_reply = 1;
+                t->from_parent = thread->transaction_stack;
+                thread->transaction_stack = t;
+            } else {
+                ...
+            }
+
+            //将BINDER_WORK_TRANSACTION添加到目标队列，本次通信的目标队列为target_proc->todo
+            t->work.type = BINDER_WORK_TRANSACTION;
+            list_add_tail(&t->work.entry, target_list);
+
+            //将BINDER_WORK_TRANSACTION_COMPLETE添加到当前线程的todo队列
+            tcomplete->type = BINDER_WORK_TRANSACTION_COMPLETE;
+            list_add_tail(&tcomplete->entry, &thread->todo);
+
+            //唤醒等待队列，本次通信的目标队列为target_proc->wait
+            if (target_wait)
+                wake_up_interruptible(target_wait);
+            return;
+        }
+         */
         //
         // 通过给
         // service_manager.c#do_add_service
@@ -371,51 +538,46 @@ public class Stu_注册系统服务 extends StuImpl {
                             uid_t uid,
                             int allow_isolated,
                             pid_t spid){
-
+        {
             struct svcinfo *si;
-200
-201    //ALOGI("add_service('%s',%x,%s) uid=%d\n", str8(s, len), handle,
-202    //        allow_isolated ? "allow_isolated" : "!allow_isolated", uid);
-203
-204    if (!handle || (len == 0) || (len > 127))
-205        return -1;
-206
-207    if (!svc_can_register(s, len, spid)) {
-208        ALOGE("add_service('%s',%x) uid=%d - PERMISSION DENIED\n",
-209             str8(s, len), handle, uid);
-210        return -1;
-211    }
-212
-213    si = find_svc(s, len);
-214    if (si) {
-215        if (si->handle) {
-216            ALOGE("add_service('%s',%x) uid=%d - ALREADY REGISTERED, OVERRIDE\n",
-217                 str8(s, len), handle, uid);
-218            svcinfo_death(bs, si);
-219        }
-220        si->handle = handle;
-221    } else {
-222        si = malloc(sizeof(*si) + (len + 1) * sizeof(uint16_t));
-223        if (!si) {
-224            ALOGE("add_service('%s',%x) uid=%d - OUT OF MEMORY\n",
-225                 str8(s, len), handle, uid);
-226            return -1;
-227        }
-228        si->handle = handle;
-229        si->len = len;
-230        memcpy(si->name, s, (len + 1) * sizeof(uint16_t));
-231        si->name[len] = '\0';
-232        si->death.func = (void*) svcinfo_death;
-233        si->death.ptr = si;
-234        si->allow_isolated = allow_isolated;
-235        si->next = svclist;
-236        svclist = si;
-237    }
-238
-239    binder_acquire(bs, handle);
-240    binder_link_to_death(bs, handle, &si->death);
-241    return 0;
-242}
+
+            if (!handle || (len == 0) || (len > 127))
+                return -1;
+
+            //权限检查
+            if (!svc_can_register(s, len, spid)) {
+                return -1;
+            }
+
+            //服务检索
+            si = find_svc(s, len);
+            if (si) {
+                if (si->handle) {
+                    svcinfo_death(bs, si); //服务已注册时，释放相应的服务
+                }
+                si->handle = handle;
+            } else {
+                si = malloc(sizeof(*si) + (len + 1) * sizeof(uint16_t));
+                if (!si) {  //内存不足，无法分配足够内存
+                    return -1;
+                }
+                si->handle = handle;
+                si->len = len;
+                memcpy(si->name, s, (len + 1) * sizeof(uint16_t)); //内存拷贝服务信息
+                si->name[len] = '\0';
+                si->death.func = (void*) svcinfo_death;
+                si->death.ptr = si;
+                si->allow_isolated = allow_isolated;
+                si->next = svclist; // svclist保存所有已注册的服务
+                svclist = si;
+            }
+
+            //以BC_ACQUIRE命令，handle为目标的信息，通过ioctl发送给binder驱动
+            binder_acquire(bs, handle);
+            //以BC_REQUEST_DEATH_NOTIFICATION命令的信息，通过ioctl发送给binder驱动，主要用于清理内存等收尾工作。
+            binder_link_to_death(bs, handle, &si->death);
+            return 0;
+        }
          */
 
     }

@@ -87,4 +87,9 @@ public class StuImpl implements IStu {
     public void p_流程() {
 
     }
+
+    @Override
+    public void c_创建() {
+
+    }
 }
