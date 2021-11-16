@@ -25,6 +25,11 @@
 
     <!--    <dimen name="variety_tab_width">170dp</dimen>-->
 
+
+    <!-- 顶导的高度 -->
+    <dimen name="dimen_1280">1280dp</dimen>
+    <dimen name="dimen_720">720dp</dimen>
+
     <dimen name="nav_bar_h">60dp</dimen>
 
     <dimen name="top_bar_h">60dp</dimen>

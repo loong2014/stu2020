@@ -38,4 +38,19 @@ object SunLog {
             E -> Log.e(logTag, msg)
         }
     }
+
+    /**
+     * 打印当前方法的调用栈
+     */
+    fun showStackTrack(tag: String) {
+        val array = Thread.currentThread().stackTrace
+        val sb = StringBuilder()
+        sb.append("\n======>begin")
+        for (ele in array) {
+            sb.append("\n===>")
+            sb.append(ele.toString())
+        }
+        sb.append("\n======>end\n")
+        Log.e(tag, sb.toString())
+    }
 }

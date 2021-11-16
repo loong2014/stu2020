@@ -9,5 +9,9 @@ public class JavaString {
 
         String str = new String("abc");
         str = str.intern();
+
+        String numStr = "01";
+        int num = Integer.parseInt(numStr); // 1
+        System.out.println("num :" + num);
     }
 }
