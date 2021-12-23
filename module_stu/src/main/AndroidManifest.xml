@@ -23,6 +23,7 @@
             android:name=".introduction.StuIntroductionActivity"
             android:launchMode="singleTask" />
         <activity android:name=".book.StuBook01Activity" />
+        <activity android:name="com.sunny.module.dragger.StuDaggerActivity" />
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@ plugins {
      *  参考 : http://www.kotlincn.net/docs/reference/kapt.html
      */
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+//    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -112,7 +112,13 @@ dependencies {
     api 'androidx.core:core-ktx:1.2.0'
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    api "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+//    api "com.google.dagger:hilt-android:$hilt_version"
+//    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    // dagger
+//    api deps.dagger.runtime
+//    api deps.dagger.android
+//    api deps.dagger.android_support
+//    annotationProcessor deps.dagger.android_support_compiler
+//    annotationProcessor deps.dagger.compiler
 }

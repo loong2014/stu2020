@@ -59,5 +59,11 @@
             app:jump_path="/stu/book01"
             app:jump_type="stu_book01" />
 
+        <com.sunny.module.stu.base.view.JumpTextView
+            style="@style/StuJumpText"
+            android:text="daggerABC"
+            app:jump_path="/stu/dagger"
+            app:jump_type="stu_dagger" />
+
     </LinearLayout>
 </ScrollView>

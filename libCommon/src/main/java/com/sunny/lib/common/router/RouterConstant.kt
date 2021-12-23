@@ -68,6 +68,7 @@ class RouterConstant {
             const val PageBook01 = "/stu/book01"
             const val PageThread = "/stu/thread"
             const val PageIntroduction = "/stu/introduction"
+            const val PageDagger = "/stu/dagger"
         }
     }
 
