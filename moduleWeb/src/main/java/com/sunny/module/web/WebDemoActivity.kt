@@ -1,5 +1,6 @@
 package com.sunny.module.web
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -30,6 +31,10 @@ class WebDemoActivity : BaseActivity() {
 
         btn_http.setOnClickListener {
             ARouter.getInstance().build(RouterConstant.Web.PageHttp).navigation()
+        }
+
+        btn_cache.setOnClickListener {
+            startActivity(Intent(this, HttpCacheActivity::class.java))
         }
     }
 }
