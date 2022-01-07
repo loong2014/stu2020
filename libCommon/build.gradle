@@ -22,15 +22,9 @@ android {
 
 dependencies {
 
-    implementation project(path: ':libBase')
-    implementation project(path: ':libUi')
+    api project(path: ':libBase')
+    api project(path: ':libUi')
 
-    // kotlin模块基础引用
-    api deps.androidx.appcompat
-    api deps.support.material
-
-    // for kotlin
-    api deps.kotlin.stdlib
     // for lifecycle
     api deps.lifecycle.viewmodel_ktx
     api deps.lifecycle.livedata_ktx
@@ -58,7 +52,8 @@ dependencies {
     api 'com.google.code.gson:gson:2.8.6'
 
     api deps.androidx.work
-    api deps.okhttp
+    api deps.okhttp.runtime
+    api deps.okhttp.logging_interceptor
 
     // BaseAdapter
     // https://github.com/CymChad/BaseRecyclerViewAdapterHelper

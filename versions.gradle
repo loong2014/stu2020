@@ -70,6 +70,13 @@ coroutines.core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.corou
 coroutines.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
 deps.coroutines = coroutines
 
+// https://square.github.io/okhttp/
+// https://github.com/square/okhttp
+def okhttp = [:]
+okhttp.runtime = 'com.squareup.okhttp3:okhttp:4.8.1'
+okhttp.logging_interceptor = 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+deps.okhttp = okhttp
+
 versions.retrofit = "2.8.0"
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
@@ -78,7 +85,6 @@ retrofit.mock = "com.squareup.retrofit2:retrofit-mock:$versions.retrofit"
 retrofit.adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
 retrofit.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
 deps.retrofit = retrofit
-deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
 
 // 路由 https://github.com/alibaba/ARouter/blob/master/README_CN.md
 versions.arouter = "1.5.1"
@@ -118,7 +124,6 @@ dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
 dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
 dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
 dagger.android_processor = "com.google.dagger:dagger-android-processor:$versions.dagger"
-
 deps.dagger = dagger
 
 def espresso = [:]
@@ -151,9 +156,6 @@ deps.timber = 'com.jakewharton.timber:timber:5.0.1'
 // https://github.com/Aspsine/SwipeToLoadLayout
 deps.swipeToLoadLayout = 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
 
-
-// okhttp3
-deps.okhttp = 'com.squareup.okhttp3:okhttp:4.8.1'
 
 deps.paging = "android.arch.paging:runtime:$versions.paging"
 deps.glide = "com.github.bumptech.glide:glide:$versions.glide"

@@ -16,10 +16,7 @@ android {
 dependencies {
     implementation project(path: ':libBase')
 
-    implementation deps.kotlin.stdlib
-    implementation deps.androidx.appcompat
-
-    implementation deps.support.material
+    api deps.support.material
 
     //
     api deps.androidx.swiperefreshlayout
