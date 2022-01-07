@@ -1,5 +1,7 @@
 package com.sunny.lib.utils
 
+import com.sunny.lib.base.utils.ContextProvider
+
 object AppConfigUtils {
 
     @JvmStatic

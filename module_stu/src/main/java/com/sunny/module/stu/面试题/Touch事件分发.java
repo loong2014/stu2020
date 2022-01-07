@@ -3,7 +3,7 @@ package com.sunny.module.stu.面试题;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.sunny.lib.utils.ContextProvider;
+import com.sunny.lib.base.utils.ContextProvider;
 import com.sunny.module.stu.base.StuImpl;
 
 /**

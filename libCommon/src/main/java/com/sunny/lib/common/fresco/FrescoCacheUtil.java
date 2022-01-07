@@ -19,7 +19,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.sunny.lib.base.log.SunLog;
 import com.sunny.lib.common.thread.SunThreadPool;
-import com.sunny.lib.utils.ContextProvider;
+import com.sunny.lib.base.utils.ContextProvider;
 
 /**
  * 使用Fresco原生方法实现util<br>

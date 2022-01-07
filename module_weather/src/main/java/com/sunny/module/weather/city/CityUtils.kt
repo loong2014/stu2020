@@ -2,7 +2,7 @@ package com.sunny.module.weather.city
 
 import com.sunny.lib.base.log.SunLog
 import com.sunny.lib.common.utils.SunSharedPreferencesUtils
-import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.module.weather.db.CityDatabase
 import com.sunny.module.weather.db.entity.ChinaCityTownEntity
 import com.sunny.module.weather.db.entity.GlobalCityEntity

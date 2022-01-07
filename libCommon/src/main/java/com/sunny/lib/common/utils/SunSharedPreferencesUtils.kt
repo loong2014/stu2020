@@ -3,7 +3,7 @@ package com.sunny.lib.common.utils
 import android.content.Context
 import android.content.SharedPreferences
 import com.sunny.lib.utils.AppConfigUtils
-import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.utils.ContextProvider
 
 /**
  * SP本地数据存储工具

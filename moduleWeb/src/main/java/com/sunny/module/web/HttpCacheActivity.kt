@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.sunny.lib.common.base.BaseActivity
-import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.module.web.api.curCacheType
 import com.sunny.module.web.api.curHasNet
 import com.sunny.module.web.api.setCacheType

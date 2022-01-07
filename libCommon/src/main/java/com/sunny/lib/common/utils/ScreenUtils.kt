@@ -3,7 +3,7 @@ package com.sunny.lib.common.utils
 import android.content.Context
 import android.graphics.Point
 import android.view.WindowManager
-import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.lib.base.log.SunLog
 
 

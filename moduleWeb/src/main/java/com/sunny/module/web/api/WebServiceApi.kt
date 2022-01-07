@@ -1,7 +1,7 @@
 package com.sunny.module.web.api
 
 import com.sunny.lib.base.log.SunLog
-import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.module.web.retrofit.GodResult
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,12 +33,12 @@ private fun buildWebApi(): WebServiceApi {
     //
     val httpLoggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
         override fun log(message: String) {
-            val log = if (message.length > 128) {
-                message.substring(0, 128) + "..."
-            } else {
-                message
-            }
-            SunLog.i("SunnyHttp", log)
+//            val log = if (message.length > 128) {
+//                message.substring(0, 128) + "..."
+//            } else {
+//                message
+//            }
+            SunLog.i("SunnyHttp", message)
         }
     })
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -111,7 +111,7 @@ private fun buildWebApi(): WebServiceApi {
         .addInterceptor(httpLoggingInterceptor)
 
     return Retrofit.Builder()
-        .baseUrl("http://api-itv.cp21.ott.cibntv.net/")
+        .baseUrl("http://pax-us.leautolink.com/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(httpClient.build())
         .build()
@@ -144,10 +144,8 @@ interface WebServiceApi {
      * 添加请求参数
      */
     @GET("god/top")
-    fun getGodTopData(
-        @Query("category") category: Int,
-        @Query("role") role: Int = 1
-    ): Call<GodResult>
+    // http://pax-us.leautolink.com/v2/us/movies
+    fun getMoviesInfo(): Call<GodResult>
 
 
 }

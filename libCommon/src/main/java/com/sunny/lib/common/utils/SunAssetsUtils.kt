@@ -2,7 +2,7 @@ package com.sunny.lib.common.utils
 
 import android.content.Context
 import android.content.res.AssetManager
-import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.lib.base.log.SunLog
 import java.io.ByteArrayOutputStream
 import java.io.InputStream

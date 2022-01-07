@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.layout_top_bar.view.*
 /**
  * Created by zhangxin17 on 2020/11/12
  */
-class SunnyTopBar(context: Context, attributeSet: AttributeSet?) : ConstraintLayout(context, attributeSet) {
+class SunnyTopBar(context: Context, attributeSet: AttributeSet?) :
+    ConstraintLayout(context, attributeSet) {
 
     companion object {
         const val TAG = "SunnyTopBar"
@@ -66,4 +67,3 @@ class SunnyTopBar(context: Context, attributeSet: AttributeSet?) : ConstraintLay
     }
 
 }
-

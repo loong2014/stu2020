@@ -8,7 +8,7 @@ import com.sunny.lib.common.crash.CrashManager
 import com.sunny.lib.common.fresco.FrescoUtils
 import com.sunny.lib.common.utils.ResUtils
 import com.sunny.lib.utils.AppConfigUtils
-import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.lib.utils.FileUtils
 
 /**

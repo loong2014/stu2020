@@ -1,7 +1,7 @@
 package com.sunny.lib.common.utils
 
 import android.widget.Toast
-import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.utils.ContextProvider
 
 /**
  * Created by zhangxin17 on 2020-01-10

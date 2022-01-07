@@ -1,4 +1,4 @@
-package com.sunny.lib.common.view;
+package com.sunny.lib.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;

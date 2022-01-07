@@ -11,7 +11,7 @@ import android.net.NetworkRequest
 import android.os.Build
 import android.telephony.TelephonyManager
 import com.sunny.lib.base.log.SunLog
-import com.sunny.lib.utils.ContextProvider
+import com.sunny.lib.base.utils.ContextProvider
 
 
 /**

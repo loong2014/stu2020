@@ -12,9 +12,9 @@ import android.os.Message
 import android.view.View
 import androidx.annotation.RequiresApi
 import com.sunny.lib.base.log.SunLog
+import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.lib.common.R
 import com.sunny.lib.common.fresco.FrescoCacheUtil
-import com.sunny.lib.utils.ContextProvider
 import java.lang.ref.WeakReference
 
 /**
@@ -98,11 +98,18 @@ class BgHandler(val view: View) : IBgHandler {
     }
 
     private fun loadBitmap(url: String, block: (bitmap: Bitmap) -> Unit) {
-        FrescoCacheUtil.getBitmap(url, "", context.resources.getDimension(R.dimen.dimen_1280).toInt(), context.resources.getDimension(R.dimen.dimen_720).toInt(), { bitmap ->
-            if (bitmap != null) {
-                block(bitmap)
-            }
-        }, Bitmap.Config.RGB_565)
+        FrescoCacheUtil.getBitmap(
+            url,
+            "",
+            context.resources.getDimension(R.dimen.dimen_1280).toInt(),
+            context.resources.getDimension(R.dimen.dimen_720).toInt(),
+            { bitmap ->
+                if (bitmap != null) {
+                    block(bitmap)
+                }
+            },
+            Bitmap.Config.RGB_565
+        )
     }
 
     private fun processToDefault() {

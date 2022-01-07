@@ -1,4 +1,4 @@
-package com.sunny.lib.utils
+package com.sunny.lib.base.utils
 
 import android.content.ContentResolver
 import android.content.Context

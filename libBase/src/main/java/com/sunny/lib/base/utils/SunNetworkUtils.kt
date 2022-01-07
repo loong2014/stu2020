@@ -6,7 +6,6 @@ import android.net.NetworkCapabilities
 import android.net.wifi.WifiManager
 import android.os.Build
 import androidx.annotation.RequiresPermission
-import com.sunny.lib.utils.ContextProvider
 import java.net.Inet6Address
 import java.net.InetAddress
 import java.net.NetworkInterface

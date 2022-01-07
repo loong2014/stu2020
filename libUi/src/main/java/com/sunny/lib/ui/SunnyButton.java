@@ -5,8 +5,6 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatButton;
 
-
-
 /**
  * Created by zhangxin17 on 2020/7/30
  */
