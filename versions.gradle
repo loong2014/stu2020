@@ -29,18 +29,17 @@ versions.paging = "1.0.0-beta1"
 versions.navigation = "2.0.0-rc02"
 versions.stetho = "1.5.0"
 //versions.core_ktx = "1.4.0"
-deps.versions = versions
 
-versions.support = "1.0.0"
-def support = [:]
-support.appcompat = "androidx.appcompat:appcompat:$versions.support"
-support.recyclerview = "androidx.recyclerview:recyclerview:$versions.support"
-support.cardview = "androidx.cardview:cardview:$versions.support"
-support.material = "com.google.android.material:material:$versions.support"
-support.v4 = "androidx.legacy:legacy-support-v4:$versions.support"
-support.palette = "androidx.palette:palette:$versions.support"
-deps.support = support
-
+// https://developer.android.google.cn/jetpack/androidx/releases/activity
+def androidx = [:]
+androidx.appcompat = 'androidx.appcompat:appcompat:1.2.0'
+androidx.cardview = 'androidx.cardview:cardview:1.0.0'
+androidx.recyclerview = 'androidx.recyclerview:recyclerview:1.2.0'
+androidx.constraintlayout = 'androidx.constraintlayout:constraintlayout:2.1.2'
+androidx.swiperefreshlayout = 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+androidx.work = 'androidx.work:work-runtime-ktx:2.5.0'
+androidx.palette = 'androidx.palette:palette:1.0.0'
+deps.androidx = androidx
 
 versions.kotlin = "1.6.0"
 def kotlin = [:]
@@ -141,20 +140,20 @@ deps.mockito = mockito
 
 // other deps
 
-// https://developer.android.google.cn/jetpack/androidx/releases/constraintlayout
-deps.constraintlayout = 'androidx.constraintlayout:constraintlayout:2.1.2'
-
-// https://developer.android.google.cn/jetpack/androidx/releases/work
-deps.work_runtime_ktx = 'androidx.work:work-runtime-ktx:2.5.0'
-
-// https://developer.android.google.cn/jetpack/androidx/releases/swiperefreshlayout
-deps.swiperefreshlayout = 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+versions.support = "1.2.0"
+def support = [:]
+support.material = "com.google.android.material:material:$versions.support"
+deps.support = support
 
 // https://github.com/JakeWharton/timber
 deps.timber = 'com.jakewharton.timber:timber:5.0.1'
 
 // https://github.com/Aspsine/SwipeToLoadLayout
 deps.swipeToLoadLayout = 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
+
+
+// okhttp3
+deps.okhttp = 'com.squareup.okhttp3:okhttp:4.8.1'
 
 deps.paging = "android.arch.paging:runtime:$versions.paging"
 deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
@@ -170,6 +169,8 @@ deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_g
 deps.stetho = "com.facebook.stetho:stetho:$versions.stetho"
 deps.agentweb = "com.github.Justson.AgentWeb:agentweb-core:v5.0.0-alpha.1-androidx"
 ext.deps = deps
+
+deps.versions = versions
 
 def build_versions = [:]
 build_versions.min_sdk = 28

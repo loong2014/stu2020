@@ -17,11 +17,16 @@ dependencies {
     implementation project(path: ':libBase')
 
     implementation deps.kotlin.stdlib
-    implementation deps.support.appcompat
+    implementation deps.androidx.appcompat
+
     implementation deps.support.material
 
     //
-    api deps.constraintlayout
-    api deps.swiperefreshlayout
+    api deps.androidx.swiperefreshlayout
+    api deps.androidx.cardview
+    api deps.androidx.recyclerview
+    api deps.androidx.constraintlayout
+
+    //
     api deps.swipeToLoadLayout
 }
