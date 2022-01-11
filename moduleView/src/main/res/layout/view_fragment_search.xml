@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="uiInfo"
+            type="com.sunny.module.view.search.SearchUiInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_1"
+            style="@style/view_SearchEditTextStyle"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="20dp"
+            android:background="#6F7874"
+            android:ellipsize="end"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:singleLine="true"
+            android:text="fad;fajdf ad;fasf ja;dfj adfa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:background="@drawable/view_search_line"
+            app:layout_constraintBottom_toBottomOf="@id/et_1"
+            app:layout_constraintLeft_toLeftOf="@id/et_1"
+            app:layout_constraintRight_toRightOf="@id/et_1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

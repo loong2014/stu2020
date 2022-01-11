@@ -1,8 +1,10 @@
 package com.sunny.module.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -12,6 +14,7 @@ import com.sunny.lib.common.utils.SunNumberUtils
 import com.sunny.lib.common.utils.showSnckbar
 import com.sunny.lib.common.utils.showToast
 import com.sunny.module.view.bar.SystemBarTintManager
+import com.sunny.module.view.databinding.ViewActivityDemoBinding
 import kotlinx.android.synthetic.main.view_activity_demo.*
 
 /**
@@ -20,12 +23,14 @@ import kotlinx.android.synthetic.main.view_activity_demo.*
 @Route(path = RouterConstant.View.PageDemo)
 class LayoutDemoActivity : BaseActivity() {
 
+    lateinit var mActBinding: ViewActivityDemoBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         SystemBarTintManager.translucentStatus(this)
 
-        setContentView(R.layout.view_activity_demo)
+        mActBinding = DataBindingUtil.setContentView(this, R.layout.view_activity_demo)
 
         SystemBarTintManager.setViewPaddingTopStatusBar(this, toolBar)
 
@@ -78,13 +83,33 @@ class LayoutDemoActivity : BaseActivity() {
         val list = mutableListOf<LayoutDemoModel>()
         list.add(LayoutDemoModel(name = "XXXLayout", jumpPath = RouterConstant.View.PageXxx))
         list.add(LayoutDemoModel(name = "DrawerLayout", jumpPath = RouterConstant.View.PageDrawer))
-        list.add(LayoutDemoModel(name = "CoordinatorLayout", jumpPath = RouterConstant.View.PageCoordinator))
+        list.add(
+            LayoutDemoModel(
+                name = "CoordinatorLayout",
+                jumpPath = RouterConstant.View.PageCoordinator
+            )
+        )
         list.add(LayoutDemoModel(name = "状态栏", jumpPath = RouterConstant.View.PageStatusBar))
         list.add(LayoutDemoModel(name = "BlackBg", jumpPath = RouterConstant.View.PageBarBlack))
         list.add(LayoutDemoModel(name = "CardView", jumpPath = RouterConstant.View.PageCardView))
-        list.add(LayoutDemoModel(name = "TitleUpdate", jumpPath = RouterConstant.View.PageTitleUpdate))
-        list.add(LayoutDemoModel(name = "RemoteViewsService", jumpPath = RouterConstant.View.PageRemoteViewsService))
-        list.add(LayoutDemoModel(name = "RemoteViewsClient", jumpPath = RouterConstant.View.PageRemoteViewsClient))
+        list.add(
+            LayoutDemoModel(
+                name = "TitleUpdate",
+                jumpPath = RouterConstant.View.PageTitleUpdate
+            )
+        )
+        list.add(
+            LayoutDemoModel(
+                name = "RemoteViewsService",
+                jumpPath = RouterConstant.View.PageRemoteViewsService
+            )
+        )
+        list.add(
+            LayoutDemoModel(
+                name = "RemoteViewsClient",
+                jumpPath = RouterConstant.View.PageRemoteViewsClient
+            )
+        )
         return list
     }
 
@@ -98,7 +123,9 @@ class LayoutDemoActivity : BaseActivity() {
             android.R.id.home -> {
 //                showToast("点击了ToolBar的默认Home按钮")
 
-                showSnackBar("你确定要点！！！")
+//                showSnackBar("你确定要点！！！")
+
+                startActivity(Intent(getActivity(), LayoutCommonActivity::class.java))
             }
             else -> {
                 showToast(item.title as String)

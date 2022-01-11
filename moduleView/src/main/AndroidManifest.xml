@@ -6,13 +6,12 @@
         android:name=".base.ModuleViewApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/view_app_name"
+        android:label="Sunny-View"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ViewTheme.NoActionBar">
-        <activity
-            android:name=".LayoutDemoActivity"
-            android:label="模块：布局">
+
+        <activity android:name=".LayoutDemoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,6 +31,7 @@
         <activity android:name=".layout.TitleUpdateLayoutActivity" />
         <activity android:name=".remote.LayoutRemoteViewsServiceActivity" />
         <activity android:name=".remote.LayoutRemoteViewsClientActivity" />
+        <activity android:name=".LayoutCommonActivity" />
 
     </application>
 

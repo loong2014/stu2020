@@ -47,5 +47,14 @@
          false, windowNoTitle: false } -->
         <item name="windowNoTitle">true</item>
     </style>
+    <!--
+   https://blog.csdn.net/lovingning/article/details/84892197
+   -->
+    <style name="view_SearchEditTextStyle">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:hint">input key for search</item>
+    </style>
 
 </resources>

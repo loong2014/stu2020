@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/libBase" />
             <option value="$PROJECT_DIR$/libCommon" />
             <option value="$PROJECT_DIR$/libUi" />
+            <option value="$PROJECT_DIR$/moduleView" />
             <option value="$PROJECT_DIR$/moduleWeb" />
           </set>
         </option>

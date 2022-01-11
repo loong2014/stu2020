@@ -1,5 +1,6 @@
 package com.sunny.lib.common.base
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.sunny.lib.common.manager.ActivityLifeManager
@@ -23,5 +24,9 @@ open class BaseActivity : AppCompatActivity() {
 
     fun doExitActivity() {
         finish()
+    }
+
+    fun getActivity():Activity{
+        return this
     }
 }
