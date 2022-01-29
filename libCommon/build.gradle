@@ -26,6 +26,8 @@ dependencies {
     api project(path: ':libUi')
 
     // for lifecycle
+    api deps.androidx.activity
+    api deps.androidx.fragment
     api deps.lifecycle.viewmodel_ktx
     api deps.lifecycle.livedata_ktx
     api deps.lifecycle.runtime_ktx

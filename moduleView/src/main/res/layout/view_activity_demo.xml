@@ -4,8 +4,6 @@
 
     <data>
 
-        <import type="com.sunny.lib.common.mock.MockImg" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,12 +32,6 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolBar" />
-
-
-        <com.sunny.lib.ui.SunnyImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:sunnyImg="@{MockImg.Img1}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

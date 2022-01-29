@@ -1,7 +1,10 @@
 package com.sunny.module.view.search
 
-class SearchUiInfo{
+import androidx.lifecycle.ViewModel
+
+class SearchUiInfo {
 
 }
-class SearchViewModel {
+
+class SearchViewModel : ViewModel() {
 }

@@ -6,6 +6,10 @@
 
         <import type="com.sunny.lib.common.mock.MockImg" />
 
+        <variable
+            name="viewModel"
+            type="com.sunny.module.view.LayoutCommonViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,11 +23,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.sunny.lib.ui.SunnyImageView
+                android:id="@+id/ddd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:sunnyImg="@{MockImg.Img1}" />
 
         </androidx.appcompat.widget.Toolbar>
+
+        <com.sunny.lib.ui.SunnyImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_view_model_life" />
 
         <FrameLayout
             android:id="@+id/layout_content"
@@ -31,6 +41,13 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tool_bar" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tab_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@{viewModel.showName}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
