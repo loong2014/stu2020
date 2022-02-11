@@ -2,9 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sunny.module.web">
 
+
     <!-- 网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 启动服务 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- 蓝牙服务
+    如果您希望应用适用于不支持 BLE 的设备，则您应仍将此元素添加到应用清单中，
+    但设置 required="false"。然后您可以在运行时使用 PackageManager.hasSystemFeature() 确定 BLE 的可用性：
+    -->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- ble sdk <= 28(P) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".base.ModuleWebApplication"
@@ -26,6 +44,14 @@
         <activity android:name=".WebWebViewActivity" />
         <activity android:name=".HttpActivity" />
         <activity android:name=".HttpCacheActivity" />
+
+        <activity android:name=".ble.MainActivity">
+
+        </activity>
+
+        <service android:name=".ble.PaxBleService" />
+        <service android:name=".ble.client.BleClientService" />
+        <service android:name=".ble.BleConnectService" />
     </application>
 
 </manifest>

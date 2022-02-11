@@ -27,6 +27,7 @@ android {
                 arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
+        multiDexEnabled true
     }
     sourceSets {
         main {

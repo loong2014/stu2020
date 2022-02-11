@@ -41,6 +41,51 @@
             android:layout_margin="5dp"
             android:text="HttpCache" />
 
+        <com.sunny.lib.ui.SunnyButton
+            android:id="@+id/btn_ble_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="BleService" />
+
+        <com.sunny.lib.ui.SunnyButton
+            android:id="@+id/btn_ble_client"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="BleClient" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar">
+
+            <com.sunny.lib.ui.SunnyButton
+                android:id="@+id/btn_ble_msg_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="发送消息" />
+
+            <com.sunny.lib.ui.SunnyButton
+                android:id="@+id/btn_ble_msg_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="读取消息" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <com.sunny.lib.ui.SunnyTextView
+            android:id="@+id/tv_ble_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#9C27B0"
+            android:textSize="20sp" />
+
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
