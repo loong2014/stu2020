@@ -49,9 +49,10 @@
 
         </activity>
 
-        <service android:name=".ble.PaxBleService" />
         <service android:name=".ble.client.BleClientService" />
         <service android:name=".ble.BleConnectService" />
+        <service android:name=".ble.service.PaxBleService" />
+        <service android:name=".ble.service.PaxBleServiceOld" />
     </application>
 
 </manifest>

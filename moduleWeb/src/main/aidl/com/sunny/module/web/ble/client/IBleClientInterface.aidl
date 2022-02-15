@@ -12,4 +12,6 @@ interface IBleClientInterface {
     boolean sendMsg(String msg);
 
     String readMsg();
+
+    boolean sendOpt(int opt);
 }

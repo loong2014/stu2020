@@ -41,19 +41,74 @@
             android:layout_margin="5dp"
             android:text="HttpCache" />
 
-        <com.sunny.lib.ui.SunnyButton
-            android:id="@+id/btn_ble_service"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="BleService" />
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
-        <com.sunny.lib.ui.SunnyButton
-            android:id="@+id/btn_ble_client"
+            <com.sunny.lib.ui.SunnyButton
+                android:id="@+id/btn_ble_target"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="更改目标设备" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                android:id="@+id/tv_ble_target"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:textColor="#9C27B0"
+                android:textSize="15sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="BleClient" />
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.sunny.lib.ui.SunnyButton
+                android:id="@+id/btn_ble_old"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="传统蓝牙" />
+
+            <com.sunny.lib.ui.SunnyButton
+                android:id="@+id/btn_ble_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="低功耗蓝牙" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.sunny.lib.ui.SunnyButton
+                android:id="@+id/btn_ble_scan_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="开始扫描" />
+
+            <com.sunny.lib.ui.SunnyButton
+                android:id="@+id/btn_ble_scan_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="停止扫描" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
@@ -62,6 +117,13 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_bar">
+
+            <com.sunny.lib.ui.SunnyButton
+                android:id="@+id/btn_ble_open_discoverable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="打开ble可见性" />
 
             <com.sunny.lib.ui.SunnyButton
                 android:id="@+id/btn_ble_msg_send"
@@ -83,8 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#9C27B0"
-            android:textSize="20sp" />
-
+            android:textSize="15sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

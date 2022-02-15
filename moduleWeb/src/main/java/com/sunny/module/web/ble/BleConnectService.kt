@@ -49,6 +49,10 @@ class BleConnectService : Service() {
         override fun readMsg(): String {
             return buildResultMsg()
         }
+
+        override fun sendOpt(opt: Int): Boolean {
+            return true
+        }
     }
 
     private fun trySeenMsg(msg: String?): Boolean {

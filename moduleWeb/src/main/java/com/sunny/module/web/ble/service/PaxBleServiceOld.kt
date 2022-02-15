@@ -3,24 +3,24 @@ package com.sunny.module.web.ble.service
 import android.app.Service
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.bluetooth.le.*
+import android.bluetooth.le.BluetoothLeScanner
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.IBinder
 import com.sunny.lib.base.log.SunLog
 import com.sunny.module.web.ble.BleTools
+import com.sunny.module.web.ble.TargetDeviceMac
 import com.sunny.module.web.ble.client.IBleClientInterface
 
 /**
- * 低功耗蓝牙
- * https://developer.android.com/guide/topics/connectivity/bluetooth-le?hl=zh-cn
- *
- * macbook : ac:bc:32:97:bc:38
- * Redmi K40 : 9C:5A:81:2F:19:39
- * FF 91 Driver : 22:22:ed:16:c2:52
+ * 传统蓝牙
+ * https://developer.android.com/guide/topics/connectivity/bluetooth?hl=zh-cn#FindDevices
  */
-class PaxBleService : Service() {
+class PaxBleServiceOld : Service() {
 
     private lateinit var mHandler: Handler
     private var mScanning: Boolean = false
@@ -65,6 +65,10 @@ class PaxBleService : Service() {
         bluetoothLeScanner = bluetoothAdapter?.bluetoothLeScanner
 
         showPairedDevices()
+
+        // Register for broadcasts when a device is discovered.
+        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+        registerReceiver(receiver, filter)
     }
 
     private fun showPairedDevices() {
@@ -125,6 +129,7 @@ class PaxBleService : Service() {
         log("### <<<< show scanResults ###")
     }
 
+
     private fun tryStartBleScan(restart: Boolean = false): Boolean {
         log("tryStartBleScan  isSupportBle($isSupportBle)")
         if (isSupportBle) {
@@ -143,66 +148,37 @@ class PaxBleService : Service() {
         return false
     }
 
-    private val mScanCallback = object : ScanCallback() {
-        override fun onScanResult(callbackType: Int, result: ScanResult?) {
-            result?.device?.let {
-                if (mDeviceAllSet.add(it)) {
-                    log("###allDev(${mDeviceAllSet.size}) ---> type(${it.type}) --- address(${it.address}) --- uuids(${it.uuids}) --- name(${it.name})")
-                }
+    // Create a BroadcastReceiver for ACTION_FOUND.
+    private val receiver = object : BroadcastReceiver() {
 
-                it.takeIf { it.name != null }?.let {
-                    if (mDeviceSet.add(it)) {
-                        mHandler.removeCallbacks(showScanDevicesTask)
-                        mHandler.postDelayed(showScanDevicesTask, 2_000)
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.action) {
+                BluetoothDevice.ACTION_FOUND -> {
+                    // Discovery has found a device. Get the BluetoothDevice
+                    // object and its info from the Intent.
+                    val device: BluetoothDevice? =
+                        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+
+                    device?.let {
+                        if (mDeviceAllSet.add(it)) {
+                            log("###allDev(${mDeviceAllSet.size}) ---> type(${it.type}) --- address(${it.address}) --- uuids(${it.uuids}) --- name(${it.name})")
+                        }
+                        it.takeIf { it.name != null }?.let {
+                            if (mDeviceSet.add(it)) {
+                                mHandler.removeCallbacks(showScanDevicesTask)
+                                mHandler.postDelayed(showScanDevicesTask, 2_000)
+                            }
+                        }
+
+                        // 发现目标设备
+                        if (it.name == TargetDeviceMac) {
+                            stopLeScan()
+                            tryStartConnect(it)
+                        }
                     }
                 }
             }
         }
-
-        override fun onBatchScanResults(results: MutableList<ScanResult>?) {
-//            log("### >>222>> show onBatchScanResults count(${results?.size}) ###")
-//            results?.forEachIndexed { index, scanResult ->
-//                val deviceName = scanResult.device.name
-//                val deviceHardwareAddress = scanResult.device.address
-//                log("$index >>> $deviceHardwareAddress --- $deviceName")
-//            }
-//            log("### <<222<< onBatchScanResults ###")
-        }
-
-        override fun onScanFailed(errorCode: Int) {
-            log("onScanFailed :$errorCode")
-        }
-    }
-
-    /**
-     * 开始查找 BLE 设备
-     * 注意：您仅能扫描蓝牙 LE 设备或传统蓝牙设备，正如蓝牙概览中所述。您无法同时扫描蓝牙 LE 设备和传统蓝牙设备。
-     */
-    private fun startLeScan() {
-        log("startLeScan($mScanning)")
-
-        val filters = mutableListOf<ScanFilter>()
-        BleTools.getTargetDevice().let {
-            filters.add(
-                ScanFilter.Builder()
-                    .setDeviceName(it.first)
-                    .build()
-            )
-        }
-
-        val setting = ScanSettings.Builder()
-            .setScanMode(ScanSettings.SCAN_MODE_BALANCED)
-            .build()
-
-
-        if (mScanning) {
-            mHandler.removeCallbacks(delayStopTask)
-        }
-        mHandler.postDelayed(delayStopTask, SCAN_PERIOD)
-
-        mScanning = true
-        mDeviceSet.clear()
-        bluetoothLeScanner?.startScan(filters, setting, mScanCallback)
     }
 
     private val delayStopTask = Runnable {
@@ -214,6 +190,20 @@ class PaxBleService : Service() {
         logScanResults()
     }
 
+    private fun startLeScan() {
+        log("startLeScan($mScanning),${bluetoothAdapter?.isDiscovering}")
+
+        if (mScanning) {
+            mHandler.removeCallbacks(delayStopTask)
+        }
+        mHandler.postDelayed(delayStopTask, SCAN_PERIOD)
+
+        mScanning = true
+        mDeviceSet.clear()
+        val isOk = bluetoothAdapter?.startDiscovery()
+        log("startDiscovery($isOk)")
+    }
+
     /**
      * 停止查找 BLE 设备
      */
@@ -222,7 +212,17 @@ class PaxBleService : Service() {
         mScanning = false
         mHandler.removeCallbacks(delayStopTask)
         logScanResults()
-        bluetoothLeScanner?.stopScan(mScanCallback)
+
+        bluetoothAdapter?.cancelDiscovery()
+    }
+
+    private fun tryStartConnect(dev: BluetoothDevice) {
+
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(receiver)
+        super.onDestroy()
     }
 
     private fun log(msg: String) {

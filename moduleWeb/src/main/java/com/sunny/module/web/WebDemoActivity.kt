@@ -15,6 +15,7 @@ import com.sunny.module.web.ble.BleTools
 import com.sunny.module.web.ble.client.BleClientService
 import com.sunny.module.web.ble.client.IBleClientInterface
 import com.sunny.module.web.ble.service.PaxBleService
+import com.sunny.module.web.ble.service.PaxBleServiceOld
 import kotlinx.android.synthetic.main.web_activity_demo.*
 
 @Route(path = RouterConstant.Web.PageDemo)
@@ -45,12 +46,25 @@ class WebDemoActivity : BaseActivity() {
             startActivity(Intent(this, HttpCacheActivity::class.java))
         }
 
-        btn_ble_service.setOnClickListener {
-            startBleService()
+        btn_ble_target.setOnClickListener {
+            changedTargetDevice()
         }
-
-        btn_ble_client.setOnClickListener {
-            startBleClient()
+        btn_ble_old.setOnClickListener {
+            openBleService(false)
+        }
+        btn_ble_new.setOnClickListener {
+            openBleService(true)
+        }
+        btn_ble_scan_start.setOnClickListener {
+            sendBleOpt(1)
+            showTip("开始扫描")
+        }
+        btn_ble_scan_stop.setOnClickListener {
+            sendBleOpt(2)
+            showTip("停止扫描")
+        }
+        btn_ble_open_discoverable.setOnClickListener {
+            BleTools.openDiscoverable(this)
         }
         btn_ble_msg_send.setOnClickListener {
             val msg = if (isClient) {
@@ -59,13 +73,25 @@ class WebDemoActivity : BaseActivity() {
                 "data from service(${System.currentTimeMillis()})"
             }
             val isOk = bleControl?.sendMsg(msg)
-            tv_ble_content.text = "send msg result :$isOk"
+            showTip("send msg result :$isOk")
         }
 
         btn_ble_msg_read.setOnClickListener {
             val msg = bleControl?.readMsg() ?: "None"
-            tv_ble_content.text = msg
+            showTip(msg)
         }
+
+        changedTargetDevice()
+    }
+
+    private fun changedTargetDevice() {
+        val dev = BleTools.updateTarget()
+        val msg = "${dev.first}\n${dev.second}"
+        tv_ble_target.text = msg
+    }
+
+    private fun showTip(msg: String) {
+        tv_ble_content.text = msg
     }
 
     var bleControl: IBleClientInterface? = null
@@ -81,16 +107,34 @@ class WebDemoActivity : BaseActivity() {
         }
     }
 
-    private fun startBleService() {
-        if (isBind) return
-        if (BleTools.checkBlePermission(this, 200)) {
+    private fun openBleService(isBle: Boolean) {
+        if (isBind) {
+            showTip("关闭蓝牙扫描服务")
+            unbindService(serviceConnection)
+            isBind = false
+        } else {
             isBind = true
-            isClient = false
-            bindService(
-                Intent(this, PaxBleService::class.java),
-                serviceConnection,
-                Context.BIND_AUTO_CREATE
-            )
+            if (isBle) {
+                showTip("打开低功耗蓝牙扫描服务")
+                bindService(
+                    Intent(this, PaxBleService::class.java),
+                    serviceConnection,
+                    Context.BIND_AUTO_CREATE
+                )
+            } else {
+                showTip("打开传统蓝牙扫描服务")
+                bindService(
+                    Intent(this, PaxBleServiceOld::class.java),
+                    serviceConnection,
+                    Context.BIND_AUTO_CREATE
+                )
+            }
+        }
+    }
+
+    private fun sendBleOpt(opt: Int) {
+        if (isBind && bleControl != null) {
+            bleControl?.sendOpt(opt)
         }
     }
 
@@ -117,6 +161,8 @@ class WebDemoActivity : BaseActivity() {
 //            132            intent.setComponent(new ComponentName("com.ff.ext.services",
 //            133                    "com.ff.analytics.service.AnalyticsService"));
 //            134            startServiceAsUser(intent, UserHandle.SYSTEM);
+
+//        sendBroadcastAsUser(intent,null)
     }
 
     override fun onDestroy() {
