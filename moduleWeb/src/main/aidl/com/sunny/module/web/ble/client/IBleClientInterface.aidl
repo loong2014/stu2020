@@ -13,5 +13,7 @@ interface IBleClientInterface {
 
     String readMsg();
 
+    String readDeviceInfo(int opt);
+
     boolean sendOpt(int opt);
 }

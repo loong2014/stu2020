@@ -12,25 +12,54 @@ import android.content.pm.PackageManager
 import com.sunny.lib.base.log.SunLog
 import java.util.*
 
+/**
+ * [BluetoothDevice.getType]
+ * 1==经典
+ * 2==低能耗
+ * 3==双模式
+ */
 
-const val PAX_BLE_NAME: String = "bluetooth_socket_sunny"
+object BleConfig {
 
-const val TargetDeviceMac = "22:22:ED:16:C2:52"
-const val TargetDeviceName = "FF 91 Driver"
+    val OptTypeScanStart = 1
+    val OptTypeScanStop = 2
+    val OptTypeConnectStart = 3
+    val OptTypeConnectStop = 4
 
-const val FFTargetName = "FF 91 Driver"
-const val FFTargetMac = "22:22:ED:16:C2:52"
-
-const val K40TargetName = "Redmi K40"
-const val K40TargetMac = "9C:5A:81:2F:19:39"
-
-object BleTools {
+    val MsgTypeRecentTip = 1
+    val MsgTypePairedDevices = 2
+    val MsgTypeScanDevices = 3
 
     val PAX_UUID_SERVICE: UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c271111")
     val PAX_UUID_WRITE: UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c272222")
     val PAX_BLE_UUID: UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c273333")
 
+    fun bleLog(msg: String) {
+        SunLog.i("BleSunny", msg)
+    }
+
+    var curBleDemoIsClient = false
+    fun updateBleDemoType(): Boolean {
+        curBleDemoIsClient = !curBleDemoIsClient
+        return curBleDemoIsClient
+    }
+
+    var curBleServerIsClassic = true
+    fun updateBleServerType(): Boolean {
+        curBleServerIsClassic = !curBleServerIsClassic
+        return curBleServerIsClassic
+    }
+
+    var curBleTarget: Pair<String, String> = Pair(FFTargetName, FFTargetMac)
     var isFF = true
+    fun updateBleTarget() {
+        isFF = !isFF
+        curBleTarget = if (isFF) {
+            Pair(FFTargetName, FFTargetMac)
+        } else {
+            Pair(K40TargetName, K40TargetMac)
+        }
+    }
 
     /**
      * 是否支持蓝牙
@@ -69,32 +98,6 @@ object BleTools {
             return false
         }
         return true
-    }
-
-    fun buildOneDeviceShowMsg(device: BluetoothDevice, tag: String): String {
-        return "$tag -> $device(${device.type}) , ${device.name} , ${device.uuids}"
-    }
-
-    fun buildDevicesShowMsg(
-        devices: Collection<BluetoothDevice>,
-        tag: String,
-        showUUID: Boolean = false
-    ): String {
-        val sb = StringBuilder()
-        sb.append("### >>>> $tag(${devices.size})")
-        devices.forEachIndexed { index, device ->
-            sb.append("\n$index -> $device(${device.type}) , ${device.name}")
-            if (showUUID) {
-                sb.append(" , ${device.uuids}")
-            }
-        }
-        sb.append("\n### <<<< $tag")
-        return sb.toString()
-    }
-
-    fun isBleDiscoverableEnable(): Boolean {
-        val adapter = BluetoothAdapter.getDefaultAdapter()
-        return adapter.isDiscovering
     }
 
     /**

@@ -1,13 +1,14 @@
-package com.sunny.module.web.ble
+package com.sunny.module.web.ble.service
 
-import android.app.Service
 import android.bluetooth.*
 import android.content.Intent
-import android.os.IBinder
 import com.sunny.lib.base.log.SunLog
-import com.sunny.module.web.ble.client.IBleClientInterface
+import com.sunny.module.web.ble.BleTools
+import com.sunny.module.web.ble.BleTools.PAX_UUID_SERVICE
+import com.sunny.module.web.ble.BleTools.PAX_UUID_WRITE
+import com.sunny.module.web.ble.PaxBleServiceBase
 
-class BleConnectService : Service() {
+class BleConnectService : PaxBleServiceBase() {
     companion object {
         const val STATE_DISCONNECTED = 0
         const val STATE_CONNECTING = 1
@@ -37,27 +38,9 @@ class BleConnectService : Service() {
         return super.onStartCommand(intent, flags, startId)
     }
 
-    override fun onBind(intent: Intent?): IBinder {
-        return mClientBleBinder
-    }
-
-    private val mClientBleBinder = object : IBleClientInterface.Stub() {
-        override fun sendMsg(msg: String?): Boolean {
-            return trySeenMsg(msg)
-        }
-
-        override fun readMsg(): String {
-            return buildResultMsg()
-        }
-
-        override fun sendOpt(opt: Int): Boolean {
-            return true
-        }
-    }
-
-    private fun trySeenMsg(msg: String?): Boolean {
+    override fun trySendMsg(msg: String): Boolean {
         log("trySeenMsg :$msg")
-        if (msg != null && isConnected()) {
+        if (isConnected()) {
             return curBluetoothGatt?.let {
                 BleTools.doMsgSend(it, msg)
                 true
@@ -147,9 +130,5 @@ class BleConnectService : Service() {
                 }
             }
         }
-    }
-
-    private fun log(msg: String) {
-        SunLog.i("PaxBleService", msg)
     }
 }

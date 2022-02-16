@@ -1,16 +1,11 @@
 package com.sunny.module.web.ble.service
 
-import android.app.Service
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.le.*
-import android.content.Intent
-import android.os.Handler
-import android.os.HandlerThread
-import android.os.IBinder
-import com.sunny.lib.base.log.SunLog
-import com.sunny.module.web.ble.BleTools
-import com.sunny.module.web.ble.client.IBleClientInterface
+import android.bluetooth.le.ScanCallback
+import android.bluetooth.le.ScanFilter
+import android.bluetooth.le.ScanResult
+import android.bluetooth.le.ScanSettings
+import com.sunny.module.web.ble.BleConfig
+import com.sunny.module.web.ble.PaxBleServiceBase
 
 /**
  * 低功耗蓝牙
@@ -20,112 +15,10 @@ import com.sunny.module.web.ble.client.IBleClientInterface
  * Redmi K40 : 9C:5A:81:2F:19:39
  * FF 91 Driver : 22:22:ed:16:c2:52
  */
-class PaxBleService : Service() {
-
-    private lateinit var mHandler: Handler
+class PaxBleService : PaxBleServiceBase() {
     private var mScanning: Boolean = false
 
-    private val SCAN_PERIOD: Long = 200_000
-
-    private var bluetoothAdapter: BluetoothAdapter? = null
-
-    private var bluetoothLeScanner: BluetoothLeScanner? = null
-
-    private var isSupportBle = false
-
-    private val mDeviceSet = mutableSetOf<BluetoothDevice>()
-    private val mDeviceAllSet = mutableSetOf<BluetoothDevice>()
-
-    override fun onCreate() {
-        super.onCreate()
-        log("onCreate")
-
-        val ht = HandlerThread("pax_ble")
-        ht.start()
-        mHandler = Handler(ht.looper)
-
-        initBluetooth()
-    }
-
-    private fun initBluetooth() {
-        isSupportBle = false
-        if (!BleTools.isSupportBLE(this)) {
-            log("Device doesn't support BLE")
-            return
-        }
-
-        if (!BleTools.isBleEnabled()) {
-            log("need turn Bluetooth ON for this device")
-            return
-        }
-
-        isSupportBle = true
-
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        bluetoothLeScanner = bluetoothAdapter?.bluetoothLeScanner
-
-        showPairedDevices()
-    }
-
-    private fun showPairedDevices() {
-        val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
-        log("### >>>> show paired devices count(${pairedDevices?.size}) ###")
-        pairedDevices?.forEachIndexed { index, device ->
-            val deviceName = device.name
-            val deviceHardwareAddress = device.address
-            log("$index >>> $deviceHardwareAddress --- $deviceName")
-        }
-        log("### <<<< show paired devices ###")
-    }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        log("onStartCommand")
-        return super.onStartCommand(intent, flags, startId)
-    }
-
-    override fun onBind(intent: Intent?): IBinder? {
-        log("onBind")
-        return mClientBleBinder
-    }
-
-    private val mClientBleBinder = object : IBleClientInterface.Stub() {
-        override fun sendMsg(msg: String?): Boolean {
-            log("sendMsg :$msg")
-            return false
-        }
-
-        override fun readMsg(): String {
-            val sb = StringBuilder()
-            sb.append(">>>> show scanResults count(${mDeviceSet.size}) ###")
-            mDeviceSet.forEachIndexed { index, device ->
-                sb.append("\n$index --->type(${device.type}),name(${device.name}),address(${device.address})")
-            }
-            sb.append("\n<<<< show scanResults ###")
-
-            val msg = sb.toString()
-            log("readMsg :$msg")
-            return msg
-        }
-
-        override fun sendOpt(opt: Int): Boolean {
-            log("sendOpt :$opt")
-            return when (opt) {
-                1 -> tryStartBleScan()
-                2 -> tryStopBleScan()
-                else -> false
-            }
-        }
-    }
-
-    private fun logScanResults() {
-        log("\n### >>>> show scanResults count(${mDeviceSet.size}) ###")
-        mDeviceSet.forEachIndexed { index, device ->
-            log("$index >>>type(${device.type}) --- address(${device.address}) --- uuids(${device.uuids}) --- name(${device.name})")
-        }
-        log("### <<<< show scanResults ###")
-    }
-
-    private fun tryStartBleScan(restart: Boolean = false): Boolean {
+    override fun tryStartBleScan(restart: Boolean): Boolean {
         log("tryStartBleScan  isSupportBle($isSupportBle)")
         if (isSupportBle) {
             startLeScan()
@@ -134,7 +27,7 @@ class PaxBleService : Service() {
         return false
     }
 
-    private fun tryStopBleScan(): Boolean {
+    override fun tryStopBleScan(): Boolean {
         log("tryStopBleScan  isSupportBle($isSupportBle)")
         if (isSupportBle) {
             stopLeScan()
@@ -182,7 +75,7 @@ class PaxBleService : Service() {
         log("startLeScan($mScanning)")
 
         val filters = mutableListOf<ScanFilter>()
-        BleTools.getTargetDevice().let {
+        BleConfig.curBleTarget.let {
             filters.add(
                 ScanFilter.Builder()
                     .setDeviceName(it.first)
@@ -223,9 +116,5 @@ class PaxBleService : Service() {
         mHandler.removeCallbacks(delayStopTask)
         logScanResults()
         bluetoothLeScanner?.stopScan(mScanCallback)
-    }
-
-    private fun log(msg: String) {
-        SunLog.i("PaxBleService", msg)
     }
 }
