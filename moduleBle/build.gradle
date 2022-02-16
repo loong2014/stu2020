@@ -1,21 +1,22 @@
-if (isModuleWebAlone.toBoolean()) {
+if (isModuleBleAlone.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
 }
+
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-
     compileSdkVersion build_versions.target_sdk
     defaultConfig {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
 
-        if (isModuleWebAlone.toBoolean()) {
-            applicationId "com.sunny.module.web"
+        if (isModuleBleAlone.toBoolean()) {
+            applicationId "com.sunny.module.ble"
             versionCode 100
             versionName "1.0"
         }
@@ -26,11 +27,13 @@ android {
                 arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
+
         multiDexEnabled true
     }
+
     sourceSets {
         main {
-            if (isModuleWebAlone.toBoolean()) {
+            if (isModuleBleAlone.toBoolean()) {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/moduleManifest/AndroidManifest.xml'
@@ -53,7 +56,7 @@ android {
     }
 
     //
-    resourcePrefix "web_"
+    resourcePrefix "ble_"
 }
 
 dependencies {

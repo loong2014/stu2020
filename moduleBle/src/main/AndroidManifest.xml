@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sunny.module.ble">
+
+    <!-- 蓝牙服务
+    如果您希望应用适用于不支持 BLE 的设备，则您应仍将此元素添加到应用清单中，
+    但设置 required="false"。然后您可以在运行时使用 PackageManager.hasSystemFeature() 确定 BLE 的可用性：
+    -->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- ble sdk <= 28(P) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/ble_app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".BleDemoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".server.BleServerClassic" />
+        <service android:name=".server.BleServerBle" />
+        <service android:name=".client.BleClientClassic" />
+
+    </application>
+
+</manifest>
