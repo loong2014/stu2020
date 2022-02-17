@@ -12,7 +12,7 @@ import android.os.IBinder
 /**
  * 蓝牙服务的基类
  */
-open class BleBaseService : Service() {
+abstract class BleBaseService : Service() {
 
     lateinit var mHandler: Handler
 
@@ -29,33 +29,36 @@ open class BleBaseService : Service() {
 
     var tipInfo: String = ""
 
+    var bleCallback: IBleCallbackInterface? = null
+
     fun log(msg: String) {
-        BleConfig.bleLog(msg)
+        BleConfig.bleLog("$this >>> $msg")
     }
 
     fun showTipInfo(msg: String) {
         tipInfo = msg
-        BleConfig.bleLog(msg)
+        log(msg)
     }
 
     fun logScanResults() {
         log(BleTools.buildDevicesShowMsg(mDeviceSet, "logScanResults", true))
     }
 
-    fun dealFoundOneDevice(device: BluetoothDevice) {
-        if (mDeviceAllSet.add(device)) {
-            log(
-                "FoundNewDevice allCount(${mDeviceAllSet.size}) -> " +
-                        "$device(${device.type}) , ${device.name} , ${device.uuids}"
-            )
-        }
-        device.takeIf { it.name != null }?.let {
-            if (mDeviceSet.add(it)) {
-                logScanResults()
-                BleConfig.updateCurDiscoveryDevices(mDeviceSet)
-            }
-        }
-    }
+    abstract fun doRelease()
+
+    abstract fun doInit()
+
+    abstract fun doSendMsg(msg: String): Boolean
+
+    abstract fun doReadMsg(): String
+
+    abstract fun doStartScan()
+
+    abstract fun doStopScan()
+
+    abstract fun doStartConnect(address: String): Boolean
+
+    abstract fun doStopConnect()
 
     override fun onCreate() {
         super.onCreate()
@@ -89,16 +92,11 @@ open class BleBaseService : Service() {
     }
 
     override fun onDestroy() {
+        log("onDestroy")
         doRelease()
         super.onDestroy()
     }
 
-    open fun doRelease() {
-
-    }
-
-    open fun doInit() {
-    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("onStartCommand")
@@ -110,7 +108,20 @@ open class BleBaseService : Service() {
         return mClientBleBinder
     }
 
+    override fun onUnbind(intent: Intent?): Boolean {
+        log("onUnbind :$mClientBleBinder")
+        return super.onUnbind(intent)
+    }
+
     private val mClientBleBinder = object : IBleClientInterface.Stub() {
+        override fun registerCallBack(callback: IBleCallbackInterface?) {
+            bleCallback = callback
+        }
+
+        override fun unRegisterCallBack(callback: IBleCallbackInterface?) {
+            bleCallback = callback
+        }
+
         override fun sendMsg(msg: String?): Boolean {
             log("sendMsg :$msg")
             if (msg.isNullOrBlank()) {
@@ -169,29 +180,5 @@ open class BleBaseService : Service() {
         override fun sendOpt(opt: Int): Boolean {
             return true
         }
-    }
-
-    open fun doSendMsg(msg: String): Boolean {
-        return false
-    }
-
-    open fun doReadMsg(): String {
-        return ""
-    }
-
-    open fun doStartScan() {
-
-    }
-
-    open fun doStopScan() {
-
-    }
-
-    open fun doStartConnect(address: String): Boolean {
-        return false
-    }
-
-    open fun doStopConnect() {
-
     }
 }

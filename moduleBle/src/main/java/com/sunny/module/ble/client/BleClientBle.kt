@@ -12,7 +12,7 @@ import com.sunny.module.ble.BleConfig
  * 传统蓝牙
  * https://developer.android.com/guide/topics/connectivity/bluetooth?hl=zh-cn#FindDevices
  */
-class BleClientClassic : BleBaseClientService() {
+class BleClientBle : BleBaseClientService() {
 
     private var mScanning: Boolean = false
 
@@ -138,12 +138,10 @@ class BleClientClassic : BleBaseClientService() {
 
     private fun tryAutoConnect(device: BluetoothDevice) {
         if (device.name == "MI 6") {
-
-//            device.bondState // 设备绑定状态
             if (buildClientConnect(device)) {
                 bleCallback?.onConnectStateChanged(
                     BleConfig.ConnectStateTypeConnected,
-                    "(${device.type})${device.name} --- ${device.address}"
+                    "设备连接成功:${device.name}"
                 )
             }
         }

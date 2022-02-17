@@ -40,6 +40,10 @@ class SunnyTopBar(context: Context, attributeSet: AttributeSet?) :
         top_bar_left_back_btn.setOnClickListener(listener)
     }
 
+    fun setMidNameClickListener(listener: OnClickListener) {
+        top_bar_mid_name.setOnClickListener(listener)
+    }
+
     fun setMiddleName(name: String) {
         middleName = name
         top_bar_mid_name.text = name

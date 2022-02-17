@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,7 +22,21 @@
             android:orientation="vertical">
 
             <com.sunny.lib.ui.SunnyTextView
-                android:id="@+id/tv_ble_cur_info"
+                android:id="@+id/tv_own_device_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="None"
+                android:textColor="#9C27B0"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#3E4A9F" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                android:id="@+id/tv_target_device_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -41,28 +54,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="配置界面(显示)" />
+                    android:text="配置界面" />
 
                 <com.sunny.lib.ui.SunnyButton
-                    android:id="@+id/btn_ble_demo_type"
+                    android:id="@+id/btn_ble_service_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="更改端类型" />
+                    android:text="开启服务" />
 
-                <com.sunny.lib.ui.SunnyTextView
-                    android:id="@+id/tv_ble_demo_type"
+                <com.sunny.lib.ui.SunnyButton
+                    android:id="@+id/btn_ble_service_stop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="None"
-                    android:textColor="#9C27B0"
-                    android:textSize="15sp" />
+                    android:text="关闭服务" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ble_config_layout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -76,82 +87,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="显示已配对设备" />
+                        android:text="已配对设备" />
 
                     <com.sunny.lib.ui.SunnyButton
-                        android:id="@+id/btn_ble_apply_permission"
+                        android:id="@+id/btn_ble_device_check"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="申请权限" />
+                        android:text="设备检测" />
 
                     <com.sunny.lib.ui.SunnyButton
-                        android:id="@+id/btn_ble_open_discovery"
+                        android:id="@+id/btn_ble_service_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="开启可见性" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.sunny.lib.ui.SunnyButton
-                        android:id="@+id/btn_ble_server_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="更改蓝牙服务类型" />
-
-                    <com.sunny.lib.ui.SunnyTextView
-                        android:id="@+id/tv_ble_server_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="None"
-                        android:textColor="#9C27B0"
-                        android:textSize="15sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.sunny.lib.ui.SunnyButton
-                        android:id="@+id/btn_ble_service_start"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="开启服务" />
-
-                    <com.sunny.lib.ui.SunnyButton
-                        android:id="@+id/btn_ble_service_stop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="关闭服务" />
-
-                    <com.sunny.lib.ui.SunnyTextView
-                        android:id="@+id/tv_ble_service_tip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="None"
-                        android:textColor="#9C27B0"
-                        android:textSize="15sp" />
+                        android:text="服务类型(BT)" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/ble_client_config_layout"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    tools:visibility="visible">
+                    android:orientation="vertical">
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="wrap_content"
@@ -199,16 +156,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="选择连接设备" />
+                            android:text="选择目标设备" />
 
-                        <com.sunny.lib.ui.SunnyTextView
+                        <com.sunny.lib.ui.SunnyButton
                             android:id="@+id/tv_ble_target"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="None"
-                            android:textColor="#9C27B0"
-                            android:textSize="15sp" />
+                            android:text="选择目标设备" />
+
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
@@ -241,69 +197,68 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ble_client_opt_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:orientation="horizontal">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <com.sunny.lib.ui.SunnyButton
+                    android:id="@+id/btn_ble_msg_send"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_margin="5dp"
+                    android:text="发送消息" />
 
-                    <com.sunny.lib.ui.SunnyTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="信息:"
-                        android:textColor="#9C27B0"
-                        android:textSize="15sp" />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_msg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minWidth="200dp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <com.sunny.lib.ui.SunnyTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_margin="5dp"
+                    android:text="信息:"
+                    android:textColor="#9C27B0"
+                    android:textSize="15sp" />
 
-                    <com.sunny.lib.ui.SunnyButton
-                        android:id="@+id/btn_ble_msg_send"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="发送消息" />
-
-                    <com.sunny.lib.ui.SunnyButton
-                        android:id="@+id/btn_ble_msg_read"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="读取消息" />
-
-                    <com.sunny.lib.ui.SunnyButton
-                        android:id="@+id/btn_ble_recent_tip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="最新提示" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:minWidth="200dp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <com.sunny.lib.ui.SunnyTextView
-                android:id="@+id/tv_ble_content"
+                android:id="@+id/ble_server_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="None"
+                android:textColor="#9C27B0"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#3E4A9F" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                android:id="@+id/ble_connect_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="None"
+                android:textColor="#9C27B0"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#3E4A9F" />
+
+            <com.sunny.lib.ui.SunnyTextView
+                android:id="@+id/ble_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="None"
                 android:textColor="#9C27B0"
                 android:textSize="15sp" />
 

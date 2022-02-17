@@ -1,48 +1,58 @@
 package com.sunny.module.ble
 
 import android.bluetooth.BluetoothDevice
+import android.os.ParcelUuid
 import com.sunny.lib.base.log.SunLog
 import java.util.*
 
-/**
- * [BluetoothDevice.getType]
- * 1==经典
- * 2==低能耗
- * 3==双模式
- */
 
-
-object BleConfig {
-
-    val MsgTypeRecentTip = 1
-    val MsgTypeScanDevices = 2
-
-    const val PAX_BLE_NAME = "bluetooth_socket_sunny"
-    val PAX_UUID_SERVICE: UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c271111")
-    val PAX_UUID_WRITE: UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c272222")
-    val PAX_BLE_UUID: UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c273333")
-
-    //
+//
 //    private val targetDeviceArray = arrayOf<Pair<String, String>>(
 //        Pair("FF 91 Driver", "22:22:ED:16:C2:52"),
 //        Pair("Redmi K40", "9C:5A:81:2F:19:39"),
 //        Pair("MI 6", "20:47:DA:9B:A2:73"),
 //    )
+object BleConfig {
 
-    fun bleLog(msg: String, tag: String = "") {
+    // 客户端与服务端的UUID需要一致
+    val PAX_BLE_UUID: UUID by lazy {
+        UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c273333")
+    }
+    val PAX_BLE_P_UUID: ParcelUuid by lazy {
+        ParcelUuid(PAX_BLE_UUID)
+    }
+
+    val MSG_SERVICE_CONNECTED: String = "sConnected"
+
+    val MSG_CLIENT_DISCONNECT: String = "cDisconnect"
+
+    val MsgTypeRecentTip = 1
+    val MsgTypeScanDevices = 2
+    val ConnectStateTypeConnected = 3
+
+    val MSG_SERVICE_DEVICE_CONNECTED = 3
+
+    const val pax_ff_device_uuid_prefix = "db764ac8-4b08"
+    val PAX_UUID_SERVICE: UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c271111")
+    val PAX_UUID_WRITE: UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c272222")
+
+    var bleServerThreadCount: Int = 0
+    fun getBleServerThreadName(): String {
+        return "BleServer-${bleServerThreadCount++}"
+    }
+
+    var bleClientThreadCount: Int = 0
+    fun getBleClientThreadName(): String {
+        return "BleClient-${bleClientThreadCount++}"
+    }
+
+
+    fun bleLog(msg: String) {
+        SunLog.i("BleSunny", msg)
+    }
+
+    fun bleLog(tag: String, msg: String) {
         SunLog.i("BleSunny", "$tag:$msg")
-    }
-
-    //
-    var curBleDemoIsClient = true
-    fun updateBleDemoType() {
-        curBleDemoIsClient = !curBleDemoIsClient
-    }
-
-    //
-    var curBluetoothTypeIsClassic = false
-    fun updateBluetoothType() {
-        curBluetoothTypeIsClassic = !curBluetoothTypeIsClassic
     }
 
     //
@@ -68,5 +78,9 @@ object BleConfig {
     fun resetCurTargetDevice() {
         curTargetIndex = -1
         curTargetDevice = null
+
+        BleTools.getBondedDevices()?.run {
+            updateCurDiscoveryDevices(this)
+        }
     }
 }

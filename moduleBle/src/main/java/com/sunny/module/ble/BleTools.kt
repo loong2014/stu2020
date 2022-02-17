@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothGattCharacteristic
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import java.io.OutputStream
 
 object BleTools {
 
@@ -61,6 +62,25 @@ object BleTools {
 
     fun buildOneDeviceShowMsg(device: BluetoothDevice, tag: String): String {
         return "$tag -> $device(${device.type}) , ${device.name} , ${device.uuids}"
+    }
+
+    /**
+     * 发送消息
+     */
+    fun doSendMsg(msg: String?, outputStream: OutputStream?): Boolean {
+        BleConfig.bleLog("doSendMsg $outputStream -> $msg")
+        if (outputStream == null || msg == null) {
+            return false
+        }
+
+        return try {
+            outputStream.write(msg.toByteArray())
+            BleConfig.bleLog("doSendMsg succeed")
+            true
+        } catch (e: Exception) {
+            BleConfig.bleLog("doSendMsg error :$e")
+            false
+        }
     }
 
     fun buildDevicesShowMsg(
@@ -154,6 +174,6 @@ object BleTools {
     }
 
     private fun log(msg: String) {
-        BleConfig.bleLog("BleTools", msg)
+        BleConfig.bleLog(msg, "BleTools")
     }
 }

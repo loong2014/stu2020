@@ -33,31 +33,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ble.BleDemoActivity">
+        <activity android:name="com.sunny.module.web.WebDemoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.sunny.module.web.WebDemoActivity">
-
-        </activity>
         <activity android:name=".WebWebViewActivity" />
         <activity android:name=".HttpActivity" />
         <activity android:name=".HttpCacheActivity" />
-
-        <activity android:name=".ble.MainActivity">
-
-        </activity>
-
-        <service android:name=".ble.client.BleClientService" />
-        <service android:name=".ble.service.BleConnectService" />
-        <service android:name=".ble.service.PaxBleService" />
-        <service android:name=".ble.service.PaxBleServiceOld" />
-        <service android:name=".ble.client.BleClientServiceOld" />
-        <service android:name=".ble.service.BleConnectServiceOld" />
     </application>
 
 </manifest>

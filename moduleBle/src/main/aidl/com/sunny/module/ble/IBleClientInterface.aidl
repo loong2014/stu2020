@@ -1,9 +1,15 @@
 // IBleClientInterface.aidl
 package com.sunny.module.ble;
 
+import  com.sunny.module.ble.IBleCallbackInterface;
+
 // Declare any non-default types here with import statements
 
 interface IBleClientInterface {
+
+    void registerCallBack(IBleCallbackInterface callback);
+
+    void unRegisterCallBack(IBleCallbackInterface callback);
 
     boolean sendMsg(String msg);
 

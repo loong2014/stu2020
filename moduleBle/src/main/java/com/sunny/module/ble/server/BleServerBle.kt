@@ -5,13 +5,13 @@ import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanFilter
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
-import com.sunny.module.ble.BleBaseService
+import com.sunny.module.ble.BleConfig
 
 /**
  * 低功耗蓝牙
  * https://developer.android.com/guide/topics/connectivity/bluetooth-le?hl=zh-cn
  */
-class BleServerBle : BleBaseService() {
+class BleServerBle : BleBaseServerService() {
 
     private var mScanning: Boolean = false
 
@@ -24,13 +24,11 @@ class BleServerBle : BleBaseService() {
         log("doStartScan($mScanning)")
 
         val filters = mutableListOf<ScanFilter>()
-//        BleConfig.curBleTarget.let {
-//            filters.add(
-//                ScanFilter.Builder()
-//                    .setDeviceName(it.first)
-//                    .build()
-//            )
-//        }
+        filters.add(
+            ScanFilter.Builder()
+                .setServiceUuid(BleConfig.PAX_BLE_P_UUID)
+                .build()
+        )
 
         val setting = ScanSettings.Builder()
             .setScanMode(ScanSettings.SCAN_MODE_BALANCED)
@@ -60,6 +58,22 @@ class BleServerBle : BleBaseService() {
 
     private val delayStopTask = Runnable {
         doStopScan()
+    }
+
+
+    fun dealFoundOneDevice(device: BluetoothDevice) {
+        if (mDeviceAllSet.add(device)) {
+            log(
+                "FoundNewDevice allCount(${mDeviceAllSet.size}) -> " +
+                        "$device(${device.type}) , ${device.name} , ${device.uuids}"
+            )
+        }
+        device.takeIf { it.name != null }?.let {
+            if (mDeviceSet.add(it)) {
+                logScanResults()
+                BleConfig.updateCurDiscoveryDevices(mDeviceSet)
+            }
+        }
     }
 
     private val mScanCallback = object : ScanCallback() {
