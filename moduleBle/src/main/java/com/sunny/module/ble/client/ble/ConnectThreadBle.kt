@@ -127,34 +127,20 @@ class ClientConnectThreadBle(
         log("displayGattServices size(${gattServices?.size})")
         if (gattServices == null) return
 
-        var uuid: String?
-
+        val sb = StringBuilder()
+        sb.append("\ndisplayGattServices size(${gattServices.size})")
         // Loops through available GATT Services.
-        for (gattService in gattServices) {
-            uuid = gattService.uuid.toString()
-            log(
-                "displayGattServices gattService --- $uuid >>> ${
-                    SampleGattAttributes.lookup(
-                        uuid,
-                        "Unknown device"
-                    )
-                }"
-            )
+        gattServices.forEachIndexed { index1, gattService ->
+            val characteristics = gattService.characteristics
+            sb.append("\n>>>($index1) --- gattService :${gattService.uuid} --- characteristics(${characteristics?.size})")
 
-            val gattCharacteristics = gattService.characteristics
             // Loops through available Characteristics.
-            for (gattCharacteristic in gattCharacteristics) {
-                uuid = gattCharacteristic.uuid.toString()
-                log(
-                    "displayGattServices gattCharacteristic --- $uuid >>> ${
-                        SampleGattAttributes.lookup(
-                            uuid,
-                            "Unknown device"
-                        )
-                    }"
-                )
+            characteristics?.forEachIndexed { index2, gattCharacteristic ->
+                sb.append("\n>>>>>>($index2) --- gattCharacteristic :${gattCharacteristic.uuid}")
             }
+            sb.append("\n")
         }
+        log(sb.toString())
     }
 
     private fun log(msg: String) {

@@ -34,6 +34,7 @@ object BleTools {
         return BluetoothAdapter.getDefaultAdapter()?.isEnabled == true
     }
 
+
     /**
      * 获取对配对设备
      */
@@ -43,16 +44,51 @@ object BleTools {
     }
 
     /**
+     * 开启蓝牙
+     */
+    fun openBleByUser(activity: Activity, requestCode: Int) {
+        // 1
+//        BluetoothAdapter.getDefaultAdapter().enable()
+
+        // 2
+        if (!isBleEnabled()) {
+            activity.startActivityForResult(
+                Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),
+                requestCode
+            )
+        }
+    }
+
+    /**
      * 判断是否有访问位置的权限，没有权限，直接申请位置权限
      */
     fun checkBlePermission(activity: Activity, requestCode: Int): Boolean {
         if ((activity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             || (activity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            || (activity.checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)
+            || (activity.checkSelfPermission(Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED)
         ) {
             activity.requestPermissions(
                 arrayOf(
                     Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.READ_CONTACTS,
+                    Manifest.permission.WRITE_CONTACTS
+                ), requestCode
+            )
+            return false
+        }
+        return true
+    }
+
+    /**
+     * 判断是否有访问位置的权限，没有权限，直接申请位置权限
+     */
+    fun checkBleReadContactsPermission(activity: Activity, requestCode: Int): Boolean {
+        if (activity.shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
+            activity.requestPermissions(
+                arrayOf(
+                    Manifest.permission.READ_CONTACTS
                 ), requestCode
             )
             return false

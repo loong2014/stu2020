@@ -23,6 +23,8 @@ class BleClientClassic : BleBaseClientService() {
     override fun doInit() {
         // Register for broadcasts when a device is discovered.
         val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+        filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED)
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
         registerReceiver(receiver, filter)
 
         //

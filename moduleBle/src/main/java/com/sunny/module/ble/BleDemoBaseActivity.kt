@@ -11,9 +11,15 @@ import android.os.IBinder
 import android.view.View
 import android.widget.TextView
 import com.sunny.lib.common.base.BaseActivity
+<<<<<<< HEAD
 import com.sunny.module.ble.client.classic.BleClientClassic
 import com.sunny.module.ble.pax.BleMasterService
 import com.sunny.module.ble.pax.BleSlaveService
+=======
+import com.sunny.module.ble.client.ble.BleClientBle
+import com.sunny.module.ble.client.classic.BleClientClassic
+import com.sunny.module.ble.server.ble.BleServerBle
+>>>>>>> ec1d5a6 (ble 6)
 import com.sunny.module.ble.server.classic.BleServerClassic
 import com.sunny.module.ble.utils.StringLrcCircle
 import kotlinx.android.synthetic.main.ble_activity_demo.*
@@ -189,11 +195,20 @@ open class BleDemoBaseActivity : BaseActivity() {
             showCheckMsg("蓝牙未开启")
             return
         }
+<<<<<<< HEAD
+=======
+        showCheckMsg("蓝牙已开启")
+>>>>>>> ec1d5a6 (ble 6)
 
         showCheckMsg("isLeExtendedAdvertisingSupported :${adapter.isLeExtendedAdvertisingSupported}")
         showCheckMsg("isMultipleAdvertisementSupported :${adapter.isMultipleAdvertisementSupported}")
 
+<<<<<<< HEAD
         showCheckMsg("通告isLe2MPhySupported :${adapter.isLe2MPhySupported}")
+=======
+        // 通告
+        showCheckMsg("isLe2MPhySupported :${adapter.isLe2MPhySupported}")
+>>>>>>> ec1d5a6 (ble 6)
         showCheckMsg("isLeCodedPhySupported :${adapter.isLeCodedPhySupported}")
         showCheckMsg("isLePeriodicAdvertisingSupported :${adapter.isLePeriodicAdvertisingSupported}")
         showCheckMsg("isOffloadedFilteringSupported :${adapter.isOffloadedFilteringSupported}")
@@ -202,8 +217,12 @@ open class BleDemoBaseActivity : BaseActivity() {
         val msg = "当前设备:${adapter.name} , ${adapter.address} "
         tv_own_device_info.text = msg
 
+<<<<<<< HEAD
         showCheckMsg("start check permission")
         if (!BleTools.checkBlePermission(this, 300)) {
+=======
+        if (!BleTools.checkBlePermission(this, 100)) {
+>>>>>>> ec1d5a6 (ble 6)
             showCheckMsg("permission error")
             return
         }

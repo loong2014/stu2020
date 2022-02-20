@@ -31,7 +31,7 @@ abstract class BleBaseService : Service() {
 
     var bleCallback: IBleCallbackInterface? = null
 
-    fun log(msg: String) {
+    open fun log(msg: String) {
         BleConfig.bleLog("$this >>> $msg")
     }
 
