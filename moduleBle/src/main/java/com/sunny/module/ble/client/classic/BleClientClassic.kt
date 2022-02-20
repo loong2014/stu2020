@@ -1,4 +1,4 @@
-package com.sunny.module.ble.client
+package com.sunny.module.ble.client.classic
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -7,6 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import com.sunny.module.ble.BleConfig
+import com.sunny.module.ble.client.BleBaseClientService
+import com.sunny.module.ble.client.ClientConnectCallback
+import com.sunny.module.ble.client.ClientConnectThread
+import com.sunny.module.ble.client.buildConnectThreadClassic
 
 /**
  * 传统蓝牙
@@ -26,22 +30,7 @@ class BleClientClassic : BleBaseClientService() {
     }
 
     override fun doRelease() {
-        super.doRelease()
         unregisterReceiver(receiver)
-    }
-
-    private fun dealRcvMsg(msg: String) {
-        showLog("dealRcvMsg msg :$msg")
-        bleCallback?.onRcvClientMsg(msg)
-    }
-
-    fun sendServerState(tip: String) {
-        bleCallback?.onConnectStateChanged(1, tip)
-        showLog(tip)
-    }
-
-    private fun showLog(msg: String) {
-        BleConfig.bleLog("dddddd :$msg")
     }
 
     override fun doStartScan() {
@@ -183,9 +172,8 @@ class BleClientClassic : BleBaseClientService() {
             }
         }
 
-
-        val connectThread: ClientConnectThread =
-            buildConnectThread(device, object : ClientConnectCallback {
+        val connectThread =
+            buildConnectThreadClassic(device, object : ClientConnectCallback {
 
                 override fun onStateChanged(oldState: String, newState: String) {
                 }
@@ -205,7 +193,7 @@ class BleClientClassic : BleBaseClientService() {
     }
 
     override fun doStopConnect() {
-        mDeviceConnectThread?.cancel()
+        mDeviceConnectThread?.doCancel()
     }
 
     var msgSeq: Int = 0

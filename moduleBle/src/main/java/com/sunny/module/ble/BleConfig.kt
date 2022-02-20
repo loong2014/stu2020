@@ -22,6 +22,13 @@ object BleConfig {
         ParcelUuid(PAX_BLE_UUID)
     }
 
+    // BLE
+    val PAX_BLE_CLIENT_UUID: UUID by lazy {
+        UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c271111")
+    }
+
+    val PAX_BLE_PERMISSIONS :Int =1
+
     val MSG_SERVICE_CONNECTED: String = "sConnected"
 
     val MSG_CLIENT_DISCONNECT: String = "cDisconnect"
@@ -48,11 +55,11 @@ object BleConfig {
 
 
     fun bleLog(msg: String) {
-        SunLog.i("BleSunny", msg)
+        SunLog.i("BleSunny-", msg)
     }
 
     fun bleLog(tag: String, msg: String) {
-        SunLog.i("BleSunny", "$tag:$msg")
+        SunLog.i("BleSunny-", "$tag:$msg")
     }
 
     //

@@ -32,9 +32,10 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".server.BleServerClassic" />
-        <service android:name=".server.BleServerBle" />
-        <service android:name=".client.BleClientClassic" />
+        <service android:name=".server.classic.BleServerClassic" />
+        <service android:name=".server.ble.BleServerBle" />
+        <service android:name=".client.classic.BleClientClassic" />
+        <service android:name=".client.ble.BleClientBle" />
 
     </application>
 

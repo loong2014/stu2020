@@ -1,4 +1,4 @@
-package com.sunny.module.ble.server
+package com.sunny.module.ble.server.classic
 
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothServerSocket
@@ -7,6 +7,7 @@ import com.sunny.module.ble.BleConfig
 import com.sunny.module.ble.BleConfig.MSG_SERVICE_CONNECTED
 import com.sunny.module.ble.BleConfig.PAX_BLE_UUID
 import com.sunny.module.ble.BleTools
+import com.sunny.module.ble.server.BleBaseServerService
 import java.io.InputStream
 import java.io.OutputStream
 
@@ -30,21 +31,11 @@ class BleServerClassic : BleBaseServerService() {
         mConnectThread?.doExit()
         mConnectThread?.interrupt()
         mConnectThread = null
-        super.doRelease()
     }
 
     fun sendServerState(tip: String) {
         bleCallback?.onConnectStateChanged(1, tip)
         showLog(tip)
-    }
-
-    private fun showLog(msg: String) {
-        BleConfig.bleLog("$mConnectThread -> ", msg)
-    }
-
-    private fun dealRcvMsg(msg: String) {
-        showLog("dealRcvMsg msg :$msg")
-        bleCallback?.onRcvClientMsg(msg)
     }
 
     inner class ConnectThread(name: String) : Thread(name) {

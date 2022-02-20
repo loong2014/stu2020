@@ -11,10 +11,10 @@ import android.os.IBinder
 import android.view.View
 import android.widget.TextView
 import com.sunny.lib.common.base.BaseActivity
-import com.sunny.module.ble.client.BleClientBle
-import com.sunny.module.ble.client.BleClientClassic
-import com.sunny.module.ble.server.BleServerBle
-import com.sunny.module.ble.server.BleServerClassic
+import com.sunny.module.ble.client.ble.BleClientBle
+import com.sunny.module.ble.client.classic.BleClientClassic
+import com.sunny.module.ble.server.ble.BleServerBle
+import com.sunny.module.ble.server.classic.BleServerClassic
 import com.sunny.module.ble.utils.StringLrcCircle
 import kotlinx.android.synthetic.main.ble_activity_demo.*
 
@@ -23,7 +23,7 @@ open class BleDemoBaseActivity : BaseActivity() {
     private val tipList = StringLrcCircle(10)
 
     var isClientDemo = false // 是否是客户端
-    var isClassic = false // 是否是经典蓝牙
+    var isClassic = true // 是否是经典蓝牙
 
     var isSupportBle = false
     var isBind = false
@@ -84,6 +84,13 @@ open class BleDemoBaseActivity : BaseActivity() {
         showTipList()
     }
 
+    fun showCheckMsg(msg: String) {
+        val tip = "Check >>> $msg"
+        BleConfig.bleLog(msg)
+        tipList.add(tip)
+        showTipList()
+    }
+
     private fun showServerTip(tip: String) {
         val msg = "Server >>> $tip"
         ble_server_tip.text = msg
@@ -115,14 +122,6 @@ open class BleDemoBaseActivity : BaseActivity() {
         tv_target_device_info.text = msg
         BleConfig.bleLog(msg)
     }
-
-    private fun showOwnDevice() {
-        val msg = BluetoothAdapter.getDefaultAdapter()?.run {
-            "当前设备:$name , $address"
-        } ?: "None"
-        tv_own_device_info.text = msg
-    }
-
 
     var sendSeq: Int = 0
     fun doSendMsg(info: String) {
@@ -168,20 +167,58 @@ open class BleDemoBaseActivity : BaseActivity() {
         updateServiceType()
 
         //
-        showOwnDevice()
-
-        //
         doDeviceCheck()
     }
 
     private fun doDeviceCheck() {
         isSupportBle = false
-        if (BleTools.checkBlePermission(this, 300)) {
-            BleTools.openDiscoverable(this)
-            isSupportBle = true
-        } else {
-            showDeviceStateTip("权限检测未通过")
+        showCheckMsg("start")
+
+        val adapter = BluetoothAdapter.getDefaultAdapter()
+        if (adapter == null) {
+            showCheckMsg("不支持蓝牙")
+            return
         }
+
+        if (!adapter.isEnabled) {
+            showCheckMsg("蓝牙未开启")
+            return
+        }
+
+        showCheckMsg("isLeExtendedAdvertisingSupported :${adapter.isLeExtendedAdvertisingSupported}")
+        showCheckMsg("isMultipleAdvertisementSupported :${adapter.isMultipleAdvertisementSupported}")
+
+        showCheckMsg("通告isLe2MPhySupported :${adapter.isLe2MPhySupported}")
+        showCheckMsg("isLeCodedPhySupported :${adapter.isLeCodedPhySupported}")
+        showCheckMsg("isLePeriodicAdvertisingSupported :${adapter.isLePeriodicAdvertisingSupported}")
+        showCheckMsg("isOffloadedFilteringSupported :${adapter.isOffloadedFilteringSupported}")
+        showCheckMsg("isOffloadedScanBatchingSupported :${adapter.isOffloadedScanBatchingSupported}")
+
+        val msg = "当前设备:${adapter.name} , ${adapter.address} "
+        tv_own_device_info.text = msg
+
+        showCheckMsg("start check permission")
+        if (!BleTools.checkBlePermission(this, 300)) {
+            showCheckMsg("permission error")
+            return
+        }
+
+        if (!BleTools.isSupportBLE(this)) {
+            showCheckMsg("不支持低功耗")
+        }
+
+        if (adapter.isDiscovering) {
+            showCheckMsg("设备正在扫描")
+        }
+
+        if (adapter.cancelDiscovery()) {
+            showCheckMsg("关闭发现")
+        }
+
+        BleTools.openDiscoverable(this)
+
+        isSupportBle = true
+        showCheckMsg("可以正常使用")
     }
 
     private fun updateDemoType() {
