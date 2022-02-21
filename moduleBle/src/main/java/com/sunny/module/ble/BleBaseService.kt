@@ -97,7 +97,6 @@ abstract class BleBaseService : Service() {
         super.onDestroy()
     }
 
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("onStartCommand")
         return super.onStartCommand(intent, flags, startId)

@@ -53,7 +53,6 @@ object BleConfig {
         return "BleClient-${bleClientThreadCount++}"
     }
 
-
     fun bleLog(msg: String) {
         SunLog.i("BleSunny-", msg)
     }

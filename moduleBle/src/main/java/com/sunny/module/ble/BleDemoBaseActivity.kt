@@ -11,9 +11,9 @@ import android.os.IBinder
 import android.view.View
 import android.widget.TextView
 import com.sunny.lib.common.base.BaseActivity
-import com.sunny.module.ble.client.ble.BleClientBle
 import com.sunny.module.ble.client.classic.BleClientClassic
-import com.sunny.module.ble.server.ble.BleServerBle
+import com.sunny.module.ble.pax.BleMasterService
+import com.sunny.module.ble.pax.BleSlaveService
 import com.sunny.module.ble.server.classic.BleServerClassic
 import com.sunny.module.ble.utils.StringLrcCircle
 import kotlinx.android.synthetic.main.ble_activity_demo.*
@@ -33,6 +33,7 @@ open class BleDemoBaseActivity : BaseActivity() {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             curBleControl = IBleClientInterface.Stub.asInterface(service)
             curBleControl?.registerCallBack(bleCallback)
+            curBleControl?.startScan()
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -66,15 +67,19 @@ open class BleDemoBaseActivity : BaseActivity() {
     }
 
     fun showTip(tip: String) {
-        ble_tip.text = tip
+        runOnUiThread {
+            ble_tip.text = tip
+        }
     }
 
     private fun showTipList() {
-        val sb = StringBuilder()
-        tipList.toList().forEach {
-            sb.append("\n$it")
+        runOnUiThread {
+            val sb = StringBuilder()
+            tipList.toList().forEach {
+                sb.append("\n$it")
+            }
+            showTip(sb.toString())
         }
-        showTip(sb.toString())
     }
 
     fun showRcvMsg(msg: String) {
@@ -329,13 +334,15 @@ open class BleDemoBaseActivity : BaseActivity() {
             if (isClassic) {
                 BleClientClassic::class.java
             } else {
-                BleClientBle::class.java
+                BleSlaveService::class.java
+//                BleClientBle::class.java
             }
         } else {
             if (isClassic) {
                 BleServerClassic::class.java
             } else {
-                BleServerBle::class.java
+                BleMasterService::class.java
+//                BleServerBle::class.java
             }
         }
 
