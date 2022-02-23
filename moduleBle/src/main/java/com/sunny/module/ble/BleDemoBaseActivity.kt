@@ -11,15 +11,9 @@ import android.os.IBinder
 import android.view.View
 import android.widget.TextView
 import com.sunny.lib.common.base.BaseActivity
-<<<<<<< HEAD
 import com.sunny.module.ble.client.classic.BleClientClassic
-import com.sunny.module.ble.pax.BleMasterService
-import com.sunny.module.ble.pax.BleSlaveService
-=======
-import com.sunny.module.ble.client.ble.BleClientBle
-import com.sunny.module.ble.client.classic.BleClientClassic
-import com.sunny.module.ble.server.ble.BleServerBle
->>>>>>> ec1d5a6 (ble 6)
+import com.sunny.module.ble.pax.PaxBleScanService
+import com.sunny.module.ble.pax.PaxSlaveService
 import com.sunny.module.ble.server.classic.BleServerClassic
 import com.sunny.module.ble.utils.StringLrcCircle
 import kotlinx.android.synthetic.main.ble_activity_demo.*
@@ -88,6 +82,11 @@ open class BleDemoBaseActivity : BaseActivity() {
         }
     }
 
+    private fun clearTip() {
+        tipList.clear()
+        showTip("None")
+    }
+
     fun showRcvMsg(msg: String) {
         val tip = "Rcv >>> $msg"
         BleConfig.bleLog(msg)
@@ -134,21 +133,21 @@ open class BleDemoBaseActivity : BaseActivity() {
         BleConfig.bleLog(msg)
     }
 
-    var sendSeq: Int = 0
     fun doSendMsg(info: String) {
-        val seq = sendSeq++
-        val msg = "($seq)$info"
-        BleConfig.bleLog("send msg :$msg")
-        val tip = getBleControl()?.run {
-            if (sendMsg(msg)) {
-                "($seq)成功"
-            } else {
-                "($seq)失败"
-            }
-        } ?: "服务未开启"
+        getBleControl()?.sendMsg(info)
 
-        BleConfig.bleLog(tip)
-        tipList.add(tip)
+        val msg = "Send >>> $info"
+        BleConfig.bleLog(msg)
+        tipList.add(msg)
+        showTipList()
+    }
+
+    fun doReadMsg() {
+        val tip = getBleControl()?.readMsg()
+
+        val msg = "Read >>> $tip"
+        BleConfig.bleLog(msg)
+        tipList.add(msg)
         showTipList()
     }
 
@@ -195,20 +194,13 @@ open class BleDemoBaseActivity : BaseActivity() {
             showCheckMsg("蓝牙未开启")
             return
         }
-<<<<<<< HEAD
-=======
         showCheckMsg("蓝牙已开启")
->>>>>>> ec1d5a6 (ble 6)
 
         showCheckMsg("isLeExtendedAdvertisingSupported :${adapter.isLeExtendedAdvertisingSupported}")
         showCheckMsg("isMultipleAdvertisementSupported :${adapter.isMultipleAdvertisementSupported}")
 
-<<<<<<< HEAD
-        showCheckMsg("通告isLe2MPhySupported :${adapter.isLe2MPhySupported}")
-=======
         // 通告
         showCheckMsg("isLe2MPhySupported :${adapter.isLe2MPhySupported}")
->>>>>>> ec1d5a6 (ble 6)
         showCheckMsg("isLeCodedPhySupported :${adapter.isLeCodedPhySupported}")
         showCheckMsg("isLePeriodicAdvertisingSupported :${adapter.isLePeriodicAdvertisingSupported}")
         showCheckMsg("isOffloadedFilteringSupported :${adapter.isOffloadedFilteringSupported}")
@@ -217,12 +209,7 @@ open class BleDemoBaseActivity : BaseActivity() {
         val msg = "当前设备:${adapter.name} , ${adapter.address} "
         tv_own_device_info.text = msg
 
-<<<<<<< HEAD
-        showCheckMsg("start check permission")
-        if (!BleTools.checkBlePermission(this, 300)) {
-=======
         if (!BleTools.checkBlePermission(this, 100)) {
->>>>>>> ec1d5a6 (ble 6)
             showCheckMsg("permission error")
             return
         }
@@ -249,11 +236,11 @@ open class BleDemoBaseActivity : BaseActivity() {
         isClientDemo = !isClientDemo
 
         if (isClientDemo) {
-            top_bar.setMiddleName("蓝牙-客户端")
+            top_bar.setMiddleName("蓝牙-手机")
             et_msg.setText("client msg")
             ble_client_config_layout.visibility = View.VISIBLE
         } else {
-            top_bar.setMiddleName("蓝牙-服务端")
+            top_bar.setMiddleName("蓝牙-车机")
             et_msg.setText("service msg")
             ble_client_config_layout.visibility = View.GONE
         }
@@ -338,9 +325,18 @@ open class BleDemoBaseActivity : BaseActivity() {
         }
 
         //
+        btn_ble_msg_clear.setOnClickListener {
+            clearTip()
+        }
+        //
         btn_ble_msg_send.setOnClickListener {
-            val msg = et_msg.text?.toString() ?: "None"
+            val msg: String = et_msg.text?.toString() ?: "None"
+//            val tip = "${System.currentTimeMillis()}$msg"
             doSendMsg(msg)
+        }
+        //
+        btn_ble_msg_read.setOnClickListener {
+            doReadMsg()
         }
     }
 
@@ -353,14 +349,14 @@ open class BleDemoBaseActivity : BaseActivity() {
             if (isClassic) {
                 BleClientClassic::class.java
             } else {
-                BleSlaveService::class.java
+                PaxSlaveService::class.java
 //                BleClientBle::class.java
             }
         } else {
             if (isClassic) {
                 BleServerClassic::class.java
             } else {
-                BleMasterService::class.java
+                PaxBleScanService::class.java
 //                BleServerBle::class.java
             }
         }

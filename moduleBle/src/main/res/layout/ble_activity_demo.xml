@@ -206,11 +206,31 @@
                 android:orientation="horizontal">
 
                 <com.sunny.lib.ui.SunnyButton
+                    android:id="@+id/btn_ble_msg_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="清空" />
+
+                <com.sunny.lib.ui.SunnyButton
                     android:id="@+id/btn_ble_msg_send"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="发送消息" />
+                    android:text="发消息" />
+
+                <com.sunny.lib.ui.SunnyButton
+                    android:id="@+id/btn_ble_msg_read"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="读消息" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <com.sunny.lib.ui.SunnyTextView
                     android:layout_width="wrap_content"
@@ -225,8 +245,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:hint="msg"
                     android:minWidth="200dp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             <com.sunny.lib.ui.SunnyTextView
                 android:id="@+id/ble_server_tip"

@@ -39,8 +39,8 @@
         <service android:name=".server.ble.BleServerBle" />
         <service android:name=".client.classic.BleClientClassic" />
         <service android:name=".client.ble.BleClientBle" />
-        <service android:name=".pax.BleMasterService" />
-        <service android:name=".pax.BleSlaveService" />
+        <service android:name=".pax.PaxBleScanService" />
+        <service android:name=".pax.PaxSlaveService" />
 
     </application>
 

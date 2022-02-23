@@ -15,6 +15,7 @@ import android.os.IBinder
 abstract class BleBaseService : Service() {
 
     lateinit var mHandler: Handler
+    lateinit var mMainHandler: Handler
 
     val SCAN_PERIOD: Long = 200_000
 
@@ -67,6 +68,8 @@ abstract class BleBaseService : Service() {
         val ht = HandlerThread("pax_ble")
         ht.start()
         mHandler = Handler(ht.looper)
+
+        mMainHandler = Handler()
 
         initBluetooth()
     }

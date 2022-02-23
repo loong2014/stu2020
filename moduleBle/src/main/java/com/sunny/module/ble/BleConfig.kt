@@ -27,7 +27,7 @@ object BleConfig {
         UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c271111")
     }
 
-    val PAX_BLE_PERMISSIONS :Int =1
+    val PAX_BLE_PERMISSIONS: Int = 1
 
     val MSG_SERVICE_CONNECTED: String = "sConnected"
 
