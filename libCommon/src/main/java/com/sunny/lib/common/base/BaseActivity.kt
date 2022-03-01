@@ -8,8 +8,10 @@ import com.sunny.lib.common.utils.SunToast
 
 open class BaseActivity : AppCompatActivity() {
 
+    lateinit var mmActivity: BaseActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mmActivity = this
         ActivityLifeManager.onCreate(this)
     }
 
@@ -26,7 +28,7 @@ open class BaseActivity : AppCompatActivity() {
         finish()
     }
 
-    fun getActivity():Activity{
+    fun getActivity(): Activity {
         return this
     }
 }

@@ -17,4 +17,5 @@ dependencies {
     api deps.kotlin.stdlib
     api deps.androidx.appcompat
     api deps.androidx.activity
+    api deps.timber
 }
