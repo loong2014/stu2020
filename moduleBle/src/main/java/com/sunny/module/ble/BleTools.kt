@@ -44,6 +44,18 @@ object BleTools {
     }
 
     /**
+     * 获取远程设备的蓝牙协议类型
+     */
+    fun getRemoteType(device: BluetoothDevice): String {
+        return when (device.type) {
+            BluetoothDevice.DEVICE_TYPE_CLASSIC -> "传统蓝牙"
+            BluetoothDevice.DEVICE_TYPE_LE -> "低功耗蓝牙"
+            BluetoothDevice.DEVICE_TYPE_DUAL -> "双模式蓝牙"
+            else -> "UNKNOWN"
+        }
+    }
+
+    /**
      * 开启蓝牙
      */
     fun openBleByUser(activity: Activity, requestCode: Int) {
@@ -208,6 +220,65 @@ object BleTools {
         characteristic.writeType = BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE;
         bluetoothGatt.writeCharacteristic(characteristic)
     }
+
+    /**
+     *
+     */
+    fun doDeviceCheck(): StringBuilder {
+        val sb = StringBuilder("开始检测")
+        val adapter = BluetoothAdapter.getDefaultAdapter()
+        if (adapter == null) {
+            sb.append("不支持蓝牙")
+            return sb
+        }
+
+        //
+        if (!adapter.isEnabled) {
+            sb.append("蓝牙未开启")
+        } else {
+            sb.append("蓝牙已开启")
+        }
+
+
+        // 最大连接数
+//
+//        showCheckMsg("isLeExtendedAdvertisingSupported :${adapter.isLeExtendedAdvertisingSupported}")
+//        showCheckMsg("isMultipleAdvertisementSupported :${adapter.isMultipleAdvertisementSupported}")
+//
+//        // 通告
+//        showCheckMsg("isLe2MPhySupported :${adapter.isLe2MPhySupported}")
+//        showCheckMsg("isLeCodedPhySupported :${adapter.isLeCodedPhySupported}")
+//        showCheckMsg("isLePeriodicAdvertisingSupported :${adapter.isLePeriodicAdvertisingSupported}")
+//        showCheckMsg("isOffloadedFilteringSupported :${adapter.isOffloadedFilteringSupported}")
+//        showCheckMsg("isOffloadedScanBatchingSupported :${adapter.isOffloadedScanBatchingSupported}")
+//
+//        val msg = "当前设备:${adapter.name} , ${adapter.address} "
+//        tv_own_device_info.text = msg
+//
+//        if (!BleTools.checkBlePermission(this, 100)) {
+//            showCheckMsg("permission error")
+//            return
+//        }
+//
+//        if (!BleTools.isSupportBLE(this)) {
+//            showCheckMsg("不支持低功耗")
+//        }
+//
+//        if (adapter.isDiscovering) {
+//            showCheckMsg("设备正在扫描")
+//        }
+//
+//        if (adapter.cancelDiscovery()) {
+//            showCheckMsg("关闭发现")
+//        }
+//
+//        BleTools.openDiscoverable(this)
+//
+//        isSupportBle = true
+//        showCheckMsg("可以正常使用")
+        return sb
+    }
+
 
     private fun log(msg: String) {
         BleConfig.bleLog(msg, "BleTools")

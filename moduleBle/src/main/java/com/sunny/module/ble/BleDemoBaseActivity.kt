@@ -2,6 +2,7 @@ package com.sunny.module.ble
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -184,6 +185,8 @@ open class BleDemoBaseActivity : BaseActivity() {
         isSupportBle = false
         showCheckMsg("start")
 
+        val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+
         val adapter = BluetoothAdapter.getDefaultAdapter()
         if (adapter == null) {
             showCheckMsg("不支持蓝牙")
@@ -196,12 +199,37 @@ open class BleDemoBaseActivity : BaseActivity() {
         }
         showCheckMsg("蓝牙已开启")
 
+        // 蓝牙3.0规范之前的版本称为传统蓝牙，蓝牙4.0规范之后的版本称为低功耗蓝牙
+        // Android 从4.3版本(API Level 18)开始支持BLE通信。
+
+
         showCheckMsg("isLeExtendedAdvertisingSupported :${adapter.isLeExtendedAdvertisingSupported}")
         showCheckMsg("isMultipleAdvertisementSupported :${adapter.isMultipleAdvertisementSupported}")
 
         // 通告
-        showCheckMsg("isLe2MPhySupported :${adapter.isLe2MPhySupported}")
-        showCheckMsg("isLeCodedPhySupported :${adapter.isLeCodedPhySupported}")
+        // Android 8.0 Oreo（API LEVEL 26）开始在BLE Manager里增加了5.0BLE相关方法，可以使用下面三个方法来鉴定你的手机对5.0BLE支持到什么程度。
+        // PHY，物理层，需要硬件支持
+        // 调制速率1Mbit/s和2Mbps
+        showCheckMsg("PHY是否支持2Mbps:${adapter.isLe2MPhySupported}")
+        /*
+        调制方式
+        1Mbps支持两种调制方式：
+            LE Uncode PHY：信息数据不编码，传输速率就为 1 Mb/s
+            LE Coded PHY：信息数据编码，传输速率为 125 kb/s或者500 kb/s
+        2Mbps支持单一方式
+            LE 2MPHY：信息数据不编码，传输速率就为 2 Mb/s
+         */
+        showCheckMsg("1Mbps下是否支持编解码 :${adapter.isLeCodedPhySupported}")
+
+        /*
+        广播
+        单向广播
+            未建立连接时 the advertising procedure
+        周期广播
+        advertising or scanning device
+
+         */
+        showCheckMsg("是否支持周期广播 :${adapter.isLePeriodicAdvertisingSupported}")
         showCheckMsg("isLePeriodicAdvertisingSupported :${adapter.isLePeriodicAdvertisingSupported}")
         showCheckMsg("isOffloadedFilteringSupported :${adapter.isOffloadedFilteringSupported}")
         showCheckMsg("isOffloadedScanBatchingSupported :${adapter.isOffloadedScanBatchingSupported}")
