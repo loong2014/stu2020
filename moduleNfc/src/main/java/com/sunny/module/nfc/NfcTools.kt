@@ -4,10 +4,16 @@ import android.net.Uri
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
 import com.sunny.lib.base.utils.ContextProvider
+import timber.log.Timber
 import java.nio.charset.Charset
 import java.util.*
 
+fun nfcLog(log: String) {
+    Timber.i("Sunny-Nfc-$log")
+}
+
 /**
+ * NFC主要有3种模式：读卡器模式， 卡模拟模式， 点到点模式。
  * 读取公交卡信息
  * https://blog.csdn.net/bbenskye/article/details/72457685
  */

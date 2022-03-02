@@ -3,6 +3,7 @@ package com.sunny.module.nfc
 import android.content.Intent
 import android.os.Bundle
 import com.sunny.lib.common.base.BaseActivity
+import com.sunny.module.nfc.service.NfcServiceActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
