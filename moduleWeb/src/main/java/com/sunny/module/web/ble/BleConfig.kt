@@ -35,7 +35,7 @@ object BleConfig {
     val PAX_BLE_UUID: UUID = UUID.fromString("db764ac8-4b08-7f25-aafe-59d03c273333")
 
     fun bleLog(msg: String) {
-        SunLog.i("BleSunny", msg)
+        SunLog.i("BleLog", msg)
     }
 
     var curBleDemoIsClient = false

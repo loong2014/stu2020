@@ -1,8 +1,15 @@
 package com.sunny.module.ble
 
 import android.bluetooth.BluetoothDevice
+import android.content.Context
 import android.os.ParcelUuid
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.sunny.lib.base.log.SunLog
+import com.sunny.module.ble.master.PaxMeetingInfo
+import com.sunny.module.ble.master.PaxZoomInfo
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.util.*
 
 
@@ -54,11 +61,11 @@ object BleConfig {
     }
 
     fun bleLog(msg: String) {
-        SunLog.i("BleSunny-", msg)
+        SunLog.i("BleLog-", msg)
     }
 
     fun bleLog(tag: String, msg: String) {
-        SunLog.i("BleSunny-", "$tag:$msg")
+        SunLog.i("BleLog-", "$tag:$msg")
     }
 
     //
@@ -89,4 +96,57 @@ object BleConfig {
             updateCurDiscoveryDevices(this)
         }
     }
+
+    fun doGetLocalMeetingInfoString(context: Context): String {
+        return getMeetingInfoFromAssets(context, "meeting_info.json")
+    }
+
+    fun doParseMeetingJson(context: Context) {
+        val meetingInfo = buildMeetingInfo(context)
+        bleLog("doParseMeetingJson $meetingInfo")
+    }
+
+    private fun buildMeetingInfo(context: Context): PaxMeetingInfo {
+        val list: List<PaxZoomInfo>? = getIosMeetingInfo(context)?.asIterable()?.mapNotNull {
+            buildZoomInfoByMeetingInfo(it)
+        }
+        return PaxMeetingInfo(list)
+    }
+
+    private fun buildZoomInfoByMeetingInfo(info: IosMeetingInfo): PaxZoomInfo? {
+        if (info.os != "ios") return null
+        return PaxZoomInfo(info.title, info.url, info.notes, info.startDate, info.endDate)
+    }
+
+    private fun getIosMeetingInfo(context: Context): List<IosMeetingInfo>? {
+        val json = getMeetingInfoFromAssets(context, "meeting_info.json")
+        return Gson().fromJson(json, object : TypeToken<ArrayList<IosMeetingInfo>>() {}.type)
+    }
+
+    private fun getMeetingInfoFromAssets(context: Context, name: String): String {
+        val input = context.assets.open(name)
+        BufferedReader(InputStreamReader(input)).use {
+            val sb = StringBuilder()
+            var line: String
+            while (true) {
+                line = it.readLine() ?: break
+                sb.append(line)
+            }
+            return sb.toString()
+        }
+    }
 }
+
+data class IosMeetingInfo(
+    var os: String,
+    var title: String,
+    var url: String,
+    var notes: String,
+    var startDate: String,
+    var endDate: String
+)
+
+data class PaxBleMeetingInfo(
+    var os: String,
+    var list: List<IosMeetingInfo>
+)

@@ -12,18 +12,18 @@ import android.os.IBinder
 import android.view.View
 import android.widget.TextView
 import com.sunny.lib.common.base.BaseActivity
-import com.sunny.module.ble.client.classic.BleClientClassic
-import com.sunny.module.ble.pax.PaxBleScanService
-import com.sunny.module.ble.pax.PaxSlaveService
-import com.sunny.module.ble.server.classic.BleServerClassic
+import com.sunny.module.ble.slave.PaxBleMasterDemoService
+import com.sunny.module.ble.slave.PaxBleSlaveService
 import com.sunny.module.ble.utils.StringLrcCircle
 import kotlinx.android.synthetic.main.ble_activity_demo.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 open class BleDemoBaseActivity : BaseActivity() {
 
     private val tipList = StringLrcCircle(10)
 
-    var isClientDemo = false // 是否是客户端
+    private var isClientSlaveDemo = false // 是否是客户端/Slave外设
     var isClassic = true // 是否是经典蓝牙
 
     var isSupportBle = false
@@ -88,9 +88,9 @@ open class BleDemoBaseActivity : BaseActivity() {
         showTip("None")
     }
 
+    val format = SimpleDateFormat("mm:ss SSS")
     fun showRcvMsg(msg: String) {
-        val tip = "Rcv >>> $msg"
-        BleConfig.bleLog(msg)
+        val tip = "${format.format(Date())} >>> $msg"
         tipList.add(tip)
         showTipList()
     }
@@ -135,12 +135,14 @@ open class BleDemoBaseActivity : BaseActivity() {
     }
 
     fun doSendMsg(info: String) {
+//        BleConfig.doParseMeetingJson(this)
+
         getBleControl()?.sendMsg(info)
 
-        val msg = "Send >>> $info"
-        BleConfig.bleLog(msg)
-        tipList.add(msg)
-        showTipList()
+//        val msg = "Send >>> $info"
+//        BleConfig.bleLog(msg)
+//        tipList.add(msg)
+//        showTipList()
     }
 
     fun doReadMsg() {
@@ -261,14 +263,14 @@ open class BleDemoBaseActivity : BaseActivity() {
     }
 
     private fun updateDemoType() {
-        isClientDemo = !isClientDemo
+        isClientSlaveDemo = !isClientSlaveDemo
 
-        if (isClientDemo) {
-            top_bar.setMiddleName("蓝牙-手机")
+        if (isClientSlaveDemo) {
+            top_bar.setMiddleName("蓝牙-手机/Slave")
             et_msg.setText("client msg")
             ble_client_config_layout.visibility = View.VISIBLE
         } else {
-            top_bar.setMiddleName("蓝牙-车机")
+            top_bar.setMiddleName("蓝牙-车机/Master")
             et_msg.setText("service msg")
             ble_client_config_layout.visibility = View.GONE
         }
@@ -369,48 +371,38 @@ open class BleDemoBaseActivity : BaseActivity() {
     }
 
     private fun doBindService(): String {
-        if (!isSupportBle) return "蓝牙初始化失败"
-
-        if (isBind) return "服务已开启"
-
-        val cls: Class<*> = if (isClientDemo) {
-            if (isClassic) {
-                BleClientClassic::class.java
-            } else {
-                PaxSlaveService::class.java
-//                BleClientBle::class.java
-            }
+        if (isClientSlaveDemo) {
+            isBind = bindService(
+                Intent(this, PaxBleSlaveService::class.java),
+                serviceConnection,
+                Context.BIND_AUTO_CREATE
+            )
         } else {
-            if (isClassic) {
-                BleServerClassic::class.java
-            } else {
-                PaxBleScanService::class.java
-//                BleServerBle::class.java
-            }
+            isBind = bindService(
+//                Intent(this, PaxBleScanService::class.java),
+                Intent(this, PaxBleMasterDemoService::class.java),
+                serviceConnection,
+                Context.BIND_AUTO_CREATE
+            )
         }
-
-        isBind = bindService(
-            Intent(this, cls),
-            serviceConnection,
-            Context.BIND_AUTO_CREATE
-        )
-
-        return if (isBind) {
-            "服务开启成功"
-        } else {
-            "服务开启失败"
-        }
+        return "服务已开启"
     }
 
     private fun doUnbindService(): String {
-        if (!isBind) {
-            return "服务未开启"
+        if (isBind) {
+            isBind = false
+            unbindService(serviceConnection)
         }
-
-        unbindService(serviceConnection)
-        isBind = false
-        curBleControl = null
         return "服务关闭成功"
+//
+//        if (!isBind) {
+//            return "服务未开启"
+//        }
+//
+//        unbindService(serviceConnection)
+//        isBind = false
+//        curBleControl = null
+//        return "服务关闭成功"
     }
 
     override fun onDestroy() {

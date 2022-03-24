@@ -1,15 +1,10 @@
 package com.sunny.module.ble.client.ble
 
-import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanFilter
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import com.sunny.module.ble.BleConfig
 import com.sunny.module.ble.client.BleBaseClientService
 import com.sunny.module.ble.client.ClientConnectCallback
@@ -64,7 +59,7 @@ class BleClientBle : BleBaseClientService() {
     override fun doStopScan() {
         log("doStopScan($mScanning)")
         mScanning = false
-        mHandler.removeCallbacks(delayStopTask)
+        mWorkHandler.removeCallbacks(delayStopTask)
         bluetoothLeScanner?.stopScan(mScanCallback)
         showTipInfo("stopScan")
 

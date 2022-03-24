@@ -38,9 +38,9 @@ class BleClientClassic : BleBaseClientService() {
     override fun doStartScan() {
         showLog("doStartScan($mScanning)")
         if (mScanning) {
-            mHandler.removeCallbacks(delayStopTask)
+            mWorkHandler.removeCallbacks(delayStopTask)
         }
-        mHandler.postDelayed(delayStopTask, SCAN_PERIOD)
+        mWorkHandler.postDelayed(delayStopTask, SCAN_PERIOD)
         mScanning = true
 
         mDeviceAllSet.clear()
@@ -52,7 +52,7 @@ class BleClientClassic : BleBaseClientService() {
     override fun doStopScan() {
         showLog("doStopScan($mScanning)")
         mScanning = false
-        mHandler.removeCallbacks(delayStopTask)
+        mWorkHandler.removeCallbacks(delayStopTask)
         val isOk = bluetoothAdapter?.cancelDiscovery()
         sendServerState("停止扫描附近设备($isOk)")
 
@@ -77,7 +77,7 @@ class BleClientClassic : BleBaseClientService() {
                 dealRcvMsg("${device.name}(${device.type})(${device.bondState})\n>>>${device.address} , ${device.uuids}")
                 device.uuids?.forEachIndexed { index, uuid ->
                     showLog("${device.name}($index) >>> $uuid")
-                    mHandler.post {
+                    mWorkHandler.post {
                         tryAutoConnect(device)
                     }
                 }

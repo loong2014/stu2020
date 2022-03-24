@@ -121,7 +121,7 @@ class BleClientBleNew : BleBaseClientService() {
     override fun doStopScan() {
         log("doStopScan($mScanning)")
         mScanning = false
-        mHandler.removeCallbacks(delayStopTask)
+        mWorkHandler.removeCallbacks(delayStopTask)
         bluetoothLeScanner?.stopScan(mScanCallback)
         showTipInfo("stopScan")
 

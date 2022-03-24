@@ -1,15 +1,17 @@
 package com.sunny.module.ble.pax
 
 import android.bluetooth.*
-import android.bluetooth.le.*
+import android.bluetooth.le.ScanCallback
+import android.bluetooth.le.ScanFilter
+import android.bluetooth.le.ScanResult
+import android.bluetooth.le.ScanSettings
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Handler
-import android.os.HandlerThread
 import android.os.IBinder
 import android.os.ParcelUuid
 import com.sunny.lib.base.log.SunLog
+import com.sunny.module.ble.PaxBleConfig
 
 interface ConnectedCallback {
     fun onConnected(device: BluetoothDevice)
@@ -24,15 +26,9 @@ interface ConnectedCallback {
  *
  * 车机上的PaxLauncher 不停扫描 FF Ctrl 设备
  */
-class PaxBleScanService : PaxBleBaseService() {
+class PaxBleMasterService : PaxBleBaseService() {
 
-    lateinit var mWorkHandler: Handler
-//    lateinit var mMainHandler: Handler
-
-    //    private var isSupportBle = false // 是否支持ble
     private var scanning = false // 是否开始发送
-
-//private    var bluetoothLeScanner: BluetoothLeScanner? = null
 
     // 等待连接的设备
     private val waitConnectDevices = mutableListOf<BluetoothDevice>()
@@ -42,24 +38,6 @@ class PaxBleScanService : PaxBleBaseService() {
 
     // 正在连接的设备
     private var mmConnectedDevice: BluetoothDevice? = null
-
-    private fun showLog(msg: String) {
-        SunLog.i("BleLog", msg)
-    }
-
-    /**
-     * 显示收到的消息
-     */
-    private fun showRcvMsg(msg: String) {
-        SunLog.i("BleLog-Rcv", msg)
-    }
-
-    /**
-     * 显示发送的消息
-     */
-    private fun showSendMsg(msg: String) {
-        SunLog.i("BleLog-Send", msg)
-    }
 
     override fun doSendMsg(msg: String): Boolean {
         mmConnectedDevice?.let {
@@ -74,12 +52,6 @@ class PaxBleScanService : PaxBleBaseService() {
 
     override fun onCreate() {
         super.onCreate()
-
-        val ht = HandlerThread("pax_ble")
-        ht.start()
-        mWorkHandler = Handler(ht.looper)
-        mMainHandler = Handler()
-
         initBle()
     }
 
@@ -130,19 +102,114 @@ class PaxBleScanService : PaxBleBaseService() {
     private val mmFilters: List<ScanFilter> by lazy {
         listOf<ScanFilter>(
             ScanFilter.Builder()
-                .setServiceUuid(ParcelUuid(PaxBleConfig.PAX_SERVICE_UUID))
-                .build()
+                // 通过 ServiceUuid 进行过滤
+                .setServiceUuid(ParcelUuid(PaxBleConfig.getServiceUUID()))
+                /*
+                在设备地址上设置过滤器。
+                 */
+                .setDeviceAddress("")
+                .build(),
         )
     }
+
+
+    fun buildScanFilters() = listOf<ScanFilter>(
+        ScanFilter.Builder()
+            // 通过 ServiceUuid 进行过滤
+            .setServiceUuid(ParcelUuid(PaxBleConfig.getServiceUUID()))
+            .build(),
+    )
+
+    /**
+     * 构建过滤设置
+     */
+    fun buildScanSettings() = ScanSettings.Builder()
+        // 扫描模式
+        .setScanMode(ScanSettings.SCAN_MODE_BALANCED)
+        // 返回类型
+        .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
+        // 匹配模式
+        .setMatchMode(ScanSettings.MATCH_MODE_STICKY)
+        // 匹配数
+        .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
+        // 是否返回旧版广告
+        .setLegacy(true)
+        // 设置物理层模式，仅在 legacy=false时生效
+        .setPhy(ScanSettings.PHY_LE_ALL_SUPPORTED)
+        // 延时返回扫描结果，0表示立即返回
+        .setReportDelay(0)
+        .build()
+
 
     /**
      * 过滤设置
      */
     private val mmSettings: ScanSettings by lazy {
         ScanSettings.Builder()
+            /*
+            扫描模式
+            SCAN_MODE_OPPORTUNISTIC
+                一种特殊的蓝牙 LE 扫描模式。使用此扫描模式的应用程序将被动地侦听其他扫描结果，而无需自行启动 BLE 扫描。
+            SCAN_MODE_LOW_POWER(默认)
+                在低功耗模式下执行蓝牙 LE 扫描。这是默认扫描模式，因为它消耗的电量最少。如果扫描应用程序不在前台，则强制执行此模式。
+            SCAN_MODE_BALANCED
+                在平衡功率模式下执行蓝牙 LE 扫描。扫描结果以在扫描频率和功耗之间提供良好折衷的速率返回。
+            SCAN_MODE_LOW_LATENCY
+                使用最高占空比进行扫描。建议仅在应用程序在前台运行时使用此模式。
+             */
             .setScanMode(ScanSettings.SCAN_MODE_BALANCED)
+            /*
+            返回类型
+            CALLBACK_TYPE_ALL_MATCHES(默认)
+                为找到的每个与过滤条件匹配的蓝牙广告触发回调。如果没有过滤器处于活动状态，则报告所有广告数据包。
+            CALLBACK_TYPE_FIRST_MATCH
+                仅针对收到的第一个与过滤条件匹配的广告数据包触发结果回调。
+            CALLBACK_TYPE_MATCH_LOST
+                当不再从先前已由第一次匹配回调报告的设备接收到广告时接收回调。
+             */
             .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
-            .setMatchMode(ScanSettings.MATCH_MODE_STICKY)
+            /*
+            匹配模式
+            MATCH_MODE_AGGRESSIVE(默认)
+                在 Aggressive 模式下，即使信号强度微弱且在一段时间内只有少量的瞄准匹配，硬件也会更快地确定匹配。
+            MATCH_MODE_STICKY
+                对于粘性模式，在硬件报告之前需要更高的信号强度和目击阈值
+             */
+            .setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
+            /*
+            匹配数
+            MATCH_NUM_MAX_ADVERTISEMENT(默认)
+                每个过滤器匹配硬件允许的尽可能多的广告，这取决于硬件中资源的当前能力和可用性
+            MATCH_NUM_FEW_ADVERTISEMENT
+                每个过滤器匹配少量广告，取决于硬件中资源的当前能力和可用性
+            MATCH_NUM_ONE_ADVERTISEMENT
+                确定每个过滤器匹配多少广告，因为这是稀缺的硬件资源
+             */
+            .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
+            /*
+            设置是否应在扫描结果中仅返回旧版广告。传统广告包括蓝牙核心规范 4.2 及以下规定的广告。默认情况下这是为了与旧应用程序兼容。
+            true 如果只返回遗留广告
+            true（默认）
+             */
+            .setLegacy(true)
+            /*
+            设置此扫描期间要使用的物理层。这仅在 {@link ScanSettings.Builder.setLegacy} 设置为 false 时使用。
+            {@link android.bluetooth.BluetoothAdapter。isLeCodedPhySupported} 可以通过调用 {@link android.bluetooth.BluetoothAdapterisLeCodedPhySupported} 来检查是否支持 LE Coded phy。选择不支持的 phy 将导致无法开始扫描。
+            ScanSettings.PHY_LE_ALL_SUPPORTED(默认)
+                使用所有支持的 PHY 进行扫描。这将检查控制器功能，并在 1Mbit 和 LE 编码 PHY（如果支持）或仅在 1Mbit PHY 上开始扫描。
+            BluetoothDevice.PHY_LE_1M
+                蓝牙 LE 1M PHY。用于指代 LE 1M 物理通道进行广告、扫描或连接。
+            BluetoothDevice.PHY_LE_CODED
+                蓝牙 LE 编码 PHY。用于指代用于广告、扫描或连接的 LE 编码物理通道。
+             */
+            .setPhy(ScanSettings.PHY_LE_ALL_SUPPORTED)
+            /*
+            设置蓝牙 LE 扫描的报告延迟时间戳。
+            reportDelayMillis
+            =0(默认) : 立即返回结果
+            >0 : 导致扫描结果排队并在请求的延迟之后或内部缓冲区填满时交付
+             */
+            .setReportDelay(0)
             .build()
     }
 
@@ -155,7 +222,7 @@ class PaxBleScanService : PaxBleBaseService() {
 
         if (scanning) return
 
-        bluetoothLeScanner?.startScan(mmFilters, mmSettings, scanCallback)
+        bluetoothLeScanner?.startScan(buildScanFilters(), buildScanSettings(), scanCallback)
         scanning = true
         showLog("tryStartScan succeed")
     }
@@ -216,13 +283,13 @@ class PaxBleScanService : PaxBleBaseService() {
         }
 
         //解析蓝牙广播数据报文
-        var isFFDevice = false
-        result.scanRecord?.serviceData?.forEach { (parcelUuid, value) ->
-            if (PaxBleConfig.isFF91Service(parcelUuid.uuid, value)) {
-                isFFDevice = true
-                return@forEach
-            }
-        }
+        var isFFDevice = true
+//        result.scanRecord?.serviceData?.forEach { (parcelUuid, value) ->
+//            if (PaxBleConfig.isFF91Service(parcelUuid.uuid, value)) {
+//                isFFDevice = true
+//                return@forEach
+//            }
+//        }
 
         // FF 设备
         if (!isFFDevice) {
@@ -367,6 +434,10 @@ class DeviceConnectedModel(
         connectedCallback.onUiTip("$device --- $msg")
     }
 
+    private fun showLog(log: String) {
+        SunLog.i("BleLog-$device", log)
+    }
+
     /**
      * 发送meeting信息给从设备
      */
@@ -455,17 +526,21 @@ class DeviceConnectedModel(
             }
         }
 
-        //特征读取回调
+        /*
+        回调指示特征写入操作的结果。
+        如果在可靠写入事务正在进行时调用此回调，则特征值表示远程设备报告的值。
+        应用程序应将此值与要写入的所需值进行比较。如果值不匹配，应用程序必须中止可靠的写入事务。
+         */
         override fun onCharacteristicRead(
             gatt: BluetoothGatt,
             characteristic: BluetoothGattCharacteristic,
             status: Int
         ) {
+            showLog("读取 :" + String(characteristic.value))
             if (BluetoothGatt.GATT_SUCCESS == status) {
-                showConnectLog("读取成功:" + String(characteristic.value))
+                showConnectLog("读取成功:")
             } else {
-                showConnectLog("读取失败($status):" + String(characteristic.value))
-
+                showConnectLog("读取失败($status):")
             }
         }
 
@@ -474,11 +549,21 @@ class DeviceConnectedModel(
             gatt: BluetoothGatt,
             characteristic: BluetoothGattCharacteristic, status: Int
         ) {
+            showLog("写入 :" + String(characteristic.value))
             if (BluetoothGatt.GATT_SUCCESS == status) {
-                showConnectLog("写入成功:" + String(characteristic.value))
+                showConnectLog("写入成功:")
             } else {
-                showConnectLog("写入失败($status):" + String(characteristic.value))
+                showConnectLog("写入失败($status):")
             }
+        }
+
+        // 由于远程特征通知而触发的回调。
+        override fun onCharacteristicChanged(
+            gatt: BluetoothGatt?,
+            characteristic: BluetoothGattCharacteristic?
+        ) {
+            showLog("特征变化")
+            super.onCharacteristicChanged(gatt, characteristic)
         }
     }
 }

@@ -124,7 +124,7 @@ class BleClientBleOld : BleBaseClientService() {
                 dealRcvMsg("${device.name}(${device.type})(${device.bondState})\n>>>${device.address} , ${device.uuids}")
                 device.uuids?.forEachIndexed { index, uuid ->
                     showLog("${device.name}($index) >>> $uuid")
-                    mHandler.post {
+                    mWorkHandler.post {
                         tryAutoConnect(device)
                     }
                 }
