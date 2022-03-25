@@ -209,14 +209,11 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
     }
 
     override fun doReadMsg(): String {
-        getAuthGattCharacteristic()?.run {
-
+        getCalendarGattCharacteristic()?.run {
             mmConnectedGatt?.readCharacteristic(this)
-
-            descriptors?.forEachIndexed { index, bluetoothGattDescriptor ->
-                val msg = getValue(bluetoothGattDescriptor)
-                showLog("$index --- $msg")
-            }
+//            descriptors?.forEachIndexed { index, bluetoothGattDescriptor ->
+//                showLog("$index --- $msg")
+//            }
         }
         return ""
     }

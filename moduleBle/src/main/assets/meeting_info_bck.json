@@ -1,95 +1,92 @@
-{
-  "os": "ios",
-  "list": [
-    {
-      "os": "ios",
-      "isAllDay": false,
-      "title": "Guan AAA的Zoom会议",
-      "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "notes": "Guan AAA 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
-      "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
-      "creationDate": "2022-03-15 03: 12: 55 +0000",
-      "timeZone": "Asia/Shanghai (fixed (equal to current))",
-      "startDate": "2022-03-16 15: 00: 17 +0000",
-      "endDate": "2022-03-16 15: 30: 17 +0000",
-      "structuredLocation": {
-        "radius": 0.0,
-        "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
-      },
-      "occurrenceDate": "2022-03-16 15:00:17 +0000"
+[
+  {
+    "os": "ios",
+    "isAllDay": false,
+    "title": "Guan AAA的Zoom会议",
+    "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "notes": "Guan AAA 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
+    "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
+    "creationDate": "2022-03-15 03: 12: 55 +0000",
+    "timeZone": "Asia/Shanghai (fixed (equal to current))",
+    "startDate": "2022-03-16 15: 00: 17 +0000",
+    "endDate": "2022-03-16 15: 30: 17 +0000",
+    "structuredLocation": {
+      "radius": 0.0,
+      "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
     },
-    {
-      "os": "ios",
-      "isAllDay": false,
-      "title": "Guan BBB的Zoom会议",
-      "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "notes": "Guan BBB 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
-      "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
-      "creationDate": "2022-03-15 03: 12: 55 +0000",
-      "timeZone": "Asia/Shanghai (fixed (equal to current))",
-      "startDate": "2022-03-16 23: 00: 17 +0000",
-      "endDate": "2022-03-17 00: 30: 17 +0000",
-      "structuredLocation": {
-        "radius": 0.0,
-        "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
-      },
-      "occurrenceDate": "2022-03-16 15:00:17 +0000"
+    "occurrenceDate": "2022-03-16 15:00:17 +0000"
+  },
+  {
+    "os": "ios",
+    "isAllDay": false,
+    "title": "Guan BBB的Zoom会议",
+    "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "notes": "Guan BBB 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
+    "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
+    "creationDate": "2022-03-15 03: 12: 55 +0000",
+    "timeZone": "Asia/Shanghai (fixed (equal to current))",
+    "startDate": "2022-03-16 23: 00: 17 +0000",
+    "endDate": "2022-03-17 00: 30: 17 +0000",
+    "structuredLocation": {
+      "radius": 0.0,
+      "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
     },
-    {
-      "os": "ios",
-      "isAllDay": false,
-      "title": "Guan DDD的Zoom会议",
-      "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "notes": "Guan DDD 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
-      "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
-      "creationDate": "2022-03-15 03: 12: 55 +0000",
-      "timeZone": "Asia/Shanghai (fixed (equal to current))",
-      "startDate": "2022-03-17 10: 00: 17 +0000",
-      "endDate": "2022-03-17 11: 30: 17 +0000",
-      "structuredLocation": {
-        "radius": 0.0,
-        "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
-      },
-      "occurrenceDate": "2022-03-16 15:00:17 +0000"
+    "occurrenceDate": "2022-03-16 15:00:17 +0000"
+  },
+  {
+    "os": "ios",
+    "isAllDay": false,
+    "title": "Guan DDD的Zoom会议",
+    "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "notes": "Guan DDD 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
+    "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
+    "creationDate": "2022-03-15 03: 12: 55 +0000",
+    "timeZone": "Asia/Shanghai (fixed (equal to current))",
+    "startDate": "2022-03-17 10: 00: 17 +0000",
+    "endDate": "2022-03-17 11: 30: 17 +0000",
+    "structuredLocation": {
+      "radius": 0.0,
+      "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
     },
-    {
-      "os": "ios",
-      "isAllDay": false,
-      "title": "Guan CCC的Zoom会议",
-      "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "notes": "Guan CCC 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
-      "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
-      "creationDate": "2022-03-15 03: 12: 55 +0000",
-      "timeZone": "Asia/Shanghai (fixed (equal to current))",
-      "startDate": "2022-03-18 15: 00: 17 +0000",
-      "endDate": "2022-03-18 15: 30: 17 +0000",
-      "structuredLocation": {
-        "radius": 0.0,
-        "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
-      },
-      "occurrenceDate": "2022-03-16 15:00:17 +0000"
+    "occurrenceDate": "2022-03-16 15:00:17 +0000"
+  },
+  {
+    "os": "ios",
+    "isAllDay": false,
+    "title": "Guan CCC的Zoom会议",
+    "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "notes": "Guan CCC 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
+    "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
+    "creationDate": "2022-03-15 03: 12: 55 +0000",
+    "timeZone": "Asia/Shanghai (fixed (equal to current))",
+    "startDate": "2022-03-18 15: 00: 17 +0000",
+    "endDate": "2022-03-18 15: 30: 17 +0000",
+    "structuredLocation": {
+      "radius": 0.0,
+      "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
     },
-    {
-      "os": "ios",
-      "isAllDay": false,
-      "title": "Guan EEE的Zoom会议",
-      "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
-      "notes": "Guan EEE 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
-      "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
-      "creationDate": "2022-03-15 03: 12: 55 +0000",
-      "timeZone": "Asia/Shanghai (fixed (equal to current))",
-      "startDate": "2022-03-18 23: 00: 17 +0000",
-      "endDate": "2022-03-19 00: 30: 17 +0000",
-      "structuredLocation": {
-        "radius": 0.0,
-        "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
-      },
-      "occurrenceDate": "2022-03-16 15:00:17 +0000"
-    }
-  ]
-}
+    "occurrenceDate": "2022-03-16 15:00:17 +0000"
+  },
+  {
+    "os": "ios",
+    "isAllDay": false,
+    "title": "Guan EEE的Zoom会议",
+    "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+    "notes": "Guan EEE 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
+    "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
+    "creationDate": "2022-03-15 03: 12: 55 +0000",
+    "timeZone": "Asia/Shanghai (fixed (equal to current))",
+    "startDate": "2022-03-18 23: 00: 17 +0000",
+    "endDate": "2022-03-19 00: 30: 17 +0000",
+    "structuredLocation": {
+      "radius": 0.0,
+      "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
+    },
+    "occurrenceDate": "2022-03-16 15:00:17 +0000"
+  }
+]

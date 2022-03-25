@@ -18,6 +18,7 @@ import com.sunny.module.ble.pax.PaxBleCommonService
 class PaxBleSlaveService : PaxBleCommonService() {
 
     private var mmGattServer: BluetoothGattServer? = null
+    private var mmGattService: BluetoothGattService? = null
 
     private var mmAdvertiser: BluetoothLeAdvertiser? = null
 
@@ -36,8 +37,7 @@ class PaxBleSlaveService : PaxBleCommonService() {
         val bm = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         mmGattServer = bm.openGattServer(this, gattServerCallback)
 
-        // 添加服务
-        mmGattServer?.addService(BluetoothGattService(
+        mmGattService = BluetoothGattService(
             PaxBleConfig.buildUUIDByFFID(PaxBleConfig.ServiceFFIDStr),
             BluetoothGattService.SERVICE_TYPE_PRIMARY
         ).apply {
@@ -54,17 +54,23 @@ class PaxBleSlaveService : PaxBleCommonService() {
             addCharacteristic(authGattCharacteristic)
 
             // calendar
+            /*
+            properties – 此特征的属性
+            permissions - 此特征的权限
+             */
             val meetingGattCharacteristic = BluetoothGattCharacteristic(
                 PaxBleConfig.getCalendarUUID(),
                 (BluetoothGattCharacteristic.PROPERTY_WRITE or
-                        BluetoothGattCharacteristic.PROPERTY_NOTIFY or
+//                        BluetoothGattCharacteristic.PROPERTY_NOTIFY or
                         BluetoothGattCharacteristic.PROPERTY_READ),
                 (BluetoothGattCharacteristic.PERMISSION_WRITE or
-                        BluetoothGattCharacteristic.PROPERTY_NOTIFY or
+//                        BluetoothGattCharacteristic.PROPERTY_NOTIFY or
                         BluetoothGattCharacteristic.PERMISSION_READ)
             )
             addCharacteristic(meetingGattCharacteristic)
-        })
+        }
+        // 添加服务
+        mmGattServer?.addService(mmGattService)
 
         //开始广播
         mmAdvertiser = BluetoothAdapter.getDefaultAdapter().bluetoothLeAdvertiser
@@ -89,8 +95,9 @@ class PaxBleSlaveService : PaxBleCommonService() {
     override fun doRelease() {
         super.doRelease()
         showUiInfo("断开连接")
+
         // 清除服务
-        mmGattServer?.clearServices()
+        mmGattServer?.removeService(mmGattService)
         mmGattServer?.close()
         mmGattServer = null
 
@@ -159,6 +166,29 @@ class PaxBleSlaveService : PaxBleCommonService() {
                     device, requestId, BluetoothGatt.GATT_SUCCESS,
                     offset, info.toByteArray()
                 )
+            } else if (PaxBleConfig.getCalendarUUID() == characteristic.uuid) {
+                val info: String = PaxBleConfig.buildMeetInfo(mmContext)
+                val fullValue = info.toByteArray()
+                val fullSize = fullValue.size
+                showUiInfo("返回日历信息 fullSize=$fullSize , offset=$offset")
+                if (offset > fullSize) {
+                    mmGattServer?.sendResponse(
+                        device, requestId, BluetoothGatt.GATT_SUCCESS,
+                        0, info.toByteArray()
+                    )
+                    return
+                }
+
+                //
+                val size = fullSize-offset
+                val response = byteArrayOf()
+                for (i in offset..fullSize) {
+                    response[i - offset] = fullValue[i]
+                }
+                mmGattServer?.sendResponse(
+                    device, requestId, BluetoothGatt.GATT_SUCCESS,
+                    offset, response
+                )
             }
         }
 
@@ -175,6 +205,9 @@ class PaxBleSlaveService : PaxBleCommonService() {
                     showUiInfo("收到车机端认证信息 :$info")
                     if (PaxBleConfig.buildVehiclePublicKey(null) == info) {
                         showUiInfo("车机认证成功")
+//                        mWorkHandler.postDelayed({
+//                            doWriteZoomData()
+//                        }, 500)
                     } else {
                         showUiInfo("车机认证失败")
                     }
@@ -192,13 +225,19 @@ class PaxBleSlaveService : PaxBleCommonService() {
             super.onNotificationSent(device, status)
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 showUiInfo("发送成功")
-                trySendZoomData()
+//                trySendZoomData()
             } else {
                 showUiInfo("发送失败")
             }
         }
     }
 
+    private fun doWriteZoomData() {
+        val info: String = PaxBleConfig.buildMeetInfo(mmContext)
+
+        val gattService = mmGattServer?.getService(PaxBleConfig.getServiceUUID())
+        gattService?.getCharacteristic(PaxBleConfig.getCalendarUUID())?.value = info.toByteArray()
+    }
 
     var calendarData: String? = null
     var calendarLen = 0
@@ -209,9 +248,9 @@ class PaxBleSlaveService : PaxBleCommonService() {
     private fun getNextData(): String? {
         if (calendarData == null) return null
         index++
-        if (index ==-2){
+        if (index == -2) {
 
-            return  ""
+            return ""
         }
         if (index < totalCount) {
             val start = index * 20
@@ -247,7 +286,7 @@ class PaxBleSlaveService : PaxBleCommonService() {
     }
 
     override fun doSendMsg(msg: String) {
-        doStartSendZoomData()
+//        doStartSendZoomData()
     }
 
     private fun trySendZoomData() {

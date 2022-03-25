@@ -146,10 +146,7 @@ open class BleDemoBaseActivity : BaseActivity() {
     }
 
     fun doReadMsg() {
-        val tip = getBleControl()?.readMsg()
-
-        val msg = "Read >>> $tip"
-        BleConfig.bleLog(msg)
+        val msg = getBleControl()?.readMsg() ?: ""
         tipList.add(msg)
         showTipList()
     }
