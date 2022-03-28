@@ -88,7 +88,9 @@ class BleClientBleNew : BleBaseClientService() {
             .setLegacy(false)
             /*
             设置此扫描期间要使用的物理层。这仅在 {@link ScanSettings.BuildersetLegacy} 设置为 false 时使用。
-            {@link android.bluetooth.BluetoothAdapter。isLeCodedPhySupported} 可以通过调用 {@link android.bluetooth.BluetoothAdapterisLeCodedPhySupported} 来检查是否支持 LE Coded phy。选择不支持的 phy 将导致无法开始扫描。
+            {@link android.bluetooth.BluetoothAdapter。isLeCodedPhySupported} 可以通过调用
+            {@link android.bluetooth.BluetoothAdapterisLeCodedPhySupported} 来检查是否支持 LE Coded phy。
+            选择不支持的 phy 将导致无法开始扫描。
             ScanSettings.PHY_LE_ALL_SUPPORTED(默认)
                 使用所有支持的 PHY 进行扫描。这将检查控制器功能，并在 1Mbit 和 LE 编码 PHY（如果支持）或仅在 1Mbit PHY 上开始扫描。
             BluetoothDevice.PHY_LE_1M

@@ -10,6 +10,7 @@ import android.os.ParcelUuid
 import com.sunny.module.ble.PaxBleConfig
 import com.sunny.module.ble.pax.PaxBleCommonService
 
+
 /**
  * 从设备 不停发送广播，等待从设备的连接
  *
@@ -180,14 +181,20 @@ class PaxBleSlaveService : PaxBleCommonService() {
                 }
 
                 //
-                val size = fullSize-offset
-                val response = byteArrayOf()
-                for (i in offset..fullSize) {
+                val size = fullSize - offset
+                val response = ByteArray(size)
+                for (i in offset until fullSize) {
                     response[i - offset] = fullValue[i]
                 }
                 mmGattServer?.sendResponse(
                     device, requestId, BluetoothGatt.GATT_SUCCESS,
                     offset, response
+                )
+            } else {
+
+                mmGattServer?.sendResponse(
+                    device, requestId, BluetoothGatt.GATT_SUCCESS,
+                    0, null
                 )
             }
         }

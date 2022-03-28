@@ -53,7 +53,7 @@ open class PaxBleCommonService : Service() {
             String(this)
         } ?: "None"
     }
-    fun getValue(characteristic: BluetoothGattCharacteristic?): String {
+   open fun getValue(characteristic: BluetoothGattCharacteristic?): String {
         return characteristic?.value?.run {
             String(this)
         } ?: "None"

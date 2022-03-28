@@ -6,10 +6,21 @@ import android.os.ParcelUuid
 import com.sunny.module.ble.PaxBleConfig
 import com.sunny.module.ble.pax.PaxBleCommonService
 
+
+// UUID 相关信息
+//const val ServiceFFIDStr = "61bad4f56acce30010246260"
+//const val ServiceUUIDStr = "99cce69d-8319-b4e3-85dd-737c1d497763"
+//const val AuthUUIDStr = "5C81B02B-8C65-7C85-80E2-8EB24F1A4E15"
+//const val CalendarUUIDStr = "5C81B02B-8C66-7C85-80E2-8EB24F1A4E15"
 /**
- * 从设备 不停发送广播，等待从设备的连接
- *
- * 手机上的 FF Ctrl 启动后，不停发广播，等待 PaxLauncher 的连接
+ * 车机端/中央设备
+ * 1. 服务启动后，开始搜索附近匹配的BLE设备（serviceUUID = "99cce69d-8319-b4e3-85dd-737c1d497763）
+ * 2. 匹配成功后进行connect
+ * 3. connect成功后，读取Auth特征中的手机端验证信息，并进行验证（authUUID = "5C81B02B-8C65-7C85-80E2-8EB24F1A4E15"）
+ * 4. 验证通过后，再通过Auth特征，发送车机端验证信息，等待手机端验证
+ * 5. 车机端机监听Calendar特征，等待手机端验证成功后，通过Calendar特征发送日历信息（CalendarUUID = "5C81B02B-8C66-7C85-80E2-8EB24F1A4E15"）
+ * 6. 收到特征变化通知后，通过Calendar特征读取日历信息
+ * 7. 整合日历信息，通知UI进行处理
  */
 class PaxBleMasterDemoService : PaxBleCommonService() {
 
@@ -29,6 +40,7 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
 
     override fun doInit() {
         super.doInit()
+        showUiInfo("开始扫描")
 
         mmLeScanner = BluetoothAdapter.getDefaultAdapter()?.bluetoothLeScanner
         mmLeScanner?.startScan(
@@ -55,7 +67,6 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
                 .build(),
             scanCallback
         )
-        showUiInfo("开始扫描")
     }
 
     override fun doRelease() {
@@ -68,6 +79,7 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
     }
 
     private fun doDisconnect() {
+        showUiInfo("断开连接 :$mmDevice")
         mmConnectedGatt?.disconnect()
         mmConnectedGatt?.close()
         mmConnectedGatt = null
@@ -161,7 +173,7 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
             val msg = getValue(characteristic)
             showLog("onCharacteristicRead msg :$msg")
             if (PaxBleConfig.getAuthUUID() == characteristic.uuid) {
-                showUiInfo("读取手机端认证信息 :$msg")
+                showUiInfo("读取手机端认证信息 :$msg") // msg=None
                 if (PaxBleConfig.buildPhonePublicKey(null) == msg) {
                     showUiInfo("手机端认证成功")
 
@@ -209,6 +221,7 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
     }
 
     override fun doReadMsg(): String {
+        showUiInfo("读取日历信息")
         getCalendarGattCharacteristic()?.run {
             mmConnectedGatt?.readCharacteristic(this)
 //            descriptors?.forEachIndexed { index, bluetoothGattDescriptor ->
@@ -228,11 +241,17 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
             showUiInfo("开始认证——获取手机端认证信息")
             getAuthGattCharacteristic()?.run {
                 val msg = getValue(this)
-                showUiInfo("当前手机认证信息 :$msg")
+                showUiInfo("当前手机认证信息 :$msg") // None
                 showUiInfo("读取认证信息")
                 mmConnectedGatt?.readCharacteristic(this)
             }
         }, 200)
 
+    }
+
+    override fun getValue(characteristic: BluetoothGattCharacteristic?): String {
+        return characteristic?.value?.run {
+            String(this)
+        } ?: "None"
     }
 }
