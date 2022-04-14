@@ -23,7 +23,7 @@ open class BleDemoBaseActivity : BaseActivity() {
 
     private val tipList = StringLrcCircle(10)
 
-    private var isClientSlaveDemo = false // 是否是客户端/Slave外设
+    private var isClientSlaveDemo = true // 是否是客户端/Slave外设
     var isClassic = true // 是否是经典蓝牙
 
     var isSupportBle = false

@@ -24,7 +24,7 @@ class PaxBleRsdConnectThread(context: Context) : PaxBleConnectThread(context, "r
 
     private fun getCalendarGattCharacteristic(): BluetoothGattCharacteristic? {
         return mmConnectedGatt?.getService(PaxBleConfig.getServiceUUID())
-            ?.getCharacteristic(PaxBleConfig.getCalendarUUID())
+            ?.getCharacteristic(PaxBleConfig.getCalendarReadableUUID())
     }
 
     override fun doConnect(device: BluetoothDevice) {
@@ -116,13 +116,11 @@ class PaxBleRsdConnectThread(context: Context) : PaxBleConnectThread(context, "r
 
                     if (msg == "authInfoFromSlave") {
                         showUiInfo("手机端认证成功，发送车机认证信息")
-                        characteristic.value =
-                            PaxBleConfig.buildVehiclePrivateKey(null).toByteArray()
-//                        characteristic.value = info.toByteArray()
+                        characteristic.value = PaxBleConfig.buildPhoneAuthKeyArray()
                         mmConnectedGatt?.writeCharacteristic(characteristic)
                     }
                 }
-                PaxBleConfig.getCalendarUUID() -> {
+                PaxBleConfig.getCalendarReadableUUID() -> {
                     showUiInfo("收到日历信息 :$msg")
                 }
 //                    mmGattServer?.sendResponse(

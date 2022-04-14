@@ -3,15 +3,13 @@ package com.sunny.module.ble.slave
 import android.bluetooth.*
 import android.bluetooth.le.*
 import android.os.ParcelUuid
+import com.sunny.lib.base.log.SunLog
 import com.sunny.module.ble.PaxBleConfig
 import com.sunny.module.ble.pax.PaxBleCommonService
+import com.sunny.module.ble.utils.NumberUtils
+import java.nio.ByteBuffer
 
 
-// UUID 相关信息
-//const val ServiceFFIDStr = "61bad4f56acce30010246260"
-//const val ServiceUUIDStr = "99cce69d-8319-b4e3-85dd-737c1d497763"
-//const val AuthUUIDStr = "5C81B02B-8C65-7C85-80E2-8EB24F1A4E15"
-//const val CalendarUUIDStr = "5C81B02B-8C66-7C85-80E2-8EB24F1A4E15"
 /**
  * 车机端/中央设备
  * 1. 服务启动后，开始搜索附近匹配的BLE设备（serviceUUID = "99cce69d-8319-b4e3-85dd-737c1d497763）
@@ -21,22 +19,74 @@ import com.sunny.module.ble.pax.PaxBleCommonService
  * 5. 车机端机监听Calendar特征，等待手机端验证成功后，通过Calendar特征发送日历信息（CalendarUUID = "5C81B02B-8C66-7C85-80E2-8EB24F1A4E15"）
  * 6. 收到特征变化通知后，通过Calendar特征读取日历信息
  * 7. 整合日历信息，通知UI进行处理
+ *
+ * 42:23:F7:CD:5E:A4
  */
+class PaxBleConnectCalendarInfo(
+    private val byteArray: ByteArray,
+    private val sessionId: Int,
+    private val totalSize: Int
+) {
+    var curPos = 0
+    var readSize = 100
+    var hasReadAll = false
+
+    var rcvData: ByteArray = byteArrayOf()
+
+    companion object {
+
+        fun showLog(info: String) {
+            SunLog.i("PaxBle", info)
+        }
+
+        fun doInit(byteArray: ByteArray): PaxBleConnectCalendarInfo? {
+            val sessionIdArray = byteArray.copyOf(4)
+            val totalSizeArray = byteArray.copyOfRange(4, 8)
+
+            val sessionId = ByteBuffer.wrap(sessionIdArray).int
+            val totalSize = ByteBuffer.wrap(totalSizeArray).int
+            showLog("sessionId :$sessionId , totalSize :$totalSize")
+            return PaxBleConnectCalendarInfo(byteArray, sessionId, totalSize)
+        }
+    }
+
+    fun getReadData(): ByteArray? {
+        if (hasReadAll) return null
+        val size = if (curPos + readSize > totalSize) {
+            totalSize - curPos
+        } else {
+            readSize
+        }
+        SunLog.i("PaxBle", "readData $sessionId , $curPos , $size")
+        return NumberUtils.intTo4Byte(sessionId) +
+                NumberUtils.intTo4Byte(curPos) +
+                NumberUtils.intTo2Byte(size)
+    }
+
+    //0000009F00000000001F7B226F73223A22694F532031
+    fun saveData(byteArray: ByteArray): Boolean {
+
+        val len = byteArray.size
+        if (len <= 10) {
+            SunLog.i("PaxBle", "saveData error")
+            return false
+        }
+
+        val validData = byteArray.copyOfRange(10, len)
+        curPos += validData.size
+        rcvData += validData
+
+        hasReadAll = curPos >= totalSize
+        return true
+    }
+}
+
 class PaxBleMasterDemoService : PaxBleCommonService() {
 
     private var mmLeScanner: BluetoothLeScanner? = null
     private var mmDevice: BluetoothDevice? = null
     private var mmConnectedGatt: BluetoothGatt? = null
-
-    private fun getAuthGattCharacteristic(): BluetoothGattCharacteristic? {
-        return mmConnectedGatt?.getService(PaxBleConfig.getServiceUUID())
-            ?.getCharacteristic(PaxBleConfig.getAuthUUID())
-    }
-
-    private fun getCalendarGattCharacteristic(): BluetoothGattCharacteristic? {
-        return mmConnectedGatt?.getService(PaxBleConfig.getServiceUUID())
-            ?.getCharacteristic(PaxBleConfig.getCalendarUUID())
-    }
+    private var mmConnectedInfo: PaxBleConnectCalendarInfo? = null
 
     override fun doInit() {
         super.doInit()
@@ -152,10 +202,30 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
 
         // 发现设备服务
         override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
-            showLog("onServicesDiscovered status($status)")
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 showUiInfo("发现服务成功")
-                doStartAuth()
+
+                // 开始监听日历服务
+                mmConnectedGatt?.getService(PaxBleConfig.getServiceUUID())
+                    ?.getCharacteristic(PaxBleConfig.getCalendarReadableUUID())
+                    ?.run {
+                        val isOk = mmConnectedGatt?.setCharacteristicNotification(this, true)
+                        getDescriptor(PaxBleConfig.getCalendarReadableDesUUID())?.let { des ->
+                            des.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+                            mmConnectedGatt?.writeDescriptor(des)
+                        }
+                        showUiInfo("监听日历变化 $isOk")
+                    }
+
+                mWorkHandler.postDelayed({
+                    // 读取认证信息
+                    mmConnectedGatt?.getService(PaxBleConfig.getServiceUUID())
+                        ?.getCharacteristic(PaxBleConfig.getAuthUUID())
+                        ?.run {
+                            showUiInfo("读取鉴权信息 :${NumberUtils.bytesToHex(value)}")
+                            mmConnectedGatt?.readCharacteristic(this)
+                        }
+                }, 200)
             } else {
                 showUiInfo("发现服务失败 :$status")
                 doDisconnect()
@@ -168,23 +238,44 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
             characteristic: BluetoothGattCharacteristic,
             status: Int
         ) {
+            showUiInfo("onCharacteristicRead :${characteristic.uuid} >>> ${characteristic.value?.size}")
             if (BluetoothGatt.GATT_SUCCESS != status) return
 
-            val msg = getValue(characteristic)
-            showLog("onCharacteristicRead msg :$msg")
             if (PaxBleConfig.getAuthUUID() == characteristic.uuid) {
-                showUiInfo("读取手机端认证信息 :$msg") // msg=None
-                if (PaxBleConfig.buildPhonePublicKey(null) == msg) {
+                showUiInfo("读取认证信息 :${NumberUtils.bytesToHex(characteristic.value)}")
+                if (PaxBleConfig.buildPhoneAuthKeyArray().contentEquals(characteristic.value)) {
                     showUiInfo("手机端认证成功")
 
-                    mMainHandler.post {
-                        getAuthGattCharacteristic()?.run {
-                            val info = PaxBleConfig.buildVehiclePrivateKey(null)
-                            showUiInfo("发送车机认证信息 :$info")
-                            value = info.toByteArray()
-                            mmConnectedGatt?.writeCharacteristic(this)
-                        }
+                    val byteArray = PaxBleConfig.buildVehicleAuthKeyArray()
+                    showUiInfo("发送认证信息 :${NumberUtils.bytesToHex(byteArray)}")
+                    characteristic.value = byteArray
+                    mmConnectedGatt?.writeCharacteristic(characteristic)
+
+                } else {
+                    showUiInfo("手机端认证失败")
+                }
+
+            } else if (PaxBleConfig.getCalendarReadUUID() == characteristic.uuid) {
+                showUiInfo("收到日历信息 :${NumberUtils.bytesToHex(characteristic.value)}")
+                mWorkHandler.post {
+                    if (mmConnectedInfo?.saveData(characteristic.value) == true) {
+                        doReadMsg()
                     }
+                }
+            }
+        }
+
+        // 由于远程特征通知而触发的回调。
+        override fun onCharacteristicChanged(
+            gatt: BluetoothGatt?,
+            characteristic: BluetoothGattCharacteristic
+        ) {
+            showLog("onCharacteristicChanged :${characteristic.uuid} >>> ${characteristic.value?.size}")
+            if (PaxBleConfig.getCalendarReadableUUID() == characteristic.uuid) {
+                showUiInfo("可以读取日历信息 :${NumberUtils.bytesToHex(characteristic.value)}")
+                mWorkHandler.post {
+                    mmConnectedInfo = PaxBleConnectCalendarInfo.doInit(characteristic.value)
+                    doReadMsg()
                 }
             }
         }
@@ -194,64 +285,58 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
             gatt: BluetoothGatt,
             characteristic: BluetoothGattCharacteristic, status: Int
         ) {
-            if (status == BluetoothGatt.GATT_SUCCESS) {
-                showUiInfo("发送成功")
+            if (status != BluetoothGatt.GATT_SUCCESS) {
+                showUiInfo("发送失败 :${characteristic.uuid} , $status")
+                return
+            }
+
+            if (PaxBleConfig.getCalendarReadUUID() == characteristic.uuid) {
+                showUiInfo("写入读取信息成功 :${NumberUtils.bytesToHex(characteristic.value)}")
+                mmConnectedGatt?.readCharacteristic(characteristic)
+
             } else {
-                showUiInfo("发送失败 :$status")
+                showUiInfo("发送成功 :${characteristic.uuid}")
             }
         }
+    }
 
-        // 由于远程特征通知而触发的回调。
-        override fun onCharacteristicChanged(
-            gatt: BluetoothGatt?,
-            characteristic: BluetoothGattCharacteristic
-        ) {
-            val msg = getValue(characteristic)
+    override fun doSendMsg(msg: String) {
+        // 读取认证信息
+        mmConnectedGatt?.getService(PaxBleConfig.getServiceUUID())
+            ?.getCharacteristic(PaxBleConfig.getAuthUUID())
+            ?.run {
+                showUiInfo("读取鉴权信息 :${NumberUtils.bytesToHex(value)}")
+                mmConnectedGatt?.readCharacteristic(this)
+            }
+    }
+
+    private fun dealReadFinish() {
+        showUiInfo("数据接收完毕")
+        val info = mmConnectedInfo?.rcvData
+
+        if (info == null) {
+            showUiInfo("没有数据")
+        } else {
+            val msg = String(info)
             showUiInfo("收到数据 :$msg")
-        }
-
-        override fun onDescriptorRead(
-            gatt: BluetoothGatt?,
-            descriptor: BluetoothGattDescriptor?,
-            status: Int
-        ) {
-            val msg = getValue(descriptor)
-            showLog("onDescriptorRead msg :$msg")
         }
     }
 
     override fun doReadMsg(): String {
-        showUiInfo("读取日历信息")
-        getCalendarGattCharacteristic()?.run {
-            mmConnectedGatt?.readCharacteristic(this)
-//            descriptors?.forEachIndexed { index, bluetoothGattDescriptor ->
-//                showLog("$index --- $msg")
-//            }
+        //使用无效偏移请求读取或写入操作
+        // 读取日历信息
+        val byteArray = mmConnectedInfo?.getReadData()
+        if (byteArray == null) {
+            dealReadFinish()
+        } else {
+            mmConnectedGatt?.getService(PaxBleConfig.getServiceUUID())
+                ?.getCharacteristic(PaxBleConfig.getCalendarReadUUID())
+                ?.run {
+                    showUiInfo("写入读取信息 :${NumberUtils.bytesToHex(byteArray)}")
+                    value = byteArray
+                    mmConnectedGatt?.writeCharacteristic(this)
+                }
         }
         return ""
-    }
-
-    private fun doStartAuth() {
-        // 开始监听日历服务
-        getCalendarGattCharacteristic()?.run {
-            mmConnectedGatt?.setCharacteristicNotification(this, true)
-        }
-
-        mWorkHandler.postDelayed({
-            showUiInfo("开始认证——获取手机端认证信息")
-            getAuthGattCharacteristic()?.run {
-                val msg = getValue(this)
-                showUiInfo("当前手机认证信息 :$msg") // None
-                showUiInfo("读取认证信息")
-                mmConnectedGatt?.readCharacteristic(this)
-            }
-        }, 200)
-
-    }
-
-    override fun getValue(characteristic: BluetoothGattCharacteristic?): String {
-        return characteristic?.value?.run {
-            String(this)
-        } ?: "None"
     }
 }

@@ -26,11 +26,6 @@ class PaxBleSlaveService : PaxBleCommonService() {
     // 正在连接的设备
     private var mmDevice: BluetoothDevice? = null
 
-    private fun getCalendarGattCharacteristic(): BluetoothGattCharacteristic? {
-        return mmGattServer?.getService(PaxBleConfig.getServiceUUID())
-            ?.getCharacteristic(PaxBleConfig.getCalendarUUID())
-    }
-
     override fun doInit() {
         super.doInit()
 
@@ -60,7 +55,7 @@ class PaxBleSlaveService : PaxBleCommonService() {
             permissions - 此特征的权限
              */
             val meetingGattCharacteristic = BluetoothGattCharacteristic(
-                PaxBleConfig.getCalendarUUID(),
+                PaxBleConfig.getCalendarReadUUID(),
                 (BluetoothGattCharacteristic.PROPERTY_WRITE or
 //                        BluetoothGattCharacteristic.PROPERTY_NOTIFY or
                         BluetoothGattCharacteristic.PROPERTY_READ),
@@ -69,6 +64,42 @@ class PaxBleSlaveService : PaxBleCommonService() {
                         BluetoothGattCharacteristic.PERMISSION_READ)
             )
             addCharacteristic(meetingGattCharacteristic)
+            // calendar
+            /*
+            properties – 此特征的属性
+            permissions - 此特征的权限
+             */
+            val meetingNotifyGattCharacteristic = BluetoothGattCharacteristic(
+                PaxBleConfig.getCalendarReadableUUID(),
+                (BluetoothGattCharacteristic.PROPERTY_WRITE or
+//                        BluetoothGattCharacteristic.PROPERTY_NOTIFY or
+                        BluetoothGattCharacteristic.PROPERTY_READ),
+                (BluetoothGattCharacteristic.PERMISSION_WRITE or
+//                        BluetoothGattCharacteristic.PROPERTY_NOTIFY or
+                        BluetoothGattCharacteristic.PERMISSION_READ)
+            )
+//                .apply {
+//                    /*
+//                    PERMISSION_WRITE
+//                        写入权限
+//                    PERMISSION_WRITE_ENCRYPTED
+//                        允许加密写入
+//                    PERMISSION_WRITE_ENCRYPTED_MITM
+//                        允许具有中间人保护的加密写入
+//                    PERMISSION_WRITE_SIGNED
+//                        允许签名写入操作
+//                    PERMISSION_WRITE_SIGNED_MITM
+//                        允许带有中间人保护的签名写入操作
+//                     */
+//                    addDescriptor(
+//                        BluetoothGattDescriptor(
+//                            PaxBleConfig.getCalendarReadableDesUUID(),
+//                            BluetoothGattDescriptor.PERMISSION_WRITE or
+//                                    BluetoothGattDescriptor.PERMISSION_READ
+//                        )
+//                    )
+//                }
+            addCharacteristic(meetingNotifyGattCharacteristic)
         }
         // 添加服务
         mmGattServer?.addService(mmGattService)
@@ -161,13 +192,12 @@ class PaxBleSlaveService : PaxBleCommonService() {
         ) {
             showUiInfo("ReadRequest requestId=$requestId , offset=$offset")
             if (PaxBleConfig.getAuthUUID() == characteristic.uuid) {
-                val info = PaxBleConfig.buildPhonePrivateKey(null)
-                showUiInfo("返回手机端认证信息 :$info")
+                showUiInfo("返回手机端认证信息")
                 mmGattServer?.sendResponse(
                     device, requestId, BluetoothGatt.GATT_SUCCESS,
-                    offset, info.toByteArray()
+                    offset, PaxBleConfig.buildPhoneAuthKeyArray(null)
                 )
-            } else if (PaxBleConfig.getCalendarUUID() == characteristic.uuid) {
+            } else if (PaxBleConfig.getCalendarReadUUID() == characteristic.uuid) {
                 val info: String = PaxBleConfig.buildMeetInfo(mmContext)
                 val fullValue = info.toByteArray()
                 val fullSize = fullValue.size
@@ -208,9 +238,8 @@ class PaxBleSlaveService : PaxBleCommonService() {
             showUiInfo("WriteRequest requestId=$requestId , offset=$offset")
             when (characteristic.uuid) {
                 PaxBleConfig.getAuthUUID() -> {
-                    val info = String(value)
-                    showUiInfo("收到车机端认证信息 :$info")
-                    if (PaxBleConfig.buildVehiclePublicKey(null) == info) {
+                    showUiInfo("收到车机端认证信息")
+                    if (PaxBleConfig.buildVehicleAuthKeyArray(null).contentEquals(value)) {
                         showUiInfo("车机认证成功")
 //                        mWorkHandler.postDelayed({
 //                            doWriteZoomData()
@@ -243,7 +272,8 @@ class PaxBleSlaveService : PaxBleCommonService() {
         val info: String = PaxBleConfig.buildMeetInfo(mmContext)
 
         val gattService = mmGattServer?.getService(PaxBleConfig.getServiceUUID())
-        gattService?.getCharacteristic(PaxBleConfig.getCalendarUUID())?.value = info.toByteArray()
+        gattService?.getCharacteristic(PaxBleConfig.getCalendarReadUUID())?.value =
+            info.toByteArray()
     }
 
     var calendarData: String? = null
@@ -300,7 +330,7 @@ class PaxBleSlaveService : PaxBleCommonService() {
         if (!isSending) return
 
         mmGattServer?.getService(PaxBleConfig.getServiceUUID())
-            ?.getCharacteristic(PaxBleConfig.getCalendarUUID())
+            ?.getCharacteristic(PaxBleConfig.getCalendarReadUUID())
             ?.let { characteristic ->
                 val info = getNextData()
                 if (info == null) {

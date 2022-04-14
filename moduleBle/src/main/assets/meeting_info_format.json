@@ -1,0 +1,34 @@
+{
+  "os": "iOS 12.5.5",
+  "events": [
+    {
+      "isAllDay": false,
+      "title": "日程",
+      "location": "",
+      "url": "",
+      "lastModifiedDate": "2022-04-15 15:57:26",
+      "creationDate": "2022-04-15 15:57:26",
+      "timeZone": "Asia/Shanghai",
+      "startDate": "2022-04-15 15:00:00",
+      "endDate": "2022-04-15 16:00:00",
+      "occurrenceDate": "2022-04-15 15:00:00"
+    },
+    {
+      "isAllDay": false,
+      "title": "Guan EEE的Zoom会议",
+      "location": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+      "url": "https://us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09",
+      "notes": "Guan EEE 邀请您参加预先安排的 Zoom 会议。加入 Zoom 会议",
+      "lastModifiedDate": "2022-03-15 03: 12: 55 +0000",
+      "creationDate": "2022-03-15 03: 12: 55 +0000",
+      "timeZone": "Asia/Shanghai (fixed (equal to current))",
+      "startDate": "2022-03-18 23: 00: 17 +0000",
+      "endDate": "2022-03-19 00: 30: 17 +0000",
+      "structuredLocation": {
+        "radius": 0.0,
+        "title": "https: //us05web.zoom.us/j/84153749777?pwd=ZVRNZ0ZzcTljM3pHSWx6NmJldEVuQT09"
+      },
+      "occurrenceDate": "2022-03-16 15:00:17 +0000"
+    }
+  ]
+}
