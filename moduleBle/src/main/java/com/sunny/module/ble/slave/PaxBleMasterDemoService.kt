@@ -28,7 +28,7 @@ class PaxBleConnectCalendarInfo(
     private val totalSize: Int
 ) {
     var curPos = 0
-    var readSize = 100
+    var readSize = 240
     var hasReadAll = false
 
     var rcvData: ByteArray = byteArrayOf()
@@ -190,7 +190,22 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
                 BluetoothProfile.STATE_CONNECTED -> {
                     showUiInfo("设备连接成功，开始发现服务")
                     mmConnectedGatt = gatt
-                    mmConnectedGatt?.discoverServices()
+                    /*
+               该函数将向远程设备发送连接参数更新请求。
+               CONNECTION_PRIORITY_BALANCED
+                   使用蓝牙 SIG 推荐的连接参数。如果没有请求更新连接参数，这是默认值
+
+               CONNECTION_PRIORITY_HIGH
+                   请求高优先级、低延迟的连接。应用程序应该只请求高优先级连接参数以通过 LE 快速传输大量数据。传输完成后，应用程序应请求 CONNECTION_PRIORITY_BALANCED 连接参数以减少能源使用
+
+               CONNECTION_PRIORITY_LOW_POWER
+                   请求低功耗、降低数据速率的连接参数。
+                */
+//                    mmConnectedGatt?.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH)
+                    /*
+                    执行写请求操作（无响应写入）时，发送的数据会被截断为 MTU 大小。此函数可用于请求更大的 MTU 大小以便能够一次发送更多数据
+                     */
+                mmConnectedGatt?.requestMtu(512)
                 }
 
                 BluetoothProfile.STATE_DISCONNECTED -> {
@@ -200,10 +215,18 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
             }
         }
 
+        override fun onMtuChanged(gatt: BluetoothGatt?, mtu: Int, status: Int) {
+            super.onMtuChanged(gatt, mtu, status)
+            showUiInfo("onMtuChanged :$mtu")
+            mmConnectedGatt?.discoverServices()
+
+        }
+
         // 发现设备服务
         override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 showUiInfo("发现服务成功")
+
 
                 // 开始监听日历服务
                 mmConnectedGatt?.getService(PaxBleConfig.getServiceUUID())
@@ -238,7 +261,7 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
             characteristic: BluetoothGattCharacteristic,
             status: Int
         ) {
-            showUiInfo("onCharacteristicRead :${characteristic.uuid} >>> ${characteristic.value?.size}")
+//            showUiInfo("onCharacteristicRead :${characteristic.uuid} >>> ${characteristic.value?.size}")
             if (BluetoothGatt.GATT_SUCCESS != status) return
 
             if (PaxBleConfig.getAuthUUID() == characteristic.uuid) {
@@ -256,7 +279,7 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
                 }
 
             } else if (PaxBleConfig.getCalendarReadUUID() == characteristic.uuid) {
-                showUiInfo("收到日历信息 :${NumberUtils.bytesToHex(characteristic.value)}")
+//                showUiInfo("收到日历信息 :${NumberUtils.bytesToHex(characteristic.value)}")
                 mWorkHandler.post {
                     if (mmConnectedInfo?.saveData(characteristic.value) == true) {
                         doReadMsg()
@@ -291,7 +314,7 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
             }
 
             if (PaxBleConfig.getCalendarReadUUID() == characteristic.uuid) {
-                showUiInfo("写入读取信息成功 :${NumberUtils.bytesToHex(characteristic.value)}")
+//                showUiInfo("写入读取信息成功 :${NumberUtils.bytesToHex(characteristic.value)}")
                 mmConnectedGatt?.readCharacteristic(characteristic)
 
             } else {
@@ -332,7 +355,7 @@ class PaxBleMasterDemoService : PaxBleCommonService() {
             mmConnectedGatt?.getService(PaxBleConfig.getServiceUUID())
                 ?.getCharacteristic(PaxBleConfig.getCalendarReadUUID())
                 ?.run {
-                    showUiInfo("写入读取信息 :${NumberUtils.bytesToHex(byteArray)}")
+//                    showUiInfo("写入读取信息 :${NumberUtils.bytesToHex(byteArray)}")
                     value = byteArray
                     mmConnectedGatt?.writeCharacteristic(this)
                 }
