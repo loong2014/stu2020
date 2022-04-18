@@ -1,6 +1,6 @@
 package com.sunny.module.ble.utils;
 
-public class NumberUtils {
+public class PaxByteUtils {
 
     public static byte[] hexToBytes(String hex) {
         hex = hex.length() % 2 != 0 ? "0" + hex : hex;

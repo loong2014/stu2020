@@ -100,6 +100,15 @@ APTX aptX分为三种：aptX，aptX HD和aptX Low Latency，
 LDAC
 
 
+4. 更改MTU
+设备连接成功后 ：onConnectionStateChange 通过 gatt.requestMtu(512) 来设置最大传输字节
+设置成功后：onMtuChanged 中再进行 discoverServices
+
+5. 发现服务后进行特征监听，然后需要延时一定时间再进行新的操作
+进行特征监听时，处理调用 setCharacteristicNotification 对特征进行enable，还要对特征下的 descriptor 进行设置。
+descriptor 对应的UUID = 00002902-0000-1000-8000-00805f9b34fb
+    des.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+    gatt.writeDescriptor(des)
 
 
 

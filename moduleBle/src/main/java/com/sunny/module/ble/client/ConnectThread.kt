@@ -1,18 +1,9 @@
 package com.sunny.module.ble.client
 
 import android.bluetooth.BluetoothDevice
-import android.content.Context
 import com.sunny.module.ble.BleConfig
-import com.sunny.module.ble.client.ble.ClientConnectThreadBle
 import com.sunny.module.ble.client.classic.ClientConnectThreadClassic
 
-fun buildConnectThreadBle(
-    context:Context,
-    device: BluetoothDevice,
-    callback: ClientConnectCallback
-): ClientConnectThread {
-    return ClientConnectThreadBle(context,device, callback, BleConfig.getBleClientThreadName())
-}
 
 fun buildConnectThreadClassic(
     device: BluetoothDevice,

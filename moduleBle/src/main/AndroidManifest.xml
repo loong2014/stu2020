@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".BleDemoActivity">
+        <!--        <activity android:name=".BleDemoActivity">-->
+        <activity android:name=".location.LocationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,10 +39,8 @@
         <service android:name=".server.classic.BleServerClassic" />
         <service android:name=".server.ble.BleServerBle" />
         <service android:name=".client.classic.BleClientClassic" />
-        <service android:name=".client.ble.BleClientBle" />
         <service android:name=".slave.PaxBleSlaveService" />
-        <service android:name=".master.PaxBleScanService" />
-        <service android:name=".slave.PaxBleMasterDemoService"/>
+        <service android:name=".master.PaxBleMasterService" />
 
     </application>
 

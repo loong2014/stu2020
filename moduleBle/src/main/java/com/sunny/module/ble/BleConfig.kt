@@ -101,10 +101,6 @@ object BleConfig {
         return getMeetingInfoFromAssets(context, "meeting_info.json")
     }
 
-    fun doParseMeetingJson(context: Context) {
-        val meetingInfo = buildMeetingInfo(context)
-        bleLog("doParseMeetingJson $meetingInfo")
-    }
 
     private fun buildMeetingInfo(context: Context): PaxMeetingInfo {
         val list: List<PaxZoomInfo>? = getIosMeetingInfo(context)?.asIterable()?.mapNotNull {

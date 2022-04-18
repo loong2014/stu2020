@@ -59,4 +59,15 @@ object SystemUtils {
         return -1
     }
 
+    /**
+     * 判断应用是否安装
+     */
+    fun isAppInstalled(context: Context, pkgName: String): Boolean {
+        val pkgInfo = try {
+            context.packageManager.getPackageInfo(pkgName, 0)
+        } catch (e: Exception) {
+            null
+        }
+        return pkgInfo != null
+    }
 }

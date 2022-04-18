@@ -12,7 +12,7 @@ import android.os.IBinder
 import android.view.View
 import android.widget.TextView
 import com.sunny.lib.common.base.BaseActivity
-import com.sunny.module.ble.slave.PaxBleMasterDemoService
+import com.sunny.module.ble.master.PaxBleMasterService
 import com.sunny.module.ble.slave.PaxBleSlaveService
 import com.sunny.module.ble.utils.StringLrcCircle
 import kotlinx.android.synthetic.main.ble_activity_demo.*
@@ -377,7 +377,7 @@ open class BleDemoBaseActivity : BaseActivity() {
         } else {
             isBind = bindService(
 //                Intent(this, PaxBleScanService::class.java),
-                Intent(this, PaxBleMasterDemoService::class.java),
+                Intent(this, PaxBleMasterService::class.java),
                 serviceConnection,
                 Context.BIND_AUTO_CREATE
             )

@@ -1,4 +1,4 @@
-package com.sunny.module.ble.pax
+package com.sunny.module.ble
 
 import android.app.Service
 import android.bluetooth.BluetoothGattCharacteristic
@@ -10,8 +10,6 @@ import android.os.HandlerThread
 import android.os.IBinder
 import android.os.Looper
 import com.sunny.lib.base.log.SunLog
-import com.sunny.module.ble.IBleCallbackInterface
-import com.sunny.module.ble.IBleClientInterface
 
 /**
  * 蓝牙服务的基类
@@ -39,8 +37,20 @@ open class PaxBleCommonService : Service() {
 
     open fun doParseOption(opt: Int) {}
 
+
+    /**
+     * 显示日志
+     */
     fun showLog(log: String) {
         SunLog.i("PaxBle", log)
+    }
+
+    /**
+     * 显示提示
+     */
+    fun showTip(tip: String) {
+        SunLog.i("PaxBle", tip)
+        bleCallback?.onRcvClientMsg(tip)
     }
 
     fun showUiInfo(info: String) {
@@ -53,7 +63,8 @@ open class PaxBleCommonService : Service() {
             String(this)
         } ?: "None"
     }
-   open fun getValue(characteristic: BluetoothGattCharacteristic?): String {
+
+    open fun getValue(characteristic: BluetoothGattCharacteristic?): String {
         return characteristic?.value?.run {
             String(this)
         } ?: "None"
