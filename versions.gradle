@@ -105,6 +105,13 @@ fresco.animated_base = "com.facebook.fresco:animated-base:$versions.fresco"
 fresco.animated_gif = "com.facebook.fresco:animated-gif:$versions.fresco"
 deps.fresco = fresco
 
+//
+versions.hilt = "2.38.1"
+def hilt = [:]
+hilt.android = "com.google.dagger:hilt-android:$versions.hilt"
+hilt.android_compiler = "com.google.dagger:hilt-android-compiler:$versions.hilt"
+deps.hilt = hilt
+
 // https://developer.android.google.cn/jetpack/androidx/releases/room
 // https://developer.android.google.cn/training/data-storage/room/index.html
 versions.room = "2.3.0"
