@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.lib.base.utils.SystemUtils
-import com.sunny.module.ble.master.PaxCalendarInfo
+import com.sunny.module.ble.meeting.PaxCalendarInfo
 import timber.log.Timber
 
 /**

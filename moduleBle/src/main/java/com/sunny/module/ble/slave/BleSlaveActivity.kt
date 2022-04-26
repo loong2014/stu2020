@@ -1,23 +1,20 @@
-package com.sunny.module.ble
+package com.sunny.module.ble.slave
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.sunny.lib.base.binding.CommonBindingListener
-import com.sunny.lib.common.base.BaseActivity
-import com.sunny.module.ble.databinding.BleActivityDemoBinding
-import com.sunny.module.ble.debug.BleConfigActivity
-import com.sunny.module.ble.master.BleMasterActivity
-import com.sunny.module.ble.slave.BleSlaveActivity
+import com.sunny.module.ble.BleBaseActivity
+import com.sunny.module.ble.R
+import com.sunny.module.ble.databinding.BleActivityMasterBinding
 
-class BleDemoActivity : BaseActivity() {
-    private lateinit var mActivityBinding: BleActivityDemoBinding
+class BleSlaveActivity : BleBaseActivity() {
+    private lateinit var mActivityBinding: BleActivityMasterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mActivityBinding = DataBindingUtil.setContentView(this, R.layout.ble_activity_demo)
+        mActivityBinding = DataBindingUtil.setContentView(this, R.layout.ble_activity_slave)
 
         initListener()
     }
@@ -33,15 +30,19 @@ class BleDemoActivity : BaseActivity() {
                     "clearMsg" -> {
                         updateMsgTip("None")
                     }
-                    "bleConfig" -> {
-                        doStartActivity(BleConfigActivity::class.java)
+
+                    "startService" -> {
+                        doBindService(PaxBleSlaveService::class.java)
                     }
 
-                    "bleSlave" -> {
-                        doStartActivity(BleSlaveActivity::class.java)
+                    "stopService" -> {
+                        doUnbindService()
                     }
-                    "bleMaster" -> {
-                        doStartActivity(BleMasterActivity::class.java)
+
+                    "userLogin" -> {
+
+                    }
+                    "userLogout" -> {
                     }
                 }
             }
@@ -49,8 +50,7 @@ class BleDemoActivity : BaseActivity() {
 
     }
 
-    private fun doStartActivity(cls: Class<*>) {
-        startActivity(Intent(mmActivity, cls))
+    override fun showTip(msg: String) {
     }
 
     private fun updateTopTip(tip: String) {
@@ -60,5 +60,4 @@ class BleDemoActivity : BaseActivity() {
     private fun updateMsgTip(msg: String) {
         mActivityBinding.tvMsgInfo.text = msg
     }
-
 }

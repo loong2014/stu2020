@@ -50,24 +50,55 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:onClick="@{(view) -> eventListener.commonOpt(view)}"
-                        android:tag="bleConfig"
-                        android:text="BLE配置" />
+                        android:tag="deviceCheck"
+                        android:text="设备检测" />
 
                     <com.sunny.lib.ui.SunnyButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:onClick="@{(view) -> eventListener.commonOpt(view)}"
-                        android:tag="bleSlave"
-                        android:text="BLE外围" />
+                        android:tag="permissionCheck"
+                        android:text="权限检测" />
 
                     <com.sunny.lib.ui.SunnyButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:onClick="@{(view) -> eventListener.commonOpt(view)}"
-                        android:tag="bleMaster"
-                        android:text="BLE中央" />
+                        android:tag="pairedDevice"
+                        android:text="已配对设备" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.sunny.lib.ui.SunnyButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:onClick="@{(view) -> eventListener.commonOpt(view)}"
+                        android:tag="requestPermission"
+                        android:text="申请权限" />
+
+                    <com.sunny.lib.ui.SunnyButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:onClick="@{(view) -> eventListener.commonOpt(view)}"
+                        android:tag="enableBle"
+                        android:text="开启蓝牙" />
+
+                    <com.sunny.lib.ui.SunnyButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:onClick="@{(view) -> eventListener.commonOpt(view)}"
+                        android:tag="enableLocation"
+                        android:text="开启定位" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

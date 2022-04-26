@@ -14,44 +14,40 @@ internal class PaxBleMasterService : PaxBleMasterBaseService() {
 
     private var mmBluetoothLeScanner: BluetoothLeScanner? = null
 
-    // 是否正在扫描
-    private var mmScanning = false
-
     override fun doStartScan() {
-        showLog("doStartScan($mmScanning)")
+        showLog("dealStartScan")
         // 先停止正在进行的扫描
-        if (mmScanning) {
-            doStopScan()
-        }
+        doStopScan()
 
-        val filter = buildScanFilters()
-        if (filter.isNullOrEmpty()) {
-            showLog("No UUID For Filter")
+        // 是否用用户登录
+        if (!bleConnectHelper.hasUserLogin()) {
+            showLog("No user login")
             return
         }
 
         mmBluetoothLeScanner = BluetoothAdapter.getDefaultAdapter()?.bluetoothLeScanner?.also {
-            it.startScan(filter, buildScanSettings(), mmScanCallback)
+            it.startScan(null, buildScanSettings(), mmScanCallback)
             showLog("startScan")
-            mmScanning = true
         }
     }
 
     override fun doStopScan() {
-        showLog("doStopScan($mmScanning)")
-        mmBluetoothLeScanner?.stopScan(mmScanCallback)
-        mmBluetoothLeScanner = null
-        mmScanning = false
+        showLog("dealStopScan")
+        try {
+            mmBluetoothLeScanner?.stopScan(mmScanCallback)
+            mmBluetoothLeScanner = null
+        } catch (e: Exception) {
+            showLog("stopScan error :$e")
+        }
     }
 
     /**
      * 扫描结果回调
      */
     private val mmScanCallback = object : ScanCallback() {
-        override fun onScanResult(callbackType: Int, result: ScanResult?) {
-            if (result == null) return
+        override fun onScanResult(callbackType: Int, result: ScanResult) {
             mWorkHandler.post {
-                dealScanResult(result)
+                bleConnectHelper.dealScanResult(result)
             }
         }
 
@@ -63,40 +59,9 @@ internal class PaxBleMasterService : PaxBleMasterBaseService() {
 
             // 扫描失败，5s后再次开始扫描
             mMainHandler.postDelayed({
-                showLog("doStartScan by delay")
+                showLog("doStartScan dealy by onScanFailed($errorCode)")
                 doStartScan()
             }, 5_000)
         }
-    }
-
-    /**
-     * 处理扫描到的设备
-     */
-    private fun dealScanResult(result: ScanResult?) {
-        if (result == null) return
-
-//        showLog("${result.device?.name} , ${result.device} , rssi(${result.rssi}) , isConnectable(${result.isConnectable})")
-
-        if (inConnecting()) {
-            showLog("Wait BLE Connected")
-            return
-        }
-
-        // 尝试后排连接
-        if (rsdConnectThread.dealConnect(result)) {
-            return
-        }
-
-        // 尝试前排连接
-        if (fpdConnectThread.dealConnect(result)) {
-            return
-        }
-    }
-
-    /**
-     * 是否有BLE设备正在连接，同一时刻，只能有一个设备处于正在连接状态
-     */
-    private fun inConnecting(): Boolean {
-        return rsdConnectThread.inConnecting() || fpdConnectThread.inConnecting()
     }
 }

@@ -45,58 +45,132 @@ class PaxBleSlaveService : PaxBleCommonService() {
 
         val serviceUUID = PaxBleConfig.buildUUIDByFFID(curFFID)
 
+        // 创建服务
         mmGattService = BluetoothGattService(
             serviceUUID,
             BluetoothGattService.SERVICE_TYPE_PRIMARY
+        )
+        // 给服务添加特征
+        doAddCharacteristic()
+
+        // 添加服务到GATT服务
+        mmGattServer?.addService(mmGattService)
+
+        //开始广播
+        mmAdvertiser = BluetoothAdapter.getDefaultAdapter().bluetoothLeAdvertiser
+        mmAdvertiser?.stopAdvertising(advertisingCallback)
+
+//        private static final int MAX_ADVERTISING_DATA_BYTES = 1650;
+//        private static final int MAX_LEGACY_ADVERTISING_DATA_BYTES = 31;
+        val maxDataSize = BluetoothAdapter.getDefaultAdapter().leMaximumAdvertisingDataLength
+        showLog("最大数据长度(字节) :$maxDataSize")
+
+        // 广播设置
+        val settings = AdvertiseSettings.Builder()
+            // 广播间隔
+            .setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_POWER)
+            /*
+            设置广告的传输功率级别。参数： txPowerLevel – 蓝牙 LE 广告的传输功率，以 dBm 为单位。有效范围为 [-127, 1]
+            推荐值为：TX_POWER_ULTRA_LOW、TX_POWER_LOW、TX_POWER_MEDIUM 或 TX_POWER_HIGH。
+             */
+            .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
+            .setTimeout(0)
+            .setConnectable(true)
+            .build()
+
+        // 广播报文
+        val advertiseData = AdvertiseData.Builder()
+            /*
+            是否包含设备名称
+            false（默认）
+             */
+            .setIncludeDeviceName(true)
+            /*
+            传输功率级别是否应包含在广告数据包中。 TX功率级别字段在通告数据包中需要3个字节。
+            false（默认）
+             */
+            .setIncludeTxPowerLevel(false)
+            /*
+            添加服务 UUID 以通告数据。
+             */
+            .addServiceUuid(ParcelUuid(serviceUUID))
+            /*
+            添加服务数据以宣传数据。
+            */
+//            .addServiceData(
+//                ParcelUuid(PaxBleConfig.getTestUUID()),
+//                "ff91".toByteArray()
+//            )
+            .build()
+
+        // 与广告数据关联的扫描响应
+        val scanResponse = AdvertiseData.Builder()
+            .setIncludeDeviceName(false)
+            .setIncludeTxPowerLevel(false)
+            // 添加制造商数据
+            .addManufacturerData(0x06, "ff".toByteArray())
+            .addServiceData(
+                ParcelUuid(PaxBleConfig.PAX_UUID_RESPONSE),
+                "sunny".toByteArray()
+            )
+            .build()
+
+        /*
+        启动蓝牙 LE 广告。如果操作成功，advertData 将被广播。
+        scanResponse 在扫描设备发送主动扫描请求时返回。该方法立即返回，操作状态通过回调传递。
+         */
+        mmAdvertiser?.startAdvertising(
+            // 设置 - 蓝牙 LE 广告的设置
+            settings,
+            // 广告数据——要在广告数据包中广告的广告数据
+            advertiseData,
+            // scanResponse – 与广告数据关联的扫描响应(可选)
+            scanResponse,
+            // callback – 广告状态的回调
+            advertisingCallback
+        )
+        showUiInfo("开始广播")
+    }
+
+    /**
+     * uuid - 此特征的UUID
+     * properties – 此特征的属性
+     * permissions - 此特征的权限
+     */
+    private fun doAddCharacteristic() {
+
+        // auth
+        authCharacteristic = BluetoothGattCharacteristic(
+            PaxBleConfig.PAX_UUID_CALENDAR_AUTH,
+
+            (BluetoothGattCharacteristic.PROPERTY_WRITE or
+                    BluetoothGattCharacteristic.PROPERTY_READ),
+
+            (BluetoothGattCharacteristic.PERMISSION_WRITE or
+                    BluetoothGattCharacteristic.PERMISSION_READ)
+        )
+        mmGattService?.addCharacteristic(authCharacteristic)
+
+
+        // calendar notify
+        notifyCharacteristic = BluetoothGattCharacteristic(
+            PaxBleConfig.PAX_UUID_CALENDAR_NOTIFY,
+            BluetoothGattCharacteristic.PROPERTY_NOTIFY,
+            BluetoothGattCharacteristic.PROPERTY_NOTIFY
         ).apply {
-            /*
-            uuid - 此特征的UUID
-            properties – 此特征的属性
-            permissions - 此特征的权限
-             */
-            // auth
-            authCharacteristic = BluetoothGattCharacteristic(
-                PaxBleConfig.PAX_UUID_CALENDAR_AUTH,
-
-                (BluetoothGattCharacteristic.PROPERTY_WRITE or
-                        BluetoothGattCharacteristic.PROPERTY_READ),
-
-                (BluetoothGattCharacteristic.PERMISSION_WRITE or
-                        BluetoothGattCharacteristic.PERMISSION_READ)
-            )
-            addCharacteristic(authCharacteristic)
-
-            // calendar notify
-            notifyCharacteristic = BluetoothGattCharacteristic(
-                PaxBleConfig.PAX_UUID_CALENDAR_NOTIFY,
-
-                BluetoothGattCharacteristic.PROPERTY_NOTIFY,
-
-                BluetoothGattCharacteristic.PROPERTY_NOTIFY
-            )
-            addCharacteristic(notifyCharacteristic)
-
-            // calendar readable
-            readableCharacteristic = BluetoothGattCharacteristic(
-                PaxBleConfig.PAX_UUID_CALENDAR_READABLE,
-
-                BluetoothGattCharacteristic.PROPERTY_NOTIFY,
-
-                BluetoothGattCharacteristic.PROPERTY_NOTIFY
-            )
-            /*
-            PERMISSION_WRITE
-                写入权限
-            PERMISSION_WRITE_ENCRYPTED
-                允许加密写入
-            PERMISSION_WRITE_ENCRYPTED_MITM
-                允许具有中间人保护的加密写入
-            PERMISSION_WRITE_SIGNED
-                允许签名写入操作
-            PERMISSION_WRITE_SIGNED_MITM
-                允许带有中间人保护的签名写入操作
-             */
-            readableCharacteristic?.addDescriptor(
+            addDescriptor(
+                /*
+                PERMISSION_WRITE
+                    写入权限
+                PERMISSION_WRITE_ENCRYPTED
+                    允许加密写入
+                PERMISSION_WRITE_ENCRYPTED_MITM
+                    允许具有中间人保护的加密写入
+                PERMISSION_WRITE_SIGNED
+                    允许签名写入操作
+                PERMISSION_WRITE_SIGNED_MITM
+                    允许带有中间人保护的签名写入操作
+                 */
                 BluetoothGattDescriptor(
                     PaxBleConfig.PAX_UUID_SUNNY,
                     BluetoothGattDescriptor.PERMISSION_WRITE or
@@ -106,76 +180,30 @@ class PaxBleSlaveService : PaxBleCommonService() {
                         value = "sunny".toByteArray()
                     }
             )
-            addCharacteristic(readableCharacteristic)
-
-            // calendar read
-            readCharacteristic = BluetoothGattCharacteristic(
-                PaxBleConfig.PAX_UUID_CALENDAR_READ,
-
-                (BluetoothGattCharacteristic.PROPERTY_WRITE or
-                        BluetoothGattCharacteristic.PROPERTY_READ),
-
-                (BluetoothGattCharacteristic.PERMISSION_WRITE or
-                        BluetoothGattCharacteristic.PERMISSION_READ)
-            )
-            addCharacteristic(readCharacteristic)
-
         }
-        // 添加服务
-        mmGattServer?.addService(mmGattService)
+        mmGattService?.addCharacteristic(notifyCharacteristic)
 
-        //开始广播
-        mmAdvertiser = BluetoothAdapter.getDefaultAdapter().bluetoothLeAdvertiser
-        mmAdvertiser?.stopAdvertising(advertisingCallback)
-        mmAdvertiser?.startAdvertising(
+        // calendar readable
+        readableCharacteristic = BluetoothGattCharacteristic(
+            PaxBleConfig.PAX_UUID_CALENDAR_READABLE,
 
-            // 广播设置
-            AdvertiseSettings.Builder()
-                .setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_POWER)
-                .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
-                .setTimeout(0)
-                .setConnectable(true)
-                .build(),
+            BluetoothGattCharacteristic.PROPERTY_NOTIFY,
 
-            //设置广播报文
-            AdvertiseData.Builder()
-                /*
-                是否包含设备名称
-                false（默认）
-                 */
-                .setIncludeDeviceName(true)
-                /*
-                传输功率级别是否应包含在广告数据包中。 TX功率级别字段在通告数据包中需要3个字节。
-                false（默认）
-                 */
-                .setIncludeTxPowerLevel(false)
-                /*
-                添加服务 UUID 以通告数据。
-                 */
-                .addServiceUuid(ParcelUuid(serviceUUID))
-                /*
-                添加服务数据以宣传数据。
-                */
-//            .addServiceData(
-//                ParcelUuid(PaxBleConfig.getTestUUID()),
-//                "ff91".toByteArray()
-//            )
-                .build(),
-
-            // 广播扫描响应报文(可选)
-            AdvertiseData.Builder()
-                .setIncludeDeviceName(false)
-                .setIncludeTxPowerLevel(false)
-                // 添加制造商数据
-                .addManufacturerData(0x06, "ff".toByteArray())
-                .addServiceData(
-                    ParcelUuid(PaxBleConfig.PAX_UUID_RESPONSE),
-                    "sunny".toByteArray()
-                )
-                .build(),
-            advertisingCallback
+            BluetoothGattCharacteristic.PROPERTY_NOTIFY
         )
-        showUiInfo("开始广播")
+        mmGattService?.addCharacteristic(readableCharacteristic)
+
+        // calendar read
+        readCharacteristic = BluetoothGattCharacteristic(
+            PaxBleConfig.PAX_UUID_CALENDAR_READ,
+
+            (BluetoothGattCharacteristic.PROPERTY_WRITE or
+                    BluetoothGattCharacteristic.PROPERTY_READ),
+
+            (BluetoothGattCharacteristic.PERMISSION_WRITE or
+                    BluetoothGattCharacteristic.PERMISSION_READ)
+        )
+        mmGattService?.addCharacteristic(readCharacteristic)
     }
 
     override fun doRelease() {

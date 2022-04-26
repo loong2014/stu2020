@@ -38,6 +38,7 @@ object PaxBleConfig {
 
     const val BleDebugUserID = 10
     const val BleDebugFFID = "61bad4f56acce30010246260"
+    // 61bad4f56acce30010246260  >>> 99cce69d-8319-b4e3-85dd-737c1d497763
 
     const val EXT_USER_DISPLAY = "ext_user_display"
     const val EXT_USER_ID = "ext_user_id"

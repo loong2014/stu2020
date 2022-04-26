@@ -6,8 +6,8 @@ import android.os.ParcelUuid
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sunny.lib.base.log.SunLog
-import com.sunny.module.ble.master.PaxMeetingInfo
-import com.sunny.module.ble.master.PaxZoomInfo
+import com.sunny.module.ble.meeting.PaxMeetingInfo
+import com.sunny.module.ble.meeting.PaxZoomInfo
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.*

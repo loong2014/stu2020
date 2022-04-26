@@ -1,5 +1,6 @@
 package com.sunny.lib.common.view
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -25,12 +26,15 @@ class SunnyTopBar(context: Context, attributeSet: AttributeSet?) :
     init {
         SunLog.i(TAG, "init")
         LayoutInflater.from(context).inflate(R.layout.layout_top_bar, this)
+    }
 
+    override fun onFinishInflate() {
+        super.onFinishInflate()
         // 默认点击返回处理
-//        top_bar_left_back_btn.setOnClickListener {
-//            val act = context as Activity
-//            act.finish()
-//        }
+        top_bar_left_back_btn.setOnClickListener {
+            val act = context as Activity
+            act.finish()
+        }
     }
 
     /**

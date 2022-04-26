@@ -1,7 +1,6 @@
 package com.sunny.module.ble.master
 
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.le.ScanFilter
 import android.bluetooth.le.ScanSettings
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -12,10 +11,9 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.os.IBinder
 import android.os.Looper
-import com.sunny.module.ble.PaxBleConfig
-import com.sunny.module.ble.SEAT_FPD_NAME
-import com.sunny.module.ble.SEAT_RSD_NAME
 import com.sunny.module.ble.PaxBleCommonService
+import com.sunny.module.ble.PaxBleConfig
+import com.sunny.module.ble.master.helper.PaxBleConnectHelper
 
 /**
  * 主设备 启动后开始扫描，发现目标获取广播信息
@@ -24,14 +22,10 @@ import com.sunny.module.ble.PaxBleCommonService
  */
 internal abstract class PaxBleMasterBaseService : PaxBleCommonService() {
 
-//    lateinit var mWorkHandler: Handler
-//    lateinit var mMainHandler: Handler
-
     // 是否支持BLE
     var isSupportBle = false
 
-    lateinit var fpdConnectThread: PaxBleConnectThread
-    lateinit var rsdConnectThread: PaxBleConnectThread
+    lateinit var bleConnectHelper: PaxBleConnectHelper
 
     override fun onCreate() {
         super.onCreate()
@@ -42,8 +36,7 @@ internal abstract class PaxBleMasterBaseService : PaxBleCommonService() {
 
         mMainHandler = Handler(Looper.getMainLooper())
 
-        fpdConnectThread = PaxBleConnectThread(this, mWorkHandler, mMainHandler, SEAT_FPD_NAME)
-        rsdConnectThread = PaxBleConnectThread(this, mWorkHandler, mMainHandler, SEAT_RSD_NAME)
+        bleConnectHelper = PaxBleConnectHelper(this, mWorkHandler, mMainHandler)
 
         val filter = IntentFilter()
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
@@ -60,26 +53,28 @@ internal abstract class PaxBleMasterBaseService : PaxBleCommonService() {
             val uid = getIntExtra(PaxBleConfig.EXT_USER_ID, -1)
             val ffid = getStringExtra(PaxBleConfig.EXT_USER_FFID)
             showLog("onStartCommand  :$display , $uid , $ffid")
-            if (SEAT_FPD_NAME == display) {
-                fpdConnectThread.updateUserInfo(uid, ffid)
-            } else if (SEAT_RSD_NAME == display) {
-                rsdConnectThread.updateUserInfo(uid, ffid)
-            }else{
-                rsdConnectThread.updateUserInfo(PaxBleConfig.BleDebugUserID, PaxBleConfig.BleDebugFFID)
-            }
+            bleConnectHelper.updateUserInfo(display, uid, ffid)
         }
 
-        tryStartScan()
+        mMainHandler.post {
+            showLog("tryStartScan by onStartCommand")
+            tryStartScan()
+        }
         return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        return null
+        mMainHandler.post {
+            showLog("tryStartScan by onBind")
+            tryStartScan()
+        }
+        return super.onBind(intent)
     }
 
     override fun onDestroy() {
         unregisterReceiver(mBleReceiver)
 
+        showLog("tryStopScanAndConnect by onDestroy")
         tryStopScanAndConnect()
         super.onDestroy()
     }
@@ -94,14 +89,26 @@ internal abstract class PaxBleMasterBaseService : PaxBleCommonService() {
                 BluetoothAdapter.STATE_TURNING_ON -> {
                 }
                 BluetoothAdapter.STATE_ON -> {
-                    showTip("tryStartScan by ble on")
-                    tryStartScan()
+                    mMainHandler.post {
+                        showTip("tryStartScan by ble ON")
+                        tryStartScan()
+                    }
+                    mMainHandler.postDelayed({
+                        showTip("tryStartScan delay by ble ON")
+                        tryStartScan()
+                    }, 500)
                 }
                 BluetoothAdapter.STATE_TURNING_OFF -> {
                 }
                 BluetoothAdapter.STATE_OFF -> {
-                    showTip("tryStopScan by ble off")
-                    tryStopScanAndConnect()
+                    mMainHandler.post {
+                        showLog("tryStopScanAndConnect by ble OFF")
+                        /*
+                        因为发现是蓝牙适配器的重量级过程，所以在尝试使用 BluetoothSocket.connect() 连接到远程设备之前，应始终调用此方法。
+                         Discovery 不是由 Activity 管理的，而是作为系统服务运行的，因此应用程序应该始终调用取消发现，即使它没有直接请求发现，只是为了确定。
+                         */
+                        tryStopScanAndConnect()
+                    }
                 }
             }
         }
@@ -145,23 +152,7 @@ internal abstract class PaxBleMasterBaseService : PaxBleCommonService() {
     private fun tryStopScanAndConnect() {
         doStopScan()
 
-        showLog("doDisconnect by stop scan")
-        fpdConnectThread.doDisconnect()
-        rsdConnectThread.doDisconnect()
-    }
-
-    /**
-     * 构建过滤条件
-     */
-    fun buildScanFilters(): List<ScanFilter> {
-        val list = mutableListOf<ScanFilter>()
-        fpdConnectThread.buildScanFilter()?.also {
-            list.add(it)
-        }
-        rsdConnectThread.buildScanFilter()?.also {
-            list.add(it)
-        }
-        return list
+        bleConnectHelper.dealStopConnect()
     }
 
     /**

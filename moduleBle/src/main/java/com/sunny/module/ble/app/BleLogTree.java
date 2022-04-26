@@ -9,16 +9,12 @@
  * ************************************************************
  */
 
-package com.sunny.lib.base.log;
+package com.sunny.module.ble.app;
 
 import timber.log.Timber;
 
-public class SunnyLogTree extends Timber.DebugTree {
-    public final String TAG;
-
-    public SunnyLogTree(String tag) {
-        TAG = tag;
-    }
+public class BleLogTree extends Timber.DebugTree {
+    public final static String TAG = "PaxBle-";
 
     @Override
     protected void log(int priority, String tag, String message, Throwable t) {

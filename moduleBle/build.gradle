@@ -1,13 +1,11 @@
-if (isModuleBleAlone.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android-extensions'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -15,30 +13,11 @@ android {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
 
-        if (isModuleBleAlone.toBoolean()) {
-            applicationId "com.sunny.module.ble"
-            versionCode 100
-            versionName "1.0"
-        }
-
-        // router
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
+        applicationId "com.sunny.module.ble"
+        versionCode 100
+        versionName "1.0"
 
         multiDexEnabled true
-    }
-
-    sourceSets {
-        main {
-            if (isModuleBleAlone.toBoolean()) {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/moduleManifest/AndroidManifest.xml'
-            }
-        }
     }
 
     buildTypes {
@@ -47,6 +26,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -62,6 +46,7 @@ android {
 dependencies {
     implementation project(path: ':libCommon')
 
-    // 路由
-    kapt deps.arouter.compiler
+    // hilt
+    implementation deps.hilt.android
+    kapt deps.hilt.android_compiler
 }

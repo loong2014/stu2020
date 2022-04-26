@@ -6,10 +6,15 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
+import android.bluetooth.le.ScanRecord
 import android.bluetooth.le.ScanSettings
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
+import android.provider.Settings
+import com.sunny.module.ble.utils.PaxByteUtils
+import timber.log.Timber
 import java.io.OutputStream
 
 object BleTools {
@@ -56,26 +61,175 @@ object BleTools {
         }
     }
 
-    /**
-     * 开启蓝牙
-     */
-    fun openBleByUser(activity: Activity, requestCode: Int) {
-        // 1
-//        BluetoothAdapter.getDefaultAdapter().enable()
+    fun deviceCheck(): String {
 
-        // 2
-        if (!isBleEnabled()) {
-            activity.startActivityForResult(
-                Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),
-                requestCode
-            )
+        fun showTip(tip: String) {
+            Timber.i("PaxBle", tip)
         }
+
+        val sb = StringBuilder()
+        val adapter = BluetoothAdapter.getDefaultAdapter()
+        /*
+        如果支持 LE 扩展广告功能，则返回最大 LE 广告数据长度（以字节为单位），否则返回 0。
+        返回： 最大 LE 广告数据长度。
+         */
+        val maxLen = adapter.leMaximumAdvertisingDataLength
+        sb.append("\nleMaximumAdvertisingDataLength :$maxLen")
+
+        /*
+        如果支持 LE 2M PHY 功能，则返回 true。
+         */
+        var support = adapter.isLe2MPhySupported
+        sb.append("\nisLe2MPhySupported :$support")
+
+        /*
+        如果支持 LE 编码 PHY 功能，则返回真。
+         */
+        support = adapter.isLeCodedPhySupported
+        sb.append("\nisLeCodedPhySupported :$support")
+
+        /*
+        如果支持 LE 扩展广告功能，则返回 true。
+         */
+        support = adapter.isLeExtendedAdvertisingSupported
+        sb.append("\nisLeExtendedAdvertisingSupported :$support")
+
+        /*
+        如果支持 LE 定期广告功能，则返回 true。
+         */
+        support = adapter.isLePeriodicAdvertisingSupported
+        sb.append("\nisLePeriodicAdvertisingSupported :$support")
+
+        /*
+        如果芯片组支持多广告，则返回 true
+         */
+        support = adapter.isMultipleAdvertisementSupported
+        sb.append("\nisMultipleAdvertisementSupported :$support")
+
+        /*
+        如果支持卸载过滤器，则返回 true
+        返回：如果芯片组支持片上过滤，则返回 true
+         */
+        support = adapter.isOffloadedFilteringSupported
+        sb.append("\nisOffloadedFilteringSupported :$support")
+
+        /*
+        如果支持卸载扫描批处理，则返回 true
+        返回：如果芯片组支持片上扫描批处理，则返回 true
+         */
+        support = adapter.isOffloadedScanBatchingSupported
+        sb.append("\nisOffloadedScanBatchingSupported :$support")
+
+        return sb.toString()
+    }
+
+    fun getPairedDevice(): String {
+        val sb = StringBuilder()
+        sb.append("PairedDevice")
+        BluetoothAdapter.getDefaultAdapter().bondedDevices?.forEachIndexed { index, bluetoothDevice ->
+            sb.append("\n $index >>> $bluetoothDevice")
+        }
+        return sb.toString()
+    }
+
+    fun permissionCheck(context: Context): String {
+        val sb = StringBuilder()
+
+        val adapter = BluetoothAdapter.getDefaultAdapter()
+        sb.append("\npermissionCheck start")
+
+        if (adapter == null) {
+            sb.append("\nnot support Bluetooth")
+            return sb.toString()
+        }
+
+        if (!context.packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            sb.append("\nnot support BLE")
+            return sb.toString()
+        }
+
+        if (!adapter.isEnabled) {
+            sb.append("\nBluetooth not enabled")
+            return sb.toString()
+        }
+
+        if (adapter.bluetoothLeScanner == null) {
+            sb.append("\nnot support LeScanner")
+            return sb.toString()
+        }
+
+        val lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (!lm.isLocationEnabled) {
+            sb.append("\nLocation not enabled")
+            return sb.toString()
+        }
+
+        sb.append("\npermissionCheck pass")
+        return sb.toString()
+    }
+
+    /**
+     * 请求开启蓝牙
+     */
+    fun requestEnableBle(activity: Activity, requestCode: Int): String {
+        if (isBleEnabled()) {
+            return "蓝牙已开启"
+        }
+//        // 1 auto
+//        try {
+//            BluetoothAdapter.getDefaultAdapter()?.enable()
+//            return "蓝牙开启成功"
+//        } catch (e: Exception) {
+//            return "Ble enable failed :$e"
+//        }
+
+        // 2 by user
+        activity.startActivityForResult(
+            Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),
+            requestCode
+        )
+        return "请求开启蓝牙"
+    }
+
+    /**
+     * 请求开启定位
+     */
+    fun requestEnableLocation(activity: Activity, requestCode: Int): String {
+        val lm = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        if (lm.isLocationEnabled) {
+            return "定位已开启"
+        }
+
+        // 1 auto
+//        try {
+//            val um = activity.getSystemService(Context.USER_SERVICE) as UserManager
+//            val userHandle = um.getUserForSerialNumber(0)
+//
+//            val c: Class<*> = LocationManager::class.java
+//            val m = c.getDeclaredMethod(
+//                "setLocationEnabledForUser",
+//                Boolean::class.java,
+//                UserHandle::class.java
+//            )
+//            m.invoke(lm, true, userHandle)
+//            return "Location enable succeed"
+//        } catch (e: Exception) {
+//            return "Location enable failed :$e"
+//        }
+
+        // 2 by user
+        activity.startActivityForResult(
+            Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),
+            requestCode
+        )
+        return "请求开启定位"
     }
 
     /**
      * 判断是否有访问位置的权限，没有权限，直接申请位置权限
      */
-    fun checkBlePermission(activity: Activity, requestCode: Int): Boolean {
+    fun requestBlePermission(activity: Activity, requestCode: Int): String {
         if ((activity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             || (activity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             || (activity.checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)
@@ -89,10 +243,11 @@ object BleTools {
                     Manifest.permission.WRITE_CONTACTS
                 ), requestCode
             )
-            return false
+            return "申请BLE权限"
         }
-        return true
+        return "BLE权限已申请"
     }
+
 
     /**
      * 判断是否有访问位置的权限，没有权限，直接申请位置权限
@@ -355,5 +510,22 @@ object BleTools {
              */
             .setReportDelay(0)
             .build()
+    }
+
+    fun parseScanRecord(scanRecord: ScanRecord): String {
+        val sb = StringBuilder()
+        var pos = 0
+
+        sb.append("serviceUuids :${scanRecord.serviceUuids?.size}")
+        scanRecord.serviceUuids?.forEach {
+            sb.append("\nserviceUuids(${pos++}) >>> $it")
+        }
+
+        sb.append("serviceData :${scanRecord.serviceData?.size}")
+        scanRecord.serviceData?.forEach { (t, u) ->
+            sb.append("\nserviceData(${pos++}) >>> $t >>> ${PaxByteUtils.bytesToHex(u)}")
+        }
+
+        return sb.toString()
     }
 }

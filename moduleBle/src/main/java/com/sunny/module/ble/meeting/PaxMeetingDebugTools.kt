@@ -5,7 +5,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.module.ble.IosMeetingInfo
-import com.sunny.module.ble.master.PaxZoomInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch

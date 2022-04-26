@@ -10,6 +10,7 @@ import android.os.HandlerThread
 import android.os.IBinder
 import android.os.Looper
 import com.sunny.lib.base.log.SunLog
+import timber.log.Timber
 
 /**
  * 蓝牙服务的基类
@@ -37,19 +38,18 @@ open class PaxBleCommonService : Service() {
 
     open fun doParseOption(opt: Int) {}
 
-
     /**
      * 显示日志
      */
     fun showLog(log: String) {
-        SunLog.i("PaxBle", log)
+        Timber.i(log)
     }
 
     /**
      * 显示提示
      */
     fun showTip(tip: String) {
-        SunLog.i("PaxBle", tip)
+        Timber.i(tip)
         bleCallback?.onRcvClientMsg(tip)
     }
 

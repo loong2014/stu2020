@@ -50,24 +50,39 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:onClick="@{(view) -> eventListener.commonOpt(view)}"
-                        android:tag="bleConfig"
-                        android:text="BLE配置" />
+                        android:tag="startService"
+                        android:text="开启服务" />
 
                     <com.sunny.lib.ui.SunnyButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:onClick="@{(view) -> eventListener.commonOpt(view)}"
-                        android:tag="bleSlave"
-                        android:text="BLE外围" />
+                        android:tag="stopService"
+                        android:text="关闭服务" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <com.sunny.lib.ui.SunnyButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:onClick="@{(view) -> eventListener.commonOpt(view)}"
-                        android:tag="bleMaster"
-                        android:text="BLE中央" />
+                        android:tag="userLogin"
+                        android:text="模拟用户登陆" />
+
+                    <com.sunny.lib.ui.SunnyButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:onClick="@{(view) -> eventListener.commonOpt(view)}"
+                        android:tag="userLogout"
+                        android:text="模拟用户登出" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -89,12 +104,18 @@
                 <com.sunny.lib.ui.SunnyTextView
                     android:id="@+id/tv_msg_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_margin="5dp"
+                    android:enabled="false"
+                    android:fadeScrollbars="false"
+                    android:focusable="false"
+                    android:inputType="textMultiLine"
+                    android:scrollbarFadeDuration="2000"
+                    android:scrollbarStyle="insideOverlay"
+                    android:scrollbars="vertical"
                     android:text="None"
                     android:textColor="#9C27B0"
                     android:textSize="15sp" />
-
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
 

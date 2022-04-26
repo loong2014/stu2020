@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application
+        android:name=".app.BleApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/ble_app_name"
@@ -27,14 +28,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--        <activity android:name=".BleDemoActivity">-->
-        <activity android:name=".location.LocationActivity">
+        <activity android:name=".BleDemoActivity">
+            <!--        <activity android:name=".location.LocationActivity">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".debug.BleConfigActivity" />
+        <activity android:name=".master.BleMasterActivity" />
+        <activity android:name=".slave.BleSlaveActivity" />
 
         <service android:name=".server.classic.BleServerClassic" />
         <service android:name=".server.ble.BleServerBle" />
