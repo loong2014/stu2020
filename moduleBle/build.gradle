@@ -49,4 +49,7 @@ dependencies {
     // hilt
     implementation deps.hilt.android
     kapt deps.hilt.android_compiler
+
+    //
+    implementation 'com.google.zxing:javase:3.4.0'
 }

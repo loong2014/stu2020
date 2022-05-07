@@ -19,6 +19,10 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
+    <!-- wifi hotspot -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:name=".app.BleApplication"
         android:allowBackup="true"
@@ -28,7 +32,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".BleDemoActivity">
+        <activity android:name=".hotspot.HotspotActivity">
+            <!--        <activity android:name=".BleDemoActivity">-->
             <!--        <activity android:name=".location.LocationActivity">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,6 +44,7 @@
         <activity android:name=".debug.BleConfigActivity" />
         <activity android:name=".master.BleMasterActivity" />
         <activity android:name=".slave.BleSlaveActivity" />
+        <activity android:name=".hotspot.arcode.QrCodeActivity" />
 
         <service android:name=".server.classic.BleServerClassic" />
         <service android:name=".server.ble.BleServerBle" />
