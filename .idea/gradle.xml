@@ -15,8 +15,6 @@
             <option value="$PROJECT_DIR$/libCommon" />
             <option value="$PROJECT_DIR$/libUi" />
             <option value="$PROJECT_DIR$/moduleBle" />
-            <option value="$PROJECT_DIR$/module_weather" />
-            <option value="$PROJECT_DIR$/simpledemo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
