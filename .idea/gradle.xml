@@ -14,7 +14,7 @@
             <option value="$PROJECT_DIR$/libBase" />
             <option value="$PROJECT_DIR$/libCommon" />
             <option value="$PROJECT_DIR$/libUi" />
-            <option value="$PROJECT_DIR$/moduleBle" />
+            <option value="$PROJECT_DIR$/moduleView" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,9 +1,4 @@
-//注意gradle.properties中的数据类型都是String类型，使用其他数据类型需要自行转换
-if (isModuleViewAlone.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -15,9 +10,7 @@ android {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
 
-        if (isModuleViewAlone.toBoolean()) {
-            applicationId "com.sunny.module.view"
-        }
+        applicationId "com.sunny.module.view"
 
         versionCode 100
         versionName "1.0"
@@ -26,16 +19,6 @@ android {
         kapt {
             arguments {
                 arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
-    }
-
-    sourceSets {
-        main {
-            if (isModuleViewAlone.toBoolean()) {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/moduleManifest/AndroidManifest.xml'
             }
         }
     }
@@ -67,7 +50,6 @@ android {
 
 dependencies {
     implementation project(path: ':libCommon')
-
 
     // 路由
     kapt deps.arouter.compiler
