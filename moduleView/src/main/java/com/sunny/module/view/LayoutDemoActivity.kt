@@ -98,18 +98,18 @@ class LayoutDemoActivity : BaseActivity() {
                 jumpPath = RouterConstant.View.PageTitleUpdate
             )
         )
-        list.add(
-            LayoutDemoModel(
-                name = "RemoteViewsService",
-                jumpPath = RouterConstant.View.PageRemoteViewsService
-            )
-        )
-        list.add(
-            LayoutDemoModel(
-                name = "RemoteViewsClient",
-                jumpPath = RouterConstant.View.PageRemoteViewsClient
-            )
-        )
+//        list.add(
+//            LayoutDemoModel(
+//                name = "RemoteViewsService",
+//                jumpPath = RouterConstant.View.PageRemoteViewsService
+//            )
+//        )
+//        list.add(
+//            LayoutDemoModel(
+//                name = "RemoteViewsClient",
+//                jumpPath = RouterConstant.View.PageRemoteViewsClient
+//            )
+//        )
         return list
     }
 

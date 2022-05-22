@@ -185,6 +185,9 @@ deps.hamcrest = "org.hamcrest:hamcrest-all:$versions.hamcrest"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 deps.stetho = "com.facebook.stetho:stetho:$versions.stetho"
 deps.agentweb = "com.github.Justson.AgentWeb:agentweb-core:v5.0.0-alpha.1-androidx"
+
+// https://github.com/google/flexbox-layout
+deps.flexbox = 'com.google.android.flexbox:flexbox:3.0.0'
 ext.deps = deps
 
 deps.versions = versions

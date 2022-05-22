@@ -1,8 +1,4 @@
-if (isModuleWebAlone.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -14,11 +10,9 @@ android {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
 
-        if (isModuleWebAlone.toBoolean()) {
-            applicationId "com.sunny.module.web"
-            versionCode 100
-            versionName "1.0"
-        }
+        applicationId "com.sunny.module.web"
+        versionCode 100
+        versionName "1.0"
 
         // router
         kapt {
@@ -27,15 +21,6 @@ android {
             }
         }
         multiDexEnabled true
-    }
-    sourceSets {
-        main {
-            if (isModuleWebAlone.toBoolean()) {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/moduleManifest/AndroidManifest.xml'
-            }
-        }
     }
 
     buildTypes {

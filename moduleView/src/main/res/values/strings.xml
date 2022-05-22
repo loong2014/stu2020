@@ -1,3 +1,5 @@
 <resources>
     <string name="view_app_name">appModuleLogin</string>
+    <string name="ff_head_behavior">com.sunny.module.view.xxx.coordinator.behavior.FFVideoHeadBehavior</string>
+    <string name="ff_list_behavior">com.sunny.module.view.xxx.coordinator.behavior.FFRecyclerViewBehavior</string>
 </resources>

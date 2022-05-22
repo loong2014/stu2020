@@ -12,6 +12,7 @@
         android:theme="@style/ViewTheme.NoActionBar">
 
         <activity android:name=".LayoutDemoActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +20,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".xxx.XxxLayoutActivity" />
         <activity android:name=".layout.DrawerLayoutActivity" />
         <activity
             android:name=".layout.CoordinatorLayoutActivity"
@@ -29,9 +29,10 @@
         <activity android:name=".bar.StatusBarActivity" />
         <activity android:name=".layout.CardViewActivity" />
         <activity android:name=".layout.TitleUpdateLayoutActivity" />
-        <activity android:name=".remote.LayoutRemoteViewsServiceActivity" />
-        <activity android:name=".remote.LayoutRemoteViewsClientActivity" />
         <activity android:name=".LayoutCommonActivity" />
+        <activity
+            android:name=".xxx.XxxLayoutActivity"
+            android:theme="@style/XxxStyle" />
 
     </application>
 

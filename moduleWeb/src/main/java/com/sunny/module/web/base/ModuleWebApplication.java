@@ -1,34 +1,15 @@
 package com.sunny.module.web.base;
 
-import android.app.Application;
-
-import com.sunny.lib.common.base.BaseModuleApplication;
-
-import org.jetbrains.annotations.NotNull;
+import com.sunny.lib.common.base.BaseApplication;
 
 /**
  * Created by zhangxin17 on 2020/12/25
  */
-public class ModuleWebApplication extends BaseModuleApplication {
-
+public class ModuleWebApplication extends BaseApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        initModuleApp(this);
-
-        initModuleData(this);
-    }
-
-    @Override
-    public void initModuleApp(@NotNull Application application) {
-
-    }
-
-    @Override
-    public void initModuleData(@NotNull Application application) {
-
     }
 
     @Override

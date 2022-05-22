@@ -23,6 +23,10 @@ android {
         }
     }
 
+    buildFeatures {
+        dataBinding = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -45,7 +49,7 @@ android {
     /**
      * 通过resourcePrefix限定当前module可访问资源
      */
-    resourcePrefix "view_"
+//    resourcePrefix "view_"
 }
 
 dependencies {
@@ -56,6 +60,9 @@ dependencies {
 
     implementation deps.glide.runtime
     kapt deps.glide.compiler
+
+    // 在RecyclerView中实现自动换行的LayoutManager
+    implementation deps.flexbox
 
     // 圆形图片 https://github.com/hdodenhof/CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
