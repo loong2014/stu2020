@@ -3,25 +3,20 @@ package com.sunny.lib.common.base
 import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.sunny.lib.common.manager.ActivityLifeManager
+import com.sunny.lib.common.font.PaxFontHelper
 import com.sunny.lib.common.utils.SunToast
 
 open class BaseActivity : AppCompatActivity() {
 
     lateinit var mmActivity: BaseActivity
     override fun onCreate(savedInstanceState: Bundle?) {
+        PaxFontHelper.byFactory(this)
         super.onCreate(savedInstanceState)
         mmActivity = this
-        ActivityLifeManager.onCreate(this)
     }
 
     protected fun showToast(msg: String) {
         SunToast.show(msg)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        ActivityLifeManager.onDestroy(this)
     }
 
     fun doExitActivity() {

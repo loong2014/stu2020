@@ -98,6 +98,14 @@ class LayoutDemoActivity : BaseActivity() {
                 jumpPath = RouterConstant.View.PageTitleUpdate
             )
         )
+        list.add(LayoutDemoModel(name = "FontChange", jumpPath = RouterConstant.View.PageFont))
+        list.add(
+            LayoutDemoModel(
+                name = "ScreenInfo",
+                jumpPath = RouterConstant.View.PageToolsScreenInfo
+            )
+        )
+
 //        list.add(
 //            LayoutDemoModel(
 //                name = "RemoteViewsService",

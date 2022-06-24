@@ -33,6 +33,8 @@
         <activity
             android:name=".xxx.XxxLayoutActivity"
             android:theme="@style/XxxStyle" />
+        <activity android:name=".font.XmlFontActivity" />
+        <activity android:name=".display.DisplayScreenInfoActivity" />
 
     </application>
 

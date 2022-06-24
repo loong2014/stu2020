@@ -14,7 +14,7 @@ class StringAdapter : BaseQuickAdapter<StringModel, BaseViewHolder> {
     }
 
     override fun convert(holder: BaseViewHolder, item: StringModel) {
-        val nameView: AppCompatTextView = holder.getView(R.id.item_name)
-        nameView.text = item.name
+//        val nameView: AppCompatTextView = holder.getView(R.id.item_name)
+//        nameView.text = item.name
     }
 }

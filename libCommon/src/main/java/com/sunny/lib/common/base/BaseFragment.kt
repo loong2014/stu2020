@@ -13,7 +13,6 @@ open class BaseFragment : Fragment() {
         this.mActivity = activity as AppCompatActivity
     }
 
-
     protected fun showToast(msg: String) {
         SunToast.show(msg)
     }

@@ -10,6 +10,7 @@
     android:ellipsize="end"
     android:gravity="center"
     android:maxWidth="276dp"
+    android:text="Hello World!"
     android:maxLines="1"
     android:minWidth="177dp"
     android:paddingHorizontal="40dp"

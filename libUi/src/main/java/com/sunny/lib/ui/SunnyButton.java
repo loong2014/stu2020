@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.sunny.lib.base.utils.FontUtils;
+
 /**
  * Created by zhangxin17 on 2020/7/30
  */
@@ -26,6 +28,7 @@ public class SunnyButton extends AppCompatButton {
     }
 
     private void initView(Context context) {
+        FontUtils.changeDefaultFont(this);
         setBackgroundResource(R.drawable.sunny_btn_selecter);
     }
 }

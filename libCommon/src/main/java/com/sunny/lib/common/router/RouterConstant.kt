@@ -42,6 +42,8 @@ class RouterConstant {
             const val PageTitleUpdate = "/view/titleupdate"
             const val PageRemoteViewsService = "/view/remoteviews/service"
             const val PageRemoteViewsClient = "/view/remoteviews/client"
+            const val PageFont = "/view/debug/font"
+            const val PageToolsScreenInfo = "/view/tools/screen_info"
         }
     }
 
