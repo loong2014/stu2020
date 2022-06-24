@@ -1,18 +1,23 @@
 package com.sunny.lib.common.font
 
 import android.content.Context
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.LayoutInflaterCompat
 import com.sunny.lib.base.utils.FontUtils
 import timber.log.Timber
 
 object PaxFontHelper {
 
+    /**
+     * 方式二，setFactory2
+     */
     fun byFactory(actContext: AppCompatActivity) {
-        byFactory(actContext, FontUtils.getFont())
+//        byFactory(actContext, FontUtils.getFont())
     }
 
     fun byFactory(actContext: AppCompatActivity, toFont: Int) {
@@ -57,5 +62,26 @@ object PaxFontHelper {
                     return null
                 }
             })
+    }
+
+
+    /**
+     * 在application中执行
+     * 方式4：第2步：编写反射方法全局替换默认字体
+     *
+     * @param mContext 上下文
+     */
+    @JvmStatic
+    fun changeDefaultFont(mContext: Context) {
+        try {
+            val typeface = ResourcesCompat.getFont(mContext, FontUtils.getFont())
+            Timber.i("typeface :$typeface")
+            val defaultField = Typeface::class.java.getDeclaredField("SERIF")
+            Timber.i("defaultField :$defaultField")
+            defaultField.isAccessible = true
+            defaultField[null] = typeface
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

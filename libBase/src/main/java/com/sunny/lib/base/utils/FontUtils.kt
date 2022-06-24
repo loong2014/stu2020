@@ -11,13 +11,13 @@ import com.sunny.lib.base.R
 object FontUtils {
 
     fun getFont(): Int {
-//        return R.font.ma_shan_zheng_regular
-        return R.font.pax_rubik_debug
+        return R.font.ma_shan_zheng_regular
+//        return R.font.pax_rubik_debug
     }
 
     @JvmStatic
     fun changeDefaultFont(view: TextView) {
-        changeDefaultFont(view, getFont())
+//        changeDefaultFont(view, getFont())
     }
 
 
