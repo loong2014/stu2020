@@ -11,6 +11,10 @@ import androidx.core.view.LayoutInflaterCompat
 import com.sunny.lib.base.utils.FontUtils
 import timber.log.Timber
 
+/**
+ *         <item name="android:fontFamily">@font/ma_shan_zheng_regular</item>
+
+ */
 object PaxFontHelper {
 
     /**

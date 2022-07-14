@@ -2,22 +2,20 @@ package com.sunny.module.view
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.Observable
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenResumed
 import com.sunny.lib.common.base.BaseActivity
+import com.sunny.lib.ui.ZEditText
 import com.sunny.module.view.databinding.ViewActCommonBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class LayoutCommonActivity : BaseActivity() {
 
-    private lateinit var mActBinding: ViewActCommonBinding
 
     /*
     // Create a ViewModel the first time the system calls an activity's onCreate() method.
@@ -26,16 +24,18 @@ class LayoutCommonActivity : BaseActivity() {
     // Use the 'by viewModels()' Kotlin property delegate
     // from the activity-ktx artifact
      */
-    private val mViewModel: LayoutCommonViewModel by viewModels()
+    private val mViewModel by viewModels<LayoutCommonViewModel>()
+    private val mActBinding by lazy { ViewActCommonBinding.inflate(layoutInflater) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycle.addObserver(object : LifecycleObserver{
+        lifecycle.addObserver(object : LifecycleObserver {
 
         })
-
-        mActBinding = DataBindingUtil.setContentView(this, R.layout.view_act_common)
+        setContentView(mActBinding.root)
+//        mActBinding = DataBindingUtil.setContentView(this, R.layout.view_act_common)
 //        final UserModel viewModel = new ViewModelProvider(this).get(UserModel.class);
 
         mActBinding.viewModel = mViewModel
@@ -65,6 +65,13 @@ class LayoutCommonActivity : BaseActivity() {
         mViewModel.tipStr.observe(this) {
             mActBinding.tabName.text = mViewModel.getTabNames()
         }
+
+        mActBinding.passwordEt.setOnEditCompleteListener(object : ZEditText.OnEditCompleteListener {
+            override fun onEditComplete(text: String) {
+                Timber.i("onEditComplete : $text")
+            }
+
+        })
     }
 
 

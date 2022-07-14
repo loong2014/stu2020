@@ -24,7 +24,7 @@
         <!-- 许多控件在选中状态或获取焦点状态下使用这个颜色 -->
         <item name="colorAccent">@color/colorAccent</item>
 <!--        <item name="android:typeface">serif</item>-->
-        <item name="android:fontFamily">@font/ma_shan_zheng_regular</item>
+<!--        <item name="android:fontFamily">@font/ma_shan_zheng_regular</item>-->
 
     </style>
 

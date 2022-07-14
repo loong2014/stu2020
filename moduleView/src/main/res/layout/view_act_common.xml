@@ -49,6 +49,23 @@
             android:gravity="center"
             android:text="@{viewModel.showName}" />
 
+        <com.sunny.lib.ui.ZEditText
+            android:id="@+id/password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="18sp"
+            app:cursorDrawable="@drawable/drawable_cursor"
+            app:cursorDrawableWidth="1dp"
+            app:inputCount="6"
+            app:isBoldText="true"
+            app:isSquare="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:space="10dp"
+            app:textBackground="@drawable/default_edit_bg" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
