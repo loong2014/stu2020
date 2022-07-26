@@ -1,0 +1,13 @@
+<resources>
+
+
+    <style name="spa_presentation_theme" parent="@android:style/Theme.Material.NoActionBar.Fullscreen">
+        <item name="android:windowAnimationStyle">@style/spa_anim</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <!-- modify some build error-->
+    <style name="spa_anim" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/spa_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/spa_exit_anim</item>
+    </style>
+</resources>
