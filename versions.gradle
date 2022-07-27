@@ -65,6 +65,8 @@ lifecycle.common = "androidx.lifecycle:lifecycle-common:$versions.lifecycle"
 lifecycle.service = "androidx.lifecycle:lifecycle-service:$versions.lifecycle"
 //lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 lifecycle.common_java8 = "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
+lifecycle.process = "androidx.lifecycle:lifecycle-process:$versions.lifecycle"
+
 deps.lifecycle = lifecycle
 
 // https://github.com/Kotlin/kotlinx.coroutines
@@ -207,6 +209,8 @@ def addRepos(RepositoryHandler handler) {
 //    maven { url 'https://maven.aliyun.com/repository/google' }
 //    maven { url 'https://maven.aliyun.com/repository/jcenter' }
 //    maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+    // 添加Mob Maven地址
+    handler.maven { url "http://mvn.mob.com/android" }
 }
 
 ext.addRepos = this.&addRepos

@@ -37,6 +37,7 @@ dependencies {
     api deps.lifecycle.runtime_ktx
     api deps.lifecycle.common
     api deps.lifecycle.service
+    api deps.lifecycle.process
     // for coroutines
     api deps.coroutines.core
     api deps.coroutines.android
