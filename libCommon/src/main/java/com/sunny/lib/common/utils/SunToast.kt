@@ -10,12 +10,14 @@ import com.sunny.lib.base.utils.ContextProvider
 object SunToast {
 
     @JvmStatic
-    fun show(msg: String) {
+    fun show(msg: String?) {
+        msg ?: return
         show(msg, Toast.LENGTH_SHORT)
     }
 
     @JvmStatic
-    fun show(msg: String, duration: Int) {
+    fun show(msg: String?, duration: Int) {
+        msg ?: return
         Toast.makeText(ContextProvider.appContext, msg, duration).show()
     }
 

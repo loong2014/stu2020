@@ -33,6 +33,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
+<!--                mlink://com.sunny.mob.link -->
                 <data
                     android:host="com.sunny.mob.link"
                     android:scheme="sunny" />

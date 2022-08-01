@@ -68,6 +68,8 @@ object MobPushManager {
             message.messageId //获取任务ID
             message.title //获取推送标题
             message.content //获取推送内容
+            val schemeData = message.extrasMap["schemeData"]
+            Timber.i("onNotifyMessageReceive schemeData :$schemeData")
         }
 
         override fun onNotifyMessageOpenedReceive(context: Context, message: MobPushNotifyMessage) {
