@@ -1,6 +1,8 @@
-include ':libBase'
-include ':libUi'
-include ':libCommon'
+include(":libBase")
+include(":libUi")
+include(":libCommon")
+include(":moduleHome")
+
 //include ':moduleWeb'
 //include ':moduleView'
 //include ':moduleBle'
@@ -9,7 +11,6 @@ include ':libCommon'
 //include ':module_stu'
 //include ':appdemo'
 //include ':moduleAccount'
-//include ':moduleHome'
 //include ':simpledemo'
 //include ':modulespa'
-include ':moduleMob'
+//include ':moduleMob'

@@ -23,6 +23,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.sunny.module.view.reverse.ReverseCardView
+            android:id="@+id/reverse_cardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:background="#00ff00"
+            app:layout_constraintDimensionRatio="3:4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_screen_info"
+            app:layout_constraintWidth_percent="0.5" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_screen_info"
             android:layout_width="match_parent"

@@ -19,8 +19,13 @@ class DisplayScreenInfoActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         mActBinding = DataBindingUtil.setContentView(this, R.layout.view_act_screen_info)
         mActBinding.btnScreenInfo.setOnClickListener {
-            doGetScreenInfo()
+//            doGetScreenInfo()
+            doReverse()
         }
+    }
+
+    private fun doReverse() {
+        mActBinding.reverseCardView.doReverse()
     }
 
     private fun doGetScreenInfo() {
@@ -48,4 +53,6 @@ class DisplayScreenInfoActivity : BaseActivity() {
 
         mActBinding.tvScreenInfo.text = sb.toString()
     }
+
+//    reverse_cardView
 }

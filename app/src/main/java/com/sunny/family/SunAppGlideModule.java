@@ -32,6 +32,7 @@ import java.nio.ByteBuffer;
  * <p>
  * <p>
  * 在Glide4.11中目前依然不知道GlideApp和Glide有什么区别？
+ * Glide的使用：http://www.zzvips.com/article/188897.html
  */
 @GlideModule
 public class SunAppGlideModule extends AppGlideModule {

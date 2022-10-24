@@ -1,52 +1,26 @@
 //注意gradle.properties中的数据类型都是String类型，使用其他数据类型需要自行转换
-if (isModuleHomeAlone.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "$build_tools_version"
-
+    compileSdkVersion build_versions.target_sdk
     defaultConfig {
-        minSdkVersion "$sdk_version_min"
-        targetSdkVersion 29
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
 
-        if (isModuleHomeAlone.toBoolean()) {
-            // 独立调试时添加 applicationId ，集成调试时移除
-            applicationId "com.sunny.module.home"
-        }
+        applicationId "com.sunny.module.home"
 
-        versionCode 1
+        versionCode 100
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-
-
-        // 使用 arguments {} 块将参数传给注解处理器：
         kapt {
-            // ARouter
             arguments {
                 arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
     }
-    sourceSets {
-        main {
-            // 独立调试与集成调试时使用不同的 AndroidManifest.xml 文件
-            if (isModuleHomeAlone.toBoolean()) {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/moduleManifest/AndroidManifest.xml'
-            }
-        }
-    }
-
 
     buildTypes {
         release {
@@ -61,6 +35,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        dataBinding true
+    }
+
     /**
      * 通过resourcePrefix限定当前module可访问资源
      */
@@ -68,10 +47,8 @@ android {
 }
 
 dependencies {
-
-    // 依赖基础组件
-    api project(path: ':libCommon')
+    implementation project(path: ':libCommon')
 
     // 路由
-    kapt 'com.alibaba:arouter-compiler:1.5.1'
+    kapt deps.arouter.compiler
 }
