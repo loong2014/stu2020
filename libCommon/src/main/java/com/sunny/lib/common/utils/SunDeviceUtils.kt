@@ -123,7 +123,8 @@ object SunDeviceUtils {
 
         try {
             val systemPropertyClass = Class.forName("android.os.SystemProperties")
-            val getMethod = systemPropertyClass.getDeclaredMethod("get", String::class.java, String::class.java)
+            val getMethod =
+                systemPropertyClass.getDeclaredMethod("get", String::class.java, String::class.java)
 
             value = getMethod.invoke(null, key, defValue).toString()
         } catch (e: Exception) {
@@ -134,6 +135,5 @@ object SunDeviceUtils {
 
         return value
     }
-
 
 }

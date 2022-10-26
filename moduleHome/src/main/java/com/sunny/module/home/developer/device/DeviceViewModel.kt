@@ -3,12 +3,17 @@ package com.sunny.module.home.developer.device
 import android.os.Build
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sunny.lib.base.log.SunLog
 import com.sunny.lib.base.utils.SunNetworkUtils
 import com.sunny.lib.common.utils.SunDeviceUtils
+import java.io.BufferedReader
+import java.io.File
+import java.io.InputStreamReader
 import java.net.Inet6Address
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.util.*
+import java.util.regex.Pattern
 import kotlin.random.Random
 
 class DeviceViewModel : ViewModel() {
@@ -97,4 +102,55 @@ class DeviceViewModel : ViewModel() {
 
             .toList()
 
+    private fun doGetCpuInfo(): String {
+
+        val sb = StringBuilder()
+
+        val cpuCount = doGetCpuCount()
+        sb.append("${cpuCount}核")
+
+        val arch = getCpuArch()
+        sb.append(" $arch")
+
+        val cpuInfo = sb.toString()
+        SunLog.i(TAG, "doGetCpuInfo :$cpuInfo")
+        return cpuInfo
+    }
+
+    /**
+     * 获取cpu架构，通过读取属性
+     */
+    private fun getCpuArch(): String {
+        var arch = "armeabi"
+        try {
+            val cpuArch = BufferedReader(InputStreamReader(Runtime.getRuntime().exec("getprop ro.product.cpu.abi").inputStream)).readLine()
+
+            arch = when {
+                cpuArch.contains("x86") -> "x86"
+
+                cpuArch.contains("armeabi-v7a") ||
+                        cpuArch.contains("arm64-v8a") -> "armeabi-v7a"
+
+                else -> "aremabi"
+            }
+        } catch (e: Exception) {
+            SunLog.e(TAG, "getCpuArch error :$e")
+        }
+        return arch
+    }
+
+    /**
+     * 获取cpu个数
+     */
+    private fun doGetCpuCount(): Int {
+        var count = 1
+        try {
+            val dir = File("/sys/devices/system/cpu/")
+            val files = dir.listFiles { it -> Pattern.matches("cpu[0-9]", it.name) }
+            count = files.size
+        } catch (e: Exception) {
+            SunLog.e(TAG, "doGetCpuInfo error :$e")
+        }
+        return count
+    }
 }

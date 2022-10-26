@@ -4,172 +4,188 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="本机信息"
-        app:layout_constraintLeft_toLeftOf="parent"
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_refresh"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.sunny.lib.ui.SunnyView
-        android:id="@+id/base_line"
-        android:layout_width="50dp"
-        android:layout_height="1dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tv_title"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="20dp"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:text="本机信息"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <!-- sdk info -->
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tvDeviceName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/base_line"
-        app:layout_constraintTop_toBottomOf="@id/base_line" />
+    <!--    <com.sunny.lib.ui.SunnyView-->
+    <!--        android:id="@+id/base_line"-->
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="1dp"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tv_title" />-->
 
-    <com.sunny.lib.ui.SunnyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="设备名称"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvDeviceName"
-        app:layout_constraintRight_toLeftOf="@+id/base_line" />
+    <!--    &lt;!&ndash; sdk info &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvDeviceName"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/base_line" />-->
 
-
-    <!-- sdk info -->
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tvSdkVersion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/base_line"
-        app:layout_constraintTop_toBottomOf="@id/tvDeviceName" />
-
-    <com.sunny.lib.ui.SunnyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="android SDK 版本"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvSdkVersion"
-        app:layout_constraintRight_toLeftOf="@+id/base_line" />
-
-    <!-- sn info -->
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tvSnKey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/base_line"
-        app:layout_constraintTop_toBottomOf="@id/tvSdkVersion" />
-
-    <com.sunny.lib.ui.SunnyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="设备序列号SN"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvSnKey"
-        app:layout_constraintRight_toLeftOf="@+id/base_line" />
-
-    <!-- mac info -->
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tvMac"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/base_line"
-        app:layout_constraintTop_toBottomOf="@id/tvSnKey" />
-
-    <com.sunny.lib.ui.SunnyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MAC"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvMac"
-        app:layout_constraintRight_toLeftOf="@+id/base_line" />
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="设备名称"-->
+    <!--        app:layout_constraintBaseline_toBaselineOf="@+id/tvDeviceName"-->
+    <!--        app:layout_constraintRight_toLeftOf="@+id/base_line" />-->
 
 
-    <!-- cpu info -->
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tvCpuInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/base_line"
-        app:layout_constraintTop_toBottomOf="@id/tvMac" />
+    <!--    &lt;!&ndash; sdk info &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvSdkVersion"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tvDeviceName" />-->
 
-    <com.sunny.lib.ui.SunnyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CPU"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvCpuInfo"
-        app:layout_constraintRight_toLeftOf="@+id/base_line" />
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="android SDK 版本"-->
+    <!--        app:layout_constraintBaseline_toBaselineOf="@+id/tvSdkVersion"-->
+    <!--        app:layout_constraintRight_toLeftOf="@+id/base_line" />-->
 
-    <!-- gpu info -->
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tvGpuInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/base_line"
-        app:layout_constraintTop_toBottomOf="@id/tvCpuInfo" />
+    <!--    &lt;!&ndash; sn info &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvSnKey"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tvSdkVersion" />-->
 
-    <com.sunny.lib.ui.SunnyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GPU"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvGpuInfo"
-        app:layout_constraintRight_toLeftOf="@+id/base_line" />
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="设备序列号SN"-->
+    <!--        app:layout_constraintBaseline_toBaselineOf="@+id/tvSnKey"-->
+    <!--        app:layout_constraintRight_toLeftOf="@+id/base_line" />-->
 
-    <!-- ui info -->
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tvSystemUiVersion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/base_line"
-        app:layout_constraintTop_toBottomOf="@id/tvGpuInfo" />
+    <!--    &lt;!&ndash; mac info &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvMac"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tvSnKey" />-->
 
-    <com.sunny.lib.ui.SunnyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="系统UI版本"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvSystemUiVersion"
-        app:layout_constraintRight_toLeftOf="@+id/base_line" />
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="MAC"-->
+    <!--        app:layout_constraintBaseline_toBaselineOf="@+id/tvMac"-->
+    <!--        app:layout_constraintRight_toLeftOf="@+id/base_line" />-->
 
-    <!-- soft info -->
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tvSystemSoftVersion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/base_line"
-        app:layout_constraintTop_toBottomOf="@id/tvSystemUiVersion" />
 
-    <com.sunny.lib.ui.SunnyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="系统软件版本"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvSystemSoftVersion"
-        app:layout_constraintRight_toLeftOf="@+id/base_line" />
+    <!--    &lt;!&ndash; cpu info &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvCpuInfo"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tvMac" />-->
 
-    <!-- internet address -->
-    <com.sunny.lib.ui.SunnyTextView
-        android:id="@+id/tvInternetAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/base_line"
-        app:layout_constraintTop_toBottomOf="@id/tvSystemSoftVersion" />
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="CPU"-->
+    <!--        app:layout_constraintBaseline_toBaselineOf="@+id/tvCpuInfo"-->
+    <!--        app:layout_constraintRight_toLeftOf="@+id/base_line" />-->
 
-    <com.sunny.lib.ui.SunnyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="外网地址"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvInternetAddress"
-        app:layout_constraintRight_toLeftOf="@+id/base_line" />
+    <!--    &lt;!&ndash; gpu info &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvGpuInfo"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tvCpuInfo" />-->
+
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="GPU"-->
+    <!--        app:layout_constraintBaseline_toBaselineOf="@+id/tvGpuInfo"-->
+    <!--        app:layout_constraintRight_toLeftOf="@+id/base_line" />-->
+
+    <!--    &lt;!&ndash; ui info &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvSystemUiVersion"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tvGpuInfo" />-->
+
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="系统UI版本"-->
+    <!--        app:layout_constraintBaseline_toBaselineOf="@+id/tvSystemUiVersion"-->
+    <!--        app:layout_constraintRight_toLeftOf="@+id/base_line" />-->
+
+    <!--    &lt;!&ndash; soft info &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvSystemSoftVersion"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tvSystemUiVersion" />-->
+
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="系统软件版本"-->
+    <!--        app:layout_constraintBaseline_toBaselineOf="@+id/tvSystemSoftVersion"-->
+    <!--        app:layout_constraintRight_toLeftOf="@+id/base_line" />-->
+
+    <!--    &lt;!&ndash; internet address &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvInternetAddress"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tvSystemSoftVersion" />-->
+
+    <!--    &lt;!&ndash; display info &ndash;&gt;-->
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:id="@+id/tvDisplayInfo"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/base_line"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tvInternetAddress" />-->
+
+    <!--    <com.sunny.lib.ui.SunnyTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="屏幕信息"-->
+    <!--        app:layout_constraintBaseline_toBaselineOf="@+id/tvDisplayInfo"-->
+    <!--        app:layout_constraintRight_toLeftOf="@+id/base_line" />-->
 
     <com.sunny.lib.ui.SunnyButton
-        android:id="@+id/btn_device_info"
+        android:id="@+id/btn_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"

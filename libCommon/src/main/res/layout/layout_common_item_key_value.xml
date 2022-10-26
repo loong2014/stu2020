@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/def_item_bg"
+    android:gravity="center_vertical"
+    android:minHeight="40dp"
+    android:orientation="horizontal"
+    android:paddingHorizontal="15dp">
+
+    <com.sunny.lib.ui.SunnyTextView
+        android:id="@+id/item_key"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:gravity="left"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="key" />
+
+    <com.sunny.lib.ui.SunnyTextView
+        android:id="@+id/item_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:gravity="right"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="value" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
