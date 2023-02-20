@@ -1,9 +1,10 @@
 include(":libBase")
 include(":libUi")
 include(":libCommon")
-//include(":moduleHome")
+include(":moduleHome")
+include(":moduleCs")
 
-//include ':moduleWeb'
+//include(":moduleWeb")
 //include ':moduleView'
 //include ':moduleBle'
 //include ':moduleNfc'
@@ -14,4 +15,3 @@ include(":libCommon")
 //include ':simpledemo'
 //include ':modulespa'
 //include ':moduleMob'
-include(":moduleCs")

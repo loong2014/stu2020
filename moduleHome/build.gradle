@@ -21,11 +21,30 @@ android {
             }
         }
     }
+    flavorDimensions('type')
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        cid {
+            dimension 'type'
+        }
+        hpc {
+            dimension 'type'
+        }
+    }
+    sourceSets {
+        //对应productFlavors的名称
+        cid {
+            manifest.srcFile 'src/main/cid/AndroidManifest.xml'
+        }
+        hpc {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
         }
     }
     compileOptions {

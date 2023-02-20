@@ -15,7 +15,7 @@
             <option value="$PROJECT_DIR$/libBase" />
             <option value="$PROJECT_DIR$/libCommon" />
             <option value="$PROJECT_DIR$/libUi" />
-            <option value="$PROJECT_DIR$/moduleCs" />
+            <option value="$PROJECT_DIR$/moduleHome" />
           </set>
         </option>
       </GradleProjectSettings>

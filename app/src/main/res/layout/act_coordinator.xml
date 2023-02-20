@@ -4,9 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 继承 LinearLayout，只能垂直布局 -->
+    <!-- 继承 LinearLayout，只能垂直布局
+    app:elevation="0dp" // 去掉阴影
+    -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
+        app:elevation="0dp"
         android:layout_height="200dp">
 
         <!--

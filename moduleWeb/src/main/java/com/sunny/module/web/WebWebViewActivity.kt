@@ -21,13 +21,29 @@ class WebWebViewActivity : BaseActivity() {
      */
     companion object {
         const val TAG = "WebWebViewActivity"
-        const val URL_BASE = "https://www.sina.com.cn/"
+
+        //        const val URL_BASE = "https://www.sina.com.cn/"
+        const val URL_BASE = "https://www.amazon.com/"
 
         fun showLog(msg: String) {
             SunLog.i(TAG, SunTimeUtils.getCurTimeStr() + " $msg")
         }
     }
 
+
+    // 默认版
+    val PAX_UA_NORMAL =
+        "Mozilla/5.0 (Linux; Android 10; DF91) " +
+                "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                "Chrome/108.0.5359.156 " +
+                "Safari/537.36 FFBrowser/101.10"
+
+    // 桌面版
+    val PAX_UA_DESKTOP =
+        "Mozilla/5.0 (X11; Linux x86_64) " +
+                "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                "Chrome/108.0.5359.156 " +
+                "Safari/537.36 FFBrowser/101.10"
     var mWebView: WebView? = null
     var mWebSettings: WebSettings? = null
 
@@ -87,7 +103,14 @@ class WebWebViewActivity : BaseActivity() {
 
     private fun initWebSettings() {
         mWebSettings?.run {
-            javaScriptEnabled = true
+
+            userAgentString = PAX_UA_DESKTOP
+
+            // 屏幕适配，使内容适配屏幕宽度
+            layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN;
+            useWideViewPort = true;
+            loadWithOverviewMode = true;
+
         }
 
     }
@@ -120,7 +143,10 @@ class WebWebViewActivity : BaseActivity() {
 
     class MyWebViewClient : WebViewClient() {
 
-        override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+        override fun shouldOverrideUrlLoading(
+            view: WebView?,
+            request: WebResourceRequest?
+        ): Boolean {
             showLog("shouldOverrideUrlLoading")
             return super.shouldOverrideUrlLoading(view, request)
         }
@@ -140,21 +166,23 @@ class WebWebViewActivity : BaseActivity() {
             showLog("onLoadResource $url")
         }
 
-        override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+        override fun onReceivedError(
+            view: WebView?,
+            request: WebResourceRequest?,
+            error: WebResourceError?
+        ) {
             super.onReceivedError(view, request, error)
             // 加载本地错误页面
             showLog("onReceivedError $error")
         }
 
-        override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
+        override fun onReceivedSslError(
+            view: WebView?,
+            handler: SslErrorHandler?,
+            error: SslError?
+        ) {
             super.onReceivedSslError(view, handler, error)
             //https证书响应
         }
     }
-
-
-    class MyWebChromeClient : WebChromeClient() {
-
-    }
-
 }
