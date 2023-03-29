@@ -60,7 +60,6 @@ object SunnyHttpUtil {
 
                 //
                 val url = URL(address)
-
                 //
                 connection = url.openConnection() as HttpURLConnection
 
