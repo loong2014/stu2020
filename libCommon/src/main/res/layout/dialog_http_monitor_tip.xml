@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="@dimen/common_400"
+        android:layout_height="@dimen/common_510"
+        android:layout_gravity="top|right"
+        android:background="@drawable/http_monitor_bg"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/common_10">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/common_10"
+            android:background="@drawable/http_monitor_btn"
+            android:paddingHorizontal="@dimen/common_10"
+            android:paddingVertical="@dimen/common_4"
+            android:text="close"
+            android:textColor="@color/colorNeutral4"
+            android:textSize="@dimen/common_sp_24" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tip_flow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_10"
+            android:textColor="@color/colorPrimary1"
+            android:textSize="@dimen/common_sp_24"
+            tools:text="上行100  下行100" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tip_amazon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_10"
+            android:textColor="@color/colorPrimary1"
+            android:textSize="@dimen/common_sp_24"
+            tools:text="amazon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tip_pax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_10"
+            android:textColor="@color/colorPrimary1"
+            android:textSize="@dimen/common_sp_24"
+            tools:text="pax" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tip_http"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/common_4"
+            android:textColor="@color/colorPrimary1"
+            android:textSize="@dimen/common_sp_20"
+            tools:text="http1\nhttp2\nhttp3\nhttp4\nhttp5\nhttp6\nhttp7\nhttp8\nhttp9\nhttp10" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>

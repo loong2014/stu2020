@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ECF4FE</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#ffc400</color>
+    <color name="navigationBarColor">#000000</color>
+
+    <color name="colorPrimary1">#313235</color>
+    <color name="colorPrimary2">#8D8E92</color>
+    <color name="colorPrimary3">#878789</color>
+
+    <color name="colorSecondary1">#313235</color>
+
+    <color name="colorNeutral0">#F1F1F1</color>
+    <color name="colorNeutral1">#EEEEEE</color>
+    <color name="colorNeutral2">#E0E0E1</color>
+    <color name="colorNeutral3">#D7D7D7</color>
+    <color name="colorNeutral4">#CBCBCD</color>
+
+    <color name="colorBackground">#EEEEEE</color>
+    <color name="colorItemBackground">#CBCBCD</color>
+    <color name="colorVideoDurationBg">#B3000000</color>
+    <color name="colorVideoDuration">#FFFFFF</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="black">#FF000000</color>
+    <color name="black_00">#00000000</color>
+    <color name="black_50">#7F000000</color>
+    <color name="black_90">#E5000000</color>
+
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="commonLoadingCircleBegin">#FF313235</color>
+    <color name="commonLoadingCircleEnd">#1A000000</color>
+
+    <color name="only_night_primary1">#C9C9D1</color>
+    <color name="sling_bg">#171725</color>
+    <color name="colorWebViewIndicator">#A7B3FF</color>
+
+    <color name="colorConfirmText">#000619</color>
+    <color name="colorConfirmBg">#00B3FD</color>
+
+    <color name="common_loading_bg">#CCFFFFFF</color>
+
+</resources>

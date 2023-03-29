@@ -3,12 +3,12 @@ package com.sunny.lib.common.base
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.sunny.lib.base.log.SunLog
+import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.lib.base.utils.SystemUtils
 import com.sunny.lib.common.crash.CrashManager
 import com.sunny.lib.common.fresco.FrescoUtils
 import com.sunny.lib.common.utils.ResUtils
 import com.sunny.lib.utils.AppConfigUtils
-import com.sunny.lib.base.utils.ContextProvider
 import com.sunny.lib.utils.FileUtils
 
 /**
@@ -48,6 +48,7 @@ object AppInitUtils {
      */
     private fun doFirstLevelInit(application: Application, isMainProcess: Boolean) {
         ContextProvider.init(application)
+        LibCoreConfig.initContext(application)
 
         ResUtils.init(application)
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0b0f19</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#ffc400</color>
+    <color name="navigationBarColor">#000000</color>
+
+    <color name="colorPrimary1">#C9C9D1</color>
+    <color name="colorPrimary2">#646669</color>
+    <color name="colorPrimary3">#898987</color>
+
+    <color name="colorSecondary1">#A7B3FF</color>
+
+    <color name="colorNeutral0">#1F2023</color>
+    <color name="colorNeutral1">#222326</color>
+    <color name="colorNeutral2">#2A2B2E</color>
+    <color name="colorNeutral3">#303134</color>
+    <color name="colorNeutral4">#404144</color>
+
+    <color name="colorBackground">#222326</color>
+    <color name="colorItemBackground">#404144</color>
+    <color name="colorVideoDurationBg">#B3000000</color>
+    <color name="colorVideoDuration">#FFFFFF</color>
+
+    <color name="commonLoadingCircleBegin">#FFC9C9D1</color>
+    <color name="commonLoadingCircleEnd">#1AFFFFFF</color>
+
+    <color name="common_loading_bg">#CC000000</color>
+
+</resources>
