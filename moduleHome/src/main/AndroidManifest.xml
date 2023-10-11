@@ -7,26 +7,18 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- 访问WiFi状态 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE	" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <!-- 访问设备状态	-->
-    <uses-permission android:name="android.permission.REAN_PHONE_STATE	" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".ModuleHomeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/home_app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Family">
-        <activity android:name=".HomeDemoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".HomeActivity" />
         <activity
             android:name=".developer.device.SunDeviceInfoActivity"
             android:exported="true" />

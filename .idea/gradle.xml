@@ -15,8 +15,17 @@
             <option value="$PROJECT_DIR$/libBase" />
             <option value="$PROJECT_DIR$/libCommon" />
             <option value="$PROJECT_DIR$/libUi" />
+<<<<<<< HEAD
+<<<<<<< HEAD
             <option value="$PROJECT_DIR$/moduleCs" />
             <option value="$PROJECT_DIR$/moduleHome" />
+=======
+            <option value="$PROJECT_DIR$/moduleWeb" />
+>>>>>>> 358c391 (debug ff webview)
+=======
+            <option value="$PROJECT_DIR$/moduleHome" />
+            <option value="$PROJECT_DIR$/module_stu" />
+>>>>>>> 7af1c09 (stu for 2023)
           </set>
         </option>
       </GradleProjectSettings>

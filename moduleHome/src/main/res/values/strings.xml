@@ -1,3 +1,5 @@
 <resources>
     <string name="home_app_name">appModuleHome</string>
+    <string name="home_app_name_hpc">HomeHpc</string>
+    <string name="home_app_name_mpc">HomeMpc</string>
 </resources>

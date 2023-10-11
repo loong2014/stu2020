@@ -2,12 +2,13 @@ include(":libBase")
 include(":libUi")
 include(":libCommon")
 include(":moduleHome")
-include(":moduleCs")
-include(":moduleView")
-
+//include(":moduleCs")
 //include(":moduleWeb")
+//include(":moduleNfc")
+include(":module_stu")
+
+//include ':moduleView'
 //include ':moduleBle'
-//include ':moduleNfc'
 //include ':module_weather'
 //include ':module_stu'
 //include ':appdemo'

@@ -1,4 +1,7 @@
 <resources>
 
-
+    <style name="CommonFontStyle">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:defaultFocusHighlightEnabled">false</item>
+    </style>
 </resources>

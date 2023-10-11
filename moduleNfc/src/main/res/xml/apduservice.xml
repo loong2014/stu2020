@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <host-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
-    android:description="servicedescSunny"
+    android:description="@string/host_apdu_service_description"
     android:requireDeviceUnlock="false"
     android:apduServiceBanner="@drawable/ic_gift">
 <!-- apduServiceBanner 为了提供更具视觉吸引力的用户体验，HCE 付款应用必须为其服务提供附加资源，也就是所谓的服务横幅。-->
@@ -10,7 +10,7 @@
     <!-- <host-apdu-service> 必须包含一个或多个 <aid-group> 标记-->
     <aid-group
         android:category="sunnyOther"
-        android:description="aiddescriptionSunny">
+        android:description="@string/aid_group_host_sunny_description">
         <aid-filter android:name="F0010203040506" />
         <aid-filter android:name="F0394148148100" />
     </aid-group>

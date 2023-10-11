@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">moduleNfc</string>
+    <string name="host_apdu_service_description">serviceDescSunny</string>
+    <string name="aid_group_host_sunny_description">aidGroupDescriptionSunny</string>
 </resources>

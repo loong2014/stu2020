@@ -1,0 +1,29 @@
+android 技能树
+
+Android开发技能树可以分为几个主要的部分。以下是一些基本和高级的技能：
+
+基础编程知识：包括Java和Kotlin的基础知识，包括面向对象编程(OOP)，数据结构和算法等。
+
+Android基础：包括了解Android的生命周期，布局，用户界面(UI)，用户体验(UX)，事件处理，数据持久化，网络编程，多线程和并发等。
+
+Android高级知识：包括自定义视图，动画，材料设计，性能优化，内存管理，安全性和权限，测试和调试等。
+
+Android框架和库：如Retrofit, Glide, Dagger, Room, RxJava, LiveData, ViewModel等。
+
+Android Jetpack：这是Google推出的一套用于Android应用开发的工具库，包括Navigation, Paging, WorkManager等。
+
+数据管理和存储：包括SQLite，Room，SharedPreferences，文件和网络存储等。
+
+网络编程：如HTTP/HTTPS，RESTful API，GraphQL，Websockets等。
+
+应用发布：了解如何打包和发布应用到Google Play Store，包括版本管理，签名，Google Play的政策和程序等。
+
+持续集成/持续部署(CI/CD)：如Jenkins，CircleCI，Travis CI等。
+
+跨平台开发：如Flutter，React Native等。
+
+移动应用安全：了解如何保护应用，包括数据加密，安全传输，防止反编译等。
+
+机器学习：如TensorFlow Lite等。
+
+以上只是一个基本的技能树，根据你的兴趣和目标，你可能需要学习更多的知识和技能。同时，随着技术的发展，这个技能树也会不断更新和发展。

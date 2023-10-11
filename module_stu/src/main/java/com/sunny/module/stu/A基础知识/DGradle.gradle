@@ -1,0 +1,114 @@
+package com.sunny.module.stu.A基础知识
+
+// https://juejin.cn/post/7257411140073078844?utm_source=gold_browser_extension
+
+
+fun stu_Gradle() {
+    /*
+    根目录下有一个build.gradle，处理整个工程的配置项，
+    根目录下的 settings.gradle 配置整个工程中参与构建的module，主要是决定每个module是否参与构建。
+    根目录下的 gradle.properties 主要是增加和修改一些可以在构建过程中直接使用的参数。
+        不只是可以添加自定义参数，还可以修改系统的参数
+    每个module自己有一个build.gradle，处理自己模块的配置。
+     */
+}
+
+fun stu_android() {
+    project.tasks.forEach { task ->
+        // 遍历所有task
+    }
+    project.getByName("android").doFirst {
+
+    }
+}
+
+fun stu_Groovy() {
+
+    // 1、字符串
+    def number = 1
+    def eagerGString = "value == ${number}"
+    def lazyGString = "value == ${-> number}"
+
+    // 2、字符
+    char c1 = 'A'
+    assert c1 instanceof Character
+    def c2 = 'B' as char
+    assert c2 instanceof Character
+    def c3 = (char) 'C'
+    assert c3 instanceof Character
+
+    // 3、列表
+    //List中存储任意类型
+    def heterogeneous = [1, "a", true]
+    //判断List默认类型
+    def arrayList = [1, 2, 3]
+    assert arrayList instanceof java.util.ArrayList
+    //使用as强转类型
+    def linkedList = [2, 3, 4] as LinkedList
+    assert linkedList instanceof java.util.LinkedList
+    //定义指定类型List
+    LinkedList otherLinked = [3, 4, 5]
+    assert otherLinked instanceof java.util.LinkedList
+    // 像python一样索引
+    assert letters[1] == 'b'
+    //负数下标则从右向左index
+    assert letters[-1] == 'd'
+    assert letters[-2] == 'c'
+    //指定item赋值判断
+    letters[2] = 'C'
+    assert letters[2] == 'C'
+    //给List追加item
+    letters << 'e'
+    assert letters[4] == 'e'
+    assert letters[-1] == 'e'
+    //获取一段List子集
+    assert letters[1, 3] == ['b', 'd']
+    assert letters[2..4] == ['C', 'd', 'e']
+
+    // 4、Map
+    //定义一个Map
+    def colors = [red: '#FF0000', green: '#00FF00', blue: '#0000FF']
+    //获取一些指定key的value进行判断操作
+    assert colors['red'] == '#FF0000'
+    assert colors.green == '#00FF00'
+
+    // 5、运算符
+    /*
+    ?.：安全占位符。和kotlin一样避免空指针异常。
+    **：次方运算符。
+    .@：直接域访问操作符。因为Groovy自动支持属性getter方法，但有时候我们有一个自己写的特殊getter方法，当不想调用这个特殊的getter方法则可以用直接域访问操作符。这点跟kotlin的
+    .&：方法指针操作符，因为闭包可以被作为一个方法的参数，如果想让一个方法作为另一个方法的参数则可以将一个方法当成一个闭包作为另一个方法的参数。
+    ?:：二目运算符。与kotlin中的类似。
+    *.展开运算符，一个集合使用展开运算符可以得到一个元素为原集合各个元素执行后面指定方法所得值的集合。
+
+    cars = [new Car(make:'Peugeot',model:'508'),null,newCar(make:'Renault',model:'Clio')]
+    assert cars*.make == ['Peugeot',null,'Renault']
+    assert null*.make == null
+     */
+
+    // 6、闭包
+    /*
+    groovy里比较重要的是闭包的概念。官方定义是“Groovy中的闭包是一个开放，匿名的代码块，可以接受参数，返回值并分配给变量”。
+    其实闭包跟kotlin的lambda函数很像，都是先定义后执行。但是又有一些细微的区别。接下来我们细讲讲gradle的闭包。
+
+    闭包是可以用作方法参数的代码块，Groovy的闭包更象是一个代码块或者方法指针，代码在某处被定义然后在其后的调用处执行。
+    一个闭包实际上就是一个Closure类型的实例。写法和kotlin的lambda函数很像。
+     */
+
+    //最基本的闭包
+    { item++ }
+            //使用->将参数与代码分离
+            { item -> item++ }
+            //使用隐含参数it
+            { println it }
+            //使用显示的名为参数
+            { name -> println name }
+    // 调用方法
+    a.call()
+    a()
+    // Groovy的闭包支持最后一个参数为不定长可变长度的参数。
+    def multiConcat = { int n, String... args ->
+        args.join('') * n
+    }
+
+}

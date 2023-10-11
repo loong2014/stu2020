@@ -18,6 +18,25 @@ buildscript {
 
 allprojects {
     addRepos(repositories)
+
+
+//    beforeEvaluate {
+//        // framework.jar 途径
+//        val path = rootDir.absolutePath + "/app/libs/framework.jar"
+//        println("> Task :${project.name}:beforeEvaluate path=$path")
+//
+//        tasks.withType<JavaCompile> {
+//            // 低版别 gradle 的计划
+////                options.compilerArgs.add("-Xbootclasspath/p:$path")
+//            // 高版别 gradle 的计划
+//            val newFileList = mutableListOf<File>()
+//            newFileList.add(File(path))
+//            options.bootstrapClasspath?.files?.let { oldFileList ->
+//                newFileList.addAll(oldFileList)
+//            }
+//            options.bootstrapClasspath = files(*newFileList.toTypedArray())
+//        }
+//    }
 }
 
 task clean(type: Delete) {

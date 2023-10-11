@@ -6,11 +6,11 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "$build_tools_version"
+    compileSdkVersion build_versions.target_sdk
 
     defaultConfig {
-        minSdkVersion "$sdk_version_min"
-        targetSdkVersion 29
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
 
         versionCode 1
         versionName "1.0"
@@ -43,6 +43,71 @@ android {
     }
 }
 
+
+//project.tasks.preBuild.get().doLast {
+//
+//    fun moveOrderEntryToEnd(rootManagerComponent: Node, node: Node) {
+//        rootManagerComponent.remove(node)
+//        rootManagerComponent.appendNode(
+//                "orderEntry", node.attributes()
+//        )
+//    }
+//
+//    // 在 preBuild 使命履行完之后处理
+//    // 修正 .iml 文件中 Android SDK 优先级办法
+//    fun changeSdkOrder(path: String) {
+//        if (!path.endsWith(".iml")) {
+//            return
+//        }
+//        println("changeSdkOrder - $path")
+//        runCatching {
+//            val imlFile = File(path)
+//            with(XmlParser().parse(imlFile)) {
+//                // 从 .iml 文件中读取 NewModuleRootManager 节点
+//                val rootManagerComponent = getAt(QName.valueOf("component"))
+//                        .map { it as Node }
+//                        .first { it.attribute("name") == "NewModuleRootManager" }
+//                // 从 NewModuleRootManager 节点中获取 Android SDK 装备节点
+//                var jdkEntry: Node? = null
+//                rootManagerComponent.getAt(QName.valueOf("orderEntry"))
+//                        .map { it as Node }
+//                        .forEach {
+//                            if (it.attribute("type") == "jdk") {
+//                                println("> Task :${project.name}:preBuild:doLast:changedSdkOrder found jdk")
+//                                jdkEntry = it
+//                            } else if (it.attribute("type") == "module") {
+//                                moveOrderEntryToEnd(rootManagerComponent, it)
+//                            }
+//                        }
+//                jdkEntry?.let {
+//                    // 保存节点参数
+//                    println("> Task :${project.name}:preBuild:doLast:changedSdkOrder jdkEntry = $jdkEntry")
+//                    moveOrderEntryToEnd(rootManagerComponent, it)
+//                }
+//
+//                // 将新生成的 .iml 写入文件
+//                XmlUtil.serialize(this, FileOutputStream(imlFile))
+//            }
+//        }
+//    }
+//    // 修正 .iml 文件
+//    println("> Task :${project.name}:preBuild:doLast:changedSdkOrder")
+//    val root = File(rootDir.absolutePath + "/.idea/modules/")
+//    if (root.exists()) {
+//        root.listFiles()?.forEach { child1 ->
+//            if (child1.isDirectory) {
+//                if (child1.exists()) {
+//                    child1.listFiles()?.forEach { child2 ->
+//                        changeSdkOrder(child2.absolutePath)
+//                    }
+//                }
+//            } else {
+//                changeSdkOrder(child1.absolutePath)
+//            }
+//        }
+//    }
+//
+//}
 dependencies {
     // 依赖基础组件
     api project(path: ':libCommon')
@@ -51,7 +116,7 @@ dependencies {
     kapt 'com.alibaba:arouter-compiler:1.5.1'
 
     //
-    compile 'com.google.auto.service:auto-service:1.0-rc3'
+//    compile 'com.google.auto.service:auto-service:1.0-rc3'
 
     // 注入
 //    kapt deps.dagger.android_support_compiler

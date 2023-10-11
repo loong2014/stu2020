@@ -31,7 +31,7 @@
         android:label="@string/web_app_name"
         android:networkSecurityConfig="@xml/web_network_config"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.Family">
         <activity android:name="com.sunny.module.web.WebDemoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WebWebViewActivity" />
+        <activity android:name=".webview.WebWebViewActivity" />
         <activity android:name=".HttpActivity" />
         <activity android:name=".HttpCacheActivity" />
     </application>

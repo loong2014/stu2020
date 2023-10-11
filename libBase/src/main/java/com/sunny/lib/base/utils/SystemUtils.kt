@@ -3,6 +3,7 @@ package com.sunny.lib.base.utils
 import android.app.ActivityManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.util.TypedValue
 import com.sunny.lib.base.log.SunLog
 
 object SystemUtils {
@@ -69,5 +70,21 @@ object SystemUtils {
             null
         }
         return pkgInfo != null
+    }
+
+    fun dp2px(context: Context, dp: Float): Float {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            context.resources.displayMetrics
+        )
+    }
+
+    fun sp2px(context: Context, sp: Float): Float {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            sp,
+            context.resources.displayMetrics
+        )
     }
 }

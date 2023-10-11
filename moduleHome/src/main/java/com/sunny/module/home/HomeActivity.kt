@@ -1,18 +1,18 @@
 package com.sunny.module.home
 
 import android.os.Bundle
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.sunny.lib.common.base.BaseActivity
-import com.sunny.lib.common.router.RouterConstant
 import com.sunny.lib.common.service.IAccountService
 import com.sunny.lib.common.service.ServiceFactory
-import kotlinx.android.synthetic.main.home_activity_home.*
+import kotlinx.android.synthetic.main.home_activity_home.btn_auto_login
+import kotlinx.android.synthetic.main.home_activity_home.btn_get_user_info
+import kotlinx.android.synthetic.main.home_activity_home.module_name
+import kotlinx.android.synthetic.main.home_activity_home.tv_tip
 
 /**
  * Created by zhangxin17 on 2020/12/29
  */
-@Route(path = RouterConstant.Home.PageHome)
-class HomeActivity : BaseActivity() {
+open class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class HomeActivity : BaseActivity() {
         }
     }
 
-    private fun updateTip(tip: String) {
+    protected fun updateTip(tip: String) {
         tv_tip.text = tip
     }
 }

@@ -24,7 +24,7 @@ class WebDemoActivity : BaseActivity() {
     }
 
     private fun initView() {
-        top_bar.setMiddleName("模块：WebView")
+        top_bar.setMiddleName("模块：Web")
         top_bar.setOnBackBtnClickListener(View.OnClickListener {
             doExitActivity()
         })
