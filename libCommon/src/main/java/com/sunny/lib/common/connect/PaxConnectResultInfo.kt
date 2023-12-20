@@ -1,6 +1,5 @@
 package com.sunny.lib.common.connect
 
-import com.ff.iai.lib.core.connect.PaxConnectConfig
 import java.net.DatagramPacket
 
 class PaxConnectResultInfo {

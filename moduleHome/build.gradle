@@ -1,6 +1,6 @@
 import java.text.SimpleDateFormat
+import groovy.xml.XmlUtil
 
-//注意gradle.properties中的数据类型都是String类型，使用其他数据类型需要自行转换
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -70,8 +70,77 @@ android {
         dataBinding true
     }
 }
+def taskCount = 0
+
+def paxLog(String msg) {
+    println("PaxGradle >>> ${project.name} $msg")
+}
+
+project.tasks.forEach { task ->
+    taskCount++
+    paxLog("forEach($taskCount) Tasks :name=${task.name}")
+}
+
+project.tasks.getByName("preBuild").doLast {
+    paxLog("task preBuild doLast")
+
+    def moveOrderEntryToEnd = { Node rootManagerComponent, Node node ->
+        rootManagerComponent.remove(node)
+        rootManagerComponent.appendNode(
+                "orderEntry", node.attributes()
+        )
+    }
+
+    // 在 preBuild 任务完成后执行
+    // 修正 .iml 文件中 Android SDK 优先级问题
+    def changeSdkOrder = { String path ->
+        if (!path.endsWith(".iml")) {
+            return
+        }
+        paxLog("changeSdkOrder for $path")
+
+        try {
+            def imlFile = new File(path)
+            def xmlParser = new XmlParser().parse(imlFile)
+            // 从 .iml 文件中读取 NewModuleRootManager 节点
+            def rootManagerComponent = xmlParser.component.find { it.@name == "NewModuleRootManager" }
+            // 从 NewModuleRootManager 节点中获取 Android SDK 配置节点
+            def jdkEntry = null
+            rootManagerComponent.orderEntry.each {
+                if (it.@type == "jdk") {
+                    jdkEntry = it
+                } else if (it.@type == "module") {
+                    moveOrderEntryToEnd(rootManagerComponent, it)
+                }
+            }
+            paxLog("changeSdkOrder find jdkEntry :$jdkEntry")
+
+            if (jdkEntry != null) {
+                // 保存节点参数
+                moveOrderEntryToEnd(rootManagerComponent, jdkEntry)
+            }
+
+            // 将新生成的 .iml 写入文件
+            new FileOutputStream(imlFile).withCloseable { out ->
+                XmlUtil.serialize(xmlParser, out)
+            }
+        } catch (Exception e) {
+            paxLog("changeSdkOrder error :${e.message}")
+        }
+    }
+
+    // 修正 .iml 文件
+    def root = new File("${rootDir.absolutePath}/.idea/modules/")
+    paxLog("start changeSdkOrder on ${root.absolutePath}")
+    if (root.exists()) {
+        root.eachFileRecurse { child ->
+            changeSdkOrder(child.absolutePath)
+        }
+    }
+}
 
 dependencies {
+    compileOnly(files("libs/framework.jar"))
     implementation project(path: ':libCommon')
 //    implementation project(path: ':module_stu')
 
