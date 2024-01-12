@@ -1,9 +1,9 @@
-package com.sunny.module.stu.AJAVA.M内存模型;
+package com.sunny.module.stu.A基础知识;
 
 import com.sunny.module.stu.base.StuImpl;
 
 
-public class 总结类实例对象格式 extends StuImpl {
+public class A类实例对象格式 extends StuImpl {
 
     @Override
     public void s_数据结构() {

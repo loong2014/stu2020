@@ -1,8 +1,12 @@
 package com.sunny.module.stu.A基础知识
 
+// android gradle 的介绍
 // https://juejin.cn/post/7257411140073078844?utm_source=gold_browser_extension
 
 
+// 官方迁移Groovy到KTS的文档
+// https://developer.android.google.cn/studio/build/migrate-to-kts?hl=zh-cn
+// https://docs.gradle.org/current/userguide/migrating_from_groovy_to_kotlin_dsl.html#creating_tasks
 fun stu_Gradle() {
     /*
     根目录下有一个build.gradle，处理整个工程的配置项，
@@ -10,6 +14,11 @@ fun stu_Gradle() {
     根目录下的 gradle.properties 主要是增加和修改一些可以在构建过程中直接使用的参数。
         不只是可以添加自定义参数，还可以修改系统的参数
     每个module自己有一个build.gradle，处理自己模块的配置。
+     */
+
+    /*
+    // 在gradle中引入其它gradle
+    apply from:rootProject.file('library.gradle')
      */
 }
 
@@ -112,3 +121,37 @@ fun stu_Groovy() {
     }
 
 }
+
+// https://juejin.cn/post/7002034268557803551?searchId=20240110103928D5E3D577EC65CAF06B31
+fun stu_KTS() {
+    // 相对于Groovy迁移到KTS
+    /*
+    1.字符串必须全是双引号
+    2.函数调用加括号。如classpath, implementation等等后面空格加字符串的，一般是函数调用。改成classpath(xxx)样式
+    3.属性值，如 minSdk, targetSdk, versionCode等等被做成了属性。同时如果属性为bool类型，名字会变成isXXX的形式。
+     */
+    // tasks
+    /*
+    每个task, 包含name:String， args:Map，configureClosure: Function.
+        groovy提供了一堆简便写法，但最终肯定归到这三部分。
+        以task clean为例。
+
+    // groovy
+    task clean(type: Delete) {
+        delete rootProject.buildDir
+    }
+    // 伪代码
+    task(
+        args: {"type": Delete::class},
+        name: "clean",
+        configureClosure: { // Delete
+            delete(rootProject.buildDir)
+        },
+    )
+    // KTS
+    task("clean", Delete::class) {
+        delete = setOf(rootProject.buildDir)
+    }
+     */
+}
+
