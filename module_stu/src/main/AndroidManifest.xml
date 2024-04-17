@@ -17,8 +17,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".thread.StuThreadActivity" />
-
         <activity
             android:name=".introduction.StuIntroductionActivity"
             android:launchMode="singleTask" />

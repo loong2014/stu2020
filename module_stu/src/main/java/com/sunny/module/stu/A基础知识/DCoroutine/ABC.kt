@@ -1,4 +1,4 @@
-package com.sunny.module.stu.A基础知识
+package com.sunny.module.stu.A基础知识.DCoroutine
 
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -13,7 +13,7 @@ import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
 
-class B协程 {
+class ABC {
 
     // 统一处理scope的异常，scope作用域中的异常没有被try-catch捕获，则抛到这里统一处理
     private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
