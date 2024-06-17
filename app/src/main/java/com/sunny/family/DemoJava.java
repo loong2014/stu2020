@@ -3,10 +3,10 @@ package com.sunny.family;
 import java.util.Random;
 
 public class DemoJava {
-
-    interface Function<Arg, Return> {
+interface Function<Arg, Return> {
         Return apply(Arg arg);
     }
+
 
     Function<String, Integer> strLen = new Function<String, Integer>() {
         @Override
@@ -25,8 +25,21 @@ public class DemoJava {
 
         }
     };
+MessageQueue.IdleHandler idleHandler = new MessageQueue.IdleHandler() {
+    @Override
+    public boolean queueIdle() {
+        if (!tasks.isEmpty()) {
+            Runnable task = tasks.get(0);
+            task.run();
+            tasks.remove(task);
+        }
+        return !tasks.isEmpty();
+    }
+};  Looper.myQueue().
 
-    public static void main(String[] args) {
+addIdleHandler(idleHandler);
+
+            public static void main(String[] args) {
         DemoJava demoJava = new DemoJava();
 
         int len = demoJava.strLen.apply("hello");

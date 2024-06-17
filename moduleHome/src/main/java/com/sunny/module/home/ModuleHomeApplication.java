@@ -12,6 +12,12 @@ import org.jetbrains.annotations.NotNull;
 public class ModuleHomeApplication extends BaseModuleApplication {
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+
+    }
+
+    @Override
     public void initModuleApp(@NotNull Application application) {
 
     }

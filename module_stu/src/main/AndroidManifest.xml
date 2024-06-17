@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sunny.module.stu">
 
+    <!-- Server端# 定义权限，并指定了其保护级别为 "signature"这意味着只有与服务端应用有相同签名的应用才能获得这个权限。-->
+    <permission android:name="com.sunny.demo.service.MY_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <!-- Client端# 由于 Server端 做了权限限制，要使用服务必须申请下面的权限 -->
+    <uses-permission android:name="com.sunny.demo.service.MY_PERMISSION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +29,10 @@
             android:launchMode="singleTask" />
         <activity android:name=".book.StuBook01Activity" />
 <!--        <activity android:name="com.sunny.module.dragger.StuDaggerActivity" />-->
+
+        <service android:name=".BAndroid.ABinder.demo.SunnyService">
+
+        </service>
     </application>
 
 </manifest>

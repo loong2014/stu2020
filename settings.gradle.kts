@@ -5,7 +5,8 @@ include(":moduleHome")
 //include(":moduleCs")
 //include(":moduleWeb")
 //include(":moduleNfc")
-include(":module_stu")
+//include(":module_stu")
+include(":moduleView")
 
 //include ':moduleView'
 //include ':moduleBle'

@@ -7,7 +7,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Sunny-View"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ViewTheme.NoActionBar">
 
@@ -35,6 +34,14 @@
             android:theme="@style/XxxStyle" />
         <activity android:name=".font.XmlFontActivity" />
         <activity android:name=".display.DisplayScreenInfoActivity" />
+        <activity android:name=".image.StuImageViewActivity" />
+
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360"/>
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640"/>
 
     </application>
 

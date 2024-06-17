@@ -109,6 +109,8 @@ public class SunAppGlideModule extends AppGlideModule {
 //        builder.setResizeExecutor(GlideExecutor.newSourceExecutor(myUncaughtThrowableStrategy));
         builder.setSourceExecutor(GlideExecutor.newSourceBuilder().setUncaughtThrowableStrategy(myUncaughtThrowableStrategy).build());
 
+//        builder.setSourceExecutor(GlideExecutor.newSourceExecutor(4, "GlideSource", GlideExecutor.UncaughtThrowableStrategy.DEFAULT));
+
         // 日志级别，默认INFO
 //        builder.setLogLevel(Log.DEBUG);
 

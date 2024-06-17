@@ -22,7 +22,6 @@ import java.lang.ref.WeakReference
  */
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
 class BgHandler(val view: View) : IBgHandler {
-
     val TAG = "BgHandler"
     val reference: WeakReference<View> = WeakReference(view)
     private var defaultBitmap: Bitmap

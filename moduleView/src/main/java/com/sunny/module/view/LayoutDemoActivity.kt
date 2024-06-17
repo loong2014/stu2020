@@ -16,7 +16,6 @@ import com.sunny.lib.common.utils.showSnckbar
 import com.sunny.lib.common.utils.showToast
 import com.sunny.module.view.bar.SystemBarTintManager
 import com.sunny.module.view.databinding.ViewActivityDemoBinding
-import kotlinx.android.synthetic.main.view_activity_demo.*
 import kotlinx.coroutines.*
 import timber.log.Timber
 
@@ -35,9 +34,9 @@ class LayoutDemoActivity : BaseActivity() {
 
         mActBinding = DataBindingUtil.setContentView(this, R.layout.view_activity_demo)
 
-        SystemBarTintManager.setViewPaddingTopStatusBar(this, toolBar)
+        SystemBarTintManager.setViewPaddingTopStatusBar(this, mActBinding.toolBar)
 
-        setSupportActionBar(toolBar)
+        setSupportActionBar(mActBinding.toolBar)
 
         initView()
     }
@@ -46,6 +45,7 @@ class LayoutDemoActivity : BaseActivity() {
         lifecycleScope.launch {
             val name = withContext(Dispatchers.IO) {
                 Thread.sleep(2_000)
+                DebugHelper.get("123456","debug")
                 "张三"
             }
             showLog("获取到名字 :$name")
@@ -218,8 +218,8 @@ class LayoutDemoActivity : BaseActivity() {
 
     private fun initToolBar() {
         //
-        toolBar.title = "模块：控件"
-        toolBar.subtitle = "各种控件的使用实战"
+        mActBinding.toolBar.title = "模块：控件"
+        mActBinding.toolBar.subtitle = "各种控件的使用实战"
 
         // 更改ToolBar左侧按钮的两种方式
         // 1针对toolBar
@@ -239,9 +239,9 @@ class LayoutDemoActivity : BaseActivity() {
     }
 
     private fun initRecyclerView() {
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        mActBinding.recyclerView.layoutManager = GridLayoutManager(this, 2)
         val adapter = LayoutDemoAdapter(this, buildDataList())
-        recyclerView.adapter = adapter
+        mActBinding.recyclerView.adapter = adapter
 
         adapter.setItemClickListener(object : DemoItemClickListener {
             override fun onItemClick(model: LayoutDemoModel) {
@@ -289,6 +289,12 @@ class LayoutDemoActivity : BaseActivity() {
 //                jumpPath = RouterConstant.View.PageRemoteViewsClient
 //            )
 //        )
+        list.add(
+            LayoutDemoModel(
+                name = "ImageView",
+                jumpPath = RouterConstant.View.PageImageView
+            )
+        )
         return list
     }
 
@@ -304,7 +310,7 @@ class LayoutDemoActivity : BaseActivity() {
 
 //                showSnackBar("你确定要点！！！")
 
-                startActivity(Intent(getActivity(), LayoutCommonActivity::class.java))
+                startActivity(Intent(mmActivity, LayoutCommonActivity::class.java))
             }
             else -> {
                 showToast(item.title as String)
@@ -323,7 +329,7 @@ class LayoutDemoActivity : BaseActivity() {
 //                }
 //                .show()
 
-        toolBar.showSnckbar(tip, "Yes") {
+        mActBinding. toolBar.showSnckbar(tip, "Yes") {
 
             val a = 10
             val b = 20

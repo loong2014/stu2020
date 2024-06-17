@@ -12,7 +12,7 @@ interface ISunny {
             double aDouble, String aString);
 
 
-    void updateName(String name);
+    oneway void updateName(String name);
 
     String getName();
 }

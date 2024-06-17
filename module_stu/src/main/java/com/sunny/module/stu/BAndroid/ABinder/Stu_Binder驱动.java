@@ -32,7 +32,7 @@ public class Stu_Binder驱动 extends StuImpl {
 
 
         简单说，当用户空间调用open()方法，最终会调用binder驱动的binder_open()方法；
-        mmap()/ioctl()方法也是同理，在BInder系列的后续文章从用户态进入内核态，都依赖于系统调用过程。
+        mmap()/ioctl()方法也是同理，在Binder系列的后续文章从用户态进入内核态，都依赖于系统调用过程。
 
 
          */

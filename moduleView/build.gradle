@@ -66,4 +66,7 @@ dependencies {
     // https://developer.android.google.cn/jetpack/androidx/releases/cardview
     implementation 'androidx.cardview:cardview:1.0.0'
 
+
+    // 字节跳动的屏幕适配方案
+    implementation 'me.jessyan:autosize:1.2.1'
 }

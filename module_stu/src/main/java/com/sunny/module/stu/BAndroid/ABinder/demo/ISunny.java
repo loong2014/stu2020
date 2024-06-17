@@ -163,7 +163,8 @@ public interface ISunny extends android.os.IInterface {
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeString(name);
-                    boolean _status = mRemote.transact(ISunny.Stub.TRANSACTION_updateName, _data, _reply, 0);
+                    // 最后的flag设置为FLAG_ONEWAY，表示这是个移步方法
+                    boolean _status = mRemote.transact(ISunny.Stub.TRANSACTION_updateName, _data, _reply, android.os.IBinder.FLAG_ONEWAY);
                     if (!_status && getDefaultImpl() != null) {
                         getDefaultImpl().updateName(name);
                         return;
